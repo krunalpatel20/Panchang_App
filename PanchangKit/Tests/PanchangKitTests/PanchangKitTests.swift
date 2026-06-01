@@ -2,7 +2,7 @@ import Testing
 @testable import PanchangKit
 
 // Scaffold smoke test — verifies the package builds and links.
-// Golden-vector tests are added in M1.
 @Test func packageLoads() {
-    #expect(PanchangKit.version == "0.1.0")
+    let ay = LahiriAyanamsa().value(julianDay: 2451545.0) // J2000
+    #expect(ay > 23.0 && ay < 24.5)
 }

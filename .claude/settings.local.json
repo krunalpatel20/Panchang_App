@@ -10,7 +10,10 @@
       "Bash(swift package *)",
       "Bash(swift test *)",
       "mcp__XcodeBuildMCP__session_set_defaults",
-      "mcp__XcodeBuildMCP__build_sim"
+      "mcp__XcodeBuildMCP__build_sim",
+      "Bash(git commit -m ' *)",
+      "Bash(swift build *)",
+      "Bash(grep -vE \"^--$\")"
     ]
   }
 }

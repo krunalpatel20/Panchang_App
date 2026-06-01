@@ -19,7 +19,8 @@ let package = Package(
         ),
         .testTarget(
             name: "PanchangKitTests",
-            dependencies: ["PanchangKit"]
+            dependencies: ["PanchangKit"],
+            resources: [.copy("Fixtures/golden_vectors.json")]
         ),
     ],
     swiftLanguageModes: [.v6]
