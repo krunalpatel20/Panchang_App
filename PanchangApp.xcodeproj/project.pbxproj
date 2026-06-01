@@ -14,6 +14,13 @@
 		AA0000000000000000000A2 /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000A1 /* AppModels.swift */; };
 		AA0000000000000000000B2 /* PanchangService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000B1 /* PanchangService.swift */; };
 		AA0000000000000000000C2 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000C1 /* TodayViewModel.swift */; };
+		AA0000000000000000000D2 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000D1 /* CalendarViewModel.swift */; };
+		AA0000000000000000000E2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000E1 /* CalendarView.swift */; };
+		AA0000000000000000000F2 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000F1 /* DayCell.swift */; };
+		AA000000000000000000102 /* DayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000101 /* DayDetailView.swift */; };
+		AA000000000000000000112 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000111 /* LocationManager.swift */; };
+		AA000000000000000000122 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000121 /* LocationSearchView.swift */; };
+		AA000000000000000000132 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000131 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +32,13 @@
 		AA0000000000000000000A1 /* AppModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModels.swift; sourceTree = "<group>"; };
 		AA0000000000000000000B1 /* PanchangService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanchangService.swift; sourceTree = "<group>"; };
 		AA0000000000000000000C1 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		AA0000000000000000000D1 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		AA0000000000000000000E1 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000F1 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		AA000000000000000000101 /* DayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayDetailView.swift; sourceTree = "<group>"; };
+		AA000000000000000000111 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		AA000000000000000000121 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
+		AA000000000000000000131 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				AA000000000000000000053 /* Today */,
+				AA000000000000000000054 /* Calendar */,
+				AA000000000000000000055 /* Settings */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -91,6 +107,27 @@
 				AA0000000000000000000C1 /* TodayViewModel.swift */,
 			);
 			path = Today;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000054 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000D1 /* CalendarViewModel.swift */,
+				AA0000000000000000000E1 /* CalendarView.swift */,
+				AA0000000000000000000F1 /* DayCell.swift */,
+				AA000000000000000000101 /* DayDetailView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000055 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000111 /* LocationManager.swift */,
+				AA000000000000000000121 /* LocationSearchView.swift */,
+				AA000000000000000000131 /* SettingsView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		AA0000000000000000000D0 /* Models */ = {
@@ -197,6 +234,13 @@
 				AA0000000000000000000A2 /* AppModels.swift in Sources */,
 				AA0000000000000000000B2 /* PanchangService.swift in Sources */,
 				AA0000000000000000000C2 /* TodayViewModel.swift in Sources */,
+				AA0000000000000000000D2 /* CalendarViewModel.swift in Sources */,
+				AA0000000000000000000E2 /* CalendarView.swift in Sources */,
+				AA0000000000000000000F2 /* DayCell.swift in Sources */,
+				AA000000000000000000102 /* DayDetailView.swift in Sources */,
+				AA000000000000000000112 /* LocationManager.swift in Sources */,
+				AA000000000000000000122 /* LocationSearchView.swift in Sources */,
+				AA000000000000000000132 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

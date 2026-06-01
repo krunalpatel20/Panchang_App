@@ -1,15 +1,32 @@
 import SwiftUI
+import SwiftData
 import PanchangKit
 
 struct TodayView: View {
     @State private var vm = TodayViewModel()
+    @Query private var savedLocations: [SavedLocation]
+    @Query private var prefsQuery: [Preferences]
+
+    private var activeLocation: GeoLocation {
+        if let loc = savedLocations.first(where: { $0.isActive }) {
+            return GeoLocation(latitude: loc.latitude, longitude: loc.longitude,
+                               timeZoneIdentifier: loc.timeZoneIdentifier)
+        }
+        return GeoLocation(latitude: 37.3382, longitude: -121.8863,
+                           timeZoneIdentifier: "America/Los_Angeles")
+    }
+
+    private var config: CalendarConfig {
+        let preset = prefsQuery.first?.calendarPreset ?? "gujarati_western"
+        return preset == "north_indian" ? .northIndian : .gujaratiWestern
+    }
 
     var body: some View {
         NavigationStack {
             Group {
                 switch vm.state {
                 case .idle:
-                    Color.clear.onAppear { vm.load() }
+                    Color.clear.onAppear { vm.load(location: activeLocation, config: config) }
                 case .loading:
                     ProgressView("Computing panchang…")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -23,9 +40,17 @@ struct TodayView: View {
             .navigationTitle("Today")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button { vm.refresh() } label: { Image(systemName: "arrow.clockwise") }
-                        .accessibilityLabel("Refresh panchang")
+                    Button { vm.refresh(location: activeLocation, config: config) } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .accessibilityLabel("Refresh panchang")
                 }
+            }
+            .onChange(of: savedLocations.first(where: { $0.isActive })?.name) { _, _ in
+                vm.load(location: activeLocation, config: config)
+            }
+            .onChange(of: prefsQuery.first?.calendarPreset) { _, _ in
+                vm.load(location: activeLocation, config: config)
             }
         }
     }
@@ -181,8 +206,6 @@ struct PanchangDayView: View {
     // MARK: Formatting
 
     private var formattedCivilDate: String {
-        var cal = Calendar(identifier: .gregorian)
-        cal.timeZone = day.location.timeZone
         let date = JulianDate.date(from: day.timings.sunrise ?? JulianDate.julianDay(from: Date()))
         let formatter = DateFormatter()
         formatter.dateStyle = .full
@@ -196,7 +219,6 @@ struct PanchangDayView: View {
         let c = JulianDate.components(julianDay: jd, timeZone: tz)
         let h = c.hour ?? 0
         let m = c.minute ?? 0
-        // Past-midnight times are shown with the panchang "+1" convention.
         if let sunrise = day.timings.sunrise {
             let sunriseComps = JulianDate.components(julianDay: sunrise, timeZone: tz)
             let sunriseDay = sunriseComps.day ?? 0

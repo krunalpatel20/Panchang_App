@@ -16,16 +16,7 @@ final class TodayViewModel {
 
     private let service = PanchangService()
 
-    /// Default location used until M4 adds CoreLocation / saved locations.
-    /// Defaults to San Jose, CA — the largest Gujarati diaspora city in the app's primary market.
-    private var location = GeoLocation(
-        latitude: 37.3382,
-        longitude: -121.8863,
-        timeZoneIdentifier: "America/Los_Angeles"
-    )
-    private var config = CalendarConfig.gujaratiWestern
-
-    func load() {
+    func load(location: GeoLocation, config: CalendarConfig) {
         state = .loading
         let loc = location
         let cfg = config
@@ -38,5 +29,7 @@ final class TodayViewModel {
         }
     }
 
-    func refresh() { load() }
+    func refresh(location: GeoLocation, config: CalendarConfig) {
+        load(location: location, config: config)
+    }
 }
