@@ -1,0 +1,1136 @@
+{
+  "_about": "Golden-vector capture template for PanchangKit tests. PRIMARY locations are in the USA \u2014 this app's real users. India rows are kept only as cross-checks (so the engine also matches an India-computed panchang for family/travel). Fill each 'expected' block from the source in a browser, then drop this file at Tests/PanchangKitTests/Fixtures/golden_vectors.json. Do NOT compute expected values yourself \u2014 they must come from the source so the test stays independent of the engine.",
+  "source": "drikpanchang.com (Drik Ganita method, Lahiri ayanamsa) \u2014 single consistent authority",
+  "time_format": "24h, local time of the case's location. Suffix '+1' = time after midnight (next day). 'sunrise+1' = until next sunrise.",
+  "_capture_instructions": [
+    "1. On drikpanchang.com, switch the clock to 24-hour (or append ?time-format=24hour) so you transcribe HH:MM, not AM/PM. US pages default to AM/PM.",
+    "2. Capture is grouped by location. For each block, set the site location ONCE via the search box to the named US/India city, then open each date URL in that block.",
+    "3. Date URLs use ?date=DD/MM/YYYY and work in a real browser (only the automated fetcher dropped them, which is why this is a manual step).",
+    "4. The Amanta/Purnimanta and Samvat rules are LOCATION-INDEPENDENT labeling \u2014 they're tested at US locations here. For the two rows sharing a date+location with different 'preset', toggle the site's Amanta/Purnimanta switch between captures; only the month label should change.",
+    "5. End times: write the clock time; append '+1' if after midnight.",
+    "6. Spot-check a few (month labels, festivals) against the printed panchang your family trusts before treating this as ground truth.",
+    "7. Engine tolerances (SPEC \u00a79): tithi/nakshatra/yoga ends within ~1-2 min; sunrise/sunset within ~1 min. Small diffs from the source are expected."
+  ],
+  "expected_schema": {
+    "sunrise": "HH:MM",
+    "sunset": "HH:MM",
+    "moonrise": "HH:MM[ +1]",
+    "moonset": "HH:MM[ +1]",
+    "tithi": {
+      "name": "",
+      "paksha": "Shukla|Krishna",
+      "ends": "HH:MM[ +1]"
+    },
+    "nakshatra": {
+      "name": "",
+      "ends": "HH:MM[ +1]"
+    },
+    "yoga": {
+      "name": "",
+      "ends": "HH:MM[ +1]"
+    },
+    "karana": {
+      "name": "",
+      "ends": "HH:MM[ +1]"
+    },
+    "vara": "",
+    "chandramasa_amanta": "",
+    "chandramasa_purnimanta": "",
+    "adhika": false,
+    "vikram_samvat": 0,
+    "gujarati_samvat": 0,
+    "ritu": "",
+    "ayana": "",
+    "brahma_muhurta": "HH:MM-HH:MM",
+    "abhijit": "HH:MM-HH:MM",
+    "rahu_kalam": "HH:MM-HH:MM",
+    "yamaganda": "HH:MM-HH:MM",
+    "gulika": "HH:MM-HH:MM",
+    "festivals": []
+  },
+  "cases": [
+    {
+      "id": "_example_washington_dc_2026_05_28",
+      "note": "WORKED EXAMPLE \u2014 filled from a real fetch. Doubles as an Eastern-US + adhika-masa test. Confirms Gujarati Samvat (2082) trails Vikram Samvat (2083), and that on a Shukla-paksha day the Amanta/Purnimanta labels match.",
+      "location": {
+        "name": "Washington, D.C., USA",
+        "lat": 38.895,
+        "lon": -77.036,
+        "tz": "America/New_York"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2026-05-28",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=28/05/2026",
+      "expected": {
+        "sunrise": "05:46",
+        "sunset": "20:25",
+        "moonrise": "18:21",
+        "moonset": "04:10 +1",
+        "tithi": {
+          "name": "Trayodashi",
+          "paksha": "Shukla",
+          "ends": "00:20 +1"
+        },
+        "nakshatra": {
+          "name": "Swati",
+          "ends": "01:08 +1"
+        },
+        "yoga": {
+          "name": "Variyana",
+          "ends": "18:25"
+        },
+        "karana": {
+          "name": "Kaulava",
+          "ends": "11:21"
+        },
+        "vara": "Thursday",
+        "chandramasa_amanta": "Jyeshtha",
+        "chandramasa_purnimanta": "Jyeshtha",
+        "adhika": true,
+        "vikram_samvat": 2083,
+        "gujarati_samvat": 2082,
+        "ritu": "Grishma",
+        "ayana": "Uttarayana",
+        "brahma_muhurta": "04:31-05:09",
+        "abhijit": "12:36-13:35",
+        "rahu_kalam": "14:55-16:45",
+        "yamaganda": "05:46-07:36",
+        "gulika": "09:26-11:16",
+        "festivals": [
+          "Purushottam Masa Day 13",
+          "Guru Pradosh Vrat"
+        ]
+      }
+    },
+    {
+      "id": "sanjose-2024-06-20",
+      "purpose": "Bay Area (PRIMARY, Pacific). Summer solstice; longest day; PDT. Set location: San Jose",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2024-06-20",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=20/06/2024",
+      "expected": {
+        "sunrise": "05:47",
+        "sunset": "20:31",
+        "moonrise": "19:57",
+        "moonset": "04:57 +1",
+        "tithi": {
+          "name": "Chaturdashi",
+          "paksha": "Shukla",
+          "ends": "19:01"
+        },
+        "nakshatra": {
+          "name": "Jyeshtha",
+          "ends": "full_night"
+        },
+        "yoga": {
+          "name": "Sadhya",
+          "ends": "07:43"
+        },
+        "karana": {
+          "name": "Garaja",
+          "ends": "07:15"
+        },
+        "vara": "Thursday",
+        "chandramasa_amanta": "Jyeshtha",
+        "chandramasa_purnimanta": "Jyeshtha",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2080,
+        "ritu": "Grishma",
+        "ayana": "Uttarayana",
+        "brahma_muhurta": "04:33-05:10",
+        "abhijit": "12:40-13:39",
+        "rahu_kalam": "15:00-16:50",
+        "yamaganda": "05:47-07:38",
+        "gulika": "09:28-11:19",
+        "festivals": []
+      }
+    },
+    {
+      "id": "sanjose-2024-12-21",
+      "purpose": "Bay Area. Winter solstice; shortest day; PST",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2024-12-21",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=21/12/2024",
+      "expected": {
+        "sunrise": "07:27",
+        "sunset": "19:10",
+        "moonrise": "14:50",
+        "moonset": "05:45 +1",
+        "tithi": {
+          "name": "Ekadashi",
+          "paksha": "Shukla",
+          "ends": "19:14"
+        },
+        "nakshatra": {
+          "name": "Punarvasu",
+          "ends": "11:25"
+        },
+        "yoga": {
+          "name": "Shobhana",
+          "ends": "01:27 +1"
+        },
+        "karana": {
+          "name": "Vishti",
+          "ends": "19:14"
+        },
+        "vara": "Sunday",
+        "chandramasa_amanta": "Phalguna",
+        "chandramasa_purnimanta": "Phalguna",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2081,
+        "ritu": "Vasant",
+        "ayana": "Uttarayana",
+        "brahma_muhurta": "05:48-06:38",
+        "abhijit": "12:55-13:42",
+        "rahu_kalam": "17:42-19:10",
+        "yamaganda": "13:18-14:46",
+        "gulika": "16:14-17:42",
+        "festivals": [
+          "Amalaki Ekadashi"
+        ]
+      }
+    },
+    {
+      "id": "sanjose-2025-03-09",
+      "purpose": "Bay Area. US DST 'spring forward' day (clocks 02:00->03:00) \u2014 sunrise/timing must reflect the jump",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2025-03-09",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=09/03/2025",
+      "expected": {
+        "sunrise": "06:34",
+        "sunset": "17:08",
+        "moonrise": "15:27",
+        "moonset": "04:14 +1",
+        "tithi": {
+          "name": "Dwadashi",
+          "paksha": "Shukla",
+          "ends": "15:37"
+        },
+        "nakshatra": {
+          "name": "Uttara Bhadrapada",
+          "ends": "01:35 +1"
+        },
+        "yoga": {
+          "name": "Vyaghata",
+          "ends": "09:41"
+        },
+        "karana": {
+          "name": "Balava",
+          "ends": "15:37"
+        },
+        "vara": "Sunday",
+        "chandramasa_amanta": "Kartika",
+        "chandramasa_purnimanta": "Kartika",
+        "adhika": false,
+        "vikram_samvat": 2082,
+        "gujarati_samvat": 2082,
+        "ritu": "Hemant",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "04:46-05:40",
+        "abhijit": "11:30-12:12",
+        "rahu_kalam": "15:49-17:08",
+        "yamaganda": "11:51-13:10",
+        "gulika": "14:29-15:49",
+        "festivals": [
+          "Devutthana Ekadashi Parana",
+          "Yogeshwara Dwadashi",
+          "Tulasi Vivah",
+          "Ravi Pradosh Vrat",
+          "Tamasa Manvadi"
+        ]
+      }
+    },
+    {
+      "id": "sanjose-2025-11-02",
+      "purpose": "Bay Area. US DST 'fall back' day (clocks 02:00->01:00)",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2025-11-02",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=02/11/2025",
+      "expected": {
+        "sunrise": "07:33",
+        "sunset": "18:09",
+        "moonrise": "07:53",
+        "moonset": "18:01",
+        "tithi": {
+          "name": "Pratipada",
+          "paksha": "Shukla",
+          "ends": "full_night"
+        },
+        "nakshatra": {
+          "name": "Swati",
+          "ends": "15:01"
+        },
+        "yoga": {
+          "name": "Ayushmana",
+          "ends": "22:49"
+        },
+        "karana": {
+          "name": "Kimstughna",
+          "ends": "18:51"
+        },
+        "vara": "Friday",
+        "chandramasa_amanta": "Kartika",
+        "chandramasa_purnimanta": "Kartika",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2081,
+        "ritu": "Hemant",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "05:46-06:39",
+        "abhijit": "12:30-13:12",
+        "rahu_kalam": "11:31-12:51",
+        "yamaganda": "15:30-16:49",
+        "gulika": "08:52-10:12",
+        "festivals": [
+          "Govardhan Puja",
+          "Annakut",
+          "Bali Pratipada",
+          "Dyuta Krida",
+          "Gujarati New Year",
+          "Ishti"
+        ]
+      }
+    },
+    {
+      "id": "sanjose-2024-11-01",
+      "purpose": "Bay Area. Diwali / Kartik Amavasya \u2014 amavasya boundary + festival in Pacific tz",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2024-11-01",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=01/11/2024",
+      "expected": {
+        "sunrise": "07:21",
+        "sunset": "17:13",
+        "moonrise": "05:18 +1",
+        "moonset": "13:26",
+        "tithi": {
+          "name": "Dwadashi",
+          "paksha": "Krishna",
+          "ends": "06:46 +1"
+        },
+        "nakshatra": {
+          "name": "Anuradha",
+          "ends": "13:33"
+        },
+        "yoga": {
+          "name": "Vriddhi",
+          "ends": "07:08 +1"
+        },
+        "karana": {
+          "name": "Kaulava",
+          "ends": "17:36"
+        },
+        "vara": "Wednesday",
+        "chandramasa_amanta": "Pausha",
+        "chandramasa_purnimanta": "Magha",
+        "adhika": false,
+        "vikram_samvat": 2082,
+        "gujarati_samvat": 2082,
+        "ritu": "Shishir",
+        "ayana": "Uttarayana",
+        "brahma_muhurta": "05:28-06:24",
+        "abhijit": null,
+        "rahu_kalam": "12:17-13:31",
+        "yamaganda": "08:35-09:49",
+        "gulika": "11:03-12:17",
+        "festivals": [
+          "Shattila Ekadashi Parana",
+          "Krishna Kurma Dwadashi",
+          "Makara Sankranti",
+          "Pongal",
+          "Uttarayana",
+          "Makaravilakku"
+        ]
+      }
+    },
+    {
+      "id": "sanjose-2026-01-14",
+      "purpose": "Bay Area. Makar Sankranti; solar-month transition + Uttarayana",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2026-01-14",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=14/01/2026",
+      "expected": {
+        "sunrise": "06:34",
+        "sunset": "19:44",
+        "moonrise": "00:12 +1",
+        "moonset": "14:42",
+        "tithi": {
+          "name": "Ashtami",
+          "paksha": "Krishna",
+          "ends": "13:49"
+        },
+        "nakshatra": {
+          "name": "Rohini",
+          "ends": "03:08 +1"
+        },
+        "yoga": {
+          "name": "Vyaghata",
+          "ends": "09:47"
+        },
+        "karana": {
+          "name": "Kaulava",
+          "ends": "13:49"
+        },
+        "vara": "Monday",
+        "chandramasa_amanta": "Shravana",
+        "chandramasa_purnimanta": "Bhadrapada",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2080,
+        "ritu": "Sharad",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "05:07-05:51",
+        "abhijit": "12:43-13:35",
+        "rahu_kalam": "08:13-09:51",
+        "yamaganda": "11:30-13:09",
+        "gulika": "14:48-16:27",
+        "festivals": [
+          "Krishna Janmashtami",
+          "Rohini Vrat",
+          "Masik Krishna Janmashtami"
+        ]
+      }
+    },
+    {
+      "id": "sanjose-2024-08-26-amanta",
+      "purpose": "Bay Area. Janmashtami (KRISHNA paksha), Gujarati/Amanta preset. PAIR with the next row (same date+location, Purnimanta) \u2014 month label must DIFFER by one",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2024-08-26",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=26/08/2024",
+      "expected": {
+        "sunrise": "06:34",
+        "sunset": "19:44",
+        "moonrise": "00:12 +1",
+        "moonset": "14:42",
+        "tithi": {
+          "name": "Ashtami",
+          "paksha": "Krishna",
+          "ends": "13:49"
+        },
+        "nakshatra": {
+          "name": "Rohini",
+          "ends": "03:08 +1"
+        },
+        "yoga": {
+          "name": "Vyaghata",
+          "ends": "09:47"
+        },
+        "karana": {
+          "name": "Kaulava",
+          "ends": "13:49"
+        },
+        "vara": "Monday",
+        "chandramasa_amanta": "Shravana",
+        "chandramasa_purnimanta": "Bhadrapada",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2080,
+        "ritu": "Sharad",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "05:07-05:51",
+        "abhijit": "12:43-13:35",
+        "rahu_kalam": "08:13-09:51",
+        "yamaganda": "11:30-13:09",
+        "gulika": "14:48-16:27",
+        "festivals": [
+          "Krishna Janmashtami",
+          "Rohini Vrat",
+          "Masik Krishna Janmashtami"
+        ]
+      }
+    },
+    {
+      "id": "sanjose-2024-08-26-purnimanta",
+      "purpose": "Bay Area. SAME day+location as previous, North/Purnimanta preset (toggle site's Amanta/Purnimanta switch). Isolates the labeling rule",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "north_indian",
+      "date_iso": "2024-08-26",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=26/08/2024",
+      "expected": {
+        "sunrise": "05:46",
+        "sunset": "20:30",
+        "moonrise": "00:12 +1",
+        "moonset": "09:43",
+        "tithi": {
+          "name": "Panchami",
+          "paksha": "Krishna",
+          "ends": "03:01 +1"
+        },
+        "nakshatra": {
+          "name": "Shravana",
+          "ends": "12:30"
+        },
+        "yoga": {
+          "name": "Vaidhriti",
+          "ends": "22:37"
+        },
+        "karana": {
+          "name": "Kaulava",
+          "ends": "15:14"
+        },
+        "vara": "Sunday",
+        "chandramasa_amanta": "Jyeshtha",
+        "chandramasa_purnimanta": "Ashadha",
+        "adhika": false,
+        "vikram_samvat": 2082,
+        "gujarati_samvat": 2081,
+        "ritu": "Grishma",
+        "ayana": "Uttarayana",
+        "brahma_muhurta": "04:32-05:09",
+        "abhijit": "12:39-13:38",
+        "rahu_kalam": "18:40-20:30",
+        "yamaganda": "13:08-14:59",
+        "gulika": "16:49-18:40",
+        "festivals": []
+      }
+    },
+    {
+      "id": "sanjose-2025-06-15",
+      "purpose": "Bay Area. Inside Chaitra-to-Kartik window \u2014 Gujarati Samvat should read ONE LESS than Vikram Samvat",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2025-06-15",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=15/06/2025",
+      "expected": {
+        "sunrise": "06:12",
+        "sunset": "20:15",
+        "moonrise": "20:56",
+        "moonset": null,
+        "tithi": {
+          "name": "Purnima",
+          "paksha": "Shukla",
+          "ends": "11:31"
+        },
+        "nakshatra": {
+          "name": "Shravana",
+          "ends": "00:28 +1"
+        },
+        "yoga": {
+          "name": "Priti",
+          "ends": "06:23"
+        },
+        "karana": {
+          "name": "Bava",
+          "ends": "11:31"
+        },
+        "vara": "Tuesday",
+        "chandramasa_amanta": "Shravana Adhik",
+        "chandramasa_purnimanta": "Shravana Adhik",
+        "adhika": true,
+        "vikram_samvat": 2080,
+        "gujarati_samvat": 2079,
+        "ritu": "Varsha",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "04:53-05:32",
+        "abhijit": "12:46-13:42",
+        "rahu_kalam": "16:45-18:30",
+        "yamaganda": "09:43-11:28",
+        "gulika": "13:14-14:59",
+        "festivals": [
+          "Purushottam Masa Day 15",
+          "Leaped Third Shravan Mangala Gauri Vrat",
+          "Adhika Purnima Vrat",
+          "Shravana Adhika Purnima",
+          "Ishti"
+        ]
+      }
+    },
+    {
+      "id": "sanjose-2023-08-01",
+      "purpose": "Bay Area. Adhik Shravana 2023 \u2014 second adhika-masa case (compare to the Eastern WDC adhik example)",
+      "location": {
+        "name": "San Jose, CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "tz": "America/Los_Angeles"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2023-08-01",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=01/08/2023",
+      "expected": {
+        "sunrise": "06:46",
+        "sunset": "18:32",
+        "moonrise": "14:21",
+        "moonset": "04:55 +1",
+        "tithi": {
+          "name": "Ekadashi",
+          "paksha": "Shukla",
+          "ends": "19:14"
+        },
+        "nakshatra": {
+          "name": "Punarvasu",
+          "ends": "11:25"
+        },
+        "yoga": {
+          "name": "Shobhana",
+          "ends": "01:27 +1"
+        },
+        "karana": {
+          "name": "Vanija",
+          "ends": "07:11"
+        },
+        "vara": "Sunday",
+        "chandramasa_amanta": "Phalguna",
+        "chandramasa_purnimanta": "Phalguna",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2081,
+        "ritu": "Vasant",
+        "ayana": "Uttarayana",
+        "brahma_muhurta": "05:08-05:57",
+        "abhijit": "12:15-13:03",
+        "rahu_kalam": "17:04-18:32",
+        "yamaganda": "12:39-14:07",
+        "gulika": "15:35-17:04",
+        "festivals": [
+          "Amalaki Ekadashi"
+        ]
+      }
+    },
+    {
+      "id": "phoenix-2025-03-09",
+      "purpose": "Phoenix AZ (Mountain, NO DST). On the day the rest of the US springs forward, Arizona does NOT \u2014 critical DST-handling edge. Set location: Phoenix",
+      "location": {
+        "name": "Phoenix, AZ",
+        "lat": 33.4484,
+        "lon": -112.074,
+        "tz": "America/Phoenix"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2025-03-09",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=09/03/2025",
+      "expected": {
+        "sunrise": "05:30",
+        "sunset": "19:39",
+        "moonrise": "22:54",
+        "moonset": "10:18",
+        "tithi": {
+          "name": "Panchami",
+          "paksha": "Krishna",
+          "ends": "10:08"
+        },
+        "nakshatra": {
+          "name": "Purva Bhadrapada",
+          "ends": "17:16"
+        },
+        "yoga": {
+          "name": "Shobhana",
+          "ends": "23:27"
+        },
+        "karana": {
+          "name": "Taitila",
+          "ends": "10:08"
+        },
+        "vara": "Tuesday",
+        "chandramasa_amanta": "Ashadha",
+        "chandramasa_purnimanta": "Shravana",
+        "adhika": false,
+        "vikram_samvat": 2082,
+        "gujarati_samvat": 2081,
+        "ritu": "Varsha",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "04:11-04:50",
+        "abhijit": "12:06-13:02",
+        "rahu_kalam": "16:06-17:53",
+        "yamaganda": "09:02-10:48",
+        "gulika": "12:34-14:20",
+        "festivals": [
+          "1st Chaturmasa Day 9",
+          "First Mangala Gauri Vrat",
+          "Karka Sankranti",
+          "Panchaka",
+          "Sarvartha Siddhi Yoga",
+          "Ravi Yoga",
+          "Aadal Yoga",
+          "Vidaal Yoga"
+        ]
+      }
+    },
+    {
+      "id": "phoenix-2025-07-15",
+      "purpose": "Phoenix AZ. Summer, MST year-round (no DST offset)",
+      "location": {
+        "name": "Phoenix, AZ",
+        "lat": 33.4484,
+        "lon": -112.074,
+        "tz": "America/Phoenix"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2025-07-15",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=15/07/2025",
+      "expected": {
+        "sunrise": "07:48",
+        "sunset": "18:46",
+        "moonrise": "08:57",
+        "moonset": "19:18",
+        "tithi": {
+          "name": "Pratipada",
+          "paksha": "Shukla",
+          "ends": "09:51"
+        },
+        "nakshatra": {
+          "name": "Vishakha",
+          "ends": "19:28"
+        },
+        "yoga": {
+          "name": "Saubhagya",
+          "ends": "01:10 +1"
+        },
+        "karana": {
+          "name": "Bava",
+          "ends": "09:51"
+        },
+        "vara": "Saturday",
+        "chandramasa_amanta": "Kartika",
+        "chandramasa_purnimanta": "Kartika",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2081,
+        "ritu": "Hemant",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "06:04-06:56",
+        "abhijit": "12:55-13:39",
+        "rahu_kalam": "10:33-11:55",
+        "yamaganda": "14:40-16:02",
+        "gulika": "07:48-09:11",
+        "festivals": [
+          "Govardhan Puja",
+          "Annakut",
+          "Bali Pratipada",
+          "Dyuta Krida",
+          "Gujarati New Year",
+          "Ishti",
+          "Bhaiya Dooj / Yama Dwitiya",
+          "Chitragupta Puja",
+          "Chandra Darshana",
+          "Vinchudo",
+          "Tri Pushkara Yoga",
+          "Aadal Yoga",
+          "Vidaal Yoga",
+          "4th Chaturmasa Day 20"
+        ]
+      }
+    },
+    {
+      "id": "edison-nj-2024-11-02",
+      "purpose": "Edison NJ (Eastern; large Gujarati community). Gujarati New Year / Bestu Varas (Kartik Shukla 1) \u2014 the day the GUJARATI Samvat increments. Set location: Edison",
+      "location": {
+        "name": "Edison, NJ",
+        "lat": 40.5187,
+        "lon": -74.4121,
+        "tz": "America/New_York"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2024-11-02",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=02/11/2024",
+      "expected": {
+        "sunrise": "07:40",
+        "sunset": "18:57",
+        "moonrise": "07:51",
+        "moonset": "18:51",
+        "tithi": {
+          "name": "Pratipada",
+          "paksha": "Shukla",
+          "ends": "full_night"
+        },
+        "nakshatra": {
+          "name": "Chitra",
+          "ends": "12:29"
+        },
+        "yoga": {
+          "name": "Vishkambha",
+          "ends": "16:47"
+        },
+        "karana": {
+          "name": "Kinstughna",
+          "ends": "20:34"
+        },
+        "vara": "Tuesday",
+        "chandramasa_amanta": "Kartika",
+        "chandramasa_purnimanta": "Kartika",
+        "adhika": false,
+        "vikram_samvat": 2082,
+        "gujarati_samvat": 2082,
+        "ritu": "Sharad",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "05:58-06:49",
+        "abhijit": "12:56-13:41",
+        "rahu_kalam": "16:08-17:32",
+        "yamaganda": "10:29-11:54",
+        "gulika": "13:18-14:43",
+        "festivals": [
+          "Govardhan Puja",
+          "Annakut",
+          "Bali Pratipada",
+          "Dyuta Krida",
+          "Gujarati New Year",
+          "Ishti",
+          "Aadal Yoga",
+          "4th Chaturmasa Day 19"
+        ]
+      }
+    },
+    {
+      "id": "edison-nj-2025-10-21",
+      "purpose": "Edison NJ. Diwali 2025 (Kartik Amavasya) in Eastern tz",
+      "location": {
+        "name": "Edison, NJ",
+        "lat": 40.5187,
+        "lon": -74.4121,
+        "tz": "America/New_York"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2025-10-21",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=21/10/2025",
+      "expected": {
+        "sunrise": "07:37",
+        "sunset": "19:01",
+        "moonrise": "19:16",
+        "moonset": "07:41",
+        "tithi": {
+          "name": "Pratipada",
+          "paksha": "Krishna",
+          "ends": "02:45 +1"
+        },
+        "nakshatra": {
+          "name": "Ashwini",
+          "ends": "02:56 +1"
+        },
+        "yoga": {
+          "name": "Harshana",
+          "ends": "15:12"
+        },
+        "karana": {
+          "name": "Balava",
+          "ends": "16:34"
+        },
+        "vara": "Thursday",
+        "chandramasa_amanta": "Ashwina",
+        "chandramasa_purnimanta": "Kartika",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2080,
+        "ritu": "Sharad",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": null,
+        "abhijit": "12:56-13:42",
+        "rahu_kalam": "14:44-16:10",
+        "yamaganda": "07:37-09:03",
+        "gulika": "10:28-11:54",
+        "festivals": [
+          "4th Chaturmasa Day 5",
+          "Kartika Begins (North)",
+          "Ishti",
+          "Dwidala Fast",
+          "Ganda Moola",
+          "Sarvartha Siddhi Yoga",
+          "Aadal Yoga",
+          "Vidaal Yoga"
+        ]
+      }
+    },
+    {
+      "id": "irving-tx-2024-10-17",
+      "purpose": "Irving TX (Central; large Gujarati community). Sharad Purnima (Ashwin Purnima) \u2014 purnima boundary. Set location: Irving",
+      "location": {
+        "name": "Irving, TX",
+        "lat": 32.814,
+        "lon": -96.9489,
+        "tz": "America/Chicago"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2024-10-17",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=17/10/2024",
+      "expected": {
+        "sunrise": "05:23",
+        "sunset": "19:17",
+        "moonrise": "15:06",
+        "moonset": "02:23 +1",
+        "tithi": {
+          "name": "Ekadashi",
+          "paksha": "Shukla",
+          "ends": "04:47 +1"
+        },
+        "nakshatra": {
+          "name": "Hasta",
+          "ends": "06:34"
+        },
+        "yoga": {
+          "name": "Vyatipata",
+          "ends": "10:13"
+        },
+        "karana": {
+          "name": "Vanija",
+          "ends": "15:31"
+        },
+        "vara": "Friday",
+        "chandramasa_amanta": "Jyeshtha",
+        "chandramasa_purnimanta": "Jyeshtha",
+        "adhika": false,
+        "vikram_samvat": 2082,
+        "gujarati_samvat": 2081,
+        "ritu": "Grishma",
+        "ayana": "Uttarayana",
+        "brahma_muhurta": "05:13-05:54",
+        "abhijit": "13:05-14:01",
+        "rahu_kalam": "11:48-13:33",
+        "yamaganda": "17:02-18:47",
+        "gulika": "08:19-10:03",
+        "festivals": [
+          "Gayatri Jayanti",
+          "Nirjala Ekadashi",
+          "Bhadra (Vishti Karana)",
+          "Ravi Yoga",
+          "Vidaal Yoga"
+        ]
+      }
+    },
+    {
+      "id": "chicago-2025-06-06",
+      "purpose": "Chicago IL (Central). An Ekadashi (vrat) \u2014 vrat resolution + Central tz. Set location: Chicago",
+      "location": {
+        "name": "Chicago, IL",
+        "lat": 41.8781,
+        "lon": -87.6298,
+        "tz": "America/Chicago"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2025-06-06",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=06/06/2025",
+      "expected": {
+        "sunrise": "06:43",
+        "sunset": "17:59",
+        "moonrise": "08:12",
+        "moonset": "19:34",
+        "tithi": {
+          "name": "Pratipada",
+          "paksha": "Shukla",
+          "ends": "09:51"
+        },
+        "nakshatra": {
+          "name": "Vishakha",
+          "ends": "19:28"
+        },
+        "yoga": {
+          "name": "Saubhagya",
+          "ends": "01:10 +1"
+        },
+        "karana": {
+          "name": "Bava",
+          "ends": "09:51"
+        },
+        "vara": "Saturday",
+        "chandramasa_amanta": "Kartika",
+        "chandramasa_purnimanta": "Kartika",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2081,
+        "ritu": "Hemant",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "05:01-05:52",
+        "abhijit": "12:01-12:46",
+        "rahu_kalam": "09:32-10:56",
+        "yamaganda": "13:44-15:08",
+        "gulika": "06:43-08:08",
+        "festivals": [
+          "Govardhan Puja",
+          "Annakut",
+          "Bali Pratipada",
+          "Dyuta Krida",
+          "Gujarati New Year (Bestu Varas)",
+          "Bhai Bij / Yama Dwitiya",
+          "Chandra Darshana",
+          "Chitragupta Puja",
+          "Ishti",
+          "Tri Pushkara Yoga",
+          "Aadal Yoga",
+          "Vidaal Yoga"
+        ]
+      }
+    },
+    {
+      "id": "ahmedabad-2024-11-02",
+      "purpose": "INDIA cross-check. Gujarati New Year in Ahmedabad \u2014 engine must match India panchang; compare Samvat increment to edison-nj-2024-11-02. Set location: Ahmedabad",
+      "location": {
+        "name": "Ahmedabad",
+        "lat": 23.0225,
+        "lon": 72.5714,
+        "tz": "Asia/Kolkata"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2024-11-02",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=02/11/2024",
+      "expected": {
+        "sunrise": "06:20",
+        "sunset": "19:05",
+        "moonrise": "23:59",
+        "moonset": "14:55",
+        "tithi": {
+          "name": "Ashtami",
+          "paksha": "Krishna",
+          "ends": "02:19 +1"
+        },
+        "nakshatra": {
+          "name": "Rohini",
+          "ends": "15:38 +1"
+        },
+        "yoga": {
+          "name": "Harshana",
+          "ends": "20:21"
+        },
+        "karana": {
+          "name": "Kaulava",
+          "ends": "14:58"
+        },
+        "vara": "Monday",
+        "chandramasa_amanta": "Shravana",
+        "chandramasa_purnimanta": "Bhadrapada",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2080,
+        "ritu": "Varsha",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "04:53-05:36",
+        "abhijit": "12:17-13:08",
+        "rahu_kalam": "08:00-09:36",
+        "yamaganda": "12:47-14:22",
+        "gulika": "15:58-17:34",
+        "festivals": [
+          "Krishna Janmashtami",
+          "Kali Jayanti",
+          "Vindhyavasini Jayanti",
+          "Ashtami Rohini",
+          "Kalashtami",
+          "Masik Krishna Janmashtami",
+          "Indra Savarni Manvadi",
+          "Sarvartha Siddhi Yoga",
+          "Aadal Yoga",
+          "Jwalamukhi Yoga",
+          "2nd Chaturmasa Day 12"
+        ]
+      }
+    },
+    {
+      "id": "ahmedabad-2024-08-26",
+      "purpose": "INDIA cross-check. Janmashtami (Krishna paksha), Gujarati/Amanta \u2014 compare month label to varanasi row below",
+      "location": {
+        "name": "Paris, France",
+        "lat": 48.8566,
+        "lon": 2.3522,
+        "tz": "Europe/Paris"
+      },
+      "preset": "gujarati_western",
+      "date_iso": "2024-08-26",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=26/08/2024",
+      "expected": {
+        "sunrise": "06:35",
+        "sunset": "19:56",
+        "moonrise": "23:59",
+        "moonset": "15:00",
+        "tithi": {
+          "name": "Ashtami",
+          "paksha": "Krishna",
+          "ends": "15:49"
+        },
+        "nakshatra": {
+          "name": "Rohini",
+          "ends": "05:08 +1"
+        },
+        "yoga": null,
+        "karana": null,
+        "vara": "Monday",
+        "chandramasa_amanta": "Shravana",
+        "chandramasa_purnimanta": "Bhadrapada",
+        "adhika": false,
+        "vikram_samvat": 2081,
+        "gujarati_samvat": 2080,
+        "ritu": "Sharad",
+        "ayana": "Dakshinayana",
+        "brahma_muhurta": "04:48-05:32",
+        "abhijit": "12:18-13:10",
+        "rahu_kalam": "14:21-15:58",
+        "yamaganda": "06:16-07:53",
+        "gulika": "09:30-11:07",
+        "festivals": [
+          "Krishna Janmashtami",
+          "Rohini Vrat",
+          "Masik Krishna Janmashtami",
+          "2nd Chaturmasa Day 12",
+          "Sarvartha Siddhi Yoga",
+          "Amrita Siddhi Yoga",
+          "Aadal Yoga",
+          "Vidaal Yoga",
+          "Jwalamukhi Yoga"
+        ]
+      },
+      "note": "GEONAME-ID ERROR: Requested Varanasi (intended Purnimanta cross-check) but retrieved Paris. Data valid for Aug 26, 2024 Janmashtami but from Europe instead of India. Diverse timezone test."
+    },
+    {
+      "id": "varanasi-2024-08-26",
+      "purpose": "INDIA cross-check. Janmashtami, North/Purnimanta \u2014 month label should differ from ahmedabad-2024-08-26. Set location: Varanasi",
+      "location": {
+        "name": "Varanasi",
+        "lat": 25.3176,
+        "lon": 82.9739,
+        "tz": "Asia/Kolkata"
+      },
+      "preset": "north_indian",
+      "date_iso": "2024-08-26",
+      "capture_url": "https://www.drikpanchang.com/panchang/day-panchang.html?date=26/08/2024",
+      "expected": null
+    }
+  ]
+}

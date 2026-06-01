@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xcodebuild -version)",
+      "Bash(xcrun simctl *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\)['devices']; iphones=[\\(k,v\\) for k,vl in d.items\\(\\) for v in vl if 'iPhone 16' in v['name'] and v['isAvailable']]; print\\(iphones[:3]\\)\")",
+      "mcp__XcodeBuildMCP__list_sims",
+      "Bash(swift --version)",
+      "Bash(gem list *)",
+      "Bash(swift package *)",
+      "Bash(swift test *)",
+      "mcp__XcodeBuildMCP__session_set_defaults",
+      "mcp__XcodeBuildMCP__build_sim"
+    ]
+  }
+}

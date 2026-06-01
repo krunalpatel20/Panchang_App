@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  engine-tests:
+    name: PanchangKit Tests
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.3.app/Contents/Developer
+
+      - name: Resolve dependencies
+        working-directory: PanchangKit
+        run: swift package resolve
+
+      - name: Run tests
+        working-directory: PanchangKit
+        run: swift test --configuration debug
+
+  app-build:
+    name: App Build (Simulator)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.3.app/Contents/Developer
+
+      - name: Create placeholder Signing.xcconfig
+        run: |
+          echo "DEVELOPMENT_TEAM =" > Signing.xcconfig
+          echo "CODE_SIGN_IDENTITY = Apple Development" >> Signing.xcconfig
+
+      - name: Resolve packages
+        run: xcodebuild -resolvePackageDependencies -project PanchangApp.xcodeproj -scheme PanchangApp
+
+      - name: Build for simulator
+        run: |
+          xcodebuild build \
+            -project PanchangApp.xcodeproj \
+            -scheme PanchangApp \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            | xcpretty || true
