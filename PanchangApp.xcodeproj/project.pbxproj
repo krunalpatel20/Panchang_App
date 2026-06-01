@@ -11,6 +11,9 @@
 		AA000000000000000000043 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000042 /* TodayView.swift */; };
 		AA000000000000000000045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000044 /* Assets.xcassets */; };
 		AA000000000000000000082 /* PanchangKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA000000000000000000081 /* PanchangKit */; };
+		AA0000000000000000000A2 /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000A1 /* AppModels.swift */; };
+		AA0000000000000000000B2 /* PanchangService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000B1 /* PanchangService.swift */; };
+		AA0000000000000000000C2 /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000C1 /* TodayViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		AA000000000000000000044 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA000000000000000000060 /* PanchangApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PanchangApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA000000000000000000090 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		AA0000000000000000000A1 /* AppModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModels.swift; sourceTree = "<group>"; };
+		AA0000000000000000000B1 /* PanchangService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanchangService.swift; sourceTree = "<group>"; };
+		AA0000000000000000000C1 /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,8 @@
 			children = (
 				AA000000000000000000051 /* App */,
 				AA000000000000000000052 /* Features */,
+				AA0000000000000000000D0 /* Models */,
+				AA0000000000000000000E0 /* Services */,
 				AA000000000000000000044 /* Assets.xcassets */,
 			);
 			path = PanchangApp;
@@ -80,8 +88,33 @@
 			isa = PBXGroup;
 			children = (
 				AA000000000000000000042 /* TodayView.swift */,
+				AA0000000000000000000C1 /* TodayViewModel.swift */,
 			);
 			path = Today;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000D0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000A1 /* AppModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000E0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000F0 /* PanchangService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000F0 /* PanchangService */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000B1 /* PanchangService.swift */,
+			);
+			path = PanchangService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +194,9 @@
 			files = (
 				AA000000000000000000041 /* PanchangApp.swift in Sources */,
 				AA000000000000000000043 /* TodayView.swift in Sources */,
+				AA0000000000000000000A2 /* AppModels.swift in Sources */,
+				AA0000000000000000000B2 /* PanchangService.swift in Sources */,
+				AA0000000000000000000C2 /* TodayViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
