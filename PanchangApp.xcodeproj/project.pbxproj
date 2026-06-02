@@ -21,6 +21,9 @@
 		AA000000000000000000112 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000111 /* LocationManager.swift */; };
 		AA000000000000000000122 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000121 /* LocationSearchView.swift */; };
 		AA000000000000000000132 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000131 /* SettingsView.swift */; };
+		AA000000000000000000142 /* FestivalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000141 /* FestivalService.swift */; };
+		AA000000000000000000152 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000151 /* NotificationService.swift */; };
+		AA000000000000000000162 /* festivals.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000161 /* festivals.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +42,9 @@
 		AA000000000000000000111 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		AA000000000000000000121 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		AA000000000000000000131 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA000000000000000000141 /* FestivalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalService.swift; sourceTree = "<group>"; };
+		AA000000000000000000151 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		AA000000000000000000161 /* festivals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = festivals.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,7 @@
 				AA0000000000000000000D0 /* Models */,
 				AA0000000000000000000E0 /* Services */,
 				AA000000000000000000044 /* Assets.xcassets */,
+				AA000000000000000000160 /* Festivals */,
 			);
 			path = PanchangApp;
 			sourceTree = "<group>";
@@ -96,6 +103,7 @@
 				AA000000000000000000053 /* Today */,
 				AA000000000000000000054 /* Calendar */,
 				AA000000000000000000055 /* Settings */,
+				AA000000000000000000150 /* Notifications */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -142,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				AA0000000000000000000F0 /* PanchangService */,
+				AA000000000000000000140 /* FestivalService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -152,6 +161,30 @@
 				AA0000000000000000000B1 /* PanchangService.swift */,
 			);
 			path = PanchangService;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000140 /* FestivalService */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000141 /* FestivalService.swift */,
+			);
+			path = FestivalService;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000150 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000151 /* NotificationService.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000160 /* Festivals */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000161 /* festivals.json */,
+			);
+			path = Resources/Festivals;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA000000000000000000045 /* Assets.xcassets in Resources */,
+				AA000000000000000000162 /* festivals.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +275,8 @@
 				AA000000000000000000112 /* LocationManager.swift in Sources */,
 				AA000000000000000000122 /* LocationSearchView.swift in Sources */,
 				AA000000000000000000132 /* SettingsView.swift in Sources */,
+				AA000000000000000000142 /* FestivalService.swift in Sources */,
+				AA000000000000000000152 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

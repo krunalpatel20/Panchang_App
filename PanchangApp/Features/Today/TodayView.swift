@@ -27,11 +27,12 @@ struct TodayView: View {
                 switch vm.state {
                 case .idle:
                     Color.clear.onAppear { vm.load(location: activeLocation, config: config) }
+                    // fallthrough to show nothing while idle
                 case .loading:
                     ProgressView("Computing panchang…")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                case .loaded(let day):
-                    PanchangDayView(day: day)
+                case .loaded(let day, let festivals):
+                    PanchangDayView(day: day, festivals: festivals)
                 case .failed(let msg):
                     ContentUnavailableView("Unable to compute", systemImage: "exclamationmark.triangle",
                                           description: Text(msg))
@@ -60,10 +61,12 @@ struct TodayView: View {
 
 struct PanchangDayView: View {
     let day: PanchangDay
+    var festivals: [FestivalOccurrence] = []
 
     var body: some View {
         List {
             dateHeaderSection
+            if !festivals.isEmpty { festivalsSection }
             sunMoonSection
             fiveLimbsSection
             monthYearSection
@@ -138,6 +141,22 @@ struct PanchangDayView: View {
             LabeledContent("Gujarati Samvat", value: "\(day.yearInfo.vikramSamvatKartikadi)")
             LabeledContent("Season (Ritu)", value: day.yearInfo.rituName)
             LabeledContent("Ayana", value: day.yearInfo.ayana)
+        }
+    }
+
+    private var festivalsSection: some View {
+        Section("Festivals & Vrats") {
+            ForEach(festivals) { f in
+                HStack {
+                    Image(systemName: f.type == .vrat ? "moon.stars" : "star.fill")
+                        .foregroundStyle(f.type == .vrat ? .indigo : .orange)
+                    Text(f.name)
+                    Spacer()
+                    Text(f.type.rawValue.capitalized)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
         }
     }
 

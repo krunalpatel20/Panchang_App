@@ -27,6 +27,7 @@ final class Preferences {
     var calendarPreset: String   // "gujarati_western" | "north_indian"
     var ayanamsaMode: String     // "lahiri" (others: v2)
     var scriptMode: String       // "transliteration" | "devanagari" | "english"
+    var notificationsEnabled: Bool = false
 
     init() {
         self.calendarPreset = "gujarati_western"

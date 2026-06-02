@@ -24,6 +24,7 @@ struct SettingsView: View {
                 locationSection
                 calendarSection
                 scriptSection
+                notificationsSection
             }
             .navigationTitle("Settings")
             .sheet(isPresented: $showLocationSearch) {
@@ -68,6 +69,29 @@ struct SettingsView: View {
             Text("Calendar Tradition")
         } footer: {
             Text("Affects month naming and Vikram Samvat year for Gujarat dates.")
+        }
+    }
+
+    private var notificationsSection: some View {
+        Section {
+            Toggle(isOn: Binding(
+                get: { prefs.notificationsEnabled },
+                set: { newValue in
+                    prefs.notificationsEnabled = newValue
+                    if newValue {
+                        Task {
+                            let granted = await NotificationService.shared.requestPermission()
+                            if !granted { prefs.notificationsEnabled = false }
+                        }
+                    }
+                }
+            )) {
+                Label("Festival Reminders", systemImage: "bell")
+            }
+        } header: {
+            Text("Notifications")
+        } footer: {
+            Text("Get a morning reminder on festival and vrat days.")
         }
     }
 
