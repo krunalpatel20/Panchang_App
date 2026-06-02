@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 import PanchangKit
 
 struct DayDetailView: View {
@@ -7,6 +8,9 @@ struct DayDetailView: View {
     let day: Int
     let location: GeoLocation
     let config: CalendarConfig
+
+    @Query private var prefsQuery: [Preferences]
+    private var scriptMode: String { prefsQuery.first?.scriptMode ?? "transliteration" }
 
     @State private var state: LoadState = .loading
 
@@ -21,7 +25,7 @@ struct DayDetailView: View {
             case .loading:
                 ProgressView("Computing…").frame(maxWidth: .infinity, maxHeight: .infinity)
             case .loaded(let day, let festivals):
-                PanchangDayView(day: day, festivals: festivals)
+                PanchangDayView(day: day, festivals: festivals, scriptMode: scriptMode)
             }
         }
         .navigationTitle(navTitle)

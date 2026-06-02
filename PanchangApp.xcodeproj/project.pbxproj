@@ -24,6 +24,7 @@
 		AA000000000000000000142 /* FestivalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000141 /* FestivalService.swift */; };
 		AA000000000000000000152 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000151 /* NotificationService.swift */; };
 		AA000000000000000000162 /* festivals.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000161 /* festivals.json */; };
+		AA000000000000000000172 /* ScriptRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000171 /* ScriptRenderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		AA000000000000000000141 /* FestivalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalService.swift; sourceTree = "<group>"; };
 		AA000000000000000000151 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		AA000000000000000000161 /* festivals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = festivals.json; sourceTree = "<group>"; };
+		AA000000000000000000171 /* ScriptRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRenderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 			children = (
 				AA0000000000000000000F0 /* PanchangService */,
 				AA000000000000000000140 /* FestivalService */,
+				AA000000000000000000170 /* ScriptRenderer */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -169,6 +172,14 @@
 				AA000000000000000000141 /* FestivalService.swift */,
 			);
 			path = FestivalService;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000170 /* ScriptRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000171 /* ScriptRenderer.swift */,
+			);
+			path = ScriptRenderer;
 			sourceTree = "<group>";
 		};
 		AA000000000000000000150 /* Notifications */ = {
@@ -277,6 +288,7 @@
 				AA000000000000000000132 /* SettingsView.swift in Sources */,
 				AA000000000000000000142 /* FestivalService.swift in Sources */,
 				AA000000000000000000152 /* NotificationService.swift in Sources */,
+				AA000000000000000000172 /* ScriptRenderer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
