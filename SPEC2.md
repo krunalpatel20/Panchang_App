@@ -32,21 +32,22 @@ Build in order. Each milestone is a hard gate — do not begin the next until th
 **Scope:** Add the full daily muhurta grid to `PanchangKit` and surface it in the UI.
 
 **Engine additions (PanchangKit):**
-- **Choghadiya** — 8 day segments (sunrise→sunset) + 8 night segments (sunset→next sunrise), each ~90 min. Fixed weekday-keyed offset table determines which Choghadiya name starts each day. Names: Udveg, Char, Labh, Amrit, Kaal, Shubh, Rog, Kaal (day cycle); same names, different start offset for night.
-- **Hora** — 24 one-hour planetary hours cycling from the day's ruling planet (Sunday=Sun, Monday=Moon, …). Each hora is 1/12 of the daytime or nighttime span.
-- **Dur Muhurtam** — inauspicious windows derived from the Vara; 2 fixed windows per weekday (classical table).
-- **Varjyam** — inauspicious window derived from the nakshatra; each nakshatra has a fixed offset from moonrise.
-- **Amrit Kalam** — auspicious window derived from the nakshatra; fixed offset per nakshatra from moonrise.
+- **Choghadiya** — 8 day segments (sunrise→sunset) + 8 night segments (sunset→next sunrise), each ~90 min. The seven Choghadiya names form a fixed repeating cycle (Udveg, Char, Labh, Amrit, Kaal, Shubh, Rog); a weekday-keyed **starting index** selects which name begins the day half, and a separate index begins the night half. The eighth segment of each half wraps the cycle. The weekday→start-index table is **sourced reference data** (see §5), like the existing Rahu-Kalam part table — do not invent it.
+- **Hora** — 24 planetary hours (~1 h each) cycling from the day's ruling planet (Sunday=Sun, Monday=Moon, …). Each hora is 1/12 of the daytime or nighttime span.
+- **Dur Muhurtam** — inauspicious windows derived from the Vara; 2 fixed windows per weekday (classical table — **sourced reference data**, see §5).
+- **Varjyam** — inauspicious window; classically a fixed fraction of the **nakshatra's own span, measured from the nakshatra's start time** (per-nakshatra ghati offsets — **sourced reference data**, see §5). It is **not** an offset from moonrise (moonrise is `nil` ~once a month and would leave the window undefined). The engine already solves nakshatra start/end times — reuse them.
+- **Amrit Kalam** — auspicious window; same basis as Varjyam (a fixed per-nakshatra fraction of the nakshatra span, measured from its start time).
 - **Tara Bala** — birth-nakshatra-relative counting; requires user's janma nakshatra input.
 - **Chandra Bala** — Moon's rashi relative to user's janma rashi; requires user's janma rashi input.
 
 **Data types:**
 ```swift
 public struct Choghadiya: Sendable {
+    public enum Quality: Sendable { case good, bad, neutral }   // green / red / yellow
     public struct Segment: Sendable, Identifiable {
         public let id: Int
         public let name: String
-        public let isAuspicious: Bool
+        public let quality: Quality   // three classes — the UI shows three colours, so a Bool can't model "neutral"
         public let start: Double   // JD
         public let end: Double     // JD
     }
@@ -71,10 +72,9 @@ public struct Hora: Sendable, Identifiable {
 - Janma Rashi picker (for Chandra Bala).
 
 **Acceptance criteria:**
-- Choghadiya day/night segments sum to exactly 24 hours (16 segments total cover full day).
-- Hora segments are equal-duration within each day/night half.
-- Dur Muhurtam windows match published drikpanchang.com values ±5 min for the golden-vector dates.
-- Varjyam and Amrit Kalam windows match ±10 min.
+- Choghadiya's 16 segments cover the full sunrise→next-sunrise interval with no gaps or overlaps. (That interval is ~24 h ± a few minutes — **not** exactly 24 h; do not assert `== 24h`.)
+- Hora segments are equal-duration within each day/night half (12 + 12 = 24).
+- Dur Muhurtam, Varjyam, and Amrit Kalam match the chosen authority within tolerance (Dur Muhurtam ±5 min; Varjyam / Amrit Kalam ±10 min) — **requires the new reference vectors named in §5; do not fabricate them.**
 
 ---
 
@@ -83,9 +83,9 @@ public struct Hora: Sendable, Identifiable {
 **Scope:** Sidereal planetary positions, Vimshottari dasha, and a basic kundli (birth chart) screen. All computation in `PanchangKit`.
 
 **Engine additions:**
-- **Planetary positions** — sidereal (Lahiri) longitudes for Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu at a given JD. Use SwiftAA's planet position APIs; apply ayanamsa to convert tropical → sidereal.
+- **Planetary positions** — sidereal (Lahiri) longitudes for Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu at a given JD. SwiftAA provides geocentric apparent ecliptic longitudes for the planets and `Moon.longitudeOfMeanAscendingNode` for Rahu/Ketu (mean node; Ketu = Rahu + 180°). Apply ayanamsa to convert tropical → sidereal. **This requires expanding the `Ephemeris` protocol** — today it exposes only `sunLongitude`/`moonLongitude` — with planet + node + sidereal-time accessors, and updating every synthetic test double that conforms to it. `isRetrograde` is not a SwiftAA property: derive it by sampling longitude over a small Δt and checking the sign of motion.
 - **Rashi** — sidereal longitude / 30°, giving zodiac sign 0…11 (Aries…Pisces).
-- **Lagna (Ascendant)** — requires latitude + sidereal time; use the standard oblique ascension formula.
+- **Lagna (Ascendant)** — requires latitude + local sidereal time. SwiftAA exposes both (`JulianDay.meanLocalSiderealTime` / `apparentGreenwichSiderealTime`). Compute the tropical ascendant via the standard oblique-ascension formula, then apply ayanamsa.
 - **Vimshottari dasha** — 120-year cycle keyed to Moon's nakshatra at birth (and its fraction traversed). Compute: mahadasha sequence, start/end dates; antardasha (sub-period) within the current mahadasha.
 - **Navamsha (D9)** — sidereal longitude mod 3°20' × 9 → navamsha rashi.
 
@@ -139,9 +139,9 @@ public struct VimshottariDasha: Sendable {
 **Scope:** Let the user choose their ayanamsa; show live comparison. Engine change only — no new UI screens, just a picker in Settings.
 
 **Engine additions (`PanchangKit`):**
-- `KPAyanamsa` — Krishnamurti Paddhati (Lahiri + 0°0'6" offset; the KP value used in practice).
+- `KPAyanamsa` — Krishnamurti Paddhati. Approximately Lahiri with a small offset, but the sign and magnitude vary by KP variant (KP-Old / KP-New / straight-line) — **source the exact constant from a published KP table**, do not hardcode a guess.
 - `RamanAyanamsa` — B.V. Raman's ayanamsa formula.
-- `TrueCitraAyanamsa` — pins Chitra (Spica) at exactly 180°; computed from SwiftAA's Spica position.
+- `TrueCitraAyanamsa` — pins Chitra (Spica) at exactly 180°. **SwiftAA ships no fixed-star catalog**, so Spica's position is not available out of the box: either add a Spica entry (J2000 RA/Dec + proper motion, precessed to the epoch) or implement the published True-Chitra formula. Resolve this dependency before starting M3.
 - Update `Ayanamsa` protocol so all four modes (including existing `LahiriAyanamsa`) are hot-swappable.
 
 **UI additions:**
@@ -149,7 +149,7 @@ public struct VimshottariDasha: Sendable {
 - In Day Detail, a small "ⓘ" info row showing the current ayanamsa value in degrees.
 
 **Acceptance criteria:**
-- All four ayanamsa values match published tables within ±0°01' for J2000.0.
+- All four ayanamsa values match published tables within ±0°01' for J2000.0 (requires the published per-mode reference values named in §5).
 - Tithi/karana invariance test remains green for all four modes (ayanamsa must not affect elongation-based limbs).
 - Nakshatra/yoga shift correctly between modes for the same date/location.
 
@@ -164,7 +164,7 @@ public struct VimshottariDasha: Sendable {
 - **Medium widget** — tithi, vara, nakshatra, next Rahu Kalam.
 - **Large widget** — full five limbs + sunrise/sunset.
 - **Lock-screen widget** — tithi name + paksha dot (inline or circular accessory).
-- Use `WidgetKit`. Widgets read their data from a shared `AppGroup` container (write from main app, read from extension). No recomputation in the extension — cache the `PanchangDay` JSON to the shared container on each main-app launch/refresh.
+- Use `WidgetKit`. **Link `PanchangKit` directly into the widget extension and compute the `PanchangDay` inside the timeline provider.** The engine is pure, offline, and <100 ms, so the old "cache to a shared AppGroup, never recompute in the extension" approach is an unnecessary self-limitation — it leaves the widget showing yesterday's tithi until the app is next opened. Computing in the timeline provider lets the widget refresh correctly at midnight without the app running. An AppGroup is then only needed to share user preferences / active location with the extension (small, read-only), not the computed day.
 
 **Apple Watch:**
 - Complication showing tithi + paksha. Updates daily via `WKExtensionDelegate`.
@@ -176,6 +176,9 @@ public struct VimshottariDasha: Sendable {
 - `MuhurtaIntent` — "When is Rahu Kalam today?" → time range response.
 - Donate intents on app launch so Siri learns usage patterns.
 
+**Project setup (human-in-Xcode — see §5):**
+- The Widget, App-Intents, and (optional) Watch targets — plus their App Group and embed-extension wiring — should be created in the Xcode GUI. The project is currently a single target with a hand-maintained `project.pbxproj`; hand-editing it for multi-target extension wiring is the highest build-breakage risk in V2.
+
 **Acceptance criteria:**
 - Widget updates within 15 minutes of midnight (standard WidgetKit policy).
 - All three Siri intents return correct spoken responses for today's date on device.
@@ -185,12 +188,14 @@ public struct VimshottariDasha: Sendable {
 
 ### M5 — iCloud Sync
 
+> **POSTPONED (2026-06-03).** Deferred while the app stays single-device / local-only. This shelves the paid Developer Program enrollment, the CloudKit container-ID confirmation, and the CloudKit-safe `AppModels` migration until cross-device sync is actually needed. M4/M6/M7/M8 do not depend on M5 (M4's widget computes in its own timeline provider, per the M4 note), so the build order simply skips M5 for now.
+
 **Scope:** Sync saved locations, preferences, and birth profiles across the user's devices via CloudKit. No user account — uses the device's signed-in Apple ID.
 
 **Architecture:**
-- Swap the existing `ModelConfiguration` to use a `CloudKitContainer` identifier (requires paid Developer Program + CloudKit capability).
-- SwiftData's `ModelConfiguration(cloudKitDatabase: .private("iCloud.com.<owner>.panchang"))` handles sync automatically for `@Model` types.
-- `CachedDay` must be excluded from sync (device-local only, large, no value syncing).
+- Use **two `ModelConfiguration`s in one `ModelContainer`**: one CloudKit-backed (`cloudKitDatabase: .private("iCloud.com.<owner>.panchang")`) holding the synced models (`SavedLocation`, `Preferences`, `BirthProfile`), and one **local-only** configuration holding `CachedDay`. A single configuration syncs *all* its models, so excluding `CachedDay` requires this split — you cannot just "swap" the one existing configuration.
+- **CloudKit imposes model constraints SwiftData does not enforce locally:** every non-optional attribute must have a default value (or be made optional), `@Attribute(.unique)` is disallowed, and all relationships must be optional. The current models (`AppModels.swift`) declare non-optional, default-less stored properties — migrate them (add inline defaults / make optional) before enabling CloudKit, or the store will fail to initialise.
+- Requires paid Developer Program + CloudKit capability (human-configured; see entitlements below).
 - Add a sync status indicator in Settings.
 
 **Entitlements needed (human configures in Xcode):**
@@ -210,14 +215,13 @@ public struct VimshottariDasha: Sendable {
 **Scope:** Gujarati native script, additional regional calendar presets, Gowri Panchangam.
 
 **Scripts:**
-- **Gujarati script** — parallel name tables in Gujarati (`ગુજરાતી`) for all five limbs, masa, vara, ritu. Same `ScriptRenderer` architecture; add `"gujarati"` mode.
-- Wire the existing `"devanagari"` mode throughout (it's in the engine; verify all views use `ScriptRenderer` — audit any hardcoded strings).
+- **Gujarati script** — parallel name tables in Gujarati (`ગુજરાતી`) for all five limbs, masa, vara, ritu. Note: `ScriptRenderer` lives in the **app layer** (`PanchangApp/Services/ScriptRenderer`) and keys off raw indices; the name *tables* (`PanchangNames`) live in `PanchangKit`. Add a `"gujarati"` mode to the renderer and the parallel tables to `PanchangNames`.
+- Wire the existing `"devanagari"` mode throughout — audit all views for hardcoded strings that bypass `ScriptRenderer`.
 
 **Calendar traditions:**
-- **Telugu / Amanta-Chaitradi** — same month system as North Indian but Chaitradi year anchor, different festival set.
-- **Tamil solar** — Surya Siddhanta solar calendar (rashi-based months, Tamil month names). Engine: solar longitude / 30° → Tamil month.
-- **Bengali** — Bengali solar calendar (similar to Tamil but different epoch).
-- Each tradition is a `CalendarConfig` preset; the existing `MonthEndConvention` + `YearAnchor` enum is extended with new cases.
+- **Telugu / Amanta-Chaitradi** — same *lunar* month system as the existing presets but Amanta months + Chaitradi anchor; expressible as a new `CalendarConfig` preset (a new `MonthEndConvention` + `YearAnchor` combination). Low risk.
+- **Tamil solar** and **Bengali** are **solar calendars and need a new engine code path**, not a preset. The current engine labels a single *lunar* tithi stream (Amanta/Purnimanta); solar calendars have sankranti-based month boundaries and a solar new-year that do not fit the `MonthEndConvention` + `YearAnchor` model at all. Scope these as a separate `SolarCalendar` computation (solar longitude / 30° → rashi month) with its own month-name tables and new-year rule.
+- **Solar festivals don't fit the current festival model.** `FestivalAnchor` is tithi/masa/vara-only; solar-date festivals (Pongal, Tamil/Bengali Sankranti) cannot be expressed. Either extend `FestivalAnchor` with a solar-date case or ship these traditions label-only (no solar festivals) for now — decide before building.
 
 **Gowri Panchangam:**
 - Five-element daily grid used in South Indian tradition (Rogam, Kalam, Labham, etc.), derived from vara + tithi using a fixed lookup table.
@@ -226,7 +230,7 @@ public struct VimshottariDasha: Sendable {
 **Acceptance criteria:**
 - All Gujarati script names render correctly in the UI without truncation at standard font sizes.
 - Tamil month names match drikpanchang.com for three test dates.
-- Tradition switching does not affect festival dates (only labelling).
+- Tradition switching does not affect *lunar* festival dates (only labelling). Solar-festival support, if added, is tested separately (see the festival-model note above).
 
 ---
 
@@ -259,7 +263,8 @@ public struct VimshottariDasha: Sendable {
 
 **Architecture:**
 - The bundled `festivals.json` (V1) is the baseline.
-- On app launch (when online), check a versioned URL (GitHub raw or CDN) for a newer dataset version. If newer: download, validate schema, store in the app's `Documents` directory. On next launch, prefer the downloaded file over the bundle.
+- **Harden the loader first.** Today `FestivalService.shared` uses `try!` + force-unwraps, and the DTO's `toRule()` silently degrades unknown anchors to a default — it crashes on malformed JSON and does no real validation. Before adding refresh, rewrite it to: decode defensively (no `try!`/`!`), validate the schema + a `version` field, and **fall back to the bundled baseline on any failure**. This is the prerequisite that makes the "corrupt JSON silently rejected" criterion achievable.
+- On app launch (when online), check a versioned URL (GitHub raw or CDN) for a newer dataset version. If newer: download, validate schema, store in the app's `Documents` directory. On next launch, prefer the downloaded file over the bundle (only if it passed validation).
 - The check is silent — no UI unless the update fails validation (show a subtle settings badge).
 - The hosted file is the same JSON schema as the V1 bundle; just add new entries or correct existing ones.
 - Remove the "provisional" label from `festivals.json` only after human curation review.
@@ -291,9 +296,18 @@ public struct VimshottariDasha: Sendable {
 
 ## 5. Open Questions / Human Inputs Needed
 
+**Reference data (hard prerequisites — the agent must not fabricate these; see SPEC.md §3.6):**
+- **Golden vectors are currently mostly corrupt** — only the Washington-DC worked example and the San Jose Janmashtami case are trustworthy. Re-capture the ~30 clean cases from the chosen authority before relying on any "matches drikpanchang" criterion. This blocks the accuracy gates across V2.
+- **Each new domain needs its own reference vectors**, captured from the authority before its milestone can pass: Choghadiya / Hora / Dur-Muhurtam / Varjyam / Amrit-Kalam windows and the Choghadiya weekday start-index + per-nakshatra Varjyam/Amrit offset tables (M1); planetary longitudes + Lagna + Vimshottari boundaries (M2); per-mode ayanamsa values at J2000.0 (M3); Gujarati name tables, Tamil/Bengali month names, and the Gowri-Panchangam lookup (M6).
+
+**Project setup (human-in-Xcode, like signing):**
+- **M4 extension targets** — create the Widget / App-Intents / Watch targets (and their App Group + embed-extension wiring) in the Xcode GUI. The project is a single target today with a hand-maintained `project.pbxproj`; multi-target surgery by hand is the highest build-breakage risk in V2.
+- **CI** — `.github/workflows/ci.yml` pins Xcode 16.3 (spec assumes Xcode 26) and the app-build step ends with `| xcpretty || true`, which swallows build failures. Fix both and add the new targets to CI before trusting it to guard V2.
+
+**Product decisions:**
 - **Kundli chart style preference** — North Indian square or South Indian grid (or both selectable)?
 - **Birth profile data** — How many profiles? Just self, or family members too?
-- **CloudKit container identifier** — Confirm the bundle ID / iCloud container ID before M5.
+- **CloudKit container identifier** — Confirm the bundle ID / iCloud container ID before M5. *(Deferred — M5 postponed 2026-06-03.)*
 - **Festival curation** — Review and sign off on the provisional festival dataset before removing the "provisional" label (M8 dependency).
 - **CDN / hosting for festival refresh** — GitHub raw is simplest; confirm acceptable.
 - **Watch app scope** — Full watchOS companion app, or just a complication?
@@ -307,10 +321,34 @@ public struct VimshottariDasha: Sendable {
 | Order | Reason |
 |-------|--------|
 | M1 Muhurta first | Pure engine extension, no new dependencies, high user value, validates the existing muhurta architecture before adding more. |
-| M2 Astrology second | Heavy engine work; doing it early means subsequent milestones can reuse planetary data (e.g. Hora in M1 uses it indirectly). |
+| M2 Astrology second | Heavy engine work; front-loaded so later milestones (Kundli transits, Day-Detail planetary rows) can reuse the planetary layer. Note: M1's Hora does *not* depend on planetary positions — it cycles planet names by weekday/hour — so M2 is not a prerequisite for M1. |
 | M3 Ayanamsa third | Small engine change; must come before M4/M5 so widgets and sync use the right mode. |
-| M4 Widgets fourth | Requires stable engine + data model; WidgetKit needs the shared container set up before M5 CloudKit. |
-| M5 Sync fifth | Requires paid Developer Program + stable data model. Comes after widgets so the shared AppGroup is already wired. |
+| M4 Widgets fourth | Requires a stable engine + data model. With the widget computing in its own timeline provider (see M4), it no longer hard-depends on a shared container — but doing M4 before M5 still lets any AppGroup-shared preferences settle before CloudKit is layered on. |
+| M5 Sync fifth — **POSTPONED** | Requires paid Developer Program + stable data model. Deferred 2026-06-03 while the app stays local-only; build order skips it (M6/M7/M8 don't depend on it). |
 | M6 Scripts sixth | Pure data/UI work; no engine dependency. Can be parallelised with M5 by a second agent if desired. |
 | M7 Sharing seventh | Requires stable UI (all screens finalized) so the card design doesn't need to change. |
 | M8 Festival refresh last | Infrastructure; lowest risk if deferred. Depends on human curation completing first. |
+
+---
+
+## 7. Model & Effort Allocation
+
+Match the model tier and thinking effort to the *kind* of work, not the milestone number. The governing rule: **correctness-critical astronomy and anything behind a golden-vector / reference gate gets the strongest model at high effort; mechanical UI, data-table, and boilerplate work gets a cheaper tier at low effort.** "Effort" = the agent's reasoning/thinking budget (low / medium / high / max). Tiers below are generic (Opus = strongest, then Sonnet, then Haiku) — use the strongest available build of each.
+
+| Milestone | Model | Effort | Why |
+|---|---|---|---|
+| **M1 — Muhurta suite** | Opus | High | Correctness-critical astronomy behind a golden gate. The Varjyam/Amrit-from-nakshatra-span derivation, Choghadiya cycle indexing, and Hora division are easy to get subtly wrong. |
+| **M2 — Astrology layer** | Opus | Max | Heaviest reasoning in V2 — Vimshottari dasha date math, Lagna oblique ascension, Navamsha, and the `Ephemeris` protocol expansion. The milestone most likely to ship wrong if under-resourced. |
+| **M3 — Ayanamsa modes** | Opus | High | Small surface but real precession math, the TrueCitra/Spica gap, and the four-mode tithi/karana invariance test that must stay green. |
+| **M4 — Widgets & integrations** | Sonnet | Medium | Mostly integration glue (WidgetKit, App Intents, timeline provider). Light algorithmic reasoning; the risk is fiddly target wiring. Bump to Opus only if the agent (not a human) must do the multi-target `project.pbxproj` surgery. |
+| **M5 — iCloud sync** | Opus | Medium | Tiny code surface but architecturally subtle — dual `ModelConfiguration` split and the CloudKit model constraints are silent-failure traps that reward careful reasoning. |
+| **M6 — Scripts (Gujarati, Gowri)** | Haiku → Sonnet | Low | Mechanical name-table and lookup-table data entry; verify rendering. |
+| **M6 — Tamil/Bengali solar calendar** | Opus | High | This sub-part is a *new engine code path* (sankranti month boundaries, solar new-year) — same class of work as M2, not data entry. Do not let the "M6 is easy" framing apply here. |
+| **M7 — Sharing & export** | Sonnet | Low–Medium | SwiftUI `ImageRenderer` + `PDFKit` rendering; no astronomy, no concurrency traps. |
+| **M8 — Festival refresh** | Sonnet | Medium | Defensive loader rewrite, schema/version validation, networking with bundle fallback. Moderate care; no heavy reasoning. |
+
+**Cross-cutting:**
+- **Tests are part of the gate.** Author engine tests (M1–M3, M6-solar) at the *same* model/effort as the implementation — a weaker model writing weak tests defeats the golden-vector contract.
+- **Verification is cheap.** Routine build / `swift test` / simulator-screenshot runs can be Haiku at low effort regardless of which tier wrote the code.
+- **Escalate on red.** If a milestone's golden/reference vectors are still failing after two honest attempts, bump one model tier and one effort level before changing the approach — never weaken a test to pass (SPEC.md §3.3).
+- **Reference-data capture and curation sign-off are human tasks**, not a model assignment (see §5).
