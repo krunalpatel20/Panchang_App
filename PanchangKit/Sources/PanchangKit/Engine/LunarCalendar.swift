@@ -140,13 +140,13 @@ struct LunarCalendar {
         let chaitraYear = gregorianYearOfMonthStart(targetIndex: 0, currentNewMoon: last, currentIndex: amanta, timeZone: timeZone)
         let kartikaYear = gregorianYearOfMonthStart(targetIndex: 7, currentNewMoon: last, currentIndex: amanta, timeZone: timeZone)
 
-        // Ritu: two amanta months per season (Chaitra/Vaishakha = Vasant, …).
-        let rituIndex = amanta / 2
-
-        // Ayana from the sidereal Sun: Uttarayana from Makara (Capricorn, 270°) entry to
-        // Karka (Cancer, 90°) entry; Dakshinayana otherwise.
-        let siderealSun = AngleMath.normalize360(ephemeris.sunLongitude(julianDay: jd) - ayanamsa.value(julianDay: jd))
-        let ayana = (siderealSun >= 270 || siderealSun < 90) ? "Uttarayana" : "Dakshinayana"
+        // Ritu (season) and ayana follow drikpanchang, which uses the TROPICAL (sayana) Sun:
+        // ritu buckets are 60°-wide starting at Vasant (330°–30°), and Uttarayana runs from the
+        // tropical winter solstice (270°) to the summer solstice (90°). This is the sayana
+        // convention the authority displays — not the nirayana/lunar-month basis.
+        let tropicalSun = ephemeris.sunLongitude(julianDay: jd)
+        let rituIndex = Int(AngleMath.normalize360(tropicalSun + 30) / 60)
+        let ayana = (tropicalSun >= 270 || tropicalSun < 90) ? "Uttarayana" : "Dakshinayana"
 
         return YearInfo(
             vikramSamvatChaitradi: chaitraYear + 57,

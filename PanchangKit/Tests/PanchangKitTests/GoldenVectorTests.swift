@@ -75,6 +75,19 @@ private func expectedJD(_ s: String?, y: Int, m: Int, d: Int, tz: TimeZone) -> D
     return JulianDate.julianDay(year: c.year!, month: c.month!, day: c.day!, hour: h, minute: mn, timeZone: tz)
 }
 
+/// The real instant(s) a wall-clock reference can denote — normally one, but TWO inside a DST
+/// fall-back overlap, where the same `HH:MM` occurs at two offsets. The engine reports one real
+/// occurrence; the string alone can't say which, so the comparison accepts either.
+private func expectedInstants(_ s: String?, y: Int, m: Int, d: Int, tz: TimeZone) -> [Double] {
+    guard let jd = expectedJD(s, y: y, m: m, d: d, tz: tz) else { return [] }
+    let base = JulianDate.components(julianDay: jd, timeZone: tz)
+    for delta in [-1.0 / 24.0, 1.0 / 24.0] {
+        let alt = JulianDate.components(julianDay: jd + delta, timeZone: tz)
+        if alt.hour == base.hour && alt.minute == base.minute { return [jd, jd + delta] }
+    }
+    return [jd]
+}
+
 private func minutesApart(_ a: Double?, _ b: Double?) -> Double? {
     guard let a, let b else { return nil }
     return abs(a - b) * 24 * 60
@@ -82,6 +95,21 @@ private func minutesApart(_ a: Double?, _ b: Double?) -> Double? {
 
 private func nameEq(_ a: String, _ b: String) -> Bool {
     a.lowercased().trimmingCharacters(in: .whitespaces) == b.lowercased().trimmingCharacters(in: .whitespaces)
+}
+
+/// Like `nameEq`, but tolerant of the two naming systems referring to the same entity:
+/// drikpanchang appends "Adhik" to an adhika month's name (the engine carries that in a
+/// separate flag), and the engine vs. drik use different transliterations for a few
+/// yoga/karana names. These are spelling differences for an identical index, not astronomy.
+private func nameMatch(_ a: String, _ b: String) -> Bool {
+    func canon(_ s: String) -> String {
+        var t = s.lowercased().trimmingCharacters(in: .whitespaces)
+        t = t.replacingOccurrences(of: " adhika", with: "").replacingOccurrences(of: " adhik", with: "")
+        t = t.replacingOccurrences(of: " ", with: "")
+        let synonyms = ["ayushmana": "ayushman", "kinstughna": "kimstughna", "nagava": "naga"]
+        return synonyms[t] ?? t
+    }
+    return canon(a) == canon(b)
 }
 
 private func config(for preset: String) -> CalendarConfig {
@@ -170,6 +198,68 @@ struct GoldenVectorTests {
         #expect(nameEq(day.masa.purnimantaName, e.chandramasa_purnimanta!))
         #expect(day.yearInfo.vikramSamvatChaitradi == e.vikram_samvat!)
         #expect(day.yearInfo.vikramSamvatKartikadi == e.gujarati_samvat!)
+    }
+
+    /// Cases the engine has been verified to match drikpanchang on across every field (five
+    /// limbs, month/year, season; sun times within tolerance). USA Bay-Area/Phoenix cases plus
+    /// the 2026-06-03 re-captures of chicago, paris, ahmedabad, and both edison. Note
+    /// `edison-nj-2025-10-21` is an amavasya whose re-capture confirms the engine's amanta label
+    /// (`Ashwina`) and gujarati samvat (2081) — the earlier disagreement was a fixture error.
+    /// Still excluded: `irving-tx-2024-10-17` (sunset 11 min off, no sun-time re-capture yet —
+    /// likely a slightly-wrong capture location). See project_golden_vectors_corrupt memory.
+    /// WDC and Janmashtami have their own dedicated tests above.
+    static let cleanCases = [
+        "sanjose-2024-06-20", "sanjose-2024-12-21", "sanjose-2025-03-09",
+        "sanjose-2025-11-02", "sanjose-2024-11-01", "sanjose-2026-01-14",
+        "sanjose-2024-08-26-purnimanta", "sanjose-2025-06-15", "sanjose-2023-08-01",
+        "phoenix-2025-03-09", "phoenix-2025-07-15",
+        "chicago-2025-06-06", "paris-2024-08-26", "ahmedabad-2024-11-02", "ahmedabad-2024-08-26",
+        "edison-nj-2024-11-02", "edison-nj-2025-10-21",
+    ]
+
+    /// Strict accuracy gate over every verified-clean case: names exact (transliteration-
+    /// tolerant), limb ends within 3 min, month/year/season exact. Sun rise/set use a looser
+    /// 5-min bound — SwiftAA and drik use different horizon-refraction constants, a known offset
+    /// that grows away from the US mid-latitudes SPEC calibrated on (e.g. ~4 min at Ahmedabad).
+    /// Limb ends given as a sentinel ("full_night") are name-only — the time bound is skipped.
+    @Test(arguments: cleanCases)
+    func cleanCaseMatchesReference(caseID: String) throws {
+        let file = try loadGolden()
+        guard let c = file.cases.first(where: { $0.id == caseID }), let e = c.expected,
+              let (y, m, d) = parseISO(c.date_iso) else { Issue.record("\(caseID) missing"); return }
+        let loc = GeoLocation(latitude: c.location.lat, longitude: c.location.lon, timeZoneIdentifier: c.location.tz)
+        let tz = loc.timeZone
+        let day = Panchang().compute(year: y, month: m, day: d, location: loc, config: config(for: c.preset))
+
+        func close(_ got: Double?, _ exp: String?, _ label: String, tol: Double = 3) {
+            let targets = expectedInstants(exp, y: y, m: m, d: d, tz: tz)
+            guard !targets.isEmpty else { return } // sentinel/null → name-only
+            guard let got else { Issue.record("\(caseID) \(label): no computed value"); return }
+            let best = targets.map { abs($0 - got) * 24 * 60 }.min()!
+            #expect(best <= tol, "\(caseID) \(label) off by \(best) min")
+        }
+
+        close(day.timings.sunrise, e.sunrise, "sunrise", tol: 5)
+        close(day.timings.sunset, e.sunset, "sunset", tol: 5)
+
+        #expect(nameMatch(day.tithi.name, e.tithi!.name), "\(caseID) tithi \(day.tithi.name) != \(e.tithi!.name)")
+        #expect(day.tithi.paksha.rawValue == e.tithi!.paksha, "\(caseID) paksha")
+        close(day.tithi.endJulianDay, e.tithi!.ends, "tithi end")
+        #expect(nameMatch(day.nakshatra.name, e.nakshatra!.name), "\(caseID) nakshatra \(day.nakshatra.name) != \(e.nakshatra!.name)")
+        close(day.nakshatra.endJulianDay, e.nakshatra!.ends, "nakshatra end")
+        #expect(nameMatch(day.yoga.name, e.yoga!.name), "\(caseID) yoga \(day.yoga.name) != \(e.yoga!.name)")
+        close(day.yoga.endJulianDay, e.yoga!.ends, "yoga end")
+        #expect(nameMatch(day.karana.name, e.karana!.name), "\(caseID) karana \(day.karana.name) != \(e.karana!.name)")
+        close(day.karana.endJulianDay, e.karana!.ends, "karana end")
+        #expect(nameMatch(day.vara.name, e.vara!), "\(caseID) vara")
+
+        #expect(nameMatch(day.masa.amantaName, e.chandramasa_amanta!), "\(caseID) amanta \(day.masa.amantaName) != \(e.chandramasa_amanta!)")
+        #expect(nameMatch(day.masa.purnimantaName, e.chandramasa_purnimanta!), "\(caseID) purnimanta")
+        #expect(day.masa.isAdhika == e.adhika!, "\(caseID) adhika")
+        #expect(day.yearInfo.vikramSamvatChaitradi == e.vikram_samvat!, "\(caseID) vikram samvat")
+        #expect(day.yearInfo.vikramSamvatKartikadi == e.gujarati_samvat!, "\(caseID) gujarati samvat")
+        #expect(nameMatch(day.yearInfo.rituName, e.ritu!), "\(caseID) ritu \(day.yearInfo.rituName) != \(e.ritu!)")
+        #expect(nameMatch(day.yearInfo.ayana, e.ayana!), "\(caseID) ayana \(day.yearInfo.ayana) != \(e.ayana!)")
     }
 
     /// Robustness: the engine must produce a result for every fixture case (incl. India and
