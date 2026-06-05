@@ -11,7 +11,7 @@ xcuserdata/
 *.resolved
 
 # Signing — never commit credentials
-Signing.xcconfig
+Signing.xcconfig*
 
 # macOS
 .DS_Store
@@ -28,3 +28,10 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots/
 fastlane/test_output/
+
+# Claude
+.claude/
+SPEC*
+
+# Github
+.github/
