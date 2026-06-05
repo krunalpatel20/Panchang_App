@@ -30,6 +30,8 @@ public struct PanchangDay: Sendable, Equatable {
     public let choghadiya: Choghadiya
     public let horas: [Hora]
     public let durMuhurtam: [MuhurtaWindow]
+    public let varjyam: [MuhurtaWindow]
+    public let amritKalam: [MuhurtaWindow]
 
     // Edge-case reporting
     public let sunNeverRises: Bool

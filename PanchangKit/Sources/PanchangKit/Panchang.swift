@@ -53,6 +53,7 @@ public struct Panchang: Sendable {
         let durMuhurtam = DurMuhurtamCalc.compute(
             sunrise: timings.sunrise, sunset: timings.sunset, nextSunrise: nextSunrise, weekday: vara.index
         )
+        let varjyamAmrit = VarjyamCalc.compute(sunrise: timings.sunrise, nextSunrise: nextSunrise, limbs: limbs)
 
         return PanchangDay(
             year: year, month: month, day: day,
@@ -61,6 +62,7 @@ public struct Panchang: Sendable {
             masa: masa, yearInfo: yearInfo,
             timings: timings, muhurtas: muhurtas,
             choghadiya: choghadiya, horas: horas, durMuhurtam: durMuhurtam,
+            varjyam: varjyamAmrit.varjyam, amritKalam: varjyamAmrit.amrit,
             sunNeverRises: timings.sunNeverRises, sunNeverSets: timings.sunNeverSets
         )
     }

@@ -79,6 +79,47 @@ enum ChoghadiyaCalc {
     }
 }
 
+enum VarjyamCalc {
+    /// 1-based start ghati of Varjyam / Amrit Kalam within a nakshatra, index 0 = Ashwini …
+    /// 26 = Revati. Sourced reference data (drikpanchang); 7 entries cross-checked against the
+    /// M1 vectors, and Amrit = (Varjyam + 24) mod 60 holds across all 27.
+    static let varjyamGhati: [Int] = [51, 25, 31, 41, 15, 22, 31, 21, 33, 31, 21, 19, 22, 21, 15, 15, 11, 15, 57, 25, 21, 11, 11, 19, 17, 25, 31]
+    static let amritGhati:   [Int] = [15, 49, 55,  5, 39, 46, 55, 45, 57, 55, 45, 43, 46, 45, 39, 39, 35, 39, 21, 49, 45, 35, 35, 43, 41, 49, 55]
+    static let durationGhati = 4.0   // = span / 15; the moon traverses 13°20′/15
+
+    /// A window starting at a 1-based ghati offset, sized `durationGhati`, proportional to the
+    /// nakshatra's time span.
+    private static func window(startGhati: Int, segStart: Double, span: Double) -> MuhurtaWindow {
+        let s = segStart + (Double(startGhati - 1) / 60.0) * span
+        let e = segStart + (Double(startGhati - 1) + durationGhati) / 60.0 * span
+        return MuhurtaWindow(start: s, end: e)
+    }
+
+    /// Varjyam and Amrit Kalam windows occurring within the Hindu day [sunrise, nextSunrise].
+    /// A day can carry windows from more than one nakshatra (and the two limbs can belong to
+    /// different nakshatras), so every nakshatra active in the span is considered and only the
+    /// windows that start within the day are kept.
+    static func compute(sunrise: Double?, nextSunrise: Double?, limbs: FiveLimbs) -> (varjyam: [MuhurtaWindow], amrit: [MuhurtaWindow]) {
+        guard let sunrise, let nextSunrise, nextSunrise > sunrise else { return ([], []) }
+        var varjyam: [MuhurtaWindow] = []
+        var amrit: [MuhurtaWindow] = []
+        var t = sunrise
+        var guardCount = 0
+        while t < nextSunrise && guardCount < 4 {
+            let seg = limbs.nakshatraSegment(containing: t)
+            let span = seg.end - seg.start
+            let v = window(startGhati: varjyamGhati[seg.index], segStart: seg.start, span: span)
+            let a = window(startGhati: amritGhati[seg.index], segStart: seg.start, span: span)
+            if let s = v.start, s >= sunrise, s < nextSunrise { varjyam.append(v) }
+            if let s = a.start, s >= sunrise, s < nextSunrise { amrit.append(a) }
+            t = seg.end + 1.0 / 86_400.0
+            guardCount += 1
+        }
+        let byStart: (MuhurtaWindow, MuhurtaWindow) -> Bool = { ($0.start ?? 0) < ($1.start ?? 0) }
+        return (varjyam.sorted(by: byStart), amrit.sorted(by: byStart))
+    }
+}
+
 enum DurMuhurtamCalc {
     /// Inauspicious day/night muhurta ordinals (1-based) per weekday, 0 = Sunday … 6 = Saturday.
     /// Day and night are each divided into 15 equal muhurtas. Sourced reference data (classical

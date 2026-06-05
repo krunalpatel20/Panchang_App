@@ -117,6 +117,30 @@ struct FiveLimbs {
         return NakshatraInfo(index: index, name: PanchangNames.nakshatra[index], endJulianDay: end)
     }
 
+    /// The nakshatra segment (index, start JD, end JD) containing `jd`. Varjyam/Amrit Kalam are
+    /// fractions of this span measured from its start, so they need the start time too.
+    func nakshatraSegment(containing jd: Double) -> (index: Int, start: Double, end: Double) {
+        let value = siderealMoon(jd)
+        let index = min(26, Int(floor(value / Self.nakshatraArc)))
+        let end = endOfSegment(arc: Self.nakshatraArc, valueAtStart: value, startJD: jd, angleAt: { self.siderealMoon($0) })
+        let start = startOfSegment(target: Double(index) * Self.nakshatraArc, near: jd, angleAt: { self.siderealMoon($0) })
+        return (index, start, end)
+    }
+
+    /// JD at which a monotone-increasing angle last crossed `target`, searching back from `near`.
+    /// Uses a modular signed distance so it is correct across the 360°→0° wrap.
+    private func startOfSegment(target: Double, near: Double, angleAt: @escaping (Double) -> Double) -> Double {
+        func signedDistance(_ jd: Double) -> Double {
+            ((angleAt(jd) - target + 540).truncatingRemainder(dividingBy: 360)) - 180   // (-180, 180]
+        }
+        var lo = near - 1.5, hi = near   // 1.5 days back > one 13°20′ segment of Moon motion
+        for _ in 0..<60 {
+            let mid = (lo + hi) / 2
+            if signedDistance(mid) < 0 { lo = mid } else { hi = mid }
+        }
+        return (lo + hi) / 2
+    }
+
     func yoga(atSunrise jd: Double) -> YogaInfo {
         let value = yogaSum(jd)
         let index = min(26, Int(floor(value / Self.nakshatraArc)))
