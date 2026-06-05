@@ -79,6 +79,30 @@ enum ChoghadiyaCalc {
     }
 }
 
+enum DurMuhurtamCalc {
+    /// Inauspicious day/night muhurta ordinals (1-based) per weekday, 0 = Sunday … 6 = Saturday.
+    /// Day and night are each divided into 15 equal muhurtas. Sourced reference data (classical
+    /// Dur Muhurtam table); validated against drikpanchang vectors for Sun/Tue/Sat.
+    static let dayMuhurtas:   [[Int]] = [[14], [9, 12], [4], [8], [6], [4, 9], [1, 2]]
+    static let nightMuhurtas: [[Int]] = [[],   [],       [7], [],  [12], [],     []]
+
+    /// Returns the day's Dur Muhurtam windows (day windows first, then night), or [] if any
+    /// boundary is missing/non-monotonic.
+    static func compute(sunrise: Double?, sunset: Double?, nextSunrise: Double?, weekday: Int) -> [MuhurtaWindow] {
+        guard let sunrise, let sunset, let nextSunrise,
+              sunset > sunrise, nextSunrise > sunset else { return [] }
+        let dayUnit = (sunset - sunrise) / 15.0
+        let nightUnit = (nextSunrise - sunset) / 15.0
+        let day = dayMuhurtas[weekday].map { k in
+            MuhurtaWindow(start: sunrise + Double(k - 1) * dayUnit, end: sunrise + Double(k) * dayUnit)
+        }
+        let night = nightMuhurtas[weekday].map { k in
+            MuhurtaWindow(start: sunset + Double(k - 1) * nightUnit, end: sunset + Double(k) * nightUnit)
+        }
+        return day + night
+    }
+}
+
 enum HoraCalc {
     /// Chaldean order of planetary-hour lords. Each hora advances +1 here; the first hora at
     /// sunrise is the weekday's lord, so the 25th hora (next sunrise) is the next day's lord.

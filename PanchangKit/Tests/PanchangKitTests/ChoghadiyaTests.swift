@@ -15,8 +15,10 @@ private struct M1Case: Decodable {
     let sunrise: String
     let sunset: String
     let choghadiya: Cho
+    let dur_muhurtam: [Window]
     struct Cho: Decodable { let day: [Seg]; let night: [Seg] }
     struct Seg: Decodable { let name: String; let start: String; let end: String }
+    struct Window: Decodable { let start: String; let end: String }
 }
 
 private func loadM1() throws -> M1File {
@@ -69,6 +71,29 @@ struct ChoghadiyaTests {
                         #expect(minutes(got[i].end, ee) <= 5, "\(c.id) \(half)[\(i)] end off by \(minutes(got[i].end, ee))")
                     }
                 }
+            }
+        }
+    }
+
+    /// Dur Muhurtam windows match drikpanchang (≤5 min on each bound) for every vector. The
+    /// fixture lists day windows then night; match as a set since order is incidental.
+    @Test func durMuhurtamMatchesReferenceVectors() throws {
+        let file = try loadM1()
+        for c in file.cases {
+            let p = c.date_iso.split(separator: "-").compactMap { Int($0) }
+            let loc = GeoLocation(latitude: c.lat, longitude: c.lon, timeZoneIdentifier: c.tz)
+            let tz = loc.timeZone
+            let day = Panchang().compute(year: p[0], month: p[1], day: p[2], location: loc, config: .gujaratiWestern)
+            let got = day.durMuhurtam
+            #expect(got.count == c.dur_muhurtam.count, "\(c.id) dur muhurtam count \(got.count) != \(c.dur_muhurtam.count)")
+            for e in c.dur_muhurtam {
+                guard let es = clock(e.start, y: p[0], m: p[1], d: p[2], tz: tz),
+                      let ee = clock(e.end, y: p[0], m: p[1], d: p[2], tz: tz) else { continue }
+                let match = got.contains { w in
+                    guard let ws = w.start, let we = w.end else { return false }
+                    return minutes(ws, es) <= 5 && minutes(we, ee) <= 5
+                }
+                #expect(match, "\(c.id) no Dur Muhurtam window near \(e.start)-\(e.end)")
             }
         }
     }
