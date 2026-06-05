@@ -20,7 +20,10 @@ let package = Package(
         .testTarget(
             name: "PanchangKitTests",
             dependencies: ["PanchangKit"],
-            resources: [.copy("Fixtures/golden_vectors.json")]
+            resources: [
+                .copy("Fixtures/golden_vectors.json"),
+                .copy("Fixtures/m1_muhurta_vectors.json"),
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]

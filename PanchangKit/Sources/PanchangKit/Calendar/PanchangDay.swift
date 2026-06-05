@@ -26,6 +26,10 @@ public struct PanchangDay: Sendable, Equatable {
     public let timings: DayTimings
     public let muhurtas: Muhurtas
 
+    // Muhurta grid (M1): Choghadiya 16-segment grid + 24 planetary horas.
+    public let choghadiya: Choghadiya
+    public let horas: [Hora]
+
     // Edge-case reporting
     public let sunNeverRises: Bool
     public let sunNeverSets: Bool

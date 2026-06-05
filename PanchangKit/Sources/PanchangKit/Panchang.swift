@@ -42,14 +42,35 @@ public struct Panchang: Sendable {
             weekday: vara.index
         )
 
+        // Next civil day's sunrise bounds the Choghadiya/Hora night halves.
+        let nextSunrise = nextDaySunrise(year: year, month: month, day: day, location: location, calc: timingsCalc)
+        let choghadiya = ChoghadiyaCalc.compute(
+            sunrise: timings.sunrise, sunset: timings.sunset, nextSunrise: nextSunrise, weekday: vara.index
+        )
+        let horas = HoraCalc.compute(
+            sunrise: timings.sunrise, sunset: timings.sunset, nextSunrise: nextSunrise, weekday: vara.index
+        )
+
         return PanchangDay(
             year: year, month: month, day: day,
             location: location, config: config,
             tithi: tithi, vara: vara, nakshatra: nakshatra, yoga: yoga, karana: karana,
             masa: masa, yearInfo: yearInfo,
             timings: timings, muhurtas: muhurtas,
+            choghadiya: choghadiya, horas: horas,
             sunNeverRises: timings.sunNeverRises, sunNeverSets: timings.sunNeverSets
         )
+    }
+
+    private func nextDaySunrise(year: Int, month: Int, day: Int, location: GeoLocation, calc: DayTimingsCalculator) -> Double? {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = location.timeZone
+        var comps = DateComponents()
+        comps.year = year; comps.month = month; comps.day = day
+        guard let date = cal.date(from: comps),
+              let next = cal.date(byAdding: .day, value: 1, to: date) else { return nil }
+        let n = cal.dateComponents([.year, .month, .day], from: next)
+        return calc.timings(year: n.year!, month: n.month!, day: n.day!, location: location).sunrise
     }
 
     private func previousDaySunset(year: Int, month: Int, day: Int, location: GeoLocation, calc: DayTimingsCalculator) -> Double? {

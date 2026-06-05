@@ -1,0 +1,161 @@
+{
+  "_about": "M1 (Expanded Muhurta Suite) validation vectors captured from drikpanchang.com. Choghadiya (day+night) and Hora are testable now. Dur Muhurtam, Varjyam, and Amrit Kalam windows are kept for when their reference lookup tables (per-weekday Dur Muhurtam; per-nakshatra Varjyam/Amrit offsets) are sourced.",
+  "source": "drikpanchang.com (Drik Ganita, Lahiri)",
+  "time_format": "24h local time; '+1' = after midnight (next day)",
+  "cases": [
+    {
+      "id": "san-jose-2024-12-21",
+      "location": "San Jose, CA",
+      "lat": 37.3382, "lon": -121.8863, "tz": "America/Los_Angeles",
+      "date_iso": "2024-12-21",
+      "sunrise": "07:18", "sunset": "16:54",
+      "choghadiya": {
+        "day": [
+          {"name":"Kala","start":"07:18","end":"08:30"},
+          {"name":"Shubha","start":"08:30","end":"09:42"},
+          {"name":"Roga","start":"09:42","end":"10:54"},
+          {"name":"Udvega","start":"10:54","end":"12:06"},
+          {"name":"Chara","start":"12:06","end":"13:18"},
+          {"name":"Labha","start":"13:18","end":"14:30"},
+          {"name":"Amrita","start":"14:30","end":"15:42"},
+          {"name":"Kala","start":"15:42","end":"16:54"}
+        ],
+        "night": [
+          {"name":"Labha","start":"16:54","end":"18:42"},
+          {"name":"Udvega","start":"18:42","end":"20:30"},
+          {"name":"Shubha","start":"20:30","end":"22:18"},
+          {"name":"Amrita","start":"22:18","end":"00:06+1"},
+          {"name":"Chara","start":"00:06+1","end":"01:54+1"},
+          {"name":"Roga","start":"01:54+1","end":"03:42+1"},
+          {"name":"Kala","start":"03:42+1","end":"05:31+1"},
+          {"name":"Labha","start":"05:31+1","end":"07:19+1"}
+        ]
+      },
+      "dur_muhurtam": [
+        {"start":"07:18","end":"07:57"},
+        {"start":"07:57","end":"08:35"}
+      ],
+      "varjyam": {"start":"00:48+1","end":"02:36+1"},
+      "amrit_kalam": {"start":"09:41","end":"11:27"}
+    },
+    {
+      "id": "san-jose-2025-03-09",
+      "location": "San Jose, CA",
+      "lat": 37.3382, "lon": -121.8863, "tz": "America/Los_Angeles",
+      "date_iso": "2025-03-09",
+      "sunrise": "07:27", "sunset": "19:10",
+      "moonrise": "14:50", "moonset": "05:45+1",
+      "choghadiya": {
+        "day": [
+          {"name":"Udvega","start":"07:27","end":"08:55"},
+          {"name":"Chara","start":"08:55","end":"10:23"},
+          {"name":"Labha","start":"10:23","end":"11:50"},
+          {"name":"Amrita","start":"11:50","end":"13:18"},
+          {"name":"Kala","start":"13:18","end":"14:46"},
+          {"name":"Shubha","start":"14:46","end":"16:14"},
+          {"name":"Roga","start":"16:14","end":"17:42"},
+          {"name":"Udvega","start":"17:42","end":"19:10"}
+        ],
+        "night": [
+          {"name":"Shubha","start":"19:10","end":"20:42"},
+          {"name":"Amrita","start":"20:42","end":"22:14"},
+          {"name":"Chara","start":"22:14","end":"23:46"},
+          {"name":"Roga","start":"23:46","end":"01:18+1"},
+          {"name":"Kala","start":"01:18+1","end":"02:50+1"},
+          {"name":"Labha","start":"02:50+1","end":"04:21+1"},
+          {"name":"Udvega","start":"04:21+1","end":"05:53+1"},
+          {"name":"Shubha","start":"05:53+1","end":"07:25+1"}
+        ]
+      },
+      "dur_muhurtam": [{"start":"17:36","end":"18:23"}],
+      "varjyam": {"start":"19:44","end":"21:23"},
+      "amrit_kalam": [
+        {"start":"08:58","end":"10:36"},
+        {"start":"05:42+1","end":"07:22+1"}
+      ],
+      "rahu_kalam": {"start":"17:42","end":"19:10"},
+      "gulikai": {"start":"16:14","end":"17:42"},
+      "yamaganda": {"start":"13:18","end":"14:46"}
+    },
+    {
+      "id": "phoenix-2025-07-15",
+      "location": "Phoenix, AZ",
+      "lat": 33.4484, "lon": -112.0740, "tz": "America/Phoenix",
+      "date_iso": "2025-07-15",
+      "sunrise": "05:30", "sunset": "19:39",
+      "moonrise": "22:54", "moonset": "10:18",
+      "choghadiya": {
+        "day": [
+          {"name":"Roga","start":"05:30","end":"07:16"},
+          {"name":"Udvega","start":"07:16","end":"09:02"},
+          {"name":"Chara","start":"09:02","end":"10:48"},
+          {"name":"Labha","start":"10:48","end":"12:34"},
+          {"name":"Amrita","start":"12:34","end":"14:20"},
+          {"name":"Kala","start":"14:20","end":"16:06"},
+          {"name":"Shubha","start":"16:06","end":"17:53"},
+          {"name":"Roga","start":"17:53","end":"19:39"}
+        ],
+        "night": [
+          {"name":"Kala","start":"19:39","end":"20:53"},
+          {"name":"Labha","start":"20:53","end":"22:07"},
+          {"name":"Udvega","start":"22:07","end":"23:21"},
+          {"name":"Shubha","start":"23:21","end":"00:34+1"},
+          {"name":"Amrita","start":"00:34+1","end":"01:48+1"},
+          {"name":"Chara","start":"01:48+1","end":"03:02+1"},
+          {"name":"Roga","start":"03:02+1","end":"04:16+1"},
+          {"name":"Kala","start":"04:16+1","end":"05:30+1"}
+        ]
+      },
+      "dur_muhurtam": [
+        {"start":"08:20","end":"09:16"},
+        {"start":"23:35","end":"00:15+1"}
+      ],
+      "varjyam": {"start":"02:30+1","end":"04:02+1"},
+      "amrit_kalam": {"start":"09:29","end":"11:03"},
+      "rahu_kalam": {"start":"16:06","end":"17:53"},
+      "gulikai": {"start":"12:34","end":"14:20"},
+      "yamaganda": {"start":"09:02","end":"10:48"}
+    },
+    {
+      "id": "edison-nj-2025-10-21",
+      "location": "Edison, NJ",
+      "lat": 40.5187, "lon": -74.4121, "tz": "America/New_York",
+      "date_iso": "2025-10-21",
+      "sunrise": "07:16", "sunset": "18:08",
+      "moonrise": "07:29", "moonset": "17:52",
+      "choghadiya": {
+        "day": [
+          {"name":"Roga","start":"07:16","end":"08:37"},
+          {"name":"Udvega","start":"08:37","end":"09:59"},
+          {"name":"Chara","start":"09:59","end":"11:20"},
+          {"name":"Labha","start":"11:20","end":"12:42"},
+          {"name":"Amrita","start":"12:42","end":"14:04"},
+          {"name":"Kala","start":"14:04","end":"15:25"},
+          {"name":"Shubha","start":"15:25","end":"16:47"},
+          {"name":"Roga","start":"16:47","end":"18:08"}
+        ],
+        "night": [
+          {"name":"Kala","start":"18:08","end":"19:47"},
+          {"name":"Labha","start":"19:47","end":"21:25"},
+          {"name":"Udvega","start":"21:25","end":"23:04"},
+          {"name":"Shubha","start":"23:04","end":"00:42+1"},
+          {"name":"Amrita","start":"00:42+1","end":"02:21+1"},
+          {"name":"Chara","start":"02:21+1","end":"04:00+1"},
+          {"name":"Roga","start":"04:00+1","end":"05:38+1"},
+          {"name":"Kala","start":"05:38+1","end":"07:17+1"}
+        ]
+      },
+      "dur_muhurtam": [
+        {"start":"09:26","end":"10:10"},
+        {"start":"23:24","end":"00:16+1"}
+      ],
+      "varjyam": {"start":"19:45","end":"21:32"},
+      "amrit_kalam": {"start":"06:30+1","end":"08:18+1"},
+      "brahma_muhurta": {"start":"05:31","end":"06:23"},
+      "abhijit": {"start":"12:20","end":"13:04"},
+      "rahu_kalam": {"start":"15:25","end":"16:47"},
+      "gulikai": {"start":"12:42","end":"14:04"},
+      "yamaganda": {"start":"09:59","end":"11:20"}
+    }
+  ]
+}
