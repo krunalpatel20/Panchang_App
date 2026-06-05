@@ -141,6 +141,11 @@ struct FiveLimbs {
         return (lo + hi) / 2
     }
 
+    /// The Moon's sidereal rashi (zodiac sign) index 0…11 at the given instant — for Chandra Bala.
+    func moonRashi(atSunrise jd: Double) -> Int {
+        min(11, Int(floor(siderealMoon(jd) / 30.0)))
+    }
+
     func yoga(atSunrise jd: Double) -> YogaInfo {
         let value = yogaSum(jd)
         let index = min(26, Int(floor(value / Self.nakshatraArc)))

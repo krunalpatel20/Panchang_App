@@ -33,6 +33,9 @@ public struct PanchangDay: Sendable, Equatable {
     public let varjyam: [MuhurtaWindow]
     public let amritKalam: [MuhurtaWindow]
 
+    /// The Moon's sidereal rashi (0…11) at sunrise — basis for Chandra Bala against a janma rashi.
+    public let moonRashiIndex: Int
+
     // Edge-case reporting
     public let sunNeverRises: Bool
     public let sunNeverSets: Bool

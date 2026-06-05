@@ -24,6 +24,18 @@ public enum PanchangNames {
         "Purva Bhadrapada", "Uttara Bhadrapada", "Revati",
     ]
 
+    /// 12 rashi (zodiac sign) names, index 0 = Mesha (Aries) … 11 = Meena (Pisces).
+    public static let rashi: [String] = [
+        "Mesha", "Vrishabha", "Mithuna", "Karka", "Simha", "Kanya",
+        "Tula", "Vrishchika", "Dhanu", "Makara", "Kumbha", "Meena",
+    ]
+
+    /// The 9 Tara Bala stars, counted from the janma nakshatra, index 0 = Janma.
+    public static let tara: [String] = [
+        "Janma", "Sampat", "Vipat", "Kshema", "Pratyari",
+        "Sadhaka", "Vadha", "Mitra", "Ati Mitra",
+    ]
+
     /// 27 yoga names, index 0 = Vishkambha.
     public static let yoga: [String] = [
         "Vishkambha", "Priti", "Ayushman", "Saubhagya", "Shobhana",
