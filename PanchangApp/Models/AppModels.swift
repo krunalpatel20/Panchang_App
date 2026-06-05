@@ -28,6 +28,10 @@ final class Preferences {
     var ayanamsaMode: String     // "lahiri" (others: v2)
     var scriptMode: String       // "transliteration" | "devanagari" | "english"
     var notificationsEnabled: Bool = false
+    /// Janma (birth) nakshatra 0…26 for Tara Bala; -1 = not set.
+    var janmaNakshatra: Int = -1
+    /// Janma (birth) rashi 0…11 for Chandra Bala; -1 = not set.
+    var janmaRashi: Int = -1
 
     init() {
         self.calendarPreset = "gujarati_western"

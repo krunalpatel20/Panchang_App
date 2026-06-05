@@ -23,6 +23,7 @@ struct SettingsView: View {
             Form {
                 locationSection
                 calendarSection
+                janmaSection
                 scriptSection
                 notificationsSection
             }
@@ -92,6 +93,33 @@ struct SettingsView: View {
             Text("Notifications")
         } footer: {
             Text("Get a morning reminder on festival and vrat days.")
+        }
+    }
+
+    private var janmaSection: some View {
+        Section {
+            Picker("Janma Nakshatra", selection: Binding(
+                get: { prefs.janmaNakshatra },
+                set: { prefs.janmaNakshatra = $0 }
+            )) {
+                Text("Not set").tag(-1)
+                ForEach(Array(PanchangNames.nakshatra.enumerated()), id: \.offset) { i, name in
+                    Text(name).tag(i)
+                }
+            }
+            Picker("Janma Rashi", selection: Binding(
+                get: { prefs.janmaRashi },
+                set: { prefs.janmaRashi = $0 }
+            )) {
+                Text("Not set").tag(-1)
+                ForEach(Array(PanchangNames.rashi.enumerated()), id: \.offset) { i, name in
+                    Text(name).tag(i)
+                }
+            }
+        } header: {
+            Text("Birth Details")
+        } footer: {
+            Text("Set your janma nakshatra and rashi to see Tara Bala and Chandra Bala in the Muhurta tab.")
         }
     }
 

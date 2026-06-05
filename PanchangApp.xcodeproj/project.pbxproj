@@ -25,6 +25,7 @@
 		AA000000000000000000152 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000151 /* NotificationService.swift */; };
 		AA000000000000000000162 /* festivals.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000161 /* festivals.json */; };
 		AA000000000000000000172 /* ScriptRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000171 /* ScriptRenderer.swift */; };
+		AA000000000000000000182 /* MuhurtaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000181 /* MuhurtaView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		AA000000000000000000151 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		AA000000000000000000161 /* festivals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = festivals.json; sourceTree = "<group>"; };
 		AA000000000000000000171 /* ScriptRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRenderer.swift; sourceTree = "<group>"; };
+		AA000000000000000000181 /* MuhurtaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuhurtaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				AA000000000000000000053 /* Today */,
+				AA000000000000000000180 /* Muhurta */,
 				AA000000000000000000054 /* Calendar */,
 				AA000000000000000000055 /* Settings */,
 				AA000000000000000000150 /* Notifications */,
@@ -117,6 +120,14 @@
 				AA0000000000000000000C1 /* TodayViewModel.swift */,
 			);
 			path = Today;
+			sourceTree = "<group>";
+		};
+		AA000000000000000000180 /* Muhurta */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000181 /* MuhurtaView.swift */,
+			);
+			path = Muhurta;
 			sourceTree = "<group>";
 		};
 		AA000000000000000000054 /* Calendar */ = {
@@ -289,6 +300,7 @@
 				AA000000000000000000142 /* FestivalService.swift in Sources */,
 				AA000000000000000000152 /* NotificationService.swift in Sources */,
 				AA000000000000000000172 /* ScriptRenderer.swift in Sources */,
+				AA000000000000000000182 /* MuhurtaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

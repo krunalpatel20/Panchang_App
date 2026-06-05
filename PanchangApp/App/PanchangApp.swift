@@ -26,6 +26,8 @@ struct RootView: View {
         TabView {
             TodayView()
                 .tabItem { Label("Today", systemImage: "sun.horizon") }
+            MuhurtaView()
+                .tabItem { Label("Muhurta", systemImage: "clock.badge") }
             CalendarView()
                 .tabItem { Label("Calendar", systemImage: "calendar") }
             SettingsView()
