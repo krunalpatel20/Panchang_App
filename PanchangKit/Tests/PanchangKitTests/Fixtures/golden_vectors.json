@@ -892,12 +892,12 @@
       "note": "Provenance: expected values were captured via geoname-id 4517009; keep this explicit when debugging location-specific failures."
     },
     {
-      "id": "irving-tx-2024-10-17",
-      "purpose": "Irving TX (Central; large Gujarati community). Sharad Purnima (Ashwin Purnima) — purnima boundary. Set location: Irving",
+      "id": "austin-tx-2024-10-17",
+      "purpose": "Austin TX (Central; large Gujarati community). Sharad Purnima (Ashwin Purnima) — purnima boundary. Set location: Austin",
       "location": {
-        "name": "Irving, TX (captured as San Antonio geoname)",
-        "lat": 32.814,
-        "lon": -96.9489,
+        "name": "Austin, TX",
+        "lat": 30.2672,
+        "lon": -97.7431,
         "tz": "America/Chicago"
       },
       "preset": "gujarati_western",
