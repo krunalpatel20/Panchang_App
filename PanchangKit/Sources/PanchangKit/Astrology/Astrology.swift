@@ -18,6 +18,17 @@ public struct Astrology: Sendable {
         return calc.positions(julianDay: jd, lagnaLongitude: siderealAscendant(julianDay: jd, location: location))
     }
 
+    /// Vimshottari dasha for a birth instant. `asOf` selects which periods are marked current.
+    public func dasha(birth: Date, asOf: Date = Date()) -> VimshottariDasha {
+        let birthJD = JulianDate.julianDay(from: birth)
+        let moonSidereal = AngleMath.normalize360(
+            ephemeris.moonLongitude(julianDay: birthJD) - ayanamsa.value(julianDay: birthJD)
+        )
+        return VimshottariCalculator().compute(
+            birthJulianDay: birthJD, moonLongitudeSidereal: moonSidereal, asOf: asOf
+        )
+    }
+
     /// Sidereal ascendant longitude, degrees [0, 360).
     func siderealAscendant(julianDay jd: Double, location: GeoLocation) -> Double {
         // Local apparent sidereal time = Greenwich AST + east longitude.
