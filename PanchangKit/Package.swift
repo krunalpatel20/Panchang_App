@@ -23,6 +23,7 @@ let package = Package(
             resources: [
                 .copy("Fixtures/golden_vectors.json"),
                 .copy("Fixtures/m1_muhurta_vectors.json"),
+                .copy("Fixtures/m2_astrology_vectors.json"),
             ]
         ),
     ],

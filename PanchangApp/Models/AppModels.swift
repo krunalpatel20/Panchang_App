@@ -32,11 +32,39 @@ final class Preferences {
     var janmaNakshatra: Int = -1
     /// Janma (birth) rashi 0…11 for Chandra Bala; -1 = not set.
     var janmaRashi: Int = -1
+    /// Kundli chakra style: "north" (square diamond) | "south" (fixed grid).
+    var kundliStyle: String = "north"
 
     init() {
         self.calendarPreset = "gujarati_western"
         self.ayanamsaMode = "lahiri"
         self.scriptMode = "transliteration"
+    }
+}
+
+/// A saved birth profile (self + family) for kundli and dasha. The birth instant is stored as
+/// an absolute `Date`; the timezone is kept separately for display and re-derivation.
+@Model
+final class BirthProfile {
+    var name: String
+    var birthInstant: Date
+    var latitude: Double
+    var longitude: Double
+    var timeZoneIdentifier: String
+    var placeName: String
+    var isPrimary: Bool
+    var createdAt: Date
+
+    init(name: String, birthInstant: Date, latitude: Double, longitude: Double,
+         timeZoneIdentifier: String, placeName: String, isPrimary: Bool = false) {
+        self.name = name
+        self.birthInstant = birthInstant
+        self.latitude = latitude
+        self.longitude = longitude
+        self.timeZoneIdentifier = timeZoneIdentifier
+        self.placeName = placeName
+        self.isPrimary = isPrimary
+        self.createdAt = Date()
     }
 }
 

@@ -1,0 +1,106 @@
+{
+  "_about": "M2 astrology reference vectors. Planetary sidereal longitudes computed via Swiss Ephemeris (pyswisseph 2.10.3, SIDM_LAHIRI). Vimshottari dasha section filled from drikpanchang.com. The ±0°05' and ±1° tolerance gates apply — SE and SwiftAA use the same Lahiri ayanamsa definition and VSOP87 planet tables so agreement should be well within tolerance.",
+  "source": "pyswisseph 2.10.3 (SIDM_LAHIRI) for planets/lagna; drikpanchang.com (Drik Ganita, Lahiri) for dasha",
+  "lon_format": "decimal degrees, sidereal (Lahiri). 0=Aries, 30=Taurus, 60=Gemini, 90=Cancer, 120=Leo, 150=Virgo, 180=Libra, 210=Scorpio, 240=Sagittarius, 270=Capricorn, 300=Aquarius, 330=Pisces",
+  "retro_note": "Rahu and Ketu are always retrograde by definition (mean node regresses). Sun and Moon are never retrograde. Other planets: speed < 0 at the given instant.",
+  "time_note": "All times are UT (UTC). Lagna is location-sensitive — computed for lat/lon below at the given jd_utc.",
+  "lagna_source_note": "lagna_sidereal_deg captured from Swiss Ephemeris swe.houses_ex() (independent house engine), NOT from the hand-rolled oblique-ascension formula — so the test reference is independent of the formula under test. Correct ascendant formula: atan2(cos θ, -(sin θ·cos ε + tan φ·sin ε)). Note: a sign error here yields the Descendant (exactly 180° off) and would pass a self-referential test — that is why these come from an independent source.",
+
+  "planetary": [
+    {
+      "_comment": "2024-08-26 05:30 UT — San Jose. Mercury retrograde (inferior conjunction window Aug 5-29). Saturn also retrograde. Overlaps golden_vectors Janmashtami case for Sun/Moon cross-check.",
+      "id": "sanjose-2024-08-26",
+      "date_iso": "2024-08-26",
+      "time_utc": "05:30",
+      "jd_utc": 2460548.72917,
+      "lat": 37.3382,
+      "lon": -121.8863,
+      "tz": "America/Los_Angeles",
+      "lagna_sidereal_deg": 15.2766,
+      "planets": {
+        "sun":     { "lon": 129.2771, "retro": false },
+        "moon":    { "lon":  37.1926, "retro": false },
+        "mars":    { "lon":  59.8844, "retro": false },
+        "mercury": { "lon": 117.6702, "retro": true  },
+        "jupiter": { "lon":  54.1178, "retro": false },
+        "venus":   { "lon": 151.7217, "retro": false },
+        "saturn":  { "lon": 322.8055, "retro": true  },
+        "rahu":    { "lon": 344.0618, "retro": true  },
+        "ketu":    { "lon": 164.0618, "retro": true  }
+      }
+    },
+    {
+      "_comment": "2024-12-21 05:30 UT — San Jose. Winter solstice. Mars retrograde + Jupiter retrograde — good stress test for two simultaneous retrogrades. Overlaps golden_vectors sanjose-2024-12-21.",
+      "id": "sanjose-2024-12-21",
+      "date_iso": "2024-12-21",
+      "time_utc": "05:30",
+      "jd_utc": 2460665.72917,
+      "lat": 37.3382,
+      "lon": -121.8863,
+      "tz": "America/Los_Angeles",
+      "lagna_sidereal_deg": 123.9490,
+      "planets": {
+        "sun":     { "lon": 245.6311, "retro": false },
+        "moon":    { "lon": 136.9990, "retro": false },
+        "mars":    { "lon": 100.5726, "retro": true  },
+        "mercury": { "lon": 224.2532, "retro": false },
+        "jupiter": { "lon":  50.2745, "retro": true  },
+        "venus":   { "lon": 291.6935, "retro": false },
+        "saturn":  { "lon": 319.5858, "retro": false },
+        "rahu":    { "lon": 337.8617, "retro": true  },
+        "ketu":    { "lon": 157.8618, "retro": true  }
+      }
+    },
+    {
+      "_comment": "2025-03-09 05:30 UT — San Jose. Venus retrograde. Overlaps golden_vectors sanjose-2025-03-09.",
+      "id": "sanjose-2025-03-09",
+      "date_iso": "2025-03-09",
+      "time_utc": "05:30",
+      "jd_utc": 2460743.72917,
+      "lat": 37.3382,
+      "lon": -121.8863,
+      "tz": "America/Los_Angeles",
+      "lagna_sidereal_deg": 186.5681,
+      "planets": {
+        "sun":     { "lon": 324.6842, "retro": false },
+        "moon":    { "lon":  86.3187, "retro": false },
+        "mars":    { "lon":  83.8176, "retro": false },
+        "mercury": { "lon": 342.7572, "retro": false },
+        "jupiter": { "lon":  48.8121, "retro": false },
+        "venus":   { "lon": 345.5463, "retro": true  },
+        "saturn":  { "lon": 327.4913, "retro": false },
+        "rahu":    { "lon": 333.7284, "retro": true  },
+        "ketu":    { "lon": 153.7284, "retro": true  }
+      }
+    }
+  ],
+
+  "dasha": [
+    {
+      "_comment": "Birth: 1986-02-20 08:03 IST, Vadodara (Gujarat, India). Mahadasha dates and antardasha boundaries captured from drikpanchang.com (Drik Ganita, Lahiri). KNOWN DISCREPANCY: drikpanchang's Lahiri ayanamsa constant differs from SE/SwiftAA SIDM_LAHIRI by ~0.142 degrees — producing ~5-day offsets in mahadasha starts and ~18-day offsets in antardasha starts vs. a SwiftAA-computed engine. Test gate is STRUCTURAL only: verify lord order, starting lord, sub-period durations match classical formula (±2 days per sub-period), and that exactly one mahadasha isCurrent. Do NOT gate on absolute mahadasha/antardasha dates vs. these drikpanchang values (the ayanamsa divergence makes ±1 day unachievable). See M2_PLAN.md §3.4.",
+      "id": "birth-case-1",
+      "birth_iso": "1986-02-20T08:03:00",
+      "tz": "Asia/Kolkata",
+      "lat": 22.3072,
+      "lon": 73.1812,
+      "start_lord": "Rahu",
+      "balance_years": -1.0,
+      "balance_note": "Not exposed in drikpanchang UI. Mahadasha start dates are the authoritative reference but carry ~5-day ayanamsa offset vs. SwiftAA — treat as informational, not as an absolute date gate.",
+      "mahadashas": [
+        { "lord": "Rahu",    "start": "1977-01-18" },
+        { "lord": "Jupiter", "start": "1995-01-18" },
+        { "lord": "Saturn",  "start": "2011-01-19" },
+        { "lord": "Mercury", "start": "2030-01-18" },
+        { "lord": "Ketu",    "start": "2047-01-19" },
+        { "lord": "Venus",   "start": "2054-01-19" },
+        { "lord": "Sun",     "start": "2074-01-19" },
+        { "lord": "Moon",    "start": "2080-01-19" },
+        { "lord": "Mars",    "start": "2090-01-19" }
+      ],
+      "current_antardashas": [
+        { "lord": "Rahu",    "start": "2024-09-13", "end": "2027-07-21" },
+        { "lord": "Jupiter", "start": "2027-07-21", "end": "2030-01-31" }
+      ]
+    }
+  ]
+}

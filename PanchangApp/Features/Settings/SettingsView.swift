@@ -24,6 +24,7 @@ struct SettingsView: View {
                 locationSection
                 calendarSection
                 janmaSection
+                kundliSection
                 scriptSection
                 notificationsSection
             }
@@ -119,7 +120,25 @@ struct SettingsView: View {
         } header: {
             Text("Birth Details")
         } footer: {
-            Text("Set your janma nakshatra and rashi to see Tara Bala and Chandra Bala in the Muhurta tab.")
+            Text("Set your janma nakshatra and rashi to see Tara Bala and Chandra Bala in the Muhurta tab. A primary Kundli profile fills these automatically.")
+        }
+    }
+
+    private var kundliSection: some View {
+        Section {
+            Picker("Kundli Style", selection: Binding(
+                get: { prefs.kundliStyle },
+                set: { prefs.kundliStyle = $0 }
+            )) {
+                Text("North Indian").tag("north")
+                Text("South Indian").tag("south")
+            }
+            .pickerStyle(.inline)
+            .labelsHidden()
+        } header: {
+            Text("Kundli Chart Style")
+        } footer: {
+            Text("North Indian uses a fixed-house diamond; South Indian uses a fixed-sign grid.")
         }
     }
 
