@@ -22,6 +22,25 @@ struct LinearEphemeris: Ephemeris {
         // Fixed 06:00/18:00-ish placeholders; the structural tests don't exercise timings.
         RiseSet(rise: anchorJulianDay - 0.25, transit: anchorJulianDay, set: anchorJulianDay + 0.25)
     }
+
+    // M2 additions. Synthetic linear motion per graha so position/dasha tests are deterministic.
+    func longitude(of graha: Graha, julianDay: Double) -> Double {
+        switch graha {
+        case .sun:  return sunLongitude(julianDay: julianDay)
+        case .moon: return moonLongitude(julianDay: julianDay)
+        default:
+            let base = Double(Graha.allCases.firstIndex(of: graha) ?? 0) * 40.0
+            return AngleMath.normalize360(base + 0.5 * (julianDay - jd0))
+        }
+    }
+    // Mean node regresses ~0.0529°/day from a fixed reference (always retrograde).
+    func lunarNodeLongitude(julianDay: Double) -> Double {
+        AngleMath.normalize360(100.0 - 0.0529539 * (julianDay - jd0))
+    }
+    func greenwichApparentSiderealTime(julianDay: Double) -> Double {
+        AngleMath.normalize360(280.46 + 360.98564736629 * (julianDay - 2451545.0))
+    }
+    func obliquityOfEcliptic(julianDay: Double) -> Double { 23.4392911 }
 }
 
 struct ConstantAyanamsa: Ayanamsa {

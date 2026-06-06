@@ -20,6 +20,39 @@ public struct SwiftAAEphemeris: Ephemeris {
         return AngleMath.normalize360(lon)
     }
 
+    public func longitude(of graha: Graha, julianDay: Double) -> Double {
+        let jd = JulianDay(julianDay)
+        switch graha {
+        case .sun:  return sunLongitude(julianDay: julianDay)
+        case .moon: return moonLongitude(julianDay: julianDay)
+        // SwiftAA's planets expose apparent geocentric *equatorial* coordinates; convert to
+        // ecliptic for the longitude. (Sun/Moon have a direct apparentEclipticCoordinates;
+        // the planets do not, so the makeEclipticCoordinates() hop is required and is the
+        // easy thing to get wrong — using heliocentricEclipticCoordinates would be wrong.)
+        case .mars:    return ecliptic(Mars(julianDay: jd))
+        case .mercury: return ecliptic(Mercury(julianDay: jd))
+        case .jupiter: return ecliptic(Jupiter(julianDay: jd))
+        case .venus:   return ecliptic(Venus(julianDay: jd))
+        case .saturn:  return ecliptic(Saturn(julianDay: jd))
+        }
+    }
+
+    private func ecliptic(_ planet: Planet) -> Double {
+        AngleMath.normalize360(planet.equatorialCoordinates.makeEclipticCoordinates().celestialLongitude.value)
+    }
+
+    public func lunarNodeLongitude(julianDay: Double) -> Double {
+        AngleMath.normalize360(Moon(julianDay: JulianDay(julianDay)).longitudeOfMeanAscendingNode.value)
+    }
+
+    public func greenwichApparentSiderealTime(julianDay: Double) -> Double {
+        AngleMath.normalize360(JulianDay(julianDay).apparentGreenwichSiderealTime().inDegrees.value)
+    }
+
+    public func obliquityOfEcliptic(julianDay: Double) -> Double {
+        Earth(julianDay: JulianDay(julianDay)).obliquityOfEcliptic(mean: false).value
+    }
+
     public func riseTransitSet(body: Body, anchorJulianDay: Double, location: GeoLocation) -> RiseSet {
         // SwiftAA's GeographicCoordinates uses positively-WESTWARD longitude (Meeus),
         // so a standard east-positive longitude is negated here.

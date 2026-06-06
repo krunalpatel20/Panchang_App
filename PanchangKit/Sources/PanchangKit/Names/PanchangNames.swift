@@ -67,6 +67,21 @@ public enum PanchangNames {
         "Vasant", "Grishma", "Varsha", "Sharad", "Hemant", "Shishir",
     ]
 
+    /// The 9 grahas of Vedic astrology. Order matches `PlanetaryPositions.planets`
+    /// (7 visible grahas in classical order, then the two lunar nodes).
+    public static let graha: [String] = [
+        "Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu",
+    ]
+
+    /// Vimshottari dasha lord cycle, starting at Ketu — the order the 120-year cycle runs in.
+    /// A nakshatra's ruling lord is `vimshottariLords[nakshatraIndex % 9]`.
+    public static let vimshottariLords: [String] = [
+        "Ketu", "Venus", "Sun", "Moon", "Mars", "Rahu", "Jupiter", "Saturn", "Mercury",
+    ]
+
+    /// Mahadasha length in years for each lord, parallel to `vimshottariLords`. Sum = 120.
+    public static let vimshottariYears: [Double] = [7, 20, 6, 10, 7, 18, 16, 19, 17]
+
     /// Resolve the karana name for a half-tithi index 0…59 within the lunar month.
     /// 0 = Kimstughna (fixed), 1…56 cycle the 7 movable karanas, 57/58/59 = the fixed
     /// Shakuni / Chatushpada / Naga.
