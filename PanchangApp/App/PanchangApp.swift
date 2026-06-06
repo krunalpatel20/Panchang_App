@@ -5,7 +5,7 @@ import PanchangKit
 @main
 struct PanchangApp: App {
     private let container: ModelContainer = {
-        let schema = Schema([SavedLocation.self, Preferences.self, CachedDay.self])
+        let schema = Schema([SavedLocation.self, Preferences.self, CachedDay.self, BirthProfile.self])
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         return try! ModelContainer(for: schema, configurations: [config])
     }()
@@ -28,6 +28,8 @@ struct RootView: View {
                 .tabItem { Label("Today", systemImage: "sun.horizon") }
             MuhurtaView()
                 .tabItem { Label("Muhurta", systemImage: "clock.badge") }
+            KundliView()
+                .tabItem { Label("Kundli", systemImage: "circle.grid.3x3") }
             CalendarView()
                 .tabItem { Label("Calendar", systemImage: "calendar") }
             SettingsView()
