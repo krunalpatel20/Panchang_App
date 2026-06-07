@@ -14,9 +14,13 @@ final class KundliViewModel {
     }
 
     var state: LoadState = .empty
+    /// Bumped on each load so switching profiles quickly can't let an earlier chart land last.
+    private var generation = 0
 
     func load(birthInstant: Date, location: GeoLocation) {
         state = .loading
+        generation += 1
+        let gen = generation
         let birth = birthInstant
         let loc = location
         Task.detached(priority: .userInitiated) {
@@ -24,7 +28,10 @@ final class KundliViewModel {
             let jd = JulianDate.julianDay(from: birth)
             let positions = astro.positions(julianDay: jd, location: loc)
             let dasha = astro.dasha(birth: birth)
-            await MainActor.run { self.state = .loaded(positions, dasha) }
+            await MainActor.run {
+                guard gen == self.generation else { return }
+                self.state = .loaded(positions, dasha)
+            }
         }
     }
 }

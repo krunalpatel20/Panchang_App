@@ -32,6 +32,8 @@ final class CalendarViewModel {
     var pickerDate: Date = Date()
 
     private let service = PanchangService()
+    /// Bumped on each load so rapid month paging can't let an earlier month's compute land last.
+    private var generation = 0
 
     init() {
         var cal = Calendar(identifier: .gregorian)
@@ -67,6 +69,8 @@ final class CalendarViewModel {
 
     func loadCells(location: GeoLocation, config: CalendarConfig) {
         isLoading = true
+        generation += 1
+        let gen = generation
         let year = displayedYear
         let month = displayedMonth
         let loc = location
@@ -75,6 +79,7 @@ final class CalendarViewModel {
         Task.detached(priority: .userInitiated) {
             let cells = Self.buildCells(year: year, month: month, location: loc, config: cfg)
             await MainActor.run {
+                guard gen == self.generation else { return }
                 self.cells = cells
                 self.isLoading = false
             }
@@ -93,14 +98,14 @@ final class CalendarViewModel {
         guard let firstDay = gregCal.date(from: components),
               let range = gregCal.range(of: .day, in: .month, for: firstDay) else { return [] }
 
-        let engine = Panchang()
+        let service = PanchangService()
         let festEngine = FestivalEngine()
         let rules = FestivalService.shared.rules
 
         let todayComponents = gregCal.dateComponents([.year, .month, .day], from: Date())
 
         return range.map { d in
-            let day = engine.compute(year: year, month: month, day: d, location: location, config: config)
+            let day = service.compute(year: year, month: month, day: d, location: location, config: config)
             let festivals = festEngine.festivals(for: day, rules: rules)
             let isToday = todayComponents.year == year && todayComponents.month == month && todayComponents.day == d
             return MonthCell(

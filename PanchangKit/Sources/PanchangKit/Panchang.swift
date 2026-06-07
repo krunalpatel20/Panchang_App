@@ -14,7 +14,11 @@ public struct Panchang: Sendable {
 
     /// Compute the panchang for a civil date (interpreted in `location.timeZone`).
     public func compute(year: Int, month: Int, day: Int, location: GeoLocation, config: CalendarConfig) -> PanchangDay {
-        let timingsCalc = DayTimingsCalculator(ephemeris: ephemeris)
+        // One memoizing cache shared by every sub-engine for this day, so the heavily-repeated
+        // Sun/Moon/rise-set evaluations (same anchors, overlapping solver grids, the masa/year and
+        // samvatsara new-moon solves) collapse to dictionary hits. Results are unchanged.
+        let eph = MemoizingEphemeris(base: ephemeris)
+        let timingsCalc = DayTimingsCalculator(ephemeris: eph)
         let timings = timingsCalc.timings(year: year, month: month, day: day, location: location)
 
         // The Hindu day runs sunrise-to-sunrise; every limb is reported as prevailing at
@@ -22,7 +26,7 @@ public struct Panchang: Sendable {
         let sunrise = timings.sunrise
             ?? timingsCalc.sunriseOrReference(year: year, month: month, day: day, location: location)
 
-        let limbs = FiveLimbs(ephemeris: ephemeris, ayanamsa: ayanamsa)
+        let limbs = FiveLimbs(ephemeris: eph, ayanamsa: ayanamsa)
         let tithi = limbs.tithi(atSunrise: sunrise)
         let karana = limbs.karana(atSunrise: sunrise)
         let nakshatra = limbs.nakshatra(atSunrise: sunrise)
@@ -30,7 +34,7 @@ public struct Panchang: Sendable {
         let yoga = limbs.yoga(atSunrise: sunrise)
         let vara = limbs.vara(sunriseJulianDay: sunrise, timeZone: location.timeZone)
 
-        let lunar = LunarCalendar(ephemeris: ephemeris, ayanamsa: ayanamsa)
+        let lunar = LunarCalendar(ephemeris: eph, ayanamsa: ayanamsa)
         let masa = lunar.masa(atSunrise: sunrise, paksha: tithi.paksha)
         let yearInfo = lunar.year(atSunrise: sunrise, timeZone: location.timeZone)
 

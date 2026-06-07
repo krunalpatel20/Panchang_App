@@ -73,7 +73,7 @@ struct BirthProfileFormView: View {
             .onReceive(completer.$results) { results = $0 }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
-                ToolbarItem(placement: .confirmationAction) { Button("Save") { save() }.disabled(!canSave) }
+                ToolbarItem(placement: .confirmationAction) { Button("Save") { Task { await save() } }.disabled(!canSave) }
             }
             .onAppear(perform: prefill)
         }
@@ -110,7 +110,7 @@ struct BirthProfileFormView: View {
         }
     }
 
-    private func save() {
+    private func save() async {
         guard let lat = latitude, let lon = longitude else { return }
         if makePrimary { for p in profiles { p.isPrimary = false } }
 
@@ -127,20 +127,22 @@ struct BirthProfileFormView: View {
                                    isPrimary: makePrimary)
             modelContext.insert(profile)
         }
-        if makePrimary { deriveJanma(from: profile) }
+        if makePrimary { await deriveJanma(from: profile) }
         dismiss()
     }
 
-    /// Derive janma nakshatra/rashi from the Moon's sidereal position at birth, feeding the
-    /// Muhurta tab's Tara/Chandra Bala without a second manual entry.
-    private func deriveJanma(from profile: BirthProfile) {
-        let loc = GeoLocation(latitude: profile.latitude, longitude: profile.longitude,
-                              timeZoneIdentifier: profile.timeZoneIdentifier)
-        let jd = JulianDate.julianDay(from: profile.birthInstant)
-        let positions = Astrology().positions(julianDay: jd, location: loc)
-        let moon = positions.planets[1]   // index 1 = Moon
+    /// Derive janma nakshatra/rashi from the Moon's sidereal longitude at birth, feeding the
+    /// Muhurta tab's Tara/Chandra Bala without a second manual entry. The ephemeris read runs off
+    /// the main actor; the Moon's longitude is geocentric, so no birthplace is needed for it.
+    private func deriveJanma(from profile: BirthProfile) async {
+        let birth = profile.birthInstant
+        let (nakshatra, rashi) = await Task.detached(priority: .userInitiated) { () -> (Int, Int) in
+            let jd = JulianDate.julianDay(from: birth)
+            let lon = Astrology().moonSidereal(julianDay: jd)
+            return (min(26, Int(lon / (360.0 / 27.0))), min(11, Int(lon / 30.0)))
+        }.value
         let prefs = (try? modelContext.fetch(FetchDescriptor<Preferences>()))?.first
-        prefs?.janmaNakshatra = moon.nakshatra
-        prefs?.janmaRashi = moon.rashi
+        prefs?.janmaNakshatra = nakshatra
+        prefs?.janmaRashi = rashi
     }
 }

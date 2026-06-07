@@ -14,14 +14,21 @@ final class TodayViewModel {
 
     var state: LoadState = .idle
     private let service = PanchangService()
+    /// Bumped on each load so a slow earlier compute can't overwrite a newer one.
+    private var generation = 0
 
     func load(location: GeoLocation, config: CalendarConfig) {
         state = .loading
+        generation += 1
+        let gen = generation
         let loc = location; let cfg = config; let svc = service
         Task.detached(priority: .userInitiated) {
             let day = svc.computeToday(location: loc, config: cfg)
             let festivals = FestivalService.shared.festivals(for: day)
-            await MainActor.run { self.state = .loaded(day, festivals) }
+            await MainActor.run {
+                guard gen == self.generation else { return }
+                self.state = .loaded(day, festivals)
+            }
         }
     }
 

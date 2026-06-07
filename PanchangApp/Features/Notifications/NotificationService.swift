@@ -12,7 +12,7 @@ final class NotificationService {
 
     private let center = UNUserNotificationCenter.current()
     private let festivalService = FestivalService.shared
-    private let panchang = Panchang()
+    private let service = PanchangService()
 
     // MARK: - Permission
 
@@ -47,7 +47,7 @@ final class NotificationService {
             let comps = cal.dateComponents([.year, .month, .day], from: date)
             guard let y = comps.year, let m = comps.month, let d = comps.day else { continue }
 
-            let day = panchang.compute(year: y, month: m, day: d, location: location, config: config)
+            let day = service.compute(year: y, month: m, day: d, location: location, config: config)
             let festivals = festivalService.festivals(for: day)
             guard !festivals.isEmpty else { continue }
 

@@ -37,7 +37,7 @@ struct DayDetailView: View {
         let loc = location; let cfg = config
         let y = year, m = month, d = day
         let result = await Task.detached(priority: .userInitiated) {
-            let day = Panchang().compute(year: y, month: m, day: d, location: loc, config: cfg)
+            let day = PanchangService().compute(year: y, month: m, day: d, location: loc, config: cfg)
             let festivals = FestivalService.shared.festivals(for: day)
             return (day, festivals)
         }.value

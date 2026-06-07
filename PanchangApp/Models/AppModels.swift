@@ -67,23 +67,3 @@ final class BirthProfile {
         self.createdAt = Date()
     }
 }
-
-/// A cached panchang result for a (date, location) pair.
-@Model
-final class CachedDay {
-    /// ISO-8601 date string "YYYY-MM-DD" (civil date in the location's timezone).
-    var dateKey: String
-    var locationKey: String    // "lat,lon" rounded to 3 decimal places
-    var preset: String
-    var computedAt: Date
-    /// Serialised `PanchangDay` as JSON data.
-    var payload: Data
-
-    init(dateKey: String, locationKey: String, preset: String, payload: Data) {
-        self.dateKey = dateKey
-        self.locationKey = locationKey
-        self.preset = preset
-        self.computedAt = Date()
-        self.payload = payload
-    }
-}
