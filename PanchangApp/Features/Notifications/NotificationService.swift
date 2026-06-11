@@ -5,8 +5,11 @@ import PanchangKit
 /// Schedules local notifications for upcoming festivals/vrats.
 /// Requests permission on first call. All scheduling is idempotent — call it
 /// whenever the active location or preferences change.
-@MainActor
-final class NotificationService {
+///
+/// Not main-actor-bound: scheduling computes a month of panchang days, so the async entry
+/// points must run on the cooperative pool, not the UI thread. The stored services are all
+/// immutable and thread-safe, hence `@unchecked Sendable`.
+final class NotificationService: @unchecked Sendable {
     static let shared = NotificationService()
     private init() {}
 
@@ -26,13 +29,19 @@ final class NotificationService {
 
     // MARK: - Scheduling
 
-    /// Schedules festival notifications for the next `daysAhead` days from today.
-    func scheduleUpcomingFestivals(location: GeoLocation, config: CalendarConfig, daysAhead: Int = 30) async {
-        // Remove previous festival notifications before rescheduling
+    /// Removes all pending festival notifications. Call when the user disables reminders —
+    /// already-scheduled requests outlive the preference flag otherwise.
+    func cancelAll() async {
         let existingIds = await center.pendingNotificationRequests()
             .map(\.identifier)
             .filter { $0.hasPrefix("festival.") }
         center.removePendingNotificationRequests(withIdentifiers: existingIds)
+    }
+
+    /// Schedules festival notifications for the next `daysAhead` days from today.
+    func scheduleUpcomingFestivals(location: GeoLocation, config: CalendarConfig, daysAhead: Int = 30) async {
+        // Remove previous festival notifications before rescheduling
+        await cancelAll()
 
         let settings = await center.notificationSettings()
         let granted = settings.authorizationStatus == .authorized

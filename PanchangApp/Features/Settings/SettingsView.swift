@@ -18,6 +18,19 @@ struct SettingsView: View {
         savedLocations.first { $0.isActive }
     }
 
+    /// Same fallback as RootView so scheduling from here matches what the app displays.
+    private var activeGeoLocation: GeoLocation {
+        if let loc = activeLocation {
+            return GeoLocation(latitude: loc.latitude, longitude: loc.longitude,
+                               timeZoneIdentifier: loc.timeZoneIdentifier)
+        }
+        return GeoLocation(latitude: 37.3382, longitude: -121.8863, timeZoneIdentifier: "America/Los_Angeles")
+    }
+
+    private var activeConfig: CalendarConfig {
+        prefs.calendarPreset == "north_indian" ? .northIndian : .gujaratiWestern
+    }
+
     var body: some View {
         NavigationStack {
             Form {
@@ -80,11 +93,18 @@ struct SettingsView: View {
                 get: { prefs.notificationsEnabled },
                 set: { newValue in
                     prefs.notificationsEnabled = newValue
+                    let loc = activeGeoLocation; let cfg = activeConfig
                     if newValue {
                         Task {
                             let granted = await NotificationService.shared.requestPermission()
-                            if !granted { prefs.notificationsEnabled = false }
+                            if granted {
+                                await NotificationService.shared.scheduleUpcomingFestivals(location: loc, config: cfg)
+                            } else {
+                                await MainActor.run { prefs.notificationsEnabled = false }
+                            }
                         }
+                    } else {
+                        Task { await NotificationService.shared.cancelAll() }
                     }
                 }
             )) {

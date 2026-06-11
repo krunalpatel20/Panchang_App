@@ -39,8 +39,12 @@ struct RootView: View {
             ensurePreferences()
             scheduleNotificationsIfEnabled()
         }
-        .onChange(of: savedLocations.first(where: { $0.isActive })?.name) { _, _ in
+        .onChange(of: savedLocations.first(where: { $0.isActive })?.persistentModelID) { _, _ in
             scheduleNotificationsIfEnabled()
+        }
+        .onChange(of: prefsQuery.first?.calendarPreset) { old, _ in
+            // Festival dates shift between traditions; skip the initial nil→value fire.
+            if old != nil { scheduleNotificationsIfEnabled() }
         }
     }
 

@@ -31,18 +31,18 @@ public struct FestivalEngine: Sendable {
 
     // tithiNumber is 1-based (1=Pratipada … 15=Purnima/Amavasya) per paksha
     private func tithiMatches(day: PanchangDay, number: Int, paksha: FestivalAnchor.PakshaMatch) -> Bool {
-        // TithiInfo.index is 0-based (0=Shukla Pratipada … 29=Amavasya)
-        // Convert rule's 1-based number to 0-based index within the paksha
+        // TithiInfo.index is 0-based: 0…14 = Shukla Pratipada…Purnima, 15…29 = Krishna
+        // Pratipada…Amavasya. Convert the rule's 1-based number to the index in its paksha.
         let expectedIndex: Int
         switch paksha {
         case .shukla:
-            expectedIndex = number - 1          // Shukla 1 → index 0
+            expectedIndex = number - 1          // Shukla 1 → index 0 … Shukla 15 → index 14
         case .krishna:
-            expectedIndex = 14 + (number - 1)  // Krishna 1 → index 14 … Krishna 15 → index 29
+            expectedIndex = 15 + (number - 1)  // Krishna 1 → index 15 … Krishna 15 → index 29
         case .both:
             // Match against either paksha
             let shuklaIdx = number - 1
-            let krishnaIdx = 14 + (number - 1)
+            let krishnaIdx = 15 + (number - 1)
             return day.tithi.index == shuklaIdx || day.tithi.index == krishnaIdx
         }
         guard day.tithi.index == expectedIndex else { return false }
