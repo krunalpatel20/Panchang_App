@@ -92,12 +92,40 @@ struct CalendarView: View {
         let leadingBlanks = leadingBlankCount()
         return ScrollView {
             LazyVGrid(columns: columns, spacing: 2) {
-                ForEach(0..<leadingBlanks, id: \.self) { _ in Color.clear.frame(height: 68) }
+                ForEach(0..<leadingBlanks, id: \.self) { _ in Color.clear.frame(height: 72) }
                 ForEach(vm.cells) { cell in
                     NavigationLink(value: cell) { DayCell(cell: cell) }.buttonStyle(.plain)
                 }
             }
-            .padding(.horizontal, 4).padding(.bottom, 12)
+            .padding(.horizontal, 4)
+
+            festivalList
+                .padding(.horizontal, 16)
+                .padding(.bottom, 16)
+        }
+    }
+
+    @ViewBuilder
+    private var festivalList: some View {
+        let festivalDays = vm.cells.filter(\.hasFestival)
+        if !festivalDays.isEmpty {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Festivals this month")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .padding(.vertical, 12)
+
+                ForEach(festivalDays) { cell in
+                    NavigationLink(value: cell) {
+                        FestivalListRow(cell: cell)
+                    }
+                    .buttonStyle(.plain)
+
+                    if cell.id != festivalDays.last?.id {
+                        Divider().padding(.leading, 48)
+                    }
+                }
+            }
         }
     }
 
@@ -149,5 +177,76 @@ struct CalendarView: View {
         let cal = Calendar(identifier: .gregorian)
         return cal.date(from: DateComponents(year: 1900, month: 1, day: 1))!
             ... cal.date(from: DateComponents(year: 2100, month: 12, day: 31))!
+    }
+}
+
+// MARK: - Festival list row
+
+private struct FestivalListRow: View {
+    let cell: MonthCell
+
+    var body: some View {
+        HStack(spacing: 12) {
+            // Day badge
+            VStack(spacing: 0) {
+                Text("\(cell.day)")
+                    .font(.title3.weight(.bold))
+                    .foregroundStyle(badgeColor)
+                Text(weekdayAbbrev)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(width: 36)
+
+            // Tithi + festival names
+            VStack(alignment: .leading, spacing: 2) {
+                Text(tithiLabel)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Text(cell.festivals.map(\.name).joined(separator: " · "))
+                    .font(.subheadline)
+                    .foregroundStyle(.primary)
+            }
+
+            Spacer()
+
+            // Type indicator
+            Image(systemName: typeIcon)
+                .font(.caption)
+                .foregroundStyle(badgeColor.opacity(0.8))
+        }
+        .padding(.vertical, 8)
+        .contentShape(Rectangle())
+    }
+
+    private var badgeColor: Color {
+        switch cell.topFestivalType {
+        case .festival:   return .orange
+        case .vrat:       return .indigo
+        case .observance: return .teal
+        case nil:         return .secondary
+        }
+    }
+
+    private var typeIcon: String {
+        switch cell.topFestivalType {
+        case .festival:   return "star.fill"
+        case .vrat:       return "moon.stars"
+        case .observance: return "circle.dotted"
+        case nil:         return "circle"
+        }
+    }
+
+    private var tithiLabel: String {
+        "\(cell.paksha == .shukla ? "Shukla" : "Krishna") \(cell.tithiName)"
+    }
+
+    private var weekdayAbbrev: String {
+        var comps = DateComponents()
+        comps.year = cell.year; comps.month = cell.month; comps.day = cell.day
+        guard let date = Calendar.current.date(from: comps) else { return "" }
+        let fmt = DateFormatter()
+        fmt.dateFormat = "EEE"
+        return fmt.string(from: date)
     }
 }

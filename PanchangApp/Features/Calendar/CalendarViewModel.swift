@@ -2,6 +2,12 @@ import Foundation
 import Observation
 import PanchangKit
 
+/// Minimal festival info carried in each calendar cell.
+struct FestivalItem: Sendable, Hashable {
+    let name: String
+    let type: FestivalRule.FestivalType
+}
+
 /// A lightweight summary computed for each calendar grid cell.
 struct MonthCell: Sendable, Identifiable, Hashable {
     let id: String           // "YYYY-MM-DD"
@@ -14,9 +20,12 @@ struct MonthCell: Sendable, Identifiable, Hashable {
     let paksha: Paksha
     let tithiIndex: Int      // 0…29 raw index
     let sunriseJD: Double?
-    let festivalNames: [String]
+    let festivals: [FestivalItem]
 
-    var hasFestival: Bool { !festivalNames.isEmpty }
+    var hasFestival: Bool { !festivals.isEmpty }
+    var festivalNames: [String] { festivals.map(\.name) }
+    /// Type of the highest-priority festival on this day (first as returned by engine).
+    var topFestivalType: FestivalRule.FestivalType? { festivals.first?.type }
 }
 
 @Observable
@@ -106,7 +115,7 @@ final class CalendarViewModel {
 
         return range.map { d in
             let day = service.compute(year: year, month: month, day: d, location: location, config: config)
-            let festivals = festEngine.festivals(for: day, rules: rules)
+            let occurrences = festEngine.festivals(for: day, rules: rules)
             let isToday = todayComponents.year == year && todayComponents.month == month && todayComponents.day == d
             return MonthCell(
                 id: String(format: "%04d-%02d-%02d", year, month, d),
@@ -117,7 +126,7 @@ final class CalendarViewModel {
                 paksha: day.tithi.paksha,
                 tithiIndex: day.tithi.index,
                 sunriseJD: day.timings.sunrise,
-                festivalNames: festivals.map(\.name)
+                festivals: occurrences.map { FestivalItem(name: $0.name, type: $0.type) }
             )
         }
     }
