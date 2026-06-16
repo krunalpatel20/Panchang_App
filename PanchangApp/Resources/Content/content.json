@@ -332,7 +332,7 @@
         "anchor": "masaTithi",
         "tithi": 15,
         "paksha": "krishna",
-        "masaIndex": 7
+        "masaIndex": 6
       },
       "variants": [],
       "voice": {
@@ -1449,7 +1449,7 @@
       "tier": 1,
       "match": {
         "anchor": "masaTithi",
-        "masaIndex": 7,
+        "masaIndex": 6,
         "tithi": 13,
         "paksha": "krishna",
         "rashiIndex": null
@@ -1492,7 +1492,7 @@
       "tier": 1,
       "match": {
         "anchor": "masaTithi",
-        "masaIndex": 7,
+        "masaIndex": 6,
         "tithi": 14,
         "paksha": "krishna",
         "rashiIndex": null
