@@ -160,7 +160,9 @@ struct PanchangDayView: View {
     private var festivalsSection: some View {
         Section("Festivals & Vrats") {
             ForEach(festivals) { f in
-                let content = resolvedContent.first { $0.entry.id == f.id } ?? .fixture
+                let content = resolvedContent.first {
+                    $0.entry.id == f.id || f.id.hasPrefix($0.entry.id + "_")
+                } ?? .fixture
                 NavigationLink(destination: FestivalDetailView(content: content)) {
                     HStack {
                         Image(systemName: f.type == .vrat ? "moon.stars" : "star.fill")
