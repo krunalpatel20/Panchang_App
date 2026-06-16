@@ -75,13 +75,24 @@ struct PanchangDayView: View {
         List {
             dateHeaderSection
             if day.sunNeverRises || day.sunNeverSets { polarWarningSection }
-            if !festivals.isEmpty { festivalsSection }
+            if !festivalsWithContent.isEmpty { festivalsSection }
             sunMoonSection
             fiveLimbsSection
             monthYearSection
             muhurtaSection
         }
         .listStyle(.insetGrouped)
+    }
+
+    private var festivalsWithContent: [(FestivalOccurrence, ResolvedContent)] {
+        festivals.compactMap { f in
+            guard let content = resolvedContent.first(where: {
+                $0.entry.id == f.id ||
+                f.id.hasPrefix($0.entry.id + "_") ||
+                f.id.hasSuffix("_" + $0.entry.id)
+            }) else { return nil }
+            return (f, content)
+        }
     }
 
     // MARK: - Sections
@@ -159,12 +170,7 @@ struct PanchangDayView: View {
 
     private var festivalsSection: some View {
         Section("Festivals & Vrats") {
-            ForEach(festivals) { f in
-                let content = resolvedContent.first {
-                    $0.entry.id == f.id ||
-                    f.id.hasPrefix($0.entry.id + "_") ||
-                    f.id.hasSuffix("_" + $0.entry.id)
-                } ?? .fixture
+            ForEach(festivalsWithContent, id: \.0.id) { f, content in
                 NavigationLink(destination: FestivalDetailView(content: content)) {
                     HStack {
                         Image(systemName: f.type == .vrat ? "moon.stars" : "star.fill")
