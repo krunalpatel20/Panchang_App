@@ -116,6 +116,7 @@ final class CalendarViewModel {
         return range.map { d in
             let day = service.compute(year: year, month: month, day: d, location: location, config: config)
             let occurrences = festEngine.festivals(for: day, rules: rules)
+            let store = ContentStore.shared
             let isToday = todayComponents.year == year && todayComponents.month == month && todayComponents.day == d
             return MonthCell(
                 id: String(format: "%04d-%02d-%02d", year, month, d),
@@ -126,7 +127,9 @@ final class CalendarViewModel {
                 paksha: day.tithi.paksha,
                 tithiIndex: day.tithi.index,
                 sunriseJD: day.timings.sunrise,
-                festivals: occurrences.map { FestivalItem(name: $0.name, type: $0.type) }
+                festivals: occurrences
+                    .filter { store.hasContent(forFestivalId: $0.id) }
+                    .map { FestivalItem(name: $0.name, type: $0.type) }
             )
         }
     }

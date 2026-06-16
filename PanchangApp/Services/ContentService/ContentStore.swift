@@ -31,6 +31,16 @@ struct ContentStore: Sendable {
     func entry(for id: String) -> ContentEntry? {
         allEntries.first { $0.id == id }
     }
+
+    /// Returns true if any authored ContentEntry covers the given festival rule ID,
+    /// using the same prefix/suffix matching as the festival detail lookup.
+    func hasContent(forFestivalId id: String) -> Bool {
+        allEntries.contains {
+            $0.id == id ||
+            id.hasPrefix($0.id + "_") ||
+            id.hasSuffix("_" + $0.id)
+        }
+    }
 }
 
 // MARK: - JSON wrapper
