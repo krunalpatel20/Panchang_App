@@ -25,7 +25,7 @@ struct DayCell: View {
                 .minimumScaleFactor(0.7)
                 .frame(maxWidth: .infinity)
 
-            // Festival name(s) — colored by type, empty spacer when none
+            // Festival name(s)
             if cell.hasFestival {
                 Text(cell.festivals.map(\.name).joined(separator: " · "))
                     .font(.system(size: 8, weight: .medium))
@@ -34,9 +34,8 @@ struct DayCell: View {
                     .multilineTextAlignment(.center)
                     .minimumScaleFactor(0.7)
                     .frame(maxWidth: .infinity)
-            } else {
-                Spacer(minLength: 0)
             }
+            Spacer(minLength: 0)
         }
         .frame(height: 72)
         .padding(2)
