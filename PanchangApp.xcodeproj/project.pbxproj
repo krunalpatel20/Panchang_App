@@ -31,8 +31,6 @@
 		AA000000000000000000122 /* LocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000121 /* LocationSearchView.swift */; };
 		AA000000000000000000132 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000131 /* SettingsView.swift */; };
 		AA000000000000000000142 /* FestivalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000141 /* FestivalService.swift */; };
-		AA000000000000000000152 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000151 /* NotificationService.swift */; };
-		AA000000000000000000162 /* festivals.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000161 /* festivals.json */; };
 		AA000000000000000000172 /* ScriptRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000171 /* ScriptRenderer.swift */; };
 		AA000000000000000000182 /* MuhurtaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000181 /* MuhurtaView.swift */; };
 		AA000000000000000000192 /* KundliView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000191 /* KundliView.swift */; };
@@ -73,8 +71,6 @@
 		AA000000000000000000121 /* LocationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchView.swift; sourceTree = "<group>"; };
 		AA000000000000000000131 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AA000000000000000000141 /* FestivalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalService.swift; sourceTree = "<group>"; };
-		AA000000000000000000151 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		AA000000000000000000161 /* festivals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = festivals.json; sourceTree = "<group>"; };
 		AA000000000000000000171 /* ScriptRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptRenderer.swift; sourceTree = "<group>"; };
 		AA000000000000000000181 /* MuhurtaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuhurtaView.swift; sourceTree = "<group>"; };
 		AA000000000000000000191 /* KundliView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KundliView.swift; sourceTree = "<group>"; };
@@ -281,7 +277,6 @@
 		AA000000000000000000150 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				AA000000000000000000151 /* NotificationService.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -289,7 +284,6 @@
 		AA000000000000000000160 /* Festivals */ = {
 			isa = PBXGroup;
 			children = (
-				AA000000000000000000161 /* festivals.json */,
 			);
 			path = Resources/Festivals;
 			sourceTree = "<group>";
@@ -414,7 +408,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA000000000000000000045 /* Assets.xcassets in Resources */,
-				AA000000000000000000162 /* festivals.json in Resources */,
 				239E9D82C01479C2ED7EEC06 /* content.json in Resources */,
 				0CF540C3A54C9A29D2E39EA7 /* content-regional.json in Resources */,
 				68896CADFD7C10F4F3F58EA2 /* content.schema.json in Resources */,
@@ -441,7 +434,6 @@
 				AA000000000000000000122 /* LocationSearchView.swift in Sources */,
 				AA000000000000000000132 /* SettingsView.swift in Sources */,
 				AA000000000000000000142 /* FestivalService.swift in Sources */,
-				AA000000000000000000152 /* NotificationService.swift in Sources */,
 				AA000000000000000000172 /* ScriptRenderer.swift in Sources */,
 				AA000000000000000000182 /* MuhurtaView.swift in Sources */,
 				AA000000000000000000192 /* KundliView.swift in Sources */,

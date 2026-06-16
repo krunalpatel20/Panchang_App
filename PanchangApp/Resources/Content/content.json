@@ -5,6 +5,8 @@
       "id": "ekadashi",
       "kind": "cycle",
       "tier": 1,
+      "name": "Ekadashi",
+      "festivalType": "vrat",
       "match": {
         "anchor": "tithi",
         "tithi": 11,
@@ -66,6 +68,8 @@
       "id": "nirjala_ekadashi",
       "kind": "festival",
       "tier": 1,
+      "name": "Nirjala Ekadashi",
+      "festivalType": "vrat",
       "match": {
         "anchor": "masaTithi",
         "tithi": 11,
@@ -127,6 +131,8 @@
       "id": "purnima",
       "kind": "cycle",
       "tier": 2,
+      "name": "Purnima",
+      "festivalType": "observance",
       "match": {
         "anchor": "tithi",
         "tithi": 15,
@@ -188,6 +194,8 @@
       "id": "amavasya",
       "kind": "cycle",
       "tier": 2,
+      "name": "Amavasya",
+      "festivalType": "observance",
       "match": {
         "anchor": "tithi",
         "tithi": 15,
@@ -249,6 +257,8 @@
       "id": "paksha_transition",
       "kind": "paksha",
       "tier": 3,
+      "name": "Paksha Transition",
+      "festivalType": null,
       "match": {
         "anchor": "pakshaTransition",
         "tithi": null,
@@ -328,6 +338,8 @@
       "id": "diwali_amavasya",
       "kind": "festival",
       "tier": 1,
+      "name": "Diwali",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "tithi": 15,
@@ -389,6 +401,8 @@
       "id": "janmashtami",
       "kind": "festival",
       "tier": 1,
+      "name": "Janmashtami",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "tithi": 8,
@@ -453,6 +467,8 @@
       "id": "mahashivratri",
       "kind": "festival",
       "tier": 1,
+      "name": "Mahashivratri",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "tithi": 14,
@@ -514,6 +530,8 @@
       "id": "ganesh_chaturthi",
       "kind": "festival",
       "tier": 1,
+      "name": "Ganesh Chaturthi",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 5,
@@ -574,6 +592,8 @@
       "id": "navratri_start",
       "kind": "festival",
       "tier": 1,
+      "name": "Navratri (Start)",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 6,
@@ -634,6 +654,8 @@
       "id": "dussehra",
       "kind": "festival",
       "tier": 1,
+      "name": "Dussehra (Vijaya Dashami)",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 6,
@@ -694,6 +716,8 @@
       "id": "holi",
       "kind": "festival",
       "tier": 1,
+      "name": "Holi (Holika Dahan)",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 11,
@@ -754,6 +778,8 @@
       "id": "vasant_panchami",
       "kind": "festival",
       "tier": 1,
+      "name": "Vasant Panchami",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 10,
@@ -814,6 +840,8 @@
       "id": "guru_purnima",
       "kind": "festival",
       "tier": 1,
+      "name": "Guru Purnima",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 3,
@@ -874,6 +902,8 @@
       "id": "sharad_purnima",
       "kind": "festival",
       "tier": 2,
+      "name": "Sharad Purnima",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 6,
@@ -934,6 +964,8 @@
       "id": "kartik_purnima",
       "kind": "festival",
       "tier": 2,
+      "name": "Kartik Purnima",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 7,
@@ -994,6 +1026,8 @@
       "id": "mahalaya_amavasya",
       "kind": "festival",
       "tier": 2,
+      "name": "Mahalaya Amavasya",
+      "festivalType": "observance",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 6,
@@ -1054,6 +1088,8 @@
       "id": "devutthana_ekadashi",
       "kind": "festival",
       "tier": 1,
+      "name": "Devutthana Ekadashi",
+      "festivalType": "vrat",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 7,
@@ -1114,6 +1150,8 @@
       "id": "vaikunta_ekadashi",
       "kind": "festival",
       "tier": 1,
+      "name": "Vaikunta Ekadashi",
+      "festivalType": "vrat",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 8,
@@ -1177,6 +1215,8 @@
       "id": "amalaki_ekadashi",
       "kind": "festival",
       "tier": 2,
+      "name": "Amalaki Ekadashi",
+      "festivalType": "vrat",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 11,
@@ -1237,6 +1277,8 @@
       "id": "pradosh",
       "kind": "tithi",
       "tier": 3,
+      "name": "Pradosh",
+      "festivalType": "vrat",
       "match": {
         "anchor": "tithi",
         "tithi": 13,
@@ -1279,6 +1321,8 @@
       "id": "chaturthi",
       "kind": "tithi",
       "tier": 3,
+      "name": "Sankashti / Vinayaka Chaturthi",
+      "festivalType": "vrat",
       "match": {
         "anchor": "tithi",
         "tithi": 4,
@@ -1321,6 +1365,8 @@
       "id": "makar_sankranti",
       "kind": "festival",
       "tier": 1,
+      "name": "Makar Sankranti",
+      "festivalType": "festival",
       "match": {
         "anchor": "solar",
         "rashiIndex": 9,
@@ -1382,6 +1428,8 @@
       "id": "raksha_bandhan",
       "kind": "festival",
       "tier": 1,
+      "name": "Raksha Bandhan",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 4,
@@ -1447,6 +1495,8 @@
       "id": "dhanteras",
       "kind": "festival",
       "tier": 1,
+      "name": "Dhanteras",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 6,
@@ -1479,7 +1529,13 @@
         }
       },
       "triggers": [
-        {"type": "morning", "time": {"hour": 7, "minute": 30}}
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 30
+          }
+        }
       ],
       "action": null,
       "regions": [],
@@ -1490,6 +1546,8 @@
       "id": "kali_chaudas",
       "kind": "festival",
       "tier": 1,
+      "name": "Kali Chaudas",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 6,
@@ -1510,7 +1568,7 @@
           "whatItIs": "Kali Chaudas — also called Narak Chaturdashi or Choti Diwali — is the fourteenth tithi of Kartika's dark fortnight: the night before Diwali, when the darkness is at its thickest. The name Narak Chaturdashi (the fourteenth of hell) refers to the mythology of Narakasura; Kali Chaudas invokes the goddess Kali, who holds power over the darkest forces. In Gujarat, it is called Bol Chaturdas — the night of spoken words at crossroads.",
           "mythology": "Krishna woke before dawn on this day and defeated Narakasura, who had imprisoned sixteen thousand women. When he returned home covered in battle, Satyabhama cleaned him with an oil bath. That ritual — the bath before first light — is still observed in South India and parts of Maharashtra on this day. The oil bath on Narak Chaturdashi is one of the few Hindu ritual practices that directly enacts a mythological scene: you are Satyabhama; you are washing away what the night brought.",
           "history": "In South India — particularly Kerala and Karnataka — Narak Chaturdashi is the primary Diwali celebration, more significant than the Amavasya night that follows. The dawn oil bath and the lighting of lamps before sunrise are the defining acts. In North India, this day is sometimes called Choti Diwali (small Diwali) and is observed as the eve of the main festival.",
-          "regional": "In Gujarat, Bol Chaturdas is observed at crossroads — family members go out at night, call out protective words, and make offerings to ward off evil spirits whose power peaks on this borderline night. In Rajasthan, lamps are lit at the base of the Pipal tree. In Bengal and Assam, the goddess Kali is worshipped through the night — Kali Puja coincides with Diwali's Amavasya in some traditions.",
+          "regional": "In Gujarat, Bol Chaturdas is observed at crossroads — family members go out at night, call out protective words, and make offerings to ward off evil spirits whose power peaks on this borderline night. In Rajasthan, lamps are lit at the base of the Pipal tree. In Bengal and Assam, households turn to Kali through the night — Kali Puja coincides with Diwali's Amavasya in some traditions.",
           "whatToDo": "Light a lamp early in the evening — before the household settles in. If your family has an oil bath tradition on this morning, observe it. Tonight is the last night of the dark fortnight before the light comes. Let it be quiet."
         },
         "food": {
@@ -1519,7 +1577,13 @@
         }
       },
       "triggers": [
-        {"type": "morning", "time": {"hour": 7, "minute": 30}}
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 30
+          }
+        }
       ],
       "action": null,
       "regions": [],
@@ -1530,6 +1594,8 @@
       "id": "bhai_dooj",
       "kind": "festival",
       "tier": 1,
+      "name": "Bhai Dooj",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 7,
@@ -1559,7 +1625,13 @@
         }
       },
       "triggers": [
-        {"type": "morning", "time": {"hour": 8, "minute": 0}}
+        {
+          "type": "morning",
+          "time": {
+            "hour": 8,
+            "minute": 0
+          }
+        }
       ],
       "action": null,
       "regions": [],
@@ -1570,6 +1642,8 @@
       "id": "ashtami",
       "kind": "tithi",
       "tier": 3,
+      "name": "Ashtami",
+      "festivalType": "observance",
       "match": {
         "anchor": "tithi",
         "tithi": 8,
@@ -1602,6 +1676,202 @@
           "time": {
             "hour": 8,
             "minute": 0
+          }
+        }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "ram_navami",
+      "kind": "festival",
+      "tier": 1,
+      "name": "Ram Navami",
+      "festivalType": "festival",
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 0,
+        "tithi": 9,
+        "paksha": "shukla",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Ram Navami arrives in two days, the close of Chaitra Navratri. If you've been observing the nine days, the fast usually breaks tomorrow evening or on the day itself.",
+          "daysBefore": 2
+        },
+        "eve": {
+          "text": "Ram Navami tomorrow — the ninth day, the birth. Chaitra Navratri ends here. If you've kept the fast this week, tomorrow is when it breaks."
+        },
+        "morning": {
+          "text": "Today is Ram Navami — the ninth day of Chaitra Shukla Paksha, the day Ram was born in Ayodhya. Many temples hold the naming and cradle ceremony around midday, the hour the texts give for his birth. The nine days of Navratri close here. What stays with people isn't the timing of the birth — it's the life that followed: a prince who kept his word even when it cost him everything."
+        },
+        "deepDive": {
+          "whatItIs": "Ram Navami falls on the ninth tithi of Chaitra Shukla Paksha and marks the birth of Ram, the seventh avatar of Vishnu, in Ayodhya. It closes the nine-day Chaitra Navratri. Many households that have fasted through the week break the fast today, and temples hold a midday ceremony — Ram's birth hour is traditionally placed near noon — with a cradle, bhajans, and the reading of the Ramayana's early chapters.",
+          "mythology": "King Dasharatha of Ayodhya had no heir. He performed the Putrakameshti yagna, and from the sacrificial fire came a bowl of kheer for his three queens. Kausalya, the eldest, bore Ram. The Ramayana that follows is the long story of what that birth set in motion — exile, the forest years, the war in Lanka, and a return that the rest of the Diwali story commemorates. Ram Navami marks where that story starts: an ordinary household, a king who wanted a son, and a child who grew into someone people still measure their own choices against.",
+          "history": "Ram Navami is observed across nearly all of North and Central India, and the Ramcharitmanas — Tulsidas's 16th-century retelling of the Ramayana in Awadhi — is read or recited in full in many communities during the preceding nine days, finishing on this morning. In Ayodhya itself, the day draws the year's largest pilgrim crowds outside Diwali, with the Saryu riverbank and the temple complex at the center of the observance.",
+          "regional": "In Ayodhya, the day centers on the Saryu river and the temple town itself — bathing, processions, and a midday arati timed to the traditional birth hour. In Andhra Pradesh and Telugu-speaking regions, Ram Navami doubles as Sita Rama Kalyanam, a celebration of Ram and Sita's wedding, with elaborate temple weddings re-enacted on the same day. In Bengal, the day is quieter, often folded into household Vishnu worship rather than public celebration.",
+          "whatToDo": "Read a chapter of the Ramayana if you have one nearby — even the exile or the forest years, not just the birth. If your family fasted through Chaitra Navratri, break it today with whatever the household tradition calls for. Call someone today and tell them you kept your word about something — that's the thread that runs through this whole story."
+        },
+        "food": {
+          "note": "Panakam — a jaggery, lemon, and dry-ginger drink — and kosambari, a raw mung dal and cucumber salad, are the classic Ram Navami offerings in South India, both suited to the Chaitra heat. In the North, the fast-breaking meal often includes kheer, echoing the bowl Dasharatha's queens received.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 30
+          }
+        }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "hanuman_jayanti",
+      "kind": "festival",
+      "tier": 2,
+      "name": "Hanuman Jayanti",
+      "festivalType": "festival",
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 0,
+        "tithi": 15,
+        "paksha": "shukla",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "eve": {
+          "text": "Hanuman Jayanti tomorrow — the full moon after Ram Navami. Many people visit a Hanuman temple early; if there's one near you, plan to go before the crowd builds."
+        },
+        "morning": {
+          "text": "Today is Hanuman Jayanti — the birth of Hanuman, marked on the Chaitra full moon, a week after Ram Navami. The two days belong together: Ram's birth, then the birth of the one who served him without ever asking what he'd get back. Sindoor, strength, and a complete absence of self-interest — that's the whole character in three words."
+        },
+        "deepDive": {
+          "whatItIs": "Hanuman Jayanti falls on the full moon of Chaitra Shukla Paksha and marks the birth of Hanuman, the vanara devotee of Ram celebrated for his strength, his discipline, and his total loyalty. Temples open early, often before sunrise, and the day includes Hanuman Chalisa recitation, sindoor offerings, and in many places a full reading of the Sundara Kanda, the Ramayana book where Hanuman finds Sita in Lanka.",
+          "mythology": "Hanuman crossed the ocean to Lanka, burned the city with his own tail, and lifted an entire mountain — the Sanjeevani peak — because he couldn't identify the one herb on it that would save Lakshman's life and refused to risk being wrong. None of it was for credit. When Ram asked what Hanuman wanted in return for a lifetime of service, the answer was nothing — only to keep serving. That's the story people are marking today: not the size of the deeds, but the fact that none of them were transactional.",
+          "history": "Hanuman Jayanti's date varies by region — Chaitra Purnima in most of North and West India, though some traditions in the South and parts of Odisha mark it elsewhere in the year. The Hanuman Chalisa, composed by Tulsidas and recited everywhere today, is among the most widely memorized devotional texts in any Indian language, known by people who know little else in Sanskrit-inflected Hindi.",
+          "regional": "In Maharashtra, some communities observe Hanuman Jayanti on Margashirsha Krishna Chaturdashi instead of Chaitra Purnima, following a different birth-date tradition. In Tamil Nadu, the day is sometimes marked in the Tamil month of Margazhi. Wherever it falls, the content is consistent — Chalisa recitation, sindoor, strength.",
+          "whatToDo": "Recite the Hanuman Chalisa once today, even slowly, even reading it rather than from memory. If you pass a Hanuman temple, stop in for two minutes. Do one thing today for someone else without mentioning that you did it — that's the actual observance, underneath the sindoor."
+        },
+        "food": {
+          "note": "Boondi and besan ladoo are the standard Hanuman Jayanti prasad — simple, fast to make, and easy to distribute to a crowd, which suits a day built around temple visits rather than home cooking.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {
+          "type": "morning",
+          "time": {
+            "hour": 6,
+            "minute": 30
+          }
+        }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "akshaya_tritiya",
+      "kind": "festival",
+      "tier": 1,
+      "name": "Akshaya Tritiya",
+      "festivalType": "festival",
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 1,
+        "tithi": 3,
+        "paksha": "shukla",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Akshaya Tritiya is two days away — the day people start anything they want to last. If you're planning a purchase, a new venture, or a first lesson for a child, this is the date households build toward.",
+          "daysBefore": 2
+        },
+        "eve": {
+          "text": "Akshaya Tritiya tomorrow. Akshaya means what never decays. Whatever you begin tomorrow, the tradition says, keeps growing rather than running out."
+        },
+        "morning": {
+          "text": "Today is Akshaya Tritiya — the third day of Vaishakha Shukla Paksha, and the date Hindu tradition treats as unconditionally auspicious, needing no almanac check. Akshaya means imperishable. Gold is bought today, ventures are launched today, children begin their first lessons today — the logic is that what starts on this day doesn't run out. The deeper read: it's not the gold that lasts, it's the intention behind starting something properly."
+        },
+        "deepDive": {
+          "whatItIs": "Akshaya Tritiya falls on the third tithi of Vaishakha Shukla Paksha and is one of the few days in the Hindu calendar considered self-auspicious — it requires no muhurta calculation, no checking against other planetary positions. Akshaya means that which never diminishes. The day is associated with new beginnings: buying gold, starting a business, laying a foundation, beginning a child's education (Akshara Abhyasam in the South), or starting any venture meant to endure.",
+          "mythology": "Several stories converge on this day. It is said to mark Parashurama's birth, the sixth avatar of Vishnu. It's also the day Ved Vyasa is said to have begun dictating the Mahabharata to Ganesha. And in the Mahabharata itself, this is the day Krishna gave Draupadi the Akshaya Patra — a vessel that produced food without ever emptying, sustaining the Pandavas through their forest exile. Three different stories, one shared idea: something given properly on this day doesn't run out.",
+          "history": "Akshaya Tritiya's status as an unconditionally auspicious day — needing no panchang consultation — is documented across Puranic literature, and the day has carried major commercial weight for centuries: in many parts of India it's historically the day debts were settled and new account books opened, a precursor to the same logic Dhanteras carries at Diwali.",
+          "regional": "In Maharashtra and Gujarat, gold and jewelry sales peak on this day more than almost any other date in the year. In Tamil Nadu and Andhra Pradesh, Akshaya Tritiya is the preferred day for Akshara Abhyasam — a child's first formal writing lesson, traced in rice or sand. In Odisha, farmers begin sowing paddy on this day, treating it as the start of the agricultural year.",
+          "whatToDo": "If you're starting something today — a purchase, a habit, a piece of work — start it properly, not in passing. Write something down if you've been putting it off. If there's a child in your house who hasn't started writing yet, today is the traditional day to guide their hand through the first letter."
+        },
+        "food": {
+          "note": "There's no single fixed Akshaya Tritiya dish, but many households mark it with something freshly made rather than reheated — kheer or a sweet made that morning is common, in keeping with the day's theme of fresh starts rather than leftovers.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 0
+          }
+        }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "govardhan_puja",
+      "kind": "festival",
+      "tier": 2,
+      "name": "Govardhan Puja",
+      "festivalType": "festival",
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 7,
+        "tithi": 1,
+        "paksha": "shukla",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "eve": {
+          "text": "Govardhan Puja tomorrow — the day after Diwali's new moon. If your family makes Annakut, the cooking usually starts tonight: dozens of vegetarian dishes, enough for a small mountain."
+        },
+        "morning": {
+          "text": "Today is Govardhan Puja, the day after the Diwali new moon. Krishna lifted the Govardhan hill on one finger and held it for seven days, sheltering an entire village from a storm Indra sent to humble them. Many homes build a small Govardhan from cow dung or clay this morning, and a meal called Annakut — a mountain of food — is offered, echoing the hill itself. The lesson tucked inside the spectacle: protection doesn't have to come from the obvious place."
+        },
+        "deepDive": {
+          "whatItIs": "Govardhan Puja falls on Kartika Shukla Pratipada, the day after Diwali's Amavasya, and commemorates Krishna lifting Mount Govardhan to shelter the people of Vraj from a storm. Many households build a small representation of the hill from cow dung or clay and decorate it. The central ritual food is Annakut — literally a mountain of food, dozens of vegetarian dishes arranged together and offered before being shared.",
+          "mythology": "The people of Vraj used to make an annual offering to Indra, god of rain and storms, for a good monsoon. One year Krishna, still a boy, asked why — the rain came from the clouds over Govardhan hill, the grass that fed their cattle came from the same hill, so why honor a distant sky-god instead of the land in front of them? He convinced the village to redirect the offering to the hill itself. Indra, insulted, sent a storm meant to flood Vraj into submission. Krishna lifted the entire hill on the tip of his little finger and held it aloft for seven days and nights, and the whole village sheltered underneath until Indra relented. It's a story about where to actually place your trust when something bigger threatens you.",
+          "history": "Govardhan Puja is closely associated with the Pushtimarg and Vallabhacharya traditions, which place Govardhan hill itself at the center of devotional life — pilgrims still circle the hill on foot, a parikrama covering more than twenty kilometers, on ordinary days throughout the year, not only on this one. The Annakut offering, scaled up into temple kitchens producing hundreds of dishes, is a defining feature of Vaishnav temples in Gujarat and Rajasthan on this day.",
+          "regional": "In Gujarat, this day is layered with two more observances: Bestu Varas, the Gujarati new year, and in some families Annakut takes precedence over the new-year visiting. In Braj — the region around Mathura and Vrindavan where the story is set — Govardhan hill itself is circumambulated by thousands of pilgrims. In Maharashtra, the day is sometimes folded into Padwa, marked instead by a different set of rituals around married couples.",
+          "whatToDo": "If you cook today, make more dishes than usual and share the extra rather than keep it for the week — that's the spirit of Annakut, abundance offered outward, not stored. If you can't manage an elaborate meal, even one extra dish set aside for a neighbor honors the same idea: the hill that shelters everyone, not just your own house."
+        },
+        "food": {
+          "note": "Annakut is the day's defining food event — Vaishnav temples in particular prepare anywhere from dozens to hundreds of dishes, arranged in tiers to resemble the hill, then distributed as prasad. At home, a smaller version might mean six or seven vegetable preparations instead of the usual two or three.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 30
           }
         }
       ],

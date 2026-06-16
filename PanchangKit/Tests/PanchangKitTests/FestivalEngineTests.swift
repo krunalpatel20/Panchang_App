@@ -9,7 +9,8 @@ struct FestivalEngineTests {
 
     /// A minimal PanchangDay: only the fields festival rules read (tithi, vara, masa) carry
     /// real values; everything else is inert filler.
-    private func day(tithiIndex: Int, varaIndex: Int = 1, amantaMasaIndex: Int = 0) -> PanchangDay {
+    private func day(tithiIndex: Int, varaIndex: Int = 1, amantaMasaIndex: Int = 0,
+                      sunRashiIndex: Int = 0, isSolarTransition: Bool = false) -> PanchangDay {
         let emptyWindow = MuhurtaWindow(start: nil, end: nil)
         return PanchangDay(
             year: 2026, month: 1, day: 1,
@@ -46,7 +47,8 @@ struct FestivalEngineTests {
             varjyam: [],
             amritKalam: [],
             moonRashiIndex: 0,
-            sunRashiIndex: 0,
+            sunRashiIndex: sunRashiIndex,
+            isSolarTransition: isSolarTransition,
             sunNeverRises: false,
             sunNeverSets: false
         )
@@ -143,5 +145,23 @@ struct FestivalEngineTests {
         #expect(matches(rule, tithiIndex: 27, varaIndex: 1))   // Krishna Trayodashi, Monday
         #expect(!matches(rule, tithiIndex: 27, varaIndex: 2))
         #expect(!matches(rule, tithiIndex: 26, varaIndex: 1))
+    }
+
+    // MARK: - Solar (Sankranti transition, not whole-month membership)
+
+    @Test func solarMatchesOnlyTheTransitionDay() {
+        let rule = FestivalRule(id: "makar_sankranti", name: "Makar Sankranti", type: .festival,
+                                anchor: .solar(rashiIndex: 9))
+        let transitionDay = day(tithiIndex: 5, sunRashiIndex: 9, isSolarTransition: true)
+        let midMonthDay = day(tithiIndex: 12, sunRashiIndex: 9, isSolarTransition: false)
+        #expect(!engine.festivals(for: transitionDay, rules: [rule]).isEmpty)
+        #expect(engine.festivals(for: midMonthDay, rules: [rule]).isEmpty)
+    }
+
+    @Test func solarRequiresMatchingRashi() {
+        let rule = FestivalRule(id: "makar_sankranti", name: "Makar Sankranti", type: .festival,
+                                anchor: .solar(rashiIndex: 9))
+        let wrongRashiTransition = day(tithiIndex: 5, sunRashiIndex: 8, isSolarTransition: true)
+        #expect(engine.festivals(for: wrongRashiTransition, rules: [rule]).isEmpty)
     }
 }

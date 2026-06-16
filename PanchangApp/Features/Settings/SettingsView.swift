@@ -114,18 +114,20 @@ struct SettingsView: View {
                 get: { prefs.notificationsEnabled },
                 set: { newValue in
                     prefs.notificationsEnabled = newValue
-                    let loc = activeGeoLocation; let cfg = activeConfig
+                    let loc = activeGeoLocation; let cfg = activeConfig; let region = prefs.contentRegion
                     if newValue {
                         Task {
-                            let granted = await NotificationService.shared.requestPermission()
+                            let granted = await NotificationScheduler.shared.requestPermission()
                             if granted {
-                                await NotificationService.shared.scheduleUpcomingFestivals(location: loc, config: cfg)
+                                await NotificationScheduler.shared.schedule(
+                                    using: ContentResolver(), location: loc, config: cfg, region: region
+                                )
                             } else {
                                 await MainActor.run { prefs.notificationsEnabled = false }
                             }
                         }
                     } else {
-                        Task { await NotificationService.shared.cancelAll() }
+                        Task { await NotificationScheduler.shared.cancelAll() }
                     }
                 }
             )) {

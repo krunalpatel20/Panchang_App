@@ -32,6 +32,10 @@ public struct Panchang: Sendable {
         let nakshatra = limbs.nakshatra(atSunrise: sunrise)
         let moonRashiIndex = limbs.moonRashi(atSunrise: sunrise)
         let sunRashiIndex  = limbs.sunRashi(atSunrise: sunrise)
+        let previousSunRashiIndex = previousDaySunRashi(
+            year: year, month: month, day: day, location: location, calc: timingsCalc, limbs: limbs
+        )
+        let isSolarTransition = previousSunRashiIndex != sunRashiIndex
         let yoga = limbs.yoga(atSunrise: sunrise)
         let vara = limbs.vara(sunriseJulianDay: sunrise, timeZone: location.timeZone)
 
@@ -71,8 +75,26 @@ public struct Panchang: Sendable {
             varjyam: varjyamAmrit.varjyam, amritKalam: varjyamAmrit.amrit,
             moonRashiIndex: moonRashiIndex,
             sunRashiIndex: sunRashiIndex,
+            isSolarTransition: isSolarTransition,
             sunNeverRises: timings.sunNeverRises, sunNeverSets: timings.sunNeverSets
         )
+    }
+
+    private func previousDaySunRashi(
+        year: Int, month: Int, day: Int, location: GeoLocation,
+        calc: DayTimingsCalculator, limbs: FiveLimbs
+    ) -> Int {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = location.timeZone
+        var comps = DateComponents()
+        comps.year = year; comps.month = month; comps.day = day
+        guard let date = cal.date(from: comps),
+              let prev = cal.date(byAdding: .day, value: -1, to: date) else { return -1 }
+        let p = cal.dateComponents([.year, .month, .day], from: prev)
+        let prevTimings = calc.timings(year: p.year!, month: p.month!, day: p.day!, location: location)
+        let prevSunrise = prevTimings.sunrise
+            ?? calc.sunriseOrReference(year: p.year!, month: p.month!, day: p.day!, location: location)
+        return limbs.sunRashi(atSunrise: prevSunrise)
     }
 
     private func nextDaySunrise(year: Int, month: Int, day: Int, location: GeoLocation, calc: DayTimingsCalculator) -> Double? {

@@ -38,6 +38,9 @@ public struct PanchangDay: Sendable, Equatable {
     /// The Sun's sidereal rashi (0…11) at sunrise — used for Sankranti (solar-transition) detection.
     /// Makara (Capricorn) = 9; changes roughly once per month.
     public let sunRashiIndex: Int
+    /// True when `sunRashiIndex` differs from the previous civil day's — i.e. this is the
+    /// Sankranti (solar ingress) day itself, not just any day within that rashi's ~30-day span.
+    public let isSolarTransition: Bool
 
     // Edge-case reporting
     public let sunNeverRises: Bool

@@ -5,9 +5,12 @@
       "id": "uttarayan",
       "kind": "festival",
       "tier": 1,
+      "name": "Uttarayan",
+      "festivalType": "festival",
       "match": {
-        "anchor": "masaTithi",
-        "masaIndex": 9,
+        "anchor": "solar",
+        "rashiIndex": 9,
+        "masaIndex": null,
         "tithi": null,
         "paksha": null
       },
@@ -36,12 +39,29 @@
         }
       },
       "triggers": [
-        { "type": "advance", "daysBefore": 7 },
-        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
-        { "type": "morning", "time": { "hour": 7, "minute": 0 } }
+        {
+          "type": "advance",
+          "daysBefore": 7
+        },
+        {
+          "type": "eve",
+          "time": {
+            "hour": 20,
+            "minute": 0
+          }
+        },
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 0
+          }
+        }
       ],
       "action": null,
-      "regions": ["gujarati"],
+      "regions": [
+        "gujarati"
+      ],
       "audioScript": null,
       "almanacBlurb": null
     },
@@ -49,6 +69,8 @@
       "id": "bestu_varas",
       "kind": "festival",
       "tier": 1,
+      "name": "Bestu Varas (Gujarati New Year)",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 7,
@@ -80,49 +102,29 @@
         }
       },
       "triggers": [
-        { "type": "advance", "daysBefore": 7 },
-        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
-        { "type": "morning", "time": { "hour": 7, "minute": 30 } }
-      ],
-      "action": null,
-      "regions": ["gujarati"],
-      "audioScript": null,
-      "almanacBlurb": null
-    },
-    {
-      "id": "kali_chaudas",
-      "kind": "festival",
-      "tier": 2,
-      "match": {
-        "anchor": "masaTithi",
-        "masaIndex": 7,
-        "tithi": 14,
-        "paksha": "krishna"
-      },
-      "variants": [],
-      "voice": {
-        "advance": null,
-        "eve": null,
-        "morning": {
-          "text": "Kali Chaudas tonight — the fourteenth night, the night before Diwali. In Gujarat this is *Bol Chaturdas*: the night when the boundary is thin, protective rituals are performed at crossroads, and the darkness is acknowledged directly. Tomorrow the lamps answer it. Tonight you sit with what the lamps are answering."
+        {
+          "type": "advance",
+          "daysBefore": 7
         },
-        "deepDive": {
-          "whatItIs": "Kali Chaudas is the fourteenth night of Krishna Paksha in Kartika — the night before Diwali. *Chaudas* means fourteen; *Kali* here refers to both darkness and the goddess Kali, who is associated with this night. In Gujarat, it is called *Bol Chaturdas* — the night of speaking, of addressing what is dangerous. It is the darkest night of the Diwali sequence: the new moon is tomorrow, and tonight has no moon at all. The demons and malevolent forces that the tradition acknowledges are considered most active on this night.",
-          "mythology": "On this night, according to the Vaishnava telling, Krishna killed Narakasura — the demon who had imprisoned sixteen thousand women and whose defeat the next morning's celebrations re-enact. The battle happened before dawn on Chaturdashi. Kali Chaudas is the night of that battle: still dark, still dangerous, the outcome not yet certain. In Gujarat, the Shaiva reading of this night centers on Kali herself — the goddess in her most terrifying form, who destroys what cannot be allowed to survive into the new year. Protective mantras, ritual fire, and offerings at crossroads are addressed to her.",
-          "history": "The practice of demon-chasing rituals on the night before Diwali is documented across multiple regions under different names — *Narak Chaturdashi* in Maharashtra and the South, *Chhoti Diwali* in North India. The Gujarati Bol Chaturdas tradition has specific local character: the gathering at crossroads (which in many cultures represent liminal space, places where worlds meet), the lighting of oil lamps specifically to ward off evil rather than to welcome abundance (that comes tomorrow), and the ritual burning of effigies of Narakasura in some communities.",
-          "regional": "In Gujarat, Kali Chaudas is treated as a genuinely distinct night from Diwali — not a preliminary, but its own occasion. The foods eaten are specific to this night and differ from the Diwali sweets. The darkness is not a problem to be solved. It is the condition that makes tomorrow's light meaningful. Without tonight's acknowledged dark, the lamps tomorrow are just decoration.",
-          "whatToDo": "Light a lamp tonight — not for welcoming or celebration, but for protection and clarity. If you observe the Kali Chaudas puja: the offerings go at the threshold, where inside and outside meet. If you don't: sit for a moment with whatever in your life is genuinely difficult, the thing the Diwali brightness doesn't quite reach. The tradition says tonight is for that. Tomorrow is for the lamps."
+        {
+          "type": "eve",
+          "time": {
+            "hour": 20,
+            "minute": 0
+          }
         },
-        "food": {
-          "note": "Bataka poha — flattened rice cooked with potatoes, mustard seeds, curry leaves, and turmeric — is the traditional Kali Chaudas evening food in Gujarat, eaten before the rituals begin. Chivda (spiced, fried flattened rice with peanuts, curry leaves, and dried coconut) is made and shared, the savory counterpoint to the week's sweets. This is not a day for mithai — the sweetness comes tomorrow.",
-          "recipeLink": null
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 30
+          }
         }
-      },
-      "triggers": [
-        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
       ],
       "action": null,
-      "regions": ["gujarati"],
+      "regions": [
+        "gujarati"
+      ],
       "audioScript": null,
       "almanacBlurb": null
     },
@@ -130,6 +132,8 @@
       "id": "labh_pancham",
       "kind": "festival",
       "tier": 3,
+      "name": "Labh Pancham",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 7,
@@ -156,10 +160,18 @@
         }
       },
       "triggers": [
-        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+        {
+          "type": "morning",
+          "time": {
+            "hour": 8,
+            "minute": 0
+          }
+        }
       ],
       "action": null,
-      "regions": ["gujarati"],
+      "regions": [
+        "gujarati"
+      ],
       "audioScript": null,
       "almanacBlurb": null
     },
@@ -167,6 +179,8 @@
       "id": "paryushana",
       "kind": "festival",
       "tier": 1,
+      "name": "Paryushana",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 5,
@@ -198,12 +212,29 @@
         }
       },
       "triggers": [
-        { "type": "advance", "daysBefore": 7 },
-        { "type": "eve", "time": { "hour": 19, "minute": 30 } },
-        { "type": "morning", "time": { "hour": 7, "minute": 0 } }
+        {
+          "type": "advance",
+          "daysBefore": 7
+        },
+        {
+          "type": "eve",
+          "time": {
+            "hour": 19,
+            "minute": 30
+          }
+        },
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 0
+          }
+        }
       ],
       "action": null,
-      "regions": ["jain"],
+      "regions": [
+        "jain"
+      ],
       "audioScript": null,
       "almanacBlurb": null
     },
@@ -211,6 +242,8 @@
       "id": "mahavir_jayanti",
       "kind": "festival",
       "tier": 1,
+      "name": "Mahavir Jayanti",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 0,
@@ -242,12 +275,29 @@
         }
       },
       "triggers": [
-        { "type": "advance", "daysBefore": 7 },
-        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
-        { "type": "morning", "time": { "hour": 7, "minute": 30 } }
+        {
+          "type": "advance",
+          "daysBefore": 7
+        },
+        {
+          "type": "eve",
+          "time": {
+            "hour": 20,
+            "minute": 0
+          }
+        },
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 30
+          }
+        }
       ],
       "action": null,
-      "regions": ["jain"],
+      "regions": [
+        "jain"
+      ],
       "audioScript": null,
       "almanacBlurb": null
     },
@@ -255,6 +305,8 @@
       "id": "gurpurab_nanak",
       "kind": "festival",
       "tier": 1,
+      "name": "Guru Nanak Gurpurab",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 7,
@@ -286,12 +338,29 @@
         }
       },
       "triggers": [
-        { "type": "advance", "daysBefore": 7 },
-        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
-        { "type": "morning", "time": { "hour": 7, "minute": 0 } }
+        {
+          "type": "advance",
+          "daysBefore": 7
+        },
+        {
+          "type": "eve",
+          "time": {
+            "hour": 20,
+            "minute": 0
+          }
+        },
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 0
+          }
+        }
       ],
       "action": null,
-      "regions": ["sikh"],
+      "regions": [
+        "sikh"
+      ],
       "audioScript": null,
       "almanacBlurb": null
     },
@@ -299,6 +368,8 @@
       "id": "gurpurab_gobind",
       "kind": "festival",
       "tier": 1,
+      "name": "Guru Gobind Singh Gurpurab",
+      "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
         "masaIndex": 9,
@@ -328,11 +399,22 @@
         }
       },
       "triggers": [
-        { "type": "advance", "daysBefore": 7 },
-        { "type": "morning", "time": { "hour": 7, "minute": 30 } }
+        {
+          "type": "advance",
+          "daysBefore": 7
+        },
+        {
+          "type": "morning",
+          "time": {
+            "hour": 7,
+            "minute": 30
+          }
+        }
       ],
       "action": null,
-      "regions": ["sikh"],
+      "regions": [
+        "sikh"
+      ],
       "audioScript": null,
       "almanacBlurb": null
     }

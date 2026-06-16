@@ -19,6 +19,10 @@ struct ScheduledTrigger: Sendable {
     let title: String
     let body: String
     let fireDate: Date
+    /// The timezone `fireDate`'s wall-clock components were computed in — needed so
+    /// `UNCalendarNotificationTrigger` fires at the intended local time even when the
+    /// device's current timezone differs from the location the panchang was computed for.
+    let timeZone: TimeZone
     let tier: Int
     let deepDiveEntryId: String
 }
@@ -36,6 +40,7 @@ protocol ContentResolving: Sendable {
         forUpcoming days: Int,
         from start: Date,
         location: GeoLocation,
-        config: CalendarConfig
+        config: CalendarConfig,
+        region: String?
     ) -> [ScheduledTrigger]
 }

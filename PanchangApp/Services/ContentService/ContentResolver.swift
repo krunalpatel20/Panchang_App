@@ -42,20 +42,19 @@ struct ContentResolver: ContentResolving {
         forUpcoming days: Int,
         from start: Date,
         location: GeoLocation,
-        config: CalendarConfig
+        config: CalendarConfig,
+        region: String?
     ) -> [ScheduledTrigger] {
         let service = PanchangService()
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = location.timeZone
 
         var allTriggers: [ScheduledTrigger] = []
-        // key: fire-hour bucket → lowest tier number seen
-        var seen: [String: Int] = [:]
 
         for offset in 0 ..< days {
             guard let date = cal.date(byAdding: .day, value: offset, to: start) else { continue }
             let day = service.compute(date: date, location: location, config: config)
-            let resolved = resolve(for: day, region: nil)
+            let resolved = resolve(for: day, region: region)
 
             let isoDate = isoDateString(from: date, timeZone: location.timeZone)
 
@@ -69,29 +68,13 @@ struct ContentResolver: ContentResolving {
                     ) else { continue }
 
                     let id = "\(rc.entry.id)-\(kindKey)-\(isoDate)"
-                    let hourBucket = hourBucketKey(fireDate: fireDate, timeZone: location.timeZone)
-
-                    // De-duplicate: keep the entry with the lower tier number (higher priority)
-                    if let existingTier = seen[hourBucket] {
-                        if rc.entry.tier < existingTier {
-                            seen[hourBucket] = rc.entry.tier
-                            // Replace existing trigger for this bucket
-                            allTriggers.removeAll { $0.fireDate.distance(to: fireDate) < 3600 && $0.tier > rc.entry.tier }
-                        } else {
-                            continue
-                        }
-                    } else {
-                        seen[hourBucket] = rc.entry.tier
-                    }
-
-                    let morningText = rc.voice.morning.text
-                    let title = String(morningText.prefix(60))
 
                     allTriggers.append(ScheduledTrigger(
                         id: id,
-                        title: title,
-                        body: morningText,
+                        title: rc.entry.name,
+                        body: rc.voice.morning.text,
                         fireDate: fireDate,
+                        timeZone: location.timeZone,
                         tier: rc.entry.tier,
                         deepDiveEntryId: rc.entry.id
                     ))
@@ -99,6 +82,8 @@ struct ContentResolver: ContentResolving {
             }
         }
 
+        // Same-hour collisions (e.g. Ekadashi + Pradosh both firing at 8am) are resolved by
+        // TriggerPlan.deduplicated(), which keeps the lowest-tier (highest-priority) trigger.
         return allTriggers.sorted { $0.fireDate < $1.fireDate }
     }
 
@@ -110,6 +95,10 @@ struct ContentResolver: ContentResolving {
             return tithiMatches(match: match, day: day)
 
         case .masaTithi:
+            // Fail closed: a masaTithi entry without a tithi would otherwise match every day
+            // of that masa (~30 days). Entries that want "the whole month" should use a
+            // dedicated anchor (e.g. solar) rather than relying on this gap.
+            guard match.tithi != nil else { return false }
             guard tithiMatches(match: match, day: day) else { return false }
             if let masaIndex = match.masaIndex {
                 guard day.masa.amantaIndex == masaIndex else { return false }
@@ -117,12 +106,18 @@ struct ContentResolver: ContentResolving {
             return true
 
         case .pakshaTransition:
-            // First tithi of a paksha: Shukla Pratipada (index 0) or Krishna Pratipada (index 15)
-            return day.tithi.index == 0 || day.tithi.index == 15
+            // match.paksha describes the paksha that just ENDED (the convention the variants
+            // use): "shukla" → today is Krishna Pratipada (index 15); "krishna" → today is
+            // Shukla Pratipada (index 0). The base entry (paksha nil) matches either transition.
+            switch match.paksha {
+            case .shukla: return day.tithi.index == 15
+            case .krishna: return day.tithi.index == 0
+            case .both, nil: return day.tithi.index == 0 || day.tithi.index == 15
+            }
 
         case .solar:
             guard let rashi = match.rashiIndex else { return false }
-            return day.sunRashiIndex == rashi
+            return day.isSolarTransition && day.sunRashiIndex == rashi
         }
     }
 
@@ -207,13 +202,6 @@ struct ContentResolver: ContentResolving {
         cal.timeZone = timeZone
         let c = cal.dateComponents([.year, .month, .day], from: date)
         return String(format: "%04d-%02d-%02d", c.year ?? 0, c.month ?? 0, c.day ?? 0)
-    }
-
-    private func hourBucketKey(fireDate: Date, timeZone: TimeZone) -> String {
-        var cal = Calendar(identifier: .gregorian)
-        cal.timeZone = timeZone
-        let c = cal.dateComponents([.year, .month, .day, .hour], from: fireDate)
-        return String(format: "%04d-%02d-%02d-%02d", c.year ?? 0, c.month ?? 0, c.day ?? 0, c.hour ?? 0)
     }
 
     // MARK: - Trigger fire-date calculation

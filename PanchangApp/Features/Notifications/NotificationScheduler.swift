@@ -2,35 +2,47 @@ import Foundation
 import UserNotifications
 import PanchangKit
 
-// MARK: - NoOp stub (replaced at integration time by Track A's real resolver)
-
-struct NoOpContentResolver: ContentResolving {
-    func resolve(for day: PanchangDay, region: String?) -> [ResolvedContent] { [] }
-    func triggers(forUpcoming days: Int, from start: Date, location: GeoLocation, config: CalendarConfig) -> [ScheduledTrigger] { [] }
-}
-
-// MARK: - Scheduler
-
 /// Converts `ContentResolving` output into pending UNNotificationRequests.
 /// Keeps at most 60 requests pending (iOS cap is 64; 4 slots reserved for system use).
-@MainActor
-final class NotificationScheduler: Sendable {
+///
+/// Not main-actor-bound: `schedule(using:)` resolves up to 30 days of panchang content,
+/// which means up to 30 synchronous `PanchangService.compute()` calls — expensive enough
+/// that running it on the main actor would freeze the UI at launch. `UNUserNotificationCenter`
+/// is documented thread-safe, so this is safe to call from any execution context.
+final class NotificationScheduler: @unchecked Sendable {
     static let shared = NotificationScheduler()
     private init() {}
 
     private let center = UNUserNotificationCenter.current()
     private let maxPending = 60
 
+    func requestPermission() async -> Bool {
+        do {
+            return try await center.requestAuthorization(options: [.alert, .sound, .badge])
+        } catch {
+            return false
+        }
+    }
+
     /// Schedule upcoming content notifications using the provided resolver.
     /// Removes any previously-scheduled content notifications first so rescheduling is idempotent.
-    func schedule(using resolver: ContentResolving, location: GeoLocation, config: CalendarConfig) async {
+    func schedule(
+        using resolver: ContentResolving,
+        location: GeoLocation,
+        config: CalendarConfig,
+        region: String?
+    ) async {
         await cancelAll()
+
+        let settings = await center.notificationSettings()
+        guard settings.authorizationStatus == .authorized else { return }
 
         let rawTriggers = resolver.triggers(
             forUpcoming: 30,
             from: Date(),
             location: location,
-            config: config
+            config: config,
+            region: region
         )
 
         let plan = TriggerPlan(triggers: rawTriggers)
@@ -44,12 +56,9 @@ final class NotificationScheduler: Sendable {
         }
     }
 
-    /// Cancel all pending content notifications (identifiers not prefixed with "festival.").
+    /// Cancel all pending content notifications.
     func cancelAll() async {
         let pending = await center.pendingNotificationRequests()
-        let contentIds = pending
-            .map(\.identifier)
-            .filter { !$0.hasPrefix("festival.") }
-        center.removePendingNotificationRequests(withIdentifiers: contentIds)
+        center.removePendingNotificationRequests(withIdentifiers: pending.map(\.identifier))
     }
 }

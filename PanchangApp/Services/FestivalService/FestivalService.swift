@@ -1,19 +1,22 @@
 import Foundation
 import PanchangKit
 
-/// Loads the bundled festival rule dataset and resolves festivals for a given panchang day.
+/// Resolves festival occurrences for a given panchang day.
+///
+/// Festival rules are derived directly from `ContentStore`'s authored entries —
+/// content.json (+ content-regional.json) is the single source of truth for which
+/// festivals exist and how they're anchored. There is no separately maintained
+/// festivals.json: a hand-kept duplicate of this data drifted from content.json in
+/// practice (festivals existed in one file but not the other, masaIndex fixes applied
+/// to one and not the other). Deriving rules from the same entries that supply the
+/// voice content makes that class of drift structurally impossible.
 struct FestivalService: Sendable {
     let rules: [FestivalRule]
     private let engine = FestivalEngine()
 
     static let shared: FestivalService = {
-        guard let url = Bundle.main.url(forResource: "festivals", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let dataset = try? JSONDecoder().decode(FestivalDataset.self, from: data) else {
-            assertionFailure("festivals.json missing or malformed")
-            return FestivalService(rules: [])
-        }
-        return FestivalService(rules: dataset.festivals.compactMap { $0.toRule() })
+        let rules = ContentStore.shared.allEntries.compactMap { $0.toFestivalRule() }
+        return FestivalService(rules: rules)
     }()
 
     private init(rules: [FestivalRule]) {
@@ -25,60 +28,44 @@ struct FestivalService: Sendable {
     }
 }
 
-// MARK: - JSON DTO
+// MARK: - ContentEntry → FestivalRule
 
-private struct FestivalDataset: Codable {
-    let version: String
-    let festivals: [FestivalDTO]
-}
-
-private struct FestivalDTO: Codable {
-    let id: String
-    let name: String
-    let type: String
-    let anchor: AnchorDTO
-    let regions: [String]
-
-    /// Returns nil (the rule is skipped) for unknown anchor types or missing fields, rather
-    /// than crashing or inventing a default anchor that would fire on the wrong days.
-    func toRule() -> FestivalRule? {
-        let anchorValue: FestivalAnchor?
-        switch anchor.type {
-        case "tithi":
-            let paksha = FestivalAnchor.PakshaMatch(rawValue: anchor.paksha ?? "both") ?? .both
-            anchorValue = anchor.number.map { .tithi(number: $0, paksha: paksha) }
-        case "masaTithi":
-            let paksha = FestivalAnchor.PakshaMatch(rawValue: anchor.paksha ?? "shukla") ?? .shukla
-            if let masaIndex = anchor.masaIndex, let number = anchor.number {
-                anchorValue = .masaTithi(masaIndex: masaIndex, number: number, paksha: paksha)
-            } else {
-                anchorValue = nil
-            }
-        case "vara":
-            anchorValue = anchor.varaIndex.map { .vara(index: $0) }
-        case "tithiVara":
-            let paksha = FestivalAnchor.PakshaMatch(rawValue: anchor.paksha ?? "shukla") ?? .shukla
-            if let number = anchor.number, let varaIndex = anchor.varaIndex {
-                anchorValue = .tithiVara(tithiNumber: number, paksha: paksha, varaIndex: varaIndex)
-            } else {
-                anchorValue = nil
-            }
-        default:
-            anchorValue = nil
-        }
-        guard let anchorValue else {
-            assertionFailure("festivals.json: skipping malformed rule '\(id)' (anchor type '\(anchor.type)')")
-            return nil
-        }
-        let festType = FestivalRule.FestivalType(rawValue: type) ?? .observance
-        return FestivalRule(id: id, name: name, type: festType, anchor: anchorValue, regions: regions)
+private extension ContentEntry {
+    /// Returns nil for entries that don't produce a standalone calendar occurrence
+    /// (festivalType == nil, e.g. paksha_transition) or whose match can't be expressed
+    /// as a FestivalAnchor.
+    func toFestivalRule() -> FestivalRule? {
+        guard let festivalType, let type = FestivalRule.FestivalType(rawValue: festivalType) else { return nil }
+        guard let anchor = match.toFestivalAnchor() else { return nil }
+        return FestivalRule(id: id, name: name, type: type, anchor: anchor, regions: regions)
     }
 }
 
-private struct AnchorDTO: Codable {
-    let type: String
-    let number: Int?
-    let paksha: String?
-    let masaIndex: Int?
-    let varaIndex: Int?
+private extension ContentMatch {
+    func toFestivalAnchor() -> FestivalAnchor? {
+        let pakshaMatch: FestivalAnchor.PakshaMatch
+        switch paksha {
+        case .shukla: pakshaMatch = .shukla
+        case .krishna: pakshaMatch = .krishna
+        case .both, nil: pakshaMatch = .both
+        }
+
+        switch anchor {
+        case .tithi:
+            guard let tithi else { return nil }
+            return .tithi(number: tithi, paksha: pakshaMatch)
+
+        case .masaTithi:
+            guard let tithi, let masaIndex else { return nil }
+            return .masaTithi(masaIndex: masaIndex, number: tithi, paksha: pakshaMatch)
+
+        case .solar:
+            guard let rashiIndex else { return nil }
+            return .solar(rashiIndex: rashiIndex)
+
+        case .pakshaTransition:
+            // Notification-text variant selector only — not a standalone calendar event.
+            return nil
+        }
+    }
 }

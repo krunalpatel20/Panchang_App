@@ -146,6 +146,8 @@ extension ResolvedContent {
             id: "ekadashi",
             kind: .tithi,
             tier: 2,
+            name: "Ekadashi",
+            festivalType: "vrat",
             match: ContentMatch(anchor: .tithi, tithi: 11, paksha: nil, masaIndex: nil, rashiIndex: nil),
             variants: [],
             voice: voice,

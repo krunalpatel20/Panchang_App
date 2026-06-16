@@ -26,6 +26,9 @@ public struct FestivalEngine: Sendable {
         case .tithiVara(let tithiNumber, let paksha, let varaIndex):
             return tithiMatches(day: day, number: tithiNumber, paksha: paksha)
                 && day.vara.index == varaIndex
+
+        case .solar(let rashiIndex):
+            return day.isSolarTransition && day.sunRashiIndex == rashiIndex
         }
     }
 

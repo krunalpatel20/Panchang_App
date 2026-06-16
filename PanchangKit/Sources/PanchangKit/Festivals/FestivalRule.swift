@@ -10,6 +10,8 @@ public enum FestivalAnchor: Sendable {
     case vara(index: Int)
     /// Tithi + vara combination (e.g. Pradosh on Shivratri weekday).
     case tithiVara(tithiNumber: Int, paksha: PakshaMatch, varaIndex: Int)
+    /// Occurs on the day the Sun enters a given sidereal rashi (Sankranti), e.g. Makar Sankranti.
+    case solar(rashiIndex: Int)
 
     public enum PakshaMatch: String, Sendable {
         case shukla, krishna, both

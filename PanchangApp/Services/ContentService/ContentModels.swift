@@ -6,6 +6,14 @@ struct ContentEntry: Sendable, Identifiable, Codable {
     let id: String
     let kind: ContentKind
     let tier: Int // 1 = major festival … 5 = named tithi
+    /// Curated display name, e.g. "Diwali", "Ekadashi" — used as notification title and
+    /// calendar label instead of deriving one mechanically from `id`.
+    let name: String
+    /// festival/vrat/observance — drives FestivalService's derived FestivalRule.FestivalType
+    /// and calendar color-coding. nil = this entry produces no standalone calendar occurrence
+    /// (e.g. paksha_transition, which only supplies notification-text variants for adjacent
+    /// purnima/amavasya entries).
+    let festivalType: String?
     let match: ContentMatch
     let variants: [ContentVariant]
     let voice: VoiceLayers

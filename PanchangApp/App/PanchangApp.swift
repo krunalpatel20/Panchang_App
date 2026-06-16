@@ -79,9 +79,11 @@ struct RootView: View {
 
     private func scheduleNotificationsIfEnabled() {
         guard prefsQuery.first?.notificationsEnabled == true else { return }
-        let loc = activeLocation; let cfg = activeConfig
+        let loc = activeLocation; let cfg = activeConfig; let region = prefsQuery.first?.contentRegion
         Task {
-            await NotificationService.shared.scheduleUpcomingFestivals(location: loc, config: cfg)
+            await NotificationScheduler.shared.schedule(
+                using: ContentResolver(), location: loc, config: cfg, region: region
+            )
         }
     }
 }
