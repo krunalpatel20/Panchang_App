@@ -9,7 +9,8 @@ struct ContentStore: Sendable {
     let allEntries: [ContentEntry]
 
     static let shared: ContentStore = {
-        guard let url = Bundle.main.url(forResource: "content", withExtension: "json", subdirectory: "Content") else {
+        guard let url = Bundle.main.url(forResource: "content", withExtension: "json", subdirectory: "Content")
+                     ?? Bundle.main.url(forResource: "content", withExtension: "json") else {
             log.warning("content.json not found in bundle — ContentStore is empty")
             return ContentStore(entries: [])
         }
