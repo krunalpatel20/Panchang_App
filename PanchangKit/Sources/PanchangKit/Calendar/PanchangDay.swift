@@ -35,6 +35,9 @@ public struct PanchangDay: Sendable, Equatable {
 
     /// The Moon's sidereal rashi (0…11) at sunrise — basis for Chandra Bala against a janma rashi.
     public let moonRashiIndex: Int
+    /// The Sun's sidereal rashi (0…11) at sunrise — used for Sankranti (solar-transition) detection.
+    /// Makara (Capricorn) = 9; changes roughly once per month.
+    public let sunRashiIndex: Int
 
     // Edge-case reporting
     public let sunNeverRises: Bool

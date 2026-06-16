@@ -255,7 +255,42 @@
         "paksha": null,
         "masaIndex": null
       },
-      "variants": [],
+      "variants": [
+        {
+          "id": "shukla_to_krishna",
+          "match": {
+            "anchor": "pakshaTransition",
+            "tithi": 15,
+            "paksha": "shukla",
+            "masaIndex": null,
+            "rashiIndex": null
+          },
+          "voice": null,
+          "morningOverride": {
+            "text": "The moon is full tonight — and from tomorrow, it begins to diminish. Shukla Paksha ends, Krishna Paksha begins. In the tradition: the waxing moon is for beginning things, the waning moon is for completing them. The next two weeks: finish what you started.",
+            "daysBefore": null
+          },
+          "triggers": null,
+          "action": null
+        },
+        {
+          "id": "krishna_to_shukla",
+          "match": {
+            "anchor": "pakshaTransition",
+            "tithi": null,
+            "paksha": "krishna",
+            "masaIndex": null,
+            "rashiIndex": null
+          },
+          "voice": null,
+          "morningOverride": {
+            "text": "The new moon was last night. From today: Shukla Paksha, the bright fortnight, the moon building back toward full. The tradition calls this the time for new beginnings, for planting, for starting ventures. What are you beginning in this fortnight?",
+            "daysBefore": null
+          },
+          "triggers": null,
+          "action": null
+        }
+      ],
       "voice": {
         "advance": null,
         "eve": null,
@@ -1265,6 +1300,176 @@
         },
         "food": {
           "note": "Modak is the standard offering and the food with which the fast is broken — coconut and jaggery stuffed into rice flour dumplings, steamed. If modak isn't available: any sweet made without grain. The fast holds until moonrise; the first food after sighting the moon should be prasad.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {
+          "type": "morning",
+          "time": {
+            "hour": 8,
+            "minute": 0
+          }
+        }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "makar_sankranti",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "solar",
+        "rashiIndex": 9,
+        "tithi": null,
+        "paksha": null,
+        "masaIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "daysBefore": 7,
+          "text": "Makar Sankranti is in a week — the day the sun crosses into Capricorn, and one of the few Hindu festivals tied to the solar calendar, which means it falls on the same date almost every year. In Gujarat, the sky fills with kites. Til-gul gets made and shared. The phrase goes: til-gul ghya, god god bola — take sesame and jaggery, speak sweetly. There's a whole philosophy in that one line."
+        },
+        "eve": {
+          "daysBefore": null,
+          "text": "Tomorrow: the astronomical new year in many traditions. The nights stop getting longer. The sun begins its return. Prepare some til-gul if you can — sesame and jaggery rolled together, one of the oldest sweets in the subcontinent. There's a reason people have been making it on this day for thousands of years."
+        },
+        "morning": {
+          "text": "The sun crosses into Capricorn today. In Gujarat, the sky is full of kites right now. Go outside at some point and look up."
+        },
+        "deepDive": {
+          "whatItIs": "Makar Sankranti is a solar festival — Sankranti means transition, Makara is Capricorn. The sun crosses into Capricorn on this day, beginning its six-month northern journey called Uttarayana. Unlike almost every other Hindu festival, which follows the lunar calendar and shifts dates each year, Sankranti is anchored to the sun. It falls on January 14th almost every year. That consistency made it an anchor point for agricultural communities before anyone had a printed calendar.",
+          "mythology": "In the Mahabharata, Bhishma Pitamaha — the great patriarch, lying on a bed of arrows after being mortally wounded — chose to wait for Uttarayana before allowing himself to die. He lay there for weeks, keeping himself alive through will. When the sun finally turned north, he let go. The tradition reads this as: Uttarayana is when the gates between worlds are more open. Even the dying choose this direction.",
+          "history": "Uttarayana has been observed across South Asia for at least three thousand years. The festival absorbed regional variations — Pongal in the South (a four-day harvest festival where the first rice of the season is cooked outdoors until it boils over, the overflow auspicious), Lohri in Punjab (a bonfire festival the night before), Bihu in Assam. Different rituals, the same sun.",
+          "regional": "In Gujarat, this is kite day — Uttarayan is what Gujaratis call it, and it's taken with full competitive seriousness. People spend days preparing kites, stay up all night flying them by searchlight, and compete from rooftops with manja (glass-coated string) designed to cut the opponent's line. The sky literally changes color. There are injuries. There is also tremendous communal joy.",
+          "whatToDo": "Make or find til-gul — sesame seeds and jaggery pressed into rounds. The sesame is warming and seasonal; jaggery is unrefined, honest sweetness. Give some to someone you've been meaning to reconnect with. Say the words: til-gul ghya, god god bola. Take sweetness. Speak sweetly. Then do it."
+        },
+        "food": {
+          "note": "Til-gul ladoo: equal parts white sesame seeds (toasted until golden) and powdered jaggery, mixed warm and rolled into small rounds. Some families add dry coconut or cardamom. Underdone and they fall apart; overdone and they harden. The right consistency comes from making them a few times. Ask someone who knows.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {
+          "type": "advance",
+          "daysBefore": 7
+        },
+        {
+          "type": "eve",
+          "time": {
+            "hour": 20,
+            "minute": 0
+          }
+        },
+        {
+          "type": "morning",
+          "time": {
+            "hour": 8,
+            "minute": 0
+          }
+        }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "raksha_bandhan",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 4,
+        "tithi": 15,
+        "paksha": "shukla",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "daysBefore": 7,
+          "text": "Rakhi is in a week. The thread isn't really about siblings — it's about choosing who you'd protect and who you trust to protect you. That circle is worth thinking about. If you have a sibling far away, now is when to mail something."
+        },
+        "eve": {
+          "daysBefore": null,
+          "text": "Tomorrow: Raksha Bandhan. Historically, women tied rakhis to kings they wanted protection from, to neighbors, to friends. The sibling framing came later. The question underneath it is older: who would you tie a thread to today?"
+        },
+        "morning": {
+          "text": "Today your wrist becomes a promise. Wherever you are — same city or different continent — the bond the thread represents doesn't need proximity to be real."
+        },
+        "deepDive": {
+          "whatItIs": "Raksha Bandhan — raksha meaning protection, bandhan meaning bond. A sister ties a rakhi (a thread or decorated bracelet) on her brother's wrist; he gives a gift and promises to protect her. It is genuinely tender, and many people's favorite festival for exactly that reason.",
+          "mythology": "In the Mahabharata, Draupadi tears a strip from her sari to bind Krishna's wrist when he cuts his finger. He considers himself bound to her from that day — which is why, at the moment of her humiliation in the Kaurava court, he intervenes. In medieval history, Rani Karnavati of Chittor sent a rakhi to the Mughal Emperor Humayun when her kingdom was threatened. He rode to her defense. The thread creates an obligation that crosses ordinary lines.",
+          "history": "The sibling-specific framing of Raksha Bandhan is a relatively modern consolidation of older, broader practices. The tradition of tying a protective thread — a raksha — appears in many forms across Hindu practice. The specificity of sister-to-brother came to dominate, but it was never the whole story.",
+          "regional": "In coastal Maharashtra, Raksha Bandhan coincides with Narali Purnima — the coconut full moon — when fishermen offer coconuts to the sea marking the end of the monsoon and the reopening of fishing season. The full moon of Shravana carries multiple meanings depending on where you are.",
+          "whatToDo": "Call your sibling. If you have no siblings: call whoever you'd protect. If they're far: mail the thread. The gesture doesn't require proximity. It requires the intention to say: I see you, I've got you, I'm here."
+        },
+        "food": {
+          "note": "Whatever sweets your family makes together. There is no canonical Raksha Bandhan food — it's the meal after the tying that matters, and what's on the table depends entirely on who you're with.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {
+          "type": "advance",
+          "daysBefore": 7
+        },
+        {
+          "type": "eve",
+          "time": {
+            "hour": 20,
+            "minute": 0
+          }
+        },
+        {
+          "type": "morning",
+          "time": {
+            "hour": 8,
+            "minute": 0
+          }
+        }
+      ],
+      "action": {
+        "kind": "call",
+        "label": "Call your sibling",
+        "payload": null
+      },
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "ashtami",
+      "kind": "tithi",
+      "tier": 3,
+      "match": {
+        "anchor": "tithi",
+        "tithi": 8,
+        "paksha": "both",
+        "masaIndex": null,
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": null,
+        "eve": null,
+        "morning": {
+          "text": "Ashtami today — the midpoint of the fortnight, Durga's tithi. Eight is the number of directions plus the center — the totality of space. Ashtami arrives in both fortnights, reminding the calendar that power doesn't wait for the full moon or the new moon. It arrives at the center."
+        },
+        "deepDive": {
+          "whatItIs": "Ashtami is the eighth tithi — the midpoint of both the waxing and waning lunar fortnights. It arrives twice a month, every month. The eighth day belongs to Durga: the goddess of power, the force that holds the cosmos together when it would otherwise fly apart. It is not a fast day in most traditions, but it is a tithi with weight.",
+          "mythology": "Durga is the force that the gods pooled their power to create when no single deity could defeat the buffalo-demon Mahishasura. The eighth day is her day because eight in Vedic numerology represents the eight directions — north, south, east, west, and the four diagonals — plus the center. Eight is the totality of space. Durga holds all of it. The Devi Mahatmya, the scripture of her power, is often read on Ashtami.",
+          "history": "The Ashtami Puja is observed most visibly during Navratri, when the eighth and ninth days are the culmination of the nine-night festival. But every Ashtami through the year carries the same energy at a quieter amplitude. In some families, especially those with a tradition of Devi worship, every Ashtami brings a small puja — a lamp, an offering, a reading.",
+          "regional": "Durga Ashtami during Navratri is major in West Bengal, where it marks the peak of Durga Puja. In Maharashtra, it falls within Navratri as well. In South India, Saraswati Puja is often held on Maha Navami, the ninth day, rather than the eighth. Outside of Navratri, Ashtami is observed quietly in Devi-worshipping households.",
+          "whatToDo": "Ashtami is a good day to light a lamp for Durga — any lamp, in any direction. If you have a specific ask that requires her kind of help (protection, power, clarity about where you stand), today is when you make it."
+        },
+        "food": {
+          "note": "Kala chana — black chickpeas, cooked simply with minimal spice — is offered to Durga on Ashtami and consumed as prasad. Halwa (semolina pudding with ghee and sugar) and puri complete the traditional offering plate. This combination — chana, halwa, puri — is the Navratri Ashtami prasad across North India.",
           "recipeLink": null
         }
       },

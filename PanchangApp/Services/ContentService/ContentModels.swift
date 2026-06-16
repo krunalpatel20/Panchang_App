@@ -24,12 +24,13 @@ struct ContentEntry: Sendable, Identifiable, Codable {
 
 struct ContentMatch: Sendable, Codable {
     enum Anchor: String, Sendable, Codable {
-        case tithi, masaTithi, pakshaTransition
+        case tithi, masaTithi, pakshaTransition, solar
     }
     let anchor: Anchor
     let tithi: Int?
     let paksha: Paksha?
     let masaIndex: Int?
+    let rashiIndex: Int? // solar anchor only — 0=Mesha … 9=Makara … 11=Meena
 
     enum Paksha: String, Sendable, Codable {
         case shukla, krishna, both
@@ -40,6 +41,8 @@ struct ContentVariant: Sendable, Codable {
     let id: String
     let match: ContentMatch
     let voice: VoiceLayers?
+    /// Overrides only the morning text, inheriting everything else from the base entry.
+    let morningOverride: VoiceLayer?
     let triggers: [NotificationTrigger]?
     let action: ContentAction?
 }

@@ -146,6 +146,12 @@ struct FiveLimbs {
         min(11, Int(floor(siderealMoon(jd) / 30.0)))
     }
 
+    /// The Sun's sidereal rashi index 0…11 — basis for Sankranti detection.
+    func sunRashi(atSunrise jd: Double) -> Int {
+        let sidereal = AngleMath.normalize360(ephemeris.sunLongitude(julianDay: jd) - ayanamsa.value(julianDay: jd))
+        return min(11, Int(floor(sidereal / 30.0)))
+    }
+
     func yoga(atSunrise jd: Double) -> YogaInfo {
         let value = yogaSum(jd)
         let index = min(26, Int(floor(value / Self.nakshatraArc)))

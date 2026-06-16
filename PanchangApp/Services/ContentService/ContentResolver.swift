@@ -119,6 +119,10 @@ struct ContentResolver: ContentResolving {
         case .pakshaTransition:
             // First tithi of a paksha: Shukla Pratipada (index 0) or Krishna Pratipada (index 15)
             return day.tithi.index == 0 || day.tithi.index == 15
+
+        case .solar:
+            guard let rashi = match.rashiIndex else { return false }
+            return day.sunRashiIndex == rashi
         }
     }
 
@@ -160,7 +164,17 @@ struct ContentResolver: ContentResolving {
         // More-specific = more non-nil fields in the match
         let best = candidates.max(by: { specificity($0.match) < specificity($1.match) })
 
-        let voice = best?.voice ?? entry.voice
+        var voice = best?.voice ?? entry.voice
+        // morningOverride swaps only the morning layer; deepDive/food inherit from base.
+        if let morningOverride = best?.morningOverride {
+            voice = VoiceLayers(
+                advance: voice.advance,
+                eve: voice.eve,
+                morning: morningOverride,
+                deepDive: voice.deepDive,
+                food: voice.food
+            )
+        }
         let triggers = best?.triggers ?? entry.triggers
         let action = best?.action ?? entry.action
 
@@ -172,6 +186,7 @@ struct ContentResolver: ContentResolving {
         if match.tithi != nil { score += 1 }
         if match.paksha != nil { score += 1 }
         if match.masaIndex != nil { score += 1 }
+        if match.rashiIndex != nil { score += 1 }
         return score
     }
 

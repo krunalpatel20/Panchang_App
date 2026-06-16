@@ -31,6 +31,7 @@ public struct Panchang: Sendable {
         let karana = limbs.karana(atSunrise: sunrise)
         let nakshatra = limbs.nakshatra(atSunrise: sunrise)
         let moonRashiIndex = limbs.moonRashi(atSunrise: sunrise)
+        let sunRashiIndex  = limbs.sunRashi(atSunrise: sunrise)
         let yoga = limbs.yoga(atSunrise: sunrise)
         let vara = limbs.vara(sunriseJulianDay: sunrise, timeZone: location.timeZone)
 
@@ -69,6 +70,7 @@ public struct Panchang: Sendable {
             choghadiya: choghadiya, horas: horas, durMuhurtam: durMuhurtam,
             varjyam: varjyamAmrit.varjyam, amritKalam: varjyamAmrit.amrit,
             moonRashiIndex: moonRashiIndex,
+            sunRashiIndex: sunRashiIndex,
             sunNeverRises: timings.sunNeverRises, sunNeverSets: timings.sunNeverSets
         )
     }
