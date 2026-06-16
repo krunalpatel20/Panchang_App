@@ -46,6 +46,7 @@ struct FestivalEngineTests {
             varjyam: [],
             amritKalam: [],
             moonRashiIndex: 0,
+            sunRashiIndex: 0,
             sunNeverRises: false,
             sunNeverSets: false
         )

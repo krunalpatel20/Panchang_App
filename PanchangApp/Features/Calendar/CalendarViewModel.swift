@@ -111,6 +111,10 @@ final class CalendarViewModel {
         let festEngine = FestivalEngine()
         let rules = FestivalService.shared.rules
 
+        func festivalPriority(_ t: FestivalRule.FestivalType) -> Int {
+            switch t { case .festival: return 2; case .vrat: return 1; case .observance: return 0 }
+        }
+
         let todayComponents = gregCal.dateComponents([.year, .month, .day], from: Date())
 
         return range.map { d in
@@ -129,6 +133,7 @@ final class CalendarViewModel {
                 sunriseJD: day.timings.sunrise,
                 festivals: occurrences
                     .filter { store.hasContent(forFestivalId: $0.id) }
+                    .sorted { festivalPriority($0.type) > festivalPriority($1.type) }
                     .map { FestivalItem(name: $0.name, type: $0.type) }
             )
         }
