@@ -17,7 +17,18 @@ struct ContentStore: Sendable {
         do {
             let data = try Data(contentsOf: url)
             let payload = try JSONDecoder().decode(ContentPayload.self, from: data)
-            return ContentStore(entries: payload.entries)
+            var entries = payload.entries
+
+            // Merge regional content (optional — missing file is not an error)
+            let regionalURL = Bundle.main.url(forResource: "content-regional", withExtension: "json", subdirectory: "Content")
+                           ?? Bundle.main.url(forResource: "content-regional", withExtension: "json")
+            if let regionalURL,
+               let regionalData = try? Data(contentsOf: regionalURL),
+               let regionalPayload = try? JSONDecoder().decode(ContentPayload.self, from: regionalData) {
+                entries += regionalPayload.entries
+            }
+
+            return ContentStore(entries: entries)
         } catch {
             log.warning("content.json failed to decode: \(error) — ContentStore is empty")
             return ContentStore(entries: [])

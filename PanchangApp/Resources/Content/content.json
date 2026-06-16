@@ -1444,6 +1444,129 @@
       "almanacBlurb": null
     },
     {
+      "id": "dhanteras",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 7,
+        "tithi": 13,
+        "paksha": "krishna",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Dhanteras arrives in two days — the first lamp of the five-day Diwali cluster. If you haven't cleaned the house yet, now is the time.",
+          "daysBefore": 2
+        },
+        "eve": {
+          "text": "Dhanteras tomorrow. Clean the home tonight. Diwali begins in the morning."
+        },
+        "morning": {
+          "text": "Diwali has begun. Today is Dhanteras — dhan meaning wealth, teras meaning the thirteenth day. The tradition: buy something metal for the home today. The deeper version: what are you welcoming in this year? The answer to that question is what you're actually acquiring."
+        },
+        "deepDive": {
+          "whatItIs": "Dhanteras is the first day of the five-day Diwali festival — Kartika Krishna Trayodashi, the thirteenth tithi of the dark fortnight. The word combines dhan (wealth, prosperity) and teras (thirteen). It is the day to bring something new and metal into the home: traditionally a vessel, a utensil, a coin. The logic is that Lakshmi is beginning her approach, and you are preparing a home worth entering.",
+          "mythology": "Dhanvantari — the physician of the gods, the lord of Ayurveda — emerged from the churning of the cosmic ocean (Samudra Manthan) on this day, bearing the vessel of amrita, the nectar of immortality. His appearance is the mythological anchor for the day's emphasis on health and prosperity. Yama, the god of death, is also propitiated on Dhanteras: lamps are lit facing south (Yama's direction) to ward off untimely death.",
+          "history": "Dhanteras as the opening of Diwali is documented across most of India — it is one of the rare days when gold and silver shops see their highest sales of the year. The 'buy metal' tradition has ancient roots in the idea that metal carries lasting value, that bringing it across the threshold on an auspicious day anchors prosperity in the home.",
+          "regional": "In Gujarat and Maharashtra, Dhanteras is observed with a pradosh puja — worship at twilight, when Yama's lamps face south. In merchant communities, Dhanteras historically marked the opening of the Diwali accounting season: ledgers were prepared, debts were settled, the books were cleared before the new year.",
+          "whatToDo": "Buy something metal today — even a small coin counts. Light a lamp facing south in the evening. If you have elders in the house, this is a good day to touch their feet. The five days that begin today are the fullest stretch of the Hindu festival calendar."
+        },
+        "food": {
+          "note": "In most Indian homes, Dhanteras cooking is preparation for what comes in four days — batches of chakli, mathia, chevdo, mohanthal are made now and stored. The kitchen is busier on Dhanteras than on Diwali itself. Eat light today: the heavy food is coming.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {"type": "morning", "time": {"hour": 7, "minute": 30}}
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "kali_chaudas",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 7,
+        "tithi": 14,
+        "paksha": "krishna",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": null,
+        "eve": {
+          "text": "Kali Chaudas tomorrow — the night before Diwali. In the South, this is the main celebration: the oil bath before sunrise re-enacts Satyabhama cleaning Krishna after his battle with Narakasura. In Gujarat, it is Bol Chaturdas: the night when the boundary between worlds is thin."
+        },
+        "morning": {
+          "text": "Tonight is Kali Chaudas — the fourteenth night of the dark fortnight, the night before Diwali. In Gujarat, this is Bol Chaturdas: the night when people gather at crossroads to ward off evil, when the boundary between worlds is thin, when protective rituals are performed. The darkness tomorrow night will be answered by lamps. Tonight you sit with it."
+        },
+        "deepDive": {
+          "whatItIs": "Kali Chaudas — also called Narak Chaturdashi or Choti Diwali — is the fourteenth tithi of Kartika's dark fortnight: the night before Diwali, when the darkness is at its thickest. The name Narak Chaturdashi (the fourteenth of hell) refers to the mythology of Narakasura; Kali Chaudas invokes the goddess Kali, who holds power over the darkest forces. In Gujarat, it is called Bol Chaturdas — the night of spoken words at crossroads.",
+          "mythology": "Krishna woke before dawn on this day and defeated Narakasura, who had imprisoned sixteen thousand women. When he returned home covered in battle, Satyabhama cleaned him with an oil bath. That ritual — the bath before first light — is still observed in South India and parts of Maharashtra on this day. The oil bath on Narak Chaturdashi is one of the few Hindu ritual practices that directly enacts a mythological scene: you are Satyabhama; you are washing away what the night brought.",
+          "history": "In South India — particularly Kerala and Karnataka — Narak Chaturdashi is the primary Diwali celebration, more significant than the Amavasya night that follows. The dawn oil bath and the lighting of lamps before sunrise are the defining acts. In North India, this day is sometimes called Choti Diwali (small Diwali) and is observed as the eve of the main festival.",
+          "regional": "In Gujarat, Bol Chaturdas is observed at crossroads — family members go out at night, call out protective words, and make offerings to ward off evil spirits whose power peaks on this borderline night. In Rajasthan, lamps are lit at the base of the Pipal tree. In Bengal and Assam, the goddess Kali is worshipped through the night — Kali Puja coincides with Diwali's Amavasya in some traditions.",
+          "whatToDo": "Light a lamp early in the evening — before the household settles in. If your family has an oil bath tradition on this morning, observe it. Tonight is the last night of the dark fortnight before the light comes. Let it be quiet."
+        },
+        "food": {
+          "note": "In South India, sweets are made and distributed on Narak Chaturdashi — the celebration here is equal to or greater than Diwali night. In Gujarat, Kali Chaudas cooking is focused on the big food push happening simultaneously for the Diwali feast days. Most families are elbow-deep in chakli dough.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {"type": "morning", "time": {"hour": 7, "minute": 30}}
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "bhai_dooj",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 7,
+        "tithi": 2,
+        "paksha": "shukla",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": null,
+        "eve": {
+          "text": "Bhai Dooj tomorrow — the fifth and last day of Diwali. If you have a sister, she is looking for you."
+        },
+        "morning": {
+          "text": "The last day: Bhai Dooj. Sisters put a tika on their brothers' foreheads and pray for their long life. The direction reverses from Raksha Bandhan — today the sister offers the protection. Five days end here. Saal Mubarak."
+        },
+        "deepDive": {
+          "whatItIs": "Bhai Dooj — also called Bhai Tika or Yama Dwitiya — is the fifth and final day of the Diwali cluster, falling on Kartika Shukla Dwitiya, the second day of the bright fortnight. The sister performs a tilak ceremony on her brother's forehead, feeds him sweets, and prays for his long life. The brother offers gifts. The festival completes the circuit of sibling protection rituals that Raksha Bandhan began four months earlier.",
+          "mythology": "Yama, the god of death, visited his sister Yamuna on this day. She placed a tika on his forehead, fed him a meal she had cooked, and asked him to promise that any brother whose sister performs this ritual will be protected from untimely death. Yama agreed. The myth reverses the expected direction of power — Yama, who presides over death, is disarmed by his sister's love. The tilak she places is a mark of protection stronger than his own domain.",
+          "history": "Bhai Dooj is observed across most of India under different names — Bhai Tika in Nepal (the largest national celebration), Bhau Beej in Maharashtra, Bhai Phota in Bengal. The pattern is the same everywhere: sister, brother, tika, sweets, prayer, gift. It is among the most widely observed sibling rituals in South Asian culture.",
+          "regional": "In Nepal, Bhai Tika is a national holiday — one of the most significant days of the Tihar festival (Nepal's Diwali). The tilak used in Nepal is made with seven colors and the ceremony is extensive. In Bengal, Bhai Phota uses sandalwood paste. In Gujarat and Maharashtra, it follows immediately after Bestu Varas and Govardhan Puja, rounding out a five-day stretch that begins at Dhanteras.",
+          "whatToDo": "If you have a sister: reach out today, even if you can't be together. If you have a brother: put a tilak on his forehead — a dot of kumkum works, a piece of rice works, your thumb works. The gesture is the thing. The five days of Diwali close here. Let them close well."
+        },
+        "food": {
+          "note": "The sister cooks for the brother today — or they eat together at a meal she has arranged. In practice, in the diaspora, this often means a family gathering on the closest weekend, with whatever sweets survived the Diwali week. Mohanthal, if there's any left. Chakli. The last of the mithai box.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {"type": "morning", "time": {"hour": 8, "minute": 0}}
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
       "id": "ashtami",
       "kind": "tithi",
       "tier": 3,
