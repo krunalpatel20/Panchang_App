@@ -1276,13 +1276,13 @@
       "almanacBlurb": null
     },
     {
-      "id": "sankashti_chaturthi",
+      "id": "chaturthi",
       "kind": "tithi",
       "tier": 3,
       "match": {
         "anchor": "tithi",
         "tithi": 4,
-        "paksha": "krishna"
+        "paksha": "both"
       },
       "variants": [],
       "voice": {

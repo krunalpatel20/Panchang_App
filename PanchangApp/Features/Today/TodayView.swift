@@ -161,7 +161,9 @@ struct PanchangDayView: View {
         Section("Festivals & Vrats") {
             ForEach(festivals) { f in
                 let content = resolvedContent.first {
-                    $0.entry.id == f.id || f.id.hasPrefix($0.entry.id + "_")
+                    $0.entry.id == f.id ||
+                    f.id.hasPrefix($0.entry.id + "_") ||
+                    f.id.hasSuffix("_" + $0.entry.id)
                 } ?? .fixture
                 NavigationLink(destination: FestivalDetailView(content: content)) {
                     HStack {
