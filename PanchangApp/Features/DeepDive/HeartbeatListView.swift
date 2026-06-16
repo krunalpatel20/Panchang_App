@@ -24,7 +24,7 @@ private struct HeartbeatRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 6) {
-                Text(item.entry.id.replacing("_", with: " ").capitalized)
+                Text(item.entry.name)
                     .font(.headline)
                     .foregroundStyle(.primary)
 
