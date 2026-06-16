@@ -16,7 +16,7 @@ struct DayDetailView: View {
 
     private enum LoadState {
         case loading
-        case loaded(PanchangDay, [FestivalOccurrence])
+        case loaded(PanchangDay, [FestivalOccurrence], [ResolvedContent])
     }
 
     var body: some View {
@@ -24,8 +24,9 @@ struct DayDetailView: View {
             switch state {
             case .loading:
                 ProgressView("Computing…").frame(maxWidth: .infinity, maxHeight: .infinity)
-            case .loaded(let day, let festivals):
-                PanchangDayView(day: day, festivals: festivals, scriptMode: scriptMode)
+            case .loaded(let day, let festivals, let resolved):
+                PanchangDayView(day: day, festivals: festivals,
+                                scriptMode: scriptMode, resolvedContent: resolved)
             }
         }
         .navigationTitle(navTitle)
@@ -36,12 +37,12 @@ struct DayDetailView: View {
     private func load() async {
         let loc = location; let cfg = config
         let y = year, m = month, d = day
-        let result = await Task.detached(priority: .userInitiated) {
-            let day = PanchangService().compute(year: y, month: m, day: d, location: loc, config: cfg)
-            let festivals = FestivalService.shared.festivals(for: day)
-            return (day, festivals)
+        let (pDay, festivals) = await Task.detached(priority: .userInitiated) {
+            let d = PanchangService().compute(year: y, month: m, day: d, location: loc, config: cfg)
+            return (d, FestivalService.shared.festivals(for: d))
         }.value
-        state = .loaded(result.0, result.1)
+        let resolved = ContentResolver().resolve(for: pDay, region: prefsQuery.first?.contentRegion)
+        state = .loaded(pDay, festivals, resolved)
     }
 
     private var navTitle: String {
