@@ -34,6 +34,10 @@ final class Preferences {
     var janmaRashi: Int = -1
     /// Kundli chakra style: "north" (square diamond) | "south" (fixed grid).
     var kundliStyle: String = "north"
+    /// Whether the user has completed onboarding. Never resets.
+    var seenOnboarding: Bool = false
+    /// Optional regional content filter: "gujarati" | "jain" | "sikh" | nil = all.
+    var contentRegion: String? = nil
 
     init() {
         self.calendarPreset = "gujarati_western"

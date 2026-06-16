@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "1.0",
+  "entries": [
+    {
+      "id": "ekadashi",
+      "kind": "cycle",
+      "tier": 1,
+      "match": {
+        "anchor": "tithi",
+        "tithi": 11,
+        "paksha": "both",
+        "masaIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Ekadashi arrives in seven days — the moon's still point, twice a month. If you fast on it, now is the time to decide. If you don't fast, consider eating lighter that day anyway. The tradition noticed something about the eleventh tithi long before anyone had words for what it noticed.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Ekadashi tomorrow — the moon at its still point. Fast if you observe it. If not: eat lighter than usual, sleep earlier. The quiet that arrives when you stop for a day is its own kind of answer.",
+          "daysBefore": null
+        },
+        "morning": {
+          "text": "Ekadashi. The eleventh day. The body knows what to do with a day of rest — and somewhere in that rest, the mind follows.",
+          "daysBefore": null
+        },
+        "deepDive": {
+          "whatItIs": "Ekadashi is the eleventh tithi of both the waxing and waning lunar fortnights — it arrives 24 times a year, every month, without fail. It is the most frequently observed fast in the Hindu calendar and arguably the most interesting one to examine, because the reason for it has two very different answers depending on who you ask.",
+          "mythology": "In the Vaishnava tradition, Ekadashi is not just a day — she is a goddess who emerged from Vishnu's body while he slept, and defeated the demon Mura who was threatening the cosmic realm. When Vishnu woke and saw what she had done, he offered her a boon. She asked that those who fast on her day be given liberation. He granted it. Every Ekadashi is her day — and the fast is not a restriction but a recognition of the event.",
+          "history": "The 24 Ekadashis across the year each carry a name and a specific mythology. Some are universally observed across Vaishnava communities — Nirjala, Devutthana, Vaikunta — while others are known mainly within specific lineages. The cycle of named Ekadashis tells the year's story through Vishnu's avatars and cosmic events. This dual monthly cadence — the heartbeat of the Vaishnava calendar — has run continuously for at least three thousand years without missing a cycle.",
+          "regional": "In South India, particularly in Andhra Pradesh, Telangana, and Karnataka, Ekadashi is observed with particular strictness in Vaishnava households — grain-free, sometimes water-reduced. In North India, the fast is widespread but more varied in its stringency. In Gujarat, many households keep at least a partial fast. The common thread is the grain restriction: rice, wheat, lentils are all set aside for the day.",
+          "whatToDo": "Choose your level honestly. The full Ekadashi fast skips all grains and legumes — fruit, dairy, certain permitted roots, and specific flours like buckwheat and water chestnut are allowed. A lighter version is simply one clean meal, nothing heavy. The point is not the degree of restriction but the act of noticing: one day each fortnight, you eat differently, and something shifts. Try it once and see what you find in the space it opens."
+        },
+        "food": {
+          "note": "Ekadashi fasting food is its own complete cuisine: sabudana khichdi — tapioca pearls toasted until translucent, tossed with ghee, cumin, crushed peanuts, and green chili, finished with a squeeze of lemon and fresh coconut. Makhana stir-fried in ghee with sendha namak until they puff and crisp. Kuttu ki roti — buckwheat flour chapati, slightly earthy, best eaten hot off the tawa with yogurt or aloo subzi made with rock salt. Singhare ki puri for those who want something more festive. Fruits and milk fill the gaps. The fast breaks the next morning after sunrise — start with something light before returning to grains.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "nirjala_ekadashi",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "tithi": 11,
+        "paksha": "shukla",
+        "masaIndex": 2
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Nirjala Ekadashi is in a week — the one Ekadashi of the year where the fast includes water. No food, no water, sunrise to sunrise. It carries a specific weight in the tradition that the other twenty-three Ekadashis don't. Even if you won't observe the full fast, it's worth knowing about.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tomorrow is Nirjala Ekadashi — the waterless fast, the most austere day on the Vaishnava calendar. If you're observing it: nothing after midnight. If you're not: even a half-fast tomorrow carries the intention of this day, which has been held continuously for thousands of years.",
+          "daysBefore": null
+        },
+        "morning": {
+          "text": "Nirjala Ekadashi. No food, no water — from sunrise through the next sunrise, if you're keeping the full fast. Bhima kept it once after years of failing every other Ekadashi, and the tradition says it counted for all of them. You're inside something very old today.",
+          "daysBefore": null
+        },
+        "deepDive": {
+          "whatItIs": "Nirjala Ekadashi falls in Jyeshtha — the hot month, roughly June — on the eleventh day of the bright fortnight. It is the single Ekadashi of the year where the fast extends to water itself: nothing passes the lips from sunrise until the following sunrise. The tradition is clear that this one Ekadashi, fully observed, carries the accumulated merit of all twenty-four Ekadashis of the year. It is also the most physically demanding fast on the Hindu calendar.",
+          "mythology": "The story belongs to Bhima — the second Pandava, the one built for appetite rather than restraint. While his brothers and Draupadi observed every Ekadashi through the year, Bhima could not fast without his strength failing. He went to the sage Vyasa and asked for a way to receive the merit of all Ekadashis without observing each one. Vyasa told him: fast on Nirjala Ekadashi in Jyeshtha — no food, no water, for the full period. Do it once and you have done them all. Bhima observed it. The tradition has honored that exchange ever since.",
+          "history": "The Brahma Vaivarta Purana singles out Nirjala Ekadashi from the other twenty-three: keep this one, it says, and you have kept them all. It is also called Bhima Ekadashi or Pandava Ekadashi, after the story of its origin. The month of Jyeshtha — arriving in the Indian summer, when the heat is at its peak — makes the waterless fast a genuine physical trial. The tradition positioned it there deliberately: the most austere fast in the hottest part of the year, so the act of keeping it is itself unmistakable.",
+          "regional": "Nirjala Ekadashi is observed most strictly in Vaishnava communities across North India — Vrindavan, Mathura, and the Braj region treat it as a major day, with temples full from before dawn. In Maharashtra and Gujarat, the fast is widely kept, though some families observe it with water, calling it a softer version of the nirjala ideal. In South India, the Vaishnava tradition keeps it along with the rest of the Ekadashi cycle. Everywhere: the breaking of the fast the next morning is done carefully, beginning with tulsi water before food.",
+          "whatToDo": "If you're observing the full fast: nothing after tonight's last meal, and nothing until tomorrow's sunrise. Keep still if you can — physical exertion intensifies dehydration. If the full fast is beyond you: try no grains and no cooked food, water only. If even that is too much: simply acknowledge the day. Light a lamp in the evening, say the name of something you've been carrying, and let the night pass quietly. The tradition's point was never suffering for its own sake. It was the space that opens when you stop filling every moment."
+        },
+        "food": {
+          "note": "On Nirjala Ekadashi there is no food and no water until the fast breaks at sunrise the next day. The breaking meal is important: begin with water in which tulsi leaves have been soaked overnight. Then panchamrit — milk, curd, honey, ghee, and sugar — offered first, then consumed. After that, fruit before anything solid. The first solid meal is light: sabudana khichdi or makhana, nothing heavy. The body has been quiet for twenty-four hours and needs to be brought back slowly.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "purnima",
+      "kind": "cycle",
+      "tier": 2,
+      "match": {
+        "anchor": "tithi",
+        "tithi": 15,
+        "paksha": "shukla",
+        "masaIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Full moon in seven days. Each month's Purnima has its own name and its own story — this is the lunar month at its peak, the moment the tradition has been marking, without exception, for thousands of years.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Purnima tonight — the moon at its fullest. The tradition made this a celebration: kheer made and shared, Satyanarayan katha told in households, the month's completion acknowledged. Whatever you do tonight, look up at some point.",
+          "daysBefore": null
+        },
+        "morning": {
+          "text": "Full moon today. The lunar month crests here, at its brightest and most complete. By tonight it begins the long return — for now it holds.",
+          "daysBefore": null
+        },
+        "deepDive": {
+          "whatItIs": "Purnima is the fifteenth tithi of the bright fortnight — the full moon, the peak of the lunar month. Every month has one, and every month's Purnima has a name tied to the lunar month it completes: Kartik Purnima, Sharad Purnima, Guru Purnima, Vaisakhi Purnima. The name changes; the structural position does not. This is the month's culmination — the moment when the moon has reached full light and has nowhere further to go.",
+          "mythology": "The Satyanarayan Katha — a puja and narrative read aloud in households — is traditionally performed on Purnima. The story follows several characters who either honor or ignore a promise to Satyanarayan, a form of Vishnu, and experience the consequences. What matters is less the plot than the practice: families gather, the story is told, prasad is shared. Purnima is when the lunar month closes, and the Satyanarayan puja is how many households mark that closing — a gathering around a story, an acknowledgment that the month passed and the family is still here.",
+          "history": "The twelve or thirteen Purnimas of the year each carry a particular weight. Sharad Purnima in Ashwin is considered the night when the moon is brightest and nearest, its light said to carry nourishing properties — kheer left outside overnight in the moonlight is a specific ritual connected to this idea. Guru Purnima in Ashadha honors Vyasa and all teachers. Kartik Purnima in November is Dev Deepawali — the gods' Diwali, when the ghats of Varanasi are lit with hundreds of thousands of lamps. The full moon calendar is its own parallel layer within the lunar year.",
+          "regional": "In coastal Maharashtra, Shravana Purnima is Narali Purnima — coconuts are offered to the sea to mark the end of monsoon and the reopening of fishing. In Bengal, the full moon of Phalguna is Dol Purnima, the day of Holi's color festival. In the Vaishnava tradition, every Purnima carries a Satyanarayan puja and a gathering. In many Tamil households, the full moon is observed with kolam drawn at the threshold and lamps lit through the night.",
+          "whatToDo": "Make kheer tonight — rice cooked slowly in milk with sugar, cardamom, a few strands of saffron. If it's Sharad Purnima, put the bowl outside in the moonlight for an hour before you eat it. If it's any other Purnima: still make the kheer. Look up at the moon when you're outside. Notice it. The tradition built this rhythm into the calendar so that once a month, without fail, something in your environment pointed upward and said: look."
+        },
+        "food": {
+          "note": "Kheer is the canonical Purnima food: whole milk simmered for thirty to forty minutes until it thickens, then rice cooked in until soft, then sugar, cardamom, and a pinch of saffron that turns the whole thing golden. Some families add raisins or slivers of almond and pistachio. Panchamrit — milk, curd, honey, ghee, sugar — is offered in puja and then consumed. On Sharad Purnima specifically, the kheer is prepared before sunset and placed outside in a clean vessel to absorb moonlight for at least an hour before eating.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "amavasya",
+      "kind": "cycle",
+      "tier": 2,
+      "match": {
+        "anchor": "tithi",
+        "tithi": 15,
+        "paksha": "krishna",
+        "masaIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Amavasya in seven days — the new moon, the darkest night of the month. The tradition makes this an ancestor day. If you have people you've lost, their names belong on this day.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tomorrow is Amavasya — the new moon, the darkest night. The tradition associates this day with the pitrus — those who came before you. Light a lamp for them tonight. Say their names if you can.",
+          "daysBefore": null
+        },
+        "morning": {
+          "text": "Amavasya. The moon is absent today — no reflected light, just the dark. The tradition made this the day for ancestors, for the ones whose faces you carry without always knowing it.",
+          "daysBefore": null
+        },
+        "deepDive": {
+          "whatItIs": "Amavasya is the new moon — the fifteenth tithi of the dark fortnight, when the moon has diminished entirely and the night is at its darkest. Where Purnima is the month's outward peak, Amavasya is its inward turning point. The tradition assigns this darkness a specific purpose: it is the day of the pitrus, the ancestors, those who have died and whose passage continues to require acknowledgment from the living.",
+          "mythology": "The pitrus occupy a specific position in the Hindu cosmology — they are neither living nor fully departed, but in a continued state that requires nourishment from those still here. Pitru Tarpan is the ritual that provides it: water poured from cupped hands, toward the sun, accompanied by the names of three generations of ancestors. The water is the vehicle; the names are the address. The tradition holds that this acknowledgment eases the passage of those who came before and clears the way for those who come after. What the mechanism actually is matters less than the fact that the living take time, once a month, to say: you existed, you mattered, I remember you.",
+          "history": "The Pitru Paksha — the fortnight of ancestors — falls in Ashwin and contains fifteen days dedicated to ancestor rites, culminating in Mahalaya Amavasya, the most significant new moon of the year for tarpan. But Amavasya every month carries a smaller version of the same practice. The universality of ancestor veneration across cultures — Chinese Qingming, Japanese Obon, Mexican Día de los Muertos, the Catholic feast of All Souls — suggests something deeper than doctrine is operating here. Every tradition that has survived long enough has found a way to keep the dead present in the lives of the living.",
+          "regional": "In South India, particularly among Tamil and Telugu communities, Amavasya is strictly observed — many families perform full tarpan ritual at a river or tank on this day. In North India, the practice is more varied but still present. In Maharashtra, Amavasya is associated with visits to ancestors' graves or temples housing their photos. The Mahalaya Amavasya at the end of Pitru Paksha is the most widely observed, but the monthly new moon carries the same intention in quieter form.",
+          "whatToDo": "Say the names of your grandparents. If you know their parents' names, say those too. Pour a glass of water somewhere that feels right — into a plant, outside, toward the light. You don't need the full ritual to carry its intention. If your parents are still alive, this is the day to call them. The tradition's logic runs both ways: honor those who are gone by staying close to those who are still here."
+        },
+        "food": {
+          "note": "Amavasya is not typically a feast day — the food is simple and the tone is quiet. Many families eat one clean meal: dal, rice, roti, nothing elaborate. In households that observe tarpan, the meal after the ritual is often shared with a Brahmin or donated to someone in need — the ancestor rites historically concluded with feeding the living as an extension of honoring the dead. If you cook something today, cook enough to share.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "paksha_transition",
+      "kind": "paksha",
+      "tier": 3,
+      "match": {
+        "anchor": "pakshaTransition",
+        "tithi": null,
+        "paksha": null,
+        "masaIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": null,
+        "eve": null,
+        "morning": {
+          "text": "The paksha turns today. The lunar month crosses its midpoint — from waxing to waning, or waning toward new. No other calendar app marks this. The tradition did, because the quality of days changes here.",
+          "daysBefore": null
+        },
+        "deepDive": {
+          "whatItIs": "The lunar month divides into two fortnights: Shukla Paksha, the bright fortnight when the moon waxes toward full; and Krishna Paksha, the dark fortnight when it wanes toward new. The transition between them happens twice a month — once at the full moon, when the bright half ends and the dark begins; and once at the new moon, when the dark ends and the bright begins. The panchang marks these transitions as meaningful thresholds, not just astronomical facts.",
+          "mythology": "The waxing moon is associated with growth, with beginnings, with Shukla — brightness. The waning moon with completion, release, and Krishna — not the deity, but the Sanskrit word for dark. The tradition says: begin things in Shukla Paksha, complete them in Krishna Paksha. Plant in the bright half; harvest in the dark. Start ventures when the moon is building; let go of what no longer serves when it is diminishing. Whether you organize your life by this or not: the structure is there, running underneath the Gregorian calendar, marking time in a different rhythm.",
+          "history": "The paksha system is fundamental to Hindu timekeeping — it is the organizing structure of the panchang itself, older than most of the festivals that run on top of it. The lunar fortnight appears in Vedic texts as the basic unit of ritual time. The names of the tithis within each paksha — Pratipada, Dwitiya, Tritiya, and so on — are counted fresh from one and fifteen in each fortnight. The paksha transition is where the count resets.",
+          "regional": "The paksha transition is observed differently across traditions. In the Vaishnava calendar, Purnima marks the beginning of Krishna Paksha and carries its own ritual significance. In the Shaiva tradition, Pradosh — the thirteenth tithi — is observed in both pakshas as a Shiva day, making the transition between them feel continuous. Agricultural communities across South Asia have historically used paksha to time planting and harvesting, with the bright half favored for sowing and the dark half for reaping.",
+          "whatToDo": "Notice which paksha you're entering. If it's Shukla Paksha: what are you beginning? The traditional wisdom is to start new things now — the moon is building and the energy follows. If it's Krishna Paksha: what are you finishing? The dark half is for completing, for letting go, for the things that have been waiting to end. You don't have to restructure your calendar around the moon to use this. Just ask the question once a fortnight."
+        },
+        "food": {
+          "note": "The paksha transition carries no specific food tradition — eat what's seasonal and fresh. In the transition into Shukla Paksha, sweet foods are traditional in some households to mark the beginning. In Krishna Paksha, lighter meals align with the inward tone of the dark fortnight. The kitchen follows the calendar here: what you eat on a full moon night tends to be celebratory; what you eat on a new moon night tends to be quiet.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "diwali_amavasya",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "tithi": 15,
+        "paksha": "krishna",
+        "masaIndex": 7
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Diwali is in a week. The darkest night of the lunar year — and the most lit. Five days of festivals run together here: Dhanteras, Choti Diwali, Diwali itself, Gujarati New Year, Bhai Dooj. Start cleaning. The preparation is part of the festival.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tomorrow night is Diwali — the Amavasya of Kartik, the new moon that the tradition decided to fill with every lamp it could find. Clean the home today if you haven't. Lakshmi moves through clean, lit, welcoming spaces. The cleaning is the invitation.",
+          "daysBefore": null
+        },
+        "morning": {
+          "text": "Tonight is the night. Every lamp on every windowsill is the same message: someone came home from somewhere very far away, and the whole world lit up to welcome them.",
+          "daysBefore": null
+        },
+        "deepDive": {
+          "whatItIs": "Diwali is not one festival but five, running on consecutive days — Dhanteras, Choti Diwali, Diwali, the Gujarati New Year, Bhai Dooj. The word Deepawali means row of lamps: deep is lamp, avali is row. The main night falls on the Amavasya — the new moon — of Kartik, the darkest night of the lunar year. The tradition responded to the maximum darkness by filling it with maximum light. Every lamp lit on Diwali is that response.",
+          "mythology": "The North Indian story: Ram returns to Ayodhya after fourteen years of exile and the battle against Ravana. He travels through the night; the kingdom, knowing he was coming, lit lamps across the city so he could find his way home through the dark. Every Diwali lamp is that lamp — a welcome home, a signal to whoever is far away that there is a place for them. The South Indian story runs differently: before dawn on Chaturdashi, Krishna defeated Narakasura, a demon who had imprisoned sixteen thousand women. Satyabhama cleaned him with an oil bath after the battle. The ritual oil bath before sunrise re-enacts that morning. And then there is the Lakshmi story, which is neither mythological event nor historical record but simply true in the way that certain truths are: on the darkest night, the goddess of abundance moves through the homes that are clean, lit, and open to receiving her.",
+          "history": "Diwali crosses more religious lines than almost any other Hindu festival. Jains observe it as the night of Mahavira's enlightenment — the last of the twenty-four Tirthankaras attaining moksha on this Amavasya. Sikhs observe it as Bandi Chhor Divas, the day Guru Hargobind was released from Gwalior Fort along with fifty-two other prisoners. Some Buddhists light lamps on this night as well. The festival of light, at the darkest point of the year, turns out to be an idea that belongs to everyone who has ever sat in darkness waiting for something to return.",
+          "regional": "In Gujarat, Diwali ends and Bestu Varas begins — the Gujarati new year, the Vikram Samvat year turning the morning after the new moon. The year begins at its darkest point, immediately after, when the light has been lit and held. In Maharashtra, the focus is Lakshmi puja on the main night and the elaborate mithai that travels between households. In Bengal, the festival is less central — the big Durga celebration already happened. In South India, Choti Diwali is often the main event, and the oil bath before dawn is observed with great seriousness.",
+          "whatToDo": "Clean your home before the night — this matters more than the lamps. Light something after sunset: one diya, or ten, or fifty, depending on what you have. Make or find a sweet. Call someone you haven't spoken to in too long. If you have children: tell them that someone came home from very far away, and the whole world lit up because they were finally home. The story is simple enough for a child and true enough for the rest of us."
+        },
+        "food": {
+          "note": "Diwali sweets are the most elaborate in the Hindu calendar — a week of preparation, family recipes that exist in no cookbook. In Gujarat: mohanthal, a dense besan fudge cooked in ghee until golden and fragrant, cut into squares while still warm. Chevdo — spiced flattened rice with peanuts, curry leaves, and mustard seeds. Chakli — spiral rice flour snacks, crisp and savory. Mathia — spiced crackers that shatter cleanly. The mithai box that travels between households in these five days says something about how seriously you take the relationship. Make something, or buy something good, and send it somewhere.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "janmashtami",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "tithi": 8,
+        "paksha": "krishna",
+        "masaIndex": 4
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Krishna's birthday is in a week. He was born at midnight — in a prison cell, during a storm, to parents who had already watched the king kill six of their children. The gods arranged the escape: guards slept, locks opened, the river Yamuna parted. The most beloved figure in the tradition entered the world in the most unlikely place. Worth sitting with.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tonight into tomorrow: Janmashtami. The fast holds until midnight, when he is born. At the exact moment, bells ring, conches blow, and the fast breaks with panchamrit. If you're not fasting: stay up until midnight anyway. Marking the exact moment of a birth, four thousand years after it happened, doesn't require belief to mean something.",
+          "daysBefore": null
+        },
+        "morning": {
+          "text": "Janmashtami. He was born at midnight in a prison during a storm, and the cosmos celebrated anyway. Today you're part of the lineage that has remembered that birth, without interruption, for four thousand years.",
+          "daysBefore": null
+        },
+        "deepDive": {
+          "whatItIs": "Janmashtami is the birthday of Krishna — it falls on the eighth tithi of the dark fortnight in Shravana, and the midnight timing is structural, not symbolic. The fast is kept through the day and broken at the exact moment of birth: midnight. In temples, a small image of the infant Krishna is placed in a cradle at the stroke of twelve, bells ring, and the night turns into celebration. The day begins as a vigil and ends as a party.",
+          "mythology": "Krishna is the most multidimensional figure in the tradition. He is simultaneously the butter-thieving child of Vrindavan who made his mother laugh and despair in equal measure; the flute-playing youth whose music the Gita says pulled all of creation toward him; the strategist on the chariot at Kurukshetra who told Arjuna, before the battle began, that the self which fights is not the self which dies; and the cosmic form in the Gita's eleventh chapter, vast and terrifying, swallowing armies the way rivers flow into the ocean. No single figure in the tradition contains this range. The child and the philosopher seem almost to be different beings. The tradition holds them together deliberately — the one who steals butter and the one who explains death are the same person, and that tension is the point.",
+          "history": "The Bhagavad Gita — eighteen chapters of philosophy delivered on a battlefield between Krishna and Arjuna — is among the most widely read texts in the world. Its central argument runs against every practical instinct: act without attachment to results. Do what your role requires without calculating personal gain. The self that dies is not the self that matters. This argument influenced Emerson and Thoreau in the nineteenth century, Gandhi in the twentieth, and Oppenheimer who quoted the Gita at the Trinity nuclear test when the first atomic bomb detonated. The child born at midnight in a prison in Mathura eventually shaped the thinking of people who had never heard of Mathura.",
+          "regional": "Mathura and Vrindavan — the cities of Krishna's birth and childhood — observe Janmashtami for days, with the celebration in Mathura's temples running through the night and into the next day. In Maharashtra, Dahi Handi is the defining ritual of the day after: a clay pot filled with curd hung high above the street, and teams of young men building human pyramids to break it, re-enacting the child Krishna's butter theft. The competition is real, the falls are real, and the prize money is substantial. In South India, women draw small footprints in rice flour from the front door to the kitchen, welcoming Krishna into the home.",
+          "whatToDo": "Fast through the day if you observe it. At midnight, break it with panchamrit — milk, curd, honey, sugar, and ghee mixed together, offered first and then consumed. If you have children: tonight is the night for the best bedtime story in the tradition. Tell them about the storm, the prison, the guards who fell asleep, the river that parted to let a father carry his newborn across. Tell them that every year since, without missing one, someone has stayed up until midnight to remember the exact moment. Let them fall asleep inside that."
+        },
+        "food": {
+          "note": "Panchamrit is the central food of Janmashtami: milk, curd, honey, sugar, and ghee mixed together — the five-ingredient offering that breaks the midnight fast. Makhan, fresh white butter, is placed before the image of the infant Krishna — the thing the child stole, returned as offering. The butter should be unsalted and freshly made if possible, or the best quality you can find. Panjiri — a dry sweet of whole wheat flour roasted in ghee until fragrant, mixed with sugar, powdered dry fruits, and sometimes edible gum — is traditional fasting food through the day. It keeps without refrigeration and provides sustained energy through the long vigil.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } },
+        { "type": "midnight" }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "mahashivratri",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "tithi": 14,
+        "paksha": "krishna",
+        "masaIndex": 10
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Maha Shivaratri is in a week — the Great Night of Shiva. Not a celebration exactly. More like a vigil. The tradition is to fast through the day and stay awake through the night, sitting with whatever is dark and unresolved rather than moving past it. Of all the festivals in the Hindu calendar, this is the one that doesn't ask you to be happy.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tonight into tomorrow: Maha Shivaratri. Shiva is most present in the dark, in the quiet, in the parts of yourself you usually move too fast to feel. Fast today if you observe it. Stay up as long as you can tonight. Shiva held the poison that would have destroyed everything — kept it in his throat forever so others were spared.",
+          "daysBefore": null
+        },
+        "morning": {
+          "text": "Maha Shivaratri. The great night is already half over for those who kept it. He holds the poison in his throat so the world doesn't have to swallow it — and every year, on this night, the tradition asks what you are holding in yours.",
+          "daysBefore": null
+        },
+        "deepDive": {
+          "whatItIs": "Most Hindu festivals are celebrations. Maha Shivaratri is a vigil. The name means Great Night of Shiva — Maha, great; Shiva, the deity; Ratri, night. It falls on the fourteenth tithi of the dark fortnight in Magha or Phalguna, just before the new moon: the darkest part of the darkest night of the fortnight, close to the darkest time of year. The timing is not accidental. This is the night set aside for sitting with what is difficult.",
+          "mythology": "When the cosmic ocean was churned by gods and demons in their search for the nectar of immortality, a poison also emerged — Halahala — so lethal it threatened all of creation. No one would touch it. Shiva drank it, held it in his throat, neither swallowing nor expelling. His throat turned blue from the contact. He stayed awake all night to keep the poison from descending to his stomach, where it would have killed him and then everything else. The gods stayed with him through the night, singing and praying, keeping him alert. The vigil kept every year on Maha Shivaratri re-enacts that night. The poison stays contained as long as someone is awake with it.",
+          "history": "Shiva is among the most ancient figures in continuous worship anywhere on Earth. Seals from the Indus Valley civilization — dated to 2500 BCE — show a figure seated in a meditation posture, surrounded by animals, in what archaeologists call the Pashupati seal. The resemblance to Shiva is close enough that many scholars read it as the deity's earliest depiction. The Shivalinga, his primary aniconic form, is the most widely installed sacred object in the Hindu tradition. He exists before the mythology that grew around him, and Maha Shivaratri may be older than any of the stories told to explain it.",
+          "regional": "In Varanasi, Ujjain, and every major Shiva pilgrimage site, the temples stay open and full through the entire night of Maha Shivaratri. The practice of abhishek — ritual bathing of the Shivalinga with milk, water, honey, curd, and bel patra leaves — continues without stop through the dark hours. In households that observe it, the vigil is quieter: the puja is extended, the fast kept, and the night is meant to be held as much as possible in wakefulness. In Kashmir, Maha Shivaratri is Herath — a multi-day observance that centers on the family, with a specific set of ritual foods prepared by women and shared across households.",
+          "whatToDo": "Fast if you observe it. If not, eat one simple meal — nothing elaborate, nothing indulgent. Stay awake past midnight if you can: not watching something, not distracted, just sitting in the dark with whatever is there. Bring bel patra to a Shiva temple if there is one near you — the three-lobed leaf is specific to Shiva and its offering is the simplest possible form of puja. The vigil is for the unresolved things, the held weight, the poison you've been carrying so others don't have to. You don't have to name it. Just stay up with it."
+        },
+        "food": {
+          "note": "Maha Shivaratri fasting food is simple by design: fruit, milk, and a narrow set of permitted grains — kuttu flour and sabudana, but no regular wheat or rice. Rock salt, sendha namak, instead of iodized salt. No onion, no garlic. The simplicity is the practice. The fast breaks at dawn on Chaturdashi with panchamrit — milk, curd, honey, sugar, ghee — offered first to the Shivalinga, then consumed. Start the breaking meal with something light; the body has been fasting through an active night of sitting and puja and earns a gentle return.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    }
+  ]
+}

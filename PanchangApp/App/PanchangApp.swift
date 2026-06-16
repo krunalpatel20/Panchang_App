@@ -35,6 +35,17 @@ struct RootView: View {
             SettingsView()
                 .tabItem { Label("Settings", systemImage: "gear") }
         }
+        .fullScreenCover(isPresented: Binding(
+            get: { prefsQuery.first?.seenOnboarding == false },
+            set: { _ in }
+        )) {
+            if let prefs = prefsQuery.first {
+                OnboardingView(seenOnboarding: Binding(
+                    get: { prefs.seenOnboarding },
+                    set: { prefs.seenOnboarding = $0 }
+                ))
+            }
+        }
         .onAppear {
             ensurePreferences()
             scheduleNotificationsIfEnabled()

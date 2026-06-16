@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0",
+  "entries": [
+    {
+      "id": "uttarayan",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 9,
+        "tithi": null,
+        "paksha": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Uttarayan is in a week. The sky over Gujarat changes on January 14th in a way it doesn't anywhere else in India — not because the sun crosses into Capricorn (it does that everywhere) but because of what Gujaratis do about it. Kites go up before dawn. By midday, ten thousand lines cross overhead. Start thinking about undhiyu now — it's made the night before and eaten cold.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tomorrow the sun crosses into Capricorn. In Gujarat, this means the rooftops fill before sunrise. Make the undhiyu tonight — slow-cooked, the winter vegetables layered with coconut and green garlic, left to cool in the pot. It tastes better eaten outside while someone cuts your line."
+        },
+        "morning": {
+          "text": "Uttarayan. The sun turns north today. Somewhere over Ahmedabad right now, the sky is full of color — every rooftop a battlefield, every line of manja a negotiation. Go outside at some point and look up."
+        },
+        "deepDive": {
+          "whatItIs": "Uttarayan is the Gujarati name for Makar Sankranti — the day the sun crosses into Capricorn (Makara), beginning its six-month northern journey called Uttarayana. It is one of the few Hindu festivals fixed to the solar calendar, falling on January 14th almost every year. In most of India, Sankranti is a harvest festival, a time for sesame sweets and charity. In Gujarat, it is also all of those things. And it is kite day.",
+          "mythology": "In the Mahabharata, Bhishma Pitamaha lay on a bed of arrows after being mortally wounded, keeping himself alive through will alone. He was waiting. The tradition says he chose to die during Uttarayana — the sun's northward journey — because this is when the path between worlds is more open. He held on for weeks, through the darkest part of winter, and let go only when the sun turned. The kites that fill the Gujarat sky on this day are not in any classical mythology. They are a folk tradition, old enough that no one remembers when it started. But there is something in the image — threads held taut between earth and sky, navigating a competitive and luminous heaven — that the mythological register of this day already contains.",
+          "history": "Uttarayana — the sun's northern passage — has been a sacred threshold in Indian thought for at least three thousand years. The Vedic texts mark it as the most auspicious time for spiritual practice, for beginning new ventures, for dying if you have the choice. The kite festival tradition is documented in Gujarat from at least the medieval period, though its origins are disputed. The government of Gujarat now organizes an international kite festival on January 14th, drawing competitors from dozens of countries. The rooftop tradition continues alongside it, unchanged.",
+          "regional": "The kite festival in Gujarat is taken with a competitive seriousness that surprises outsiders. Manja — the cutting string, coated with glass powder — is prepared weeks in advance. Competitors fly from rooftops through the night using searchlights, calling out *kai po che* (I've cut it) when an opponent's line falls. There are injuries. There are also families who have flown together every January 14th for four generations, from the same rooftop, with the same thermos of tea, watching the same stretch of sky. Pongal in Tamil Nadu, Lohri in Punjab, Bihu in Assam — the same solar transit, four completely different expressions.",
+          "whatToDo": "If you can find a kite: fly it. Even a cheap one from a convenience store, in a parking lot, alone. The gesture is enough. Make or find til-gul — sesame and jaggery rolled together — and give some to someone you've been meaning to reconnect with. Say the words if you know them: *til-gul ghya, god god bola.* Take sweetness. Speak sweetly."
+        },
+        "food": {
+          "note": "Undhiyu is the signature dish — a slow-cooked medley of winter vegetables (surti papdi, raw banana, yam, purple yam, eggplant) layered with a paste of coconut, cilantro, ginger, garlic, and green garlic, traditionally cooked upside-down in a clay pot buried in the ground. Modern kitchens use a pressure cooker and get something close. It is made the night before and eaten cold the next day — the flavors settle overnight in a way that makes this the best argument for not eating it immediately. Alongside: chikki (sesame-peanut brittle in flat slabs, cracked apart by hand), til-gul ladoo, and jalebi with fafda for breakfast.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 7, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": ["gujarati"],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "bestu_varas",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 7,
+        "tithi": 1,
+        "paksha": "shukla"
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Bestu Varas — the Gujarati new year — is in a week. The Vikram Samvat turns not in January and not at the spring equinox but the morning after Diwali, when the darkness has been confronted and the lamps have held. The merchants open new account books. The first entry in the ledger is an invocation. The family gathers. Prepare accordingly.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tomorrow the Gujarati year turns. Tonight: clean the house, prepare the sweets, think about what you are actually beginning. The Vikram Samvat year starts at its quietest and darkest point — immediately after the harvest is done, the lamps have burned, the debts of the old year are settled. Tomorrow: something new."
+        },
+        "morning": {
+          "text": "Saal Mubarak. The Vikram Samvat turns today — not in January, not at the equinox, but here, at the darkest point of the year, the morning after the lamps held. The Gujarati new year begins now."
+        },
+        "deepDive": {
+          "whatItIs": "Bestu Varas — literally 'new year' in Gujarati — is the first day of Kartika Shukla Paksha, the morning after Diwali's Amavasya. The Vikram Samvat calendar that Gujarat follows (the Kartikadi system) begins its year here, not in the spring as North India does. This puts the Gujarati year count one behind the North Indian count for the months between Chaitra and Kartik — a detail that has caught more than one panchang designer by surprise. More meaningfully, it means the Gujarati year begins at the darkest point and immediately after: when the harvest is complete, the lamps have burned, and whatever needed to be done in the old year has been done.",
+          "mythology": "Bestu Varas does not have a single mythological origin story the way Diwali does. What it has is continuity — the Vikram Samvat era, which this calendar follows, was established by the legendary king Vikramaditya of Ujjain, who is said to have begun the era after driving out invaders. The calendar has run unbroken since 57 BCE. Every Bestu Varas is a continuation of that thread. The day is also associated with Mahavira's nirvan — his liberation — which is why the night of Diwali (the Amavasya) carries Jain significance as well as Hindu, and why Bestu Varas is a day observed across both traditions in Gujarat.",
+          "history": "The Chopda Puja tradition on Bestu Varas is central to Gujarati commercial culture. Merchants and business families open new account books — *chopda* — on this day and have them blessed by a priest. The first entry written in the new ledger is *Shri Ganeshaya Namah*, a dedication before the accounts begin. The books are then touched to the feet of Lakshmi's image. In a trading community that has always understood wealth as something tended and acknowledged rather than simply accumulated, this ritual of beginning the books correctly carries genuine weight. It is not superstition. It is discipline made visible.",
+          "regional": "In Saurashtra and Kutch, Bestu Varas observances have particular regional character — the red tilak applied to the forehead in the morning, the visit to family elders for their blessings, the formal exchange of *saal mubarak* (happy new year). In cities like Ahmedabad and Surat, the morning temple visits draw enormous crowds — this is not a private holiday but a public one. Outside Gujarat, the day is largely invisible. Inside Gujarat, it is a bigger occasion than January 1st.",
+          "whatToDo": "Open something new today. A notebook, an account, a practice, a conversation you've been deferring. If your family observes Chopda Puja, open the books and write the first line. If not: write down one intention for the year that has just begun — not a resolution, an intention. The distinction matters. A resolution requires willpower. An intention requires direction. Begin with direction."
+        },
+        "food": {
+          "note": "Meetha chawal — sweet saffron rice with ghee, raisins, and cardamom — is traditional on Bestu Varas morning, the new year beginning with something golden and fragrant. Mohanthal is the quintessential Gujarati Diwali sweet that carries into Bestu Varas: besan (chickpea flour) roasted slowly in ghee until it turns deep gold, then set with sugar syrup and cardamom into a fudge that is cut into diamonds. The texture should be slightly grainy, not smooth — that grain is the roasted flour doing its work. Distribute the mithai box today; what you send says something about how you are beginning the year.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 7, "minute": 30 } }
+      ],
+      "action": null,
+      "regions": ["gujarati"],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "kali_chaudas",
+      "kind": "festival",
+      "tier": 2,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 7,
+        "tithi": 14,
+        "paksha": "krishna"
+      },
+      "variants": [],
+      "voice": {
+        "advance": null,
+        "eve": null,
+        "morning": {
+          "text": "Kali Chaudas tonight — the fourteenth night, the night before Diwali. In Gujarat this is *Bol Chaturdas*: the night when the boundary is thin, protective rituals are performed at crossroads, and the darkness is acknowledged directly. Tomorrow the lamps answer it. Tonight you sit with what the lamps are answering."
+        },
+        "deepDive": {
+          "whatItIs": "Kali Chaudas is the fourteenth night of Krishna Paksha in Kartika — the night before Diwali. *Chaudas* means fourteen; *Kali* here refers to both darkness and the goddess Kali, who is associated with this night. In Gujarat, it is called *Bol Chaturdas* — the night of speaking, of addressing what is dangerous. It is the darkest night of the Diwali sequence: the new moon is tomorrow, and tonight has no moon at all. The demons and malevolent forces that the tradition acknowledges are considered most active on this night.",
+          "mythology": "On this night, according to the Vaishnava telling, Krishna killed Narakasura — the demon who had imprisoned sixteen thousand women and whose defeat the next morning's celebrations re-enact. The battle happened before dawn on Chaturdashi. Kali Chaudas is the night of that battle: still dark, still dangerous, the outcome not yet certain. In Gujarat, the Shaiva reading of this night centers on Kali herself — the goddess in her most terrifying form, who destroys what cannot be allowed to survive into the new year. Protective mantras, ritual fire, and offerings at crossroads are addressed to her.",
+          "history": "The practice of demon-chasing rituals on the night before Diwali is documented across multiple regions under different names — *Narak Chaturdashi* in Maharashtra and the South, *Chhoti Diwali* in North India. The Gujarati Bol Chaturdas tradition has specific local character: the gathering at crossroads (which in many cultures represent liminal space, places where worlds meet), the lighting of oil lamps specifically to ward off evil rather than to welcome abundance (that comes tomorrow), and the ritual burning of effigies of Narakasura in some communities.",
+          "regional": "In Gujarat, Kali Chaudas is treated as a genuinely distinct night from Diwali — not a preliminary, but its own occasion. The foods eaten are specific to this night and differ from the Diwali sweets. The darkness is not a problem to be solved. It is the condition that makes tomorrow's light meaningful. Without tonight's acknowledged dark, the lamps tomorrow are just decoration.",
+          "whatToDo": "Light a lamp tonight — not for welcoming or celebration, but for protection and clarity. If you observe the Kali Chaudas puja: the offerings go at the threshold, where inside and outside meet. If you don't: sit for a moment with whatever in your life is genuinely difficult, the thing the Diwali brightness doesn't quite reach. The tradition says tonight is for that. Tomorrow is for the lamps."
+        },
+        "food": {
+          "note": "Bataka poha — flattened rice cooked with potatoes, mustard seeds, curry leaves, and turmeric — is the traditional Kali Chaudas evening food in Gujarat, eaten before the rituals begin. Chivda (spiced, fried flattened rice with peanuts, curry leaves, and dried coconut) is made and shared, the savory counterpoint to the week's sweets. This is not a day for mithai — the sweetness comes tomorrow.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": ["gujarati"],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "labh_pancham",
+      "kind": "festival",
+      "tier": 3,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 7,
+        "tithi": 5,
+        "paksha": "shukla"
+      },
+      "variants": [],
+      "voice": {
+        "advance": null,
+        "eve": null,
+        "morning": {
+          "text": "Labh Pancham. The fifth day after Diwali — the day the tradition designates for beginning new ventures. *Labh* means profit, gain, the auspicious. If something has been waiting for the right moment, today is when the calendar says: go."
+        },
+        "deepDive": {
+          "whatItIs": "Labh Pancham is the fifth day of Kartika Shukla Paksha — the fifth day of the Diwali sequence, which in Gujarat extends well past the main night. *Labh* means profit or auspicious gain; *Pancham* means fifth. This is the day for beginning new ventures, reopening businesses that closed for the Diwali holiday, and making the first auspicious mark in new endeavors. In the Chopda Puja tradition that runs through Gujarati commercial culture, Labh Pancham is a second opening day for those who didn't begin on Bestu Varas.",
+          "mythology": "The fifth day of Kartika Shukla Paksha is associated with Skanda (also called Kartikeya or Murugan) — the war god, commander of the divine armies, son of Shiva. Skanda is invoked for new beginnings because he represents directed energy: not raw force but strategic action, the capacity to move toward a goal without hesitation. A business beginning on Labh Pancham is placing itself under his direction.",
+          "history": "In Gujarati commercial communities — particularly the Vania and Jain trading families — the Diwali season has always had a commercial dimension that runs alongside the spiritual one. New account books, new partnerships, new ventures: these begin in the Diwali cluster, and Labh Pancham is the last auspicious gate before the season closes. The tradition of marking the first transaction of a new venture on this day is still observed by families who may not observe much else.",
+          "regional": "Outside Gujarat, Labh Pancham is largely unknown. Within the Gujarati business diaspora — in East Africa, in the UK, in the American cities with large Gujarati communities — the day is marked by the same commercial beginning rituals that operated in Surat and Ahmedabad a century ago. The geography changes; the calendar doesn't.",
+          "whatToDo": "Begin something today. The tradition is specific: this is an auspicious gate, and the right thing to do when you reach an auspicious gate is walk through it. Start the project. Send the email you've been composing. Open the new notebook. If you are starting a business or a significant new direction: write the first entry today. *Shri Ganeshaya Namah.* Then begin."
+        },
+        "food": {
+          "note": "Something sweet marks the beginning — shiro (semolina halwa with ghee and cardamom, made quickly and eaten warm) is traditional as a first-thing offering, the sweetness that starts the new venture correctly. Any sweet made at home carries the intention better than one purchased.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "morning", "time": { "hour": 8, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": ["gujarati"],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "paryushana",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 5,
+        "tithi": 4,
+        "paksha": "shukla"
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Paryushana begins in a week — the eight-day Jain festival of reflection and forgiveness that arrives in Bhadrapada, running on the same panchang rhythm this app tracks. This is the most significant annual observance in the Jain calendar: a week of fasting, prayer, and culminating in Kshamavani — the practice of seeking forgiveness from everyone you may have wronged. Start thinking about who you owe that to.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Paryushana begins tomorrow. The fast that starts then may run for eight days in Shvetambara communities or ten in Digambara — the duration differs; the intention is the same. Tonight: prepare for what you are giving up. The dietary restrictions during Paryushana are among the strictest in any tradition. And the question the fast is meant to create space for is: who have I harmed this year, and am I willing to say so?"
+        },
+        "morning": {
+          "text": "Paryushana begins today. The panchang marks this — Bhadrapada, the same lunar month that holds the energy for inner work. Eight days. What are you fasting from, and what are you making space for?"
+        },
+        "deepDive": {
+          "whatItIs": "Paryushana is the most important festival in the Jain calendar — eight days (Shvetambara) or ten days (Digambara, where it is called *Das Lakshana*) of fasting, reflection, scripture reading, and spiritual practice. It arrives in Bhadrapada, during the monsoon — the same lunar month tracked by this panchang. The timing follows the same calendar infrastructure as the Hindu festivals around it: the lunar fortnight, the same tithi system. The tradition built on shared foundations, even as the theology diverged.",
+          "mythology": "Jainism does not have mythology in the Hindu sense — no gods who intervene in human affairs, no cosmic creation drama. What it has instead is the biography of the Tirthankaras — the twenty-four enlightened beings who found liberation and taught the path. Mahavira, the twenty-fourth Tirthankara, is the figure whose life most directly shapes Paryushana. The festival period includes reading from the *Kalpa Sutra* — the Shvetambara text that contains Mahavira's biography and the biographies of the Tirthankaras before him. Hearing this text read aloud during Paryushana is itself an act of observance.",
+          "history": "Paryushana has been observed continuously since before Mahavira — elements of it predate even the historical Mahavira (c. 599–527 BCE), suggesting it built on an existing tradition of periodic intensive practice. The monsoon timing is not arbitrary: during the monsoon, Jain monks traditionally remain in one place rather than traveling (to avoid harming the increased insect life underfoot in wet season). The householder community stays close to them. The intensive period of practice that results is Paryushana.",
+          "regional": "Shvetambara and Digambara communities observe the festival differently in ways that reflect their centuries-long theological divergence. Shvetambara Paryushana runs eight days, ending on *Samvatsari* — the day of universal forgiveness. Digambara Das Lakshana runs ten days and ends on *Ananta Chaturdashi*. In cities with large Jain populations — Ahmedabad, Mumbai, Rajasthan — the festival transforms the neighborhood: the scale of the fasting, the temple attendance, the activity is visible from outside the community.",
+          "whatToDo": "The culminating practice of Paryushana is *Kshamavani* — the practice of seeking forgiveness. On Samvatsari (the last day), the tradition is to ask forgiveness from everyone you may have wronged during the year, in any way, however small: *Micchami Dukkadam* — may all the wrong I have done be forgiven. This is done in person, by phone, by letter. The request is made without expecting a particular response. The act of asking is the practice, not the absolution."
+        },
+        "food": {
+          "note": "Paryushana fasting is among the most rigorous in any tradition. Root vegetables are avoided entirely during the period — the tradition reasons that pulling roots from the ground destroys the plant and the organisms living in the soil around it, multiplying harm. Eating after sunset is prohibited. Green vegetables are limited to avoid harming the insects that may be on them during monsoon season. What remains: grains, dairy, dried legumes, fruits. Experienced practitioners often do complete fasts (*upvas*) on one or more days, or the full *aTTham* (three-day fast). Paryushana cooking, within these constraints, is quietly ingenious — the same creativity of restriction that produced Ekadashi cuisine, applied with greater strictness.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 19, "minute": 30 } },
+        { "type": "morning", "time": { "hour": 7, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": ["jain"],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "mahavir_jayanti",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 0,
+        "tithi": 13,
+        "paksha": "shukla"
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Mahavir Jayanti is in a week — the birthday of Vardhamana Mahavira, the twenty-fourth Tirthankara, born in Vaishali (present-day Bihar) on Chaitra Shukla Trayodashi. The tradition says he was born a prince, renounced everything at thirty, and spent twelve years in increasingly austere practice before reaching *Kevala Jnana* — complete knowledge. Then he taught for thirty years. Whatever you think you know about Jainism probably begins with what he said in those thirty years.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tomorrow is Mahavir Jayanti. The Kalpa Sutra describes his birth as a moment when the whole cosmos rejoiced — the gods descended, the lamps lit themselves, and even the animals were at peace. The tradition marks births with that kind of fullness. Tonight: think about what non-violence — *ahimsa* — actually costs in daily life, and what the trade is worth."
+        },
+        "morning": {
+          "text": "Mahavir Jayanti. Vardhamana was born on this tithi in Vaishali, 599 BCE by tradition, into a family he would leave behind completely. The man who taught that no creature's life is less important than your own was once a prince who had every reason to believe otherwise."
+        },
+        "deepDive": {
+          "whatItIs": "Mahavir Jayanti marks the birth of Vardhamana Mahavira — the twenty-fourth and last Tirthankara in the current cosmic cycle — on Chaitra Shukla Trayodashi. A Tirthankara is literally a ford-finder: one who has crossed the ocean of existence and can show others the crossing. Mahavira was born around 599 BCE in Vaishali (in present-day Bihar), to a Kshatriya family. He renounced his household life at thirty, spent twelve years in ascetic practice, attained *Kevala Jnana* (omniscience) at forty-two, and taught until his liberation (*nirvana*) at seventy-two. The tradition he shaped, which was already ancient when he found it, became what we now call Jainism.",
+          "mythology": "The Kalpa Sutra — the foundational Shvetambara biographical text — describes Mahavira's birth in the language of cosmic event: Indra and the gods descend from the heavens, the fourteen auspicious dreams appear to his mother Trishala before his birth (a white elephant, a bull, a lion — each a sign of what is coming), and the world fills with light. The tradition marks Tirthankara births with this kind of totality because a Tirthankara's arrival changes the quality of time itself — their presence in the world makes liberation accessible to others who would not otherwise have found it.",
+          "history": "Mahavira was roughly contemporary with the Buddha — both were born in the same region of northeastern India, both renounced princely lives, both built communities of monks and lay followers that outlasted them. The two traditions have sometimes been confused by Western scholars because of this historical proximity. They are theologically quite different. Buddhism holds that the self is an illusion to be dissolved; Jainism holds that the self (*jiva*) is real and eternal, weighed down by *karma* (understood in Jainism as a physical substance that clings to the soul), and that the path is to shed that karma through right conduct, right knowledge, and right faith. Mahavira refined and codified the five great vows — *ahimsa* (non-violence), *satya* (truth), *asteya* (non-stealing), *brahmacharya* (celibacy for monks), *aparigraha* (non-possession) — that form the ethical spine of Jain practice.",
+          "regional": "In Gujarat, Rajasthan, and Maharashtra — where the Jain community is historically concentrated — Mahavir Jayanti is a public holiday and a major occasion. Procession of the Mahavira image through the streets, *abhisheka* (ritual bathing of the image with milk, water, and saffron), and the reading of the Kalpa Sutra are central observances. In the diaspora, temples hold all-day programs. The non-violence principle extends to the day itself: many Jain families observe a complete fast and avoid any activity that might harm living beings.",
+          "whatToDo": "The three jewels that Mahavira taught — *samyag darshana* (right perception), *samyag jnana* (right knowledge), *samyag charitra* (right conduct) — are not a checklist but a lifetime's work. Today, one question: where in your life are you causing harm that you could reduce? Not eliminate entirely — the tradition is realistic about what is possible for a householder — but reduce. Mahavira taught that every step toward ahimsa counts, and that the direction matters as much as the distance."
+        },
+        "food": {
+          "note": "Mahavir Jayanti is typically a fasting day for observant Jain families, with the same constraints as Paryushana: no root vegetables, no eating after sunset, no green vegetables that might harbor insects. The fast-breaking meal emphasizes purity and lightness — rice, dal, simple vegetables (above-ground, harvested without uprooting). In many families, the day's food is given to those in need before being eaten at home — the practice of *dana* (charitable giving) is as central to the observance as the fast itself.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 7, "minute": 30 } }
+      ],
+      "action": null,
+      "regions": ["jain"],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "gurpurab_nanak",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 7,
+        "tithi": 15,
+        "paksha": "shukla"
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Guru Nanak Jayanti is in a week — the birthday of Guru Nanak Dev Ji, born in 1469 in Nankana Sahib (present-day Pakistan). This falls on Kartik Purnima, the full moon of the holiest month in the Hindu calendar. The same night that Dev Deepawali lights the Ganges in Varanasi. The panchang makes no distinction between what these lights are for. They are all lights on the same night.",
+          "daysBefore": 7
+        },
+        "eve": {
+          "text": "Tomorrow is Kartik Purnima — and Guru Nanak Jayanti. In Varanasi, hundreds of thousands of diyas are lit on the ghats tonight, a river of light on the holiest month's full moon. In Amritsar, the Golden Temple blazes in a way that is hard to look at directly. Two traditions, one night, one moon."
+        },
+        "morning": {
+          "text": "Guru Nanak Jayanti. He was born on Kartik Purnima, and the moon he was born under is still full tonight. *Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh.* The light that began with him has not gone out."
+        },
+        "deepDive": {
+          "whatItIs": "Guru Nanak Jayanti — *Gurpurab* — marks the birth of Guru Nanak Dev Ji, the founder of Sikhism and the first of the ten Sikh Gurus. He was born on Kartik Purnima (the full moon of Kartika) in 1469 CE in what is now Nankana Sahib, Pakistan. The gurpurab is the most widely observed Sikh festival — celebrated wherever Sikh communities exist, from Amritsar to London to the Central Valley of California.",
+          "mythology": "Guru Nanak's life is told through the *Janam Sakhis* — biographical accounts that are part history, part hagiography, and wholly concerned with the question of what it means to find the divine in the ordinary. The most famous story: at age thirty, while bathing in a river, Nanak disappeared for three days. When he returned, he said only: *There is no Hindu, there is no Muslim.* Then he began to teach. What he taught was *Ik Onkar* — One God, present in all, accessible without priest or ritual, requiring only the sincere remembrance the tradition calls *Naam Simran*. He traveled thousands of miles — to the Hindu pilgrimage sites, to Mecca, to Baghdad — and wherever he went, he sang.",
+          "history": "The timing of Guru Nanak's birth on Kartik Purnima places it in the same night as Dev Deepawali — when the Ganges ghats in Varanasi are lit with hundreds of thousands of lamps in honor of the gods' own Diwali. This overlap is not incidental to Sikh history: Guru Nanak explicitly engaged with Hindu tradition, critiqued its excesses, and retained its calendar infrastructure while redirecting its meaning. The Sikh calendar (the Nanakshahi calendar, adopted in its current form in 2003) has moved most gurpurabs to fixed solar dates — but Guru Nanak Jayanti remains on Kartik Purnima by near-universal community consensus.",
+          "regional": "In Punjab and the Punjabi diaspora, the gurpurab is marked by the *Akhand Path* — a continuous forty-eight-hour reading of the Guru Granth Sahib, completed on the morning of the festival. Processions (*nagar kirtan*) carry the Guru Granth Sahib through the streets, accompanied by *kirtan* (devotional music) and volunteers distributing *langar* — free food, available to anyone, with no distinction of faith or background. The langar tradition is older than the festival format: it is the principle made edible.",
+          "whatToDo": "If there is a gurdwara near you: go today, or go for the nagar kirtan if one is happening. The langar is open to everyone, always, no questions asked. Sit on the floor, eat with strangers, leave. That's the practice Guru Nanak built the institution around — the principle that no one eats alone while others have food to share. If you can't go: find the kirtan online. The music is its own arrival."
+        },
+        "food": {
+          "note": "Langar — the community kitchen meal served at every gurdwara, free to all — is the food of this day. *Karah prashad* is the sweet offering distributed at the end of the service: equal parts whole wheat flour, ghee, and sugar, cooked in a kadai until it turns deep amber and pulls away from the sides. It is distributed with both hands, placed directly into cupped palms, the same portion to every person regardless of who they are. The recipe has not changed. The principle behind it has not changed.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "eve", "time": { "hour": 20, "minute": 0 } },
+        { "type": "morning", "time": { "hour": 7, "minute": 0 } }
+      ],
+      "action": null,
+      "regions": ["sikh"],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "gurpurab_gobind",
+      "kind": "festival",
+      "tier": 1,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 9,
+        "tithi": 7,
+        "paksha": "shukla"
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "text": "Guru Gobind Singh Jayanti is coming — the birthday of the tenth Sikh Guru, born in Patna Sahib in 1666. He was the Guru who created the Khalsa, the community of initiated Sikhs that still carries his five symbols. He was also a poet, a general, and the last human Guru — the one who declared that after him, the Guru Granth Sahib itself would be the living Guru. He was forty-one when he died.",
+          "daysBefore": 7
+        },
+        "eve": null,
+        "morning": {
+          "text": "Guru Gobind Singh Jayanti. He was born Gobind Rai, son of Guru Tegh Bahadur — who was executed by Aurangzeb for refusing to convert. What the son built from that grief and that inheritance is one of the more remarkable things in South Asian history."
+        },
+        "deepDive": {
+          "whatItIs": "Guru Gobind Singh Jayanti marks the birth of the tenth and final human Sikh Guru — Gobind Singh Ji — born on Pokh Shukla Saptami (the seventh day of the bright fortnight of Pokh, approximately December or January in the Gregorian calendar) in 1666 CE in Patna Sahib, Bihar. He became Guru at nine years old, following the execution of his father, Guru Tegh Bahadur. He led the Sikh community for thirty-three years before his death in 1708.",
+          "mythology": "The founding of the Khalsa on Vaisakhi 1699 is the central mythological event of Guru Gobind Singh's life. He called the Sikh community together and asked: who here is willing to give their life for the Guru? One man stepped forward; Guru Gobind Singh led him behind a tent and returned with a bloodied sword. He asked again. Another man stepped forward. Five times. The five who volunteered — the *Panj Pyare*, the Five Beloved — emerged from behind the tent unharmed, dressed in saffron, baptized with *Amrit* (nectar). The Khalsa was born. Guru Gobind Singh then asked the five to baptize him in turn. The Guru who was served, serving.",
+          "history": "Guru Gobind Singh's life was shaped by violence — the execution of his father, the deaths of all four of his sons (two in battle, two executed by Mughals after capture), decades of military conflict with the Mughal empire and Rajput hill chiefs. What he built in those conditions — a community with a visible identity (the five Ks: *Kesh*, *Kangha*, *Kara*, *Kachera*, *Kirpan*), a democratic internal structure, and the declaration that after his death the scripture itself would be Guru — is a response to conditions of erasure that produced not submission but elaboration. He was also a prolific poet. His writings in the Dasam Granth include the *Jaap Sahib*, the *Chaupai Sahib*, and the *Zafarnama* — a letter to Aurangzeb written in Persian that is one of the more extraordinary documents of the period.",
+          "regional": "The gurpurab observance follows the same pattern as Guru Nanak Jayanti: Akhand Path completed on the morning of the festival, nagar kirtan procession, langar available through the day. In communities with large Sikh populations — Chandigarh, Amritsar, parts of the UK, British Columbia, California — the processions are substantial public events. The Nihang Sikhs, the traditional warrior order, often participate in historical dress.",
+          "whatToDo": "The Ardas — the Sikh congregational prayer — is the practice for this day. If you know it, say it. If you don't: go to the gurdwara and stand while it is recited. The Ardas is one of the few formal prayers in any tradition that names the historical dead individually — the martyrs, the tortured, the ones who held when they could have let go — and asks that their sacrifice not be forgotten. That act of public remembrance is worth participating in regardless of what you believe."
+        },
+        "food": {
+          "note": "Karah prashad — the sanctified sweet of the gurdwara, equal parts whole wheat flour, ghee, and sugar cooked until deep amber — is distributed after the Ardas on all gurpurabs. The langar meal varies by gurdwara and community, but the principle is always the same: everyone eats, no one pays, no one sits at a higher table.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        { "type": "advance", "daysBefore": 7 },
+        { "type": "morning", "time": { "hour": 7, "minute": 30 } }
+      ],
+      "action": null,
+      "regions": ["sikh"],
+      "audioScript": null,
+      "almanacBlurb": null
+    }
+  ]
+}

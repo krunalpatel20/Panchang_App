@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CF540C3A54C9A29D2E39EA7 /* content-regional.json in Resources */ = {isa = PBXBuildFile; fileRef = 673B4FBCAB5CDBF827CD47E8 /* content-regional.json */; };
+		239E9D82C01479C2ED7EEC06 /* content.json in Resources */ = {isa = PBXBuildFile; fileRef = 872198943BE056EA5F0FC626 /* content.json */; };
+		3611B7572084BA7AD2D81FC9 /* NotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024B2F27A91FCDD97EBFAD5 /* NotificationTrigger.swift */; };
+		637D9AD97D6D20DA06143E75 /* FoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D9D94092936D922A9E2320 /* FoodView.swift */; };
+		6502AE5243A2D695CB84C910 /* TriggerPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0232890D655330EAF1D283BA /* TriggerPlan.swift */; };
+		673F0A634014771E641FA6BD /* ContentResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B9DC95D1A9DEF3B1D6435 /* ContentResolver.swift */; };
+		68896CADFD7C10F4F3F58EA2 /* content.schema.json in Resources */ = {isa = PBXBuildFile; fileRef = A89112781E867F0B7B04F1B6 /* content.schema.json */; };
+		A40DFAF8C6A11E36D92E94D5 /* ContentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB1BBCBB401F908769C4CD /* ContentModels.swift */; };
+		A844B13B424110AC1DDCB20C /* ContentResolving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01632AD939370E86F825E552 /* ContentResolving.swift */; };
 		AA000000000000000000041 /* PanchangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000040 /* PanchangApp.swift */; };
 		AA000000000000000000043 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000042 /* TodayView.swift */; };
 		AA000000000000000000045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000044 /* Assets.xcassets */; };
@@ -32,9 +41,22 @@
 		AA000000000000000000198 /* PlanetTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000197 /* PlanetTableView.swift */; };
 		AA00000000000000000019A /* DashaTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000199 /* DashaTimelineView.swift */; };
 		AA00000000000000000019C /* BirthProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000019B /* BirthProfileFormView.swift */; };
+		D446CBBE7BB4472E464FC490 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311619D02035F36CE12044E /* OnboardingView.swift */; };
+		DEAC9F5240D8769ADCB64055 /* ContentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED1C2D59CB02E8516403F8 /* ContentStore.swift */; };
+		F00938B4BB53728B648D3489 /* FestivalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7B302F21FCBF986E7CE8C0 /* FestivalDetailView.swift */; };
+		F8D07DB15A7F8E30B4FC0700 /* HeartbeatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EE2581376FA4F065CAB057 /* HeartbeatListView.swift */; };
+		F962B85F3CA5ACF74CDEB318 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17CB5582CE845C223E44B46 /* NotificationScheduler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01632AD939370E86F825E552 /* ContentResolving.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentResolving.swift; path = Services/ContentService/ContentResolving.swift; sourceTree = "<group>"; };
+		0232890D655330EAF1D283BA /* TriggerPlan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TriggerPlan.swift; path = Features/Notifications/TriggerPlan.swift; sourceTree = "<group>"; };
+		43ED1C2D59CB02E8516403F8 /* ContentStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentStore.swift; path = Services/ContentService/ContentStore.swift; sourceTree = "<group>"; };
+		53EE2581376FA4F065CAB057 /* HeartbeatListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HeartbeatListView.swift; path = Features/DeepDive/HeartbeatListView.swift; sourceTree = "<group>"; };
+		673B4FBCAB5CDBF827CD47E8 /* content-regional.json */ = {isa = PBXFileReference; includeInIndex = 1; name = "content-regional.json"; path = "Resources/Content/content-regional.json"; sourceTree = "<group>"; };
+		872198943BE056EA5F0FC626 /* content.json */ = {isa = PBXFileReference; includeInIndex = 1; name = content.json; path = Resources/Content/content.json; sourceTree = "<group>"; };
+		9A7B302F21FCBF986E7CE8C0 /* FestivalDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FestivalDetailView.swift; path = Features/DeepDive/FestivalDetailView.swift; sourceTree = "<group>"; };
+		A89112781E867F0B7B04F1B6 /* content.schema.json */ = {isa = PBXFileReference; includeInIndex = 1; name = content.schema.json; path = Resources/Content/content.schema.json; sourceTree = "<group>"; };
 		AA000000000000000000040 /* PanchangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanchangApp.swift; sourceTree = "<group>"; };
 		AA000000000000000000042 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		AA000000000000000000044 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +83,12 @@
 		AA000000000000000000197 /* PlanetTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetTableView.swift; sourceTree = "<group>"; };
 		AA000000000000000000199 /* DashaTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashaTimelineView.swift; sourceTree = "<group>"; };
 		AA00000000000000000019B /* BirthProfileFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthProfileFormView.swift; sourceTree = "<group>"; };
+		B024B2F27A91FCDD97EBFAD5 /* NotificationTrigger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NotificationTrigger.swift; path = Services/ContentService/NotificationTrigger.swift; sourceTree = "<group>"; };
+		B17CB5582CE845C223E44B46 /* NotificationScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NotificationScheduler.swift; path = Features/Notifications/NotificationScheduler.swift; sourceTree = "<group>"; };
+		B311619D02035F36CE12044E /* OnboardingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = Features/Onboarding/OnboardingView.swift; sourceTree = "<group>"; };
+		E56B9DC95D1A9DEF3B1D6435 /* ContentResolver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentResolver.swift; path = Services/ContentService/ContentResolver.swift; sourceTree = "<group>"; };
+		EBBB1BBCBB401F908769C4CD /* ContentModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentModels.swift; path = Services/ContentService/ContentModels.swift; sourceTree = "<group>"; };
+		F9D9D94092936D922A9E2320 /* FoodView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoodView.swift; path = Features/Food/FoodView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +103,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12ED51E8E19B370F9E0FB1E7 /* ContentService */ = {
+			isa = PBXGroup;
+			children = (
+				EBBB1BBCBB401F908769C4CD /* ContentModels.swift */,
+				E56B9DC95D1A9DEF3B1D6435 /* ContentResolver.swift */,
+				01632AD939370E86F825E552 /* ContentResolving.swift */,
+				43ED1C2D59CB02E8516403F8 /* ContentStore.swift */,
+				B024B2F27A91FCDD97EBFAD5 /* NotificationTrigger.swift */,
+			);
+			name = ContentService;
+			sourceTree = "<group>";
+		};
+		25D0EF67B45B1D21BFEF11B9 /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				F9D9D94092936D922A9E2320 /* FoodView.swift */,
+			);
+			name = Food;
+			sourceTree = "<group>";
+		};
+		4795D31528C0EA669F120E3C /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				B17CB5582CE845C223E44B46 /* NotificationScheduler.swift */,
+				0232890D655330EAF1D283BA /* TriggerPlan.swift */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
+		49EDF936A1C0527312EC2702 /* DeepDive */ = {
+			isa = PBXGroup;
+			children = (
+				9A7B302F21FCBF986E7CE8C0 /* FestivalDetailView.swift */,
+				53EE2581376FA4F065CAB057 /* HeartbeatListView.swift */,
+			);
+			name = DeepDive;
+			sourceTree = "<group>";
+		};
+		55451E64B18762A6B6A5E608 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B8FAD675FAF263BF6EE32B62 /* Content */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		8FC7FA98861C654207241E34 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				49EDF936A1C0527312EC2702 /* DeepDive */,
+				25D0EF67B45B1D21BFEF11B9 /* Food */,
+				4795D31528C0EA669F120E3C /* Notifications */,
+				D79FECC339397D9E9BF0E002 /* Onboarding */,
+			);
+			name = Features;
+			sourceTree = "<group>";
+		};
 		AA000000000000000000002 = {
 			isa = PBXGroup;
 			children = (
@@ -100,7 +185,10 @@
 				AA0000000000000000000D0 /* Models */,
 				AA0000000000000000000E0 /* Services */,
 				AA000000000000000000044 /* Assets.xcassets */,
-				AA000000000000000000160 /* Resources/Festivals */,
+				AA000000000000000000160 /* Festivals */,
+				8FC7FA98861C654207241E34 /* Features */,
+				EA85D301D6C6A978A0822556 /* Services */,
+				55451E64B18762A6B6A5E608 /* Resources */,
 			);
 			path = PanchangApp;
 			sourceTree = "<group>";
@@ -198,7 +286,7 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
-		AA000000000000000000160 /* Resources/Festivals */ = {
+		AA000000000000000000160 /* Festivals */ = {
 			isa = PBXGroup;
 			children = (
 				AA000000000000000000161 /* festivals.json */,
@@ -233,6 +321,32 @@
 				AA00000000000000000019B /* BirthProfileFormView.swift */,
 			);
 			path = Kundli;
+			sourceTree = "<group>";
+		};
+		B8FAD675FAF263BF6EE32B62 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				872198943BE056EA5F0FC626 /* content.json */,
+				673B4FBCAB5CDBF827CD47E8 /* content-regional.json */,
+				A89112781E867F0B7B04F1B6 /* content.schema.json */,
+			);
+			name = Content;
+			sourceTree = "<group>";
+		};
+		D79FECC339397D9E9BF0E002 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				B311619D02035F36CE12044E /* OnboardingView.swift */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		EA85D301D6C6A978A0822556 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				12ED51E8E19B370F9E0FB1E7 /* ContentService */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +415,9 @@
 			files = (
 				AA000000000000000000045 /* Assets.xcassets in Resources */,
 				AA000000000000000000162 /* festivals.json in Resources */,
+				239E9D82C01479C2ED7EEC06 /* content.json in Resources */,
+				0CF540C3A54C9A29D2E39EA7 /* content-regional.json in Resources */,
+				68896CADFD7C10F4F3F58EA2 /* content.schema.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +450,17 @@
 				AA000000000000000000198 /* PlanetTableView.swift in Sources */,
 				AA00000000000000000019A /* DashaTimelineView.swift in Sources */,
 				AA00000000000000000019C /* BirthProfileFormView.swift in Sources */,
+				F00938B4BB53728B648D3489 /* FestivalDetailView.swift in Sources */,
+				F8D07DB15A7F8E30B4FC0700 /* HeartbeatListView.swift in Sources */,
+				637D9AD97D6D20DA06143E75 /* FoodView.swift in Sources */,
+				F962B85F3CA5ACF74CDEB318 /* NotificationScheduler.swift in Sources */,
+				6502AE5243A2D695CB84C910 /* TriggerPlan.swift in Sources */,
+				D446CBBE7BB4472E464FC490 /* OnboardingView.swift in Sources */,
+				A40DFAF8C6A11E36D92E94D5 /* ContentModels.swift in Sources */,
+				673F0A634014771E641FA6BD /* ContentResolver.swift in Sources */,
+				A844B13B424110AC1DDCB20C /* ContentResolving.swift in Sources */,
+				DEAC9F5240D8769ADCB64055 /* ContentStore.swift in Sources */,
+				3611B7572084BA7AD2D81FC9 /* NotificationTrigger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

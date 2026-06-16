@@ -36,6 +36,7 @@ struct SettingsView: View {
             Form {
                 locationSection
                 calendarSection
+                regionSection
                 janmaSection
                 kundliSection
                 scriptSection
@@ -84,6 +85,26 @@ struct SettingsView: View {
             Text("Calendar Tradition")
         } footer: {
             Text("Affects month naming and Vikram Samvat year for Gujarat dates.")
+        }
+    }
+
+    private var regionSection: some View {
+        Section {
+            Picker("Region", selection: Binding(
+                get: { prefs.contentRegion ?? "none" },
+                set: { prefs.contentRegion = $0 == "none" ? nil : $0 }
+            )) {
+                Text("None").tag("none")
+                Text("Gujarati").tag("gujarati")
+                Text("Jain").tag("jain")
+                Text("Sikh").tag("sikh")
+            }
+            .pickerStyle(.inline)
+            .labelsHidden()
+        } header: {
+            Text("Regional Content")
+        } footer: {
+            Text("Shows region-specific festivals alongside the main calendar.")
         }
     }
 

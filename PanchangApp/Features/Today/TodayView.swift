@@ -32,7 +32,10 @@ struct TodayView: View {
                     ProgressView("Computing panchang…")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 case .loaded(let day, let festivals):
-                    PanchangDayView(day: day, festivals: festivals, scriptMode: scriptMode)
+                    let resolved = ContentResolver().resolve(
+                        for: day, region: prefsQuery.first?.contentRegion)
+                    PanchangDayView(day: day, festivals: festivals,
+                                   scriptMode: scriptMode, resolvedContent: resolved)
                 case .failed(let msg):
                     ContentUnavailableView("Unable to compute",
                                           systemImage: "exclamationmark.triangle",
@@ -64,6 +67,7 @@ struct PanchangDayView: View {
     let day: PanchangDay
     var festivals: [FestivalOccurrence] = []
     var scriptMode: String = "transliteration"
+    var resolvedContent: [ResolvedContent] = []
 
     private var renderer: ScriptRenderer { ScriptRenderer(mode: scriptMode) }
 
@@ -156,16 +160,19 @@ struct PanchangDayView: View {
     private var festivalsSection: some View {
         Section("Festivals & Vrats") {
             ForEach(festivals) { f in
-                HStack {
-                    Image(systemName: f.type == .vrat ? "moon.stars" : "star.fill")
-                        .foregroundStyle(f.type == .vrat ? .indigo : .orange)
-                    Text(f.name)
-                    Spacer()
-                    Text(f.type.rawValue.capitalized)
-                        .font(.caption).foregroundStyle(.secondary)
+                let content = resolvedContent.first { $0.entry.id == f.id } ?? .fixture
+                NavigationLink(destination: FestivalDetailView(content: content)) {
+                    HStack {
+                        Image(systemName: f.type == .vrat ? "moon.stars" : "star.fill")
+                            .foregroundStyle(f.type == .vrat ? .indigo : .orange)
+                        Text(f.name)
+                        Spacer()
+                        Text(f.type.rawValue.capitalized)
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("\(f.name), \(f.type.rawValue)")
                 }
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("\(f.name), \(f.type.rawValue)")
             }
         }
     }

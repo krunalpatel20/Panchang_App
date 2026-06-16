@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Panchang Content Store",
+  "description": "Single source of truth for all voice content. Feeds app + print almanac + AI corpus.",
+  "type": "object",
+  "required": ["schemaVersion", "entries"],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0" },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/ContentEntry" }
+    }
+  },
+  "definitions": {
+    "ContentEntry": {
+      "type": "object",
+      "required": ["id", "kind", "tier", "match", "voice", "triggers", "regions"],
+      "properties": {
+        "id":      { "type": "string", "description": "Stable key matching a FestivalRule id or cycle id" },
+        "kind":    { "type": "string", "enum": ["cycle", "festival", "paksha", "tithi"] },
+        "tier":    { "type": "integer", "minimum": 1, "maximum": 5,
+                     "description": "1=major festival … 5=named tithi. Controls notification priority." },
+        "match":   { "$ref": "#/definitions/ContentMatch" },
+        "variants":{ "type": "array", "items": { "$ref": "#/definitions/ContentVariant" }, "default": [] },
+        "voice":   { "$ref": "#/definitions/VoiceLayers" },
+        "triggers":{ "type": "array", "items": { "$ref": "#/definitions/NotificationTrigger" } },
+        "action":  { "oneOf": [{ "$ref": "#/definitions/ContentAction" }, { "type": "null" }] },
+        "regions": { "type": "array", "items": { "type": "string" },
+                     "description": "Empty = everywhere. Values: 'gujarati', 'marathi', 'tamil', 'jain', 'sikh'" },
+        "audioScript":  { "type": ["string", "null"], "description": "Reserved for V2 60-sec audio layer" },
+        "almanacBlurb": { "type": ["string", "null"], "description": "Reserved for print almanac Part Six" }
+      }
+    },
+    "ContentMatch": {
+      "type": "object",
+      "required": ["anchor"],
+      "properties": {
+        "anchor":    { "type": "string", "enum": ["tithi", "masaTithi", "pakshaTransition"] },
+        "tithi":     { "type": ["integer", "null"], "minimum": 1, "maximum": 30 },
+        "paksha":    { "type": ["string", "null"], "enum": ["shukla", "krishna", "both", null] },
+        "masaIndex": { "type": ["integer", "null"], "minimum": 0, "maximum": 11 }
+      }
+    },
+    "ContentVariant": {
+      "type": "object",
+      "required": ["id", "match"],
+      "description": "Most-specific match wins; falls back to base entry voice/triggers.",
+      "properties": {
+        "id":       { "type": "string" },
+        "match":    { "$ref": "#/definitions/ContentMatch" },
+        "voice":    { "oneOf": [{ "$ref": "#/definitions/VoiceLayers" }, { "type": "null" }] },
+        "triggers": { "oneOf": [{ "type": "array", "items": { "$ref": "#/definitions/NotificationTrigger" } }, { "type": "null" }] },
+        "action":   { "oneOf": [{ "$ref": "#/definitions/ContentAction" }, { "type": "null" }] }
+      }
+    },
+    "VoiceLayers": {
+      "type": "object",
+      "required": ["morning", "deepDive", "food"],
+      "description": "food is non-nullable — the food layer is never optional.",
+      "properties": {
+        "advance":  { "oneOf": [{ "$ref": "#/definitions/VoiceLayer" }, { "type": "null" }] },
+        "eve":      { "oneOf": [{ "$ref": "#/definitions/VoiceLayer" }, { "type": "null" }] },
+        "morning":  { "$ref": "#/definitions/VoiceLayer" },
+        "deepDive": { "$ref": "#/definitions/DeepDive" },
+        "food":     { "$ref": "#/definitions/FoodNote" }
+      }
+    },
+    "VoiceLayer": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text":       { "type": "string" },
+        "daysBefore": { "type": ["integer", "null"], "description": "Only used for advance layer" }
+      }
+    },
+    "DeepDive": {
+      "type": "object",
+      "required": ["whatItIs", "mythology", "history", "regional", "whatToDo"],
+      "description": "Five-paragraph Part Seven structure. Every paragraph required.",
+      "properties": {
+        "whatItIs":  { "type": "string" },
+        "mythology": { "type": "string" },
+        "history":   { "type": "string" },
+        "regional":  { "type": "string" },
+        "whatToDo":  { "type": "string" }
+      }
+    },
+    "FoodNote": {
+      "type": "object",
+      "required": ["note"],
+      "properties": {
+        "note":       { "type": "string" },
+        "recipeLink": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "ContentAction": {
+      "type": "object",
+      "required": ["kind", "label"],
+      "properties": {
+        "kind":    { "type": "string", "enum": ["call", "addReminder", "openMaps", "note"] },
+        "label":   { "type": "string" },
+        "payload": { "type": ["string", "null"], "description": "Phone number / address / note template" }
+      }
+    },
+    "NotificationTrigger": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type":       { "type": "string", "enum": ["advance", "eve", "morning", "midnight", "dayOffset"] },
+        "daysBefore": { "type": "integer", "description": "Required for type=advance" },
+        "time":       { "$ref": "#/definitions/TimeHHMM", "description": "Required for type=eve|morning" },
+        "offset":     { "type": "integer", "description": "Required for type=dayOffset" },
+        "label":      { "type": "string",  "description": "Required for type=dayOffset" }
+      }
+    },
+    "TimeHHMM": {
+      "type": "object",
+      "required": ["hour", "minute"],
+      "properties": {
+        "hour":   { "type": "integer", "minimum": 0, "maximum": 23 },
+        "minute": { "type": "integer", "minimum": 0, "maximum": 59 }
+      }
+    }
+  }
+}
