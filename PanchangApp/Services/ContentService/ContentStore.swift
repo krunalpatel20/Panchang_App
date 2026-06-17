@@ -52,6 +52,16 @@ struct ContentStore: Sendable {
             id.hasSuffix("_" + $0.id)
         }
     }
+
+    /// Region-aware version of `hasContent(forFestivalId:)`. An entry is visible to `region`
+    /// when it's universal (`regions` empty) or explicitly lists that region — e.g. Paryushana
+    /// (jain-only) should not surface on a Gujarati or default user's calendar.
+    func hasContent(forFestivalId id: String, region: String?) -> Bool {
+        allEntries.contains {
+            ($0.id == id || id.hasPrefix($0.id + "_") || id.hasSuffix("_" + $0.id)) &&
+            ($0.regions.isEmpty || (region != nil && $0.regions.contains(region!)))
+        }
+    }
 }
 
 // MARK: - JSON wrapper

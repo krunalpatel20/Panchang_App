@@ -67,7 +67,7 @@ struct ContentResolver: ContentResolving {
                         calendar: cal
                     ) else { continue }
 
-                    let id = "\(rc.entry.id)-\(kindKey)-\(isoDate)"
+                    let id = "content.\(rc.entry.id)-\(kindKey)-\(isoDate)"
 
                     allTriggers.append(ScheduledTrigger(
                         id: id,

@@ -36,8 +36,11 @@ final class Preferences {
     var kundliStyle: String = "north"
     /// Whether the user has completed onboarding. Never resets.
     var seenOnboarding: Bool = false
-    /// Optional regional content filter: "gujarati" | "jain" | "sikh" | nil = all.
-    var contentRegion: String? = nil
+    /// Regional content filter: "gujarati" | "jain" | "sikh" | nil = no regional content at
+    /// all (region-restricted entries are skipped, not included — see ContentResolver.resolve).
+    /// Defaults to "gujarati": the Content Gita names Gujarat as this app's default tradition,
+    /// and the calendar/Today surfaces should agree on what an un-configured user sees.
+    var contentRegion: String? = "gujarati"
 
     init() {
         self.calendarPreset = "gujarati_western"

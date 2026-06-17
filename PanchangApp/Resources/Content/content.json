@@ -277,7 +277,7 @@
           },
           "voice": null,
           "morningOverride": {
-            "text": "The moon is full tonight — and from tomorrow, it begins to diminish. Shukla Paksha ends, Krishna Paksha begins. In the tradition: the waxing moon is for beginning things, the waning moon is for completing them. The next two weeks: finish what you started.",
+            "text": "The moon was full last night, and today it begins to diminish. Shukla Paksha ends, Krishna Paksha begins. In the tradition: the waxing moon is for beginning things, the waning moon is for completing them. The next two weeks: finish what you started.",
             "daysBefore": null
           },
           "triggers": null,
@@ -1030,7 +1030,7 @@
       "festivalType": "observance",
       "match": {
         "anchor": "masaTithi",
-        "masaIndex": 6,
+        "masaIndex": 5,
         "tithi": 15,
         "paksha": "krishna"
       },

@@ -22,6 +22,10 @@ struct CalendarView: View {
         prefsQuery.first?.calendarPreset == "north_indian" ? .northIndian : .gujaratiWestern
     }
 
+    private var region: String? {
+        prefsQuery.first?.contentRegion
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -38,12 +42,15 @@ struct CalendarView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbarItems }
             .sheet(isPresented: $vm.showDatePicker) { datepickerSheet }
-            .onAppear { vm.loadCells(location: activeLocation, config: config) }
+            .onAppear { vm.loadCells(location: activeLocation, config: config, region: region) }
             .onChange(of: savedLocations.first(where: { $0.isActive })?.name) { _, _ in
-                vm.loadCells(location: activeLocation, config: config)
+                vm.loadCells(location: activeLocation, config: config, region: region)
             }
             .onChange(of: prefsQuery.first?.calendarPreset) { _, _ in
-                vm.loadCells(location: activeLocation, config: config)
+                vm.loadCells(location: activeLocation, config: config, region: region)
+            }
+            .onChange(of: prefsQuery.first?.contentRegion) { _, _ in
+                vm.loadCells(location: activeLocation, config: config, region: region)
             }
             .navigationDestination(for: MonthCell.self) { cell in
                 DayDetailView(year: cell.year, month: cell.month, day: cell.day,
@@ -56,7 +63,7 @@ struct CalendarView: View {
 
     private var monthHeader: some View {
         HStack {
-            Button { vm.goToPreviousMonth(location: activeLocation, config: config) } label: {
+            Button { vm.goToPreviousMonth(location: activeLocation, config: config, region: region) } label: {
                 Image(systemName: "chevron.left").fontWeight(.semibold).frame(width: 44, height: 44)
             }
             .accessibilityLabel("Previous month")
@@ -70,7 +77,7 @@ struct CalendarView: View {
 
             Spacer()
 
-            Button { vm.goToNextMonth(location: activeLocation, config: config) } label: {
+            Button { vm.goToNextMonth(location: activeLocation, config: config, region: region) } label: {
                 Image(systemName: "chevron.right").fontWeight(.semibold).frame(width: 44, height: 44)
             }
             .accessibilityLabel("Next month")
@@ -132,7 +139,7 @@ struct CalendarView: View {
     @ToolbarContentBuilder
     private var toolbarItems: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) {
-            Button { vm.jumpTo(date: Date(), location: activeLocation, config: config) } label: {
+            Button { vm.jumpTo(date: Date(), location: activeLocation, config: config, region: region) } label: {
                 Text("Today")
             }
         }
@@ -148,7 +155,7 @@ struct CalendarView: View {
                     ToolbarItem(placement: .confirmationAction) {
                         Button("Go") {
                             vm.showDatePicker = false
-                            vm.jumpTo(date: vm.pickerDate, location: activeLocation, config: config)
+                            vm.jumpTo(date: vm.pickerDate, location: activeLocation, config: config, region: region)
                         }
                     }
                     ToolbarItem(placement: .cancellationAction) {

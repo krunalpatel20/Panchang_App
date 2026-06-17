@@ -56,9 +56,11 @@ final class NotificationScheduler: @unchecked Sendable {
         }
     }
 
-    /// Cancel all pending content notifications.
+    /// Cancel all pending content notifications. Scoped to the "content." id prefix so this
+    /// doesn't sweep up notifications some other feature schedules in the future.
     func cancelAll() async {
         let pending = await center.pendingNotificationRequests()
-        center.removePendingNotificationRequests(withIdentifiers: pending.map(\.identifier))
+        let contentIds = pending.map(\.identifier).filter { $0.hasPrefix("content.") }
+        center.removePendingNotificationRequests(withIdentifiers: contentIds)
     }
 }

@@ -52,31 +52,31 @@ final class CalendarViewModel {
         displayedMonth = now.month!
     }
 
-    func goToPreviousMonth(location: GeoLocation, config: CalendarConfig) {
+    func goToPreviousMonth(location: GeoLocation, config: CalendarConfig, region: String?) {
         var m = displayedMonth - 1
         var y = displayedYear
         if m < 1 { m = 12; y -= 1 }
         displayedYear = y; displayedMonth = m
-        loadCells(location: location, config: config)
+        loadCells(location: location, config: config, region: region)
     }
 
-    func goToNextMonth(location: GeoLocation, config: CalendarConfig) {
+    func goToNextMonth(location: GeoLocation, config: CalendarConfig, region: String?) {
         var m = displayedMonth + 1
         var y = displayedYear
         if m > 12 { m = 1; y += 1 }
         displayedYear = y; displayedMonth = m
-        loadCells(location: location, config: config)
+        loadCells(location: location, config: config, region: region)
     }
 
-    func jumpTo(date: Date, location: GeoLocation, config: CalendarConfig) {
+    func jumpTo(date: Date, location: GeoLocation, config: CalendarConfig, region: String?) {
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = location.timeZone
         let c = cal.dateComponents([.year, .month], from: date)
         displayedYear = c.year!; displayedMonth = c.month!
-        loadCells(location: location, config: config)
+        loadCells(location: location, config: config, region: region)
     }
 
-    func loadCells(location: GeoLocation, config: CalendarConfig) {
+    func loadCells(location: GeoLocation, config: CalendarConfig, region: String?) {
         isLoading = true
         generation += 1
         let gen = generation
@@ -86,7 +86,7 @@ final class CalendarViewModel {
         let cfg = config
 
         Task.detached(priority: .userInitiated) {
-            let cells = Self.buildCells(year: year, month: month, location: loc, config: cfg)
+            let cells = Self.buildCells(year: year, month: month, location: loc, config: cfg, region: region)
             await MainActor.run {
                 guard gen == self.generation else { return }
                 self.cells = cells
@@ -97,7 +97,7 @@ final class CalendarViewModel {
 
     private nonisolated static func buildCells(
         year: Int, month: Int,
-        location: GeoLocation, config: CalendarConfig
+        location: GeoLocation, config: CalendarConfig, region: String?
     ) -> [MonthCell] {
         var gregCal = Calendar(identifier: .gregorian)
         gregCal.timeZone = location.timeZone
@@ -132,7 +132,7 @@ final class CalendarViewModel {
                 tithiIndex: day.tithi.index,
                 sunriseJD: day.timings.sunrise,
                 festivals: occurrences
-                    .filter { store.hasContent(forFestivalId: $0.id) }
+                    .filter { store.hasContent(forFestivalId: $0.id, region: region) }
                     .sorted { festivalPriority($0.type) > festivalPriority($1.type) }
                     .map { FestivalItem(name: $0.name, type: $0.type) }
             )
