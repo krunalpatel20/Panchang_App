@@ -51,10 +51,10 @@
 		0232890D655330EAF1D283BA /* TriggerPlan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TriggerPlan.swift; path = Features/Notifications/TriggerPlan.swift; sourceTree = "<group>"; };
 		43ED1C2D59CB02E8516403F8 /* ContentStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentStore.swift; path = Services/ContentService/ContentStore.swift; sourceTree = "<group>"; };
 		53EE2581376FA4F065CAB057 /* HeartbeatListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HeartbeatListView.swift; path = Features/DeepDive/HeartbeatListView.swift; sourceTree = "<group>"; };
-		673B4FBCAB5CDBF827CD47E8 /* content-regional.json */ = {isa = PBXFileReference; includeInIndex = 1; name = "content-regional.json"; path = "Resources/Content/content-regional.json"; sourceTree = "<group>"; };
-		872198943BE056EA5F0FC626 /* content.json */ = {isa = PBXFileReference; includeInIndex = 1; name = content.json; path = Resources/Content/content.json; sourceTree = "<group>"; };
+		673B4FBCAB5CDBF827CD47E8 /* content-regional.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = "content-regional.json"; path = "Resources/Content/content-regional.json"; sourceTree = "<group>"; };
+		872198943BE056EA5F0FC626 /* content.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = content.json; path = Resources/Content/content.json; sourceTree = "<group>"; };
 		9A7B302F21FCBF986E7CE8C0 /* FestivalDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FestivalDetailView.swift; path = Features/DeepDive/FestivalDetailView.swift; sourceTree = "<group>"; };
-		A89112781E867F0B7B04F1B6 /* content.schema.json */ = {isa = PBXFileReference; includeInIndex = 1; name = content.schema.json; path = Resources/Content/content.schema.json; sourceTree = "<group>"; };
+		A89112781E867F0B7B04F1B6 /* content.schema.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = content.schema.json; path = Resources/Content/content.schema.json; sourceTree = "<group>"; };
 		AA000000000000000000040 /* PanchangApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanchangApp.swift; sourceTree = "<group>"; };
 		AA000000000000000000042 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		AA000000000000000000044 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -181,7 +181,6 @@
 				AA0000000000000000000D0 /* Models */,
 				AA0000000000000000000E0 /* Services */,
 				AA000000000000000000044 /* Assets.xcassets */,
-				AA000000000000000000160 /* Festivals */,
 				8FC7FA98861C654207241E34 /* Features */,
 				EA85D301D6C6A978A0822556 /* Services */,
 				55451E64B18762A6B6A5E608 /* Resources */,
@@ -279,13 +278,6 @@
 			children = (
 			);
 			path = Notifications;
-			sourceTree = "<group>";
-		};
-		AA000000000000000000160 /* Festivals */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources/Festivals;
 			sourceTree = "<group>";
 		};
 		AA000000000000000000170 /* ScriptRenderer */ = {
@@ -469,6 +461,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X9XT6KW58W;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Panchang;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Panchang needs your location to calculate sunrise times and accurate panchang for your area.";
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Panchang needs Reminders access to add fast-break times and festival reminders you tap \"Add Reminder\" for.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -497,6 +491,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X9XT6KW58W;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Panchang;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Panchang needs your location to calculate sunrise times and accurate panchang for your area.";
 				INFOPLIST_KEY_NSRemindersUsageDescription = "Panchang needs Reminders access to add fast-break times and festival reminders you tap \"Add Reminder\" for.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
