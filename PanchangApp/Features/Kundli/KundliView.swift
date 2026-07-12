@@ -38,6 +38,7 @@ struct KundliView: View {
                 }
             }
             .navigationTitle("Kundli")
+            .background(Palette.paper)
             .toolbar {
                 if !profiles.isEmpty {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -71,11 +72,11 @@ struct KundliView: View {
 
             switch vm.state {
             case .empty, .loading:
-                Section { ProgressView().frame(maxWidth: .infinity) }
+                Section { ProgressView().tint(Palette.accent).frame(maxWidth: .infinity) }
             case .loaded(let positions, let dasha):
                 Section { ChartView(positions: positions, style: kundliStyle).padding(.vertical, 8) }
-                Section("Planets") { PlanetTableView(positions: positions) }
-                Section("Vimshottari Dasha") { DashaTimelineView(dasha: dasha) }
+                Section { PlanetTableView(positions: positions) } header: { EditorialSectionHeader("Planets") }
+                Section { DashaTimelineView(dasha: dasha) } header: { EditorialSectionHeader("Vimshottari Dasha") }
             }
 
             if let p = selectedProfile {
@@ -84,6 +85,8 @@ struct KundliView: View {
                 }
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(Palette.paper)
     }
 
     private func loadSelected() {

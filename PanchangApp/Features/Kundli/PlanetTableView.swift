@@ -8,10 +8,10 @@ struct PlanetTableView: View {
     var body: some View {
         VStack(spacing: 0) {
             row(positions.lagna, isLagna: true)
-            Divider()
+            HairlineDivider()
             ForEach(positions.planets) { planet in
                 row(planet, isLagna: false)
-                if planet.id != positions.planets.last?.id { Divider() }
+                if planet.id != positions.planets.last?.id { HairlineDivider() }
             }
         }
     }
@@ -19,24 +19,27 @@ struct PlanetTableView: View {
     private func row(_ p: PlanetaryPositions.Planet, isLagna: Bool) -> some View {
         HStack {
             Text(p.name)
+                .font(.bodySans())
                 .fontWeight(isLagna ? .semibold : .regular)
+                .foregroundStyle(Palette.inkStrong)
                 .frame(width: 78, alignment: .leading)
             Text(p.rashiName)
-                .foregroundStyle(.secondary)
+                .font(.bodySans())
+                .foregroundStyle(Palette.inkSecondary)
                 .frame(width: 84, alignment: .leading)
             Text(Self.degreesInSign(p.longitude))
-                .monospacedDigit()
+                .font(.dataSans)
+                .foregroundStyle(Palette.inkSecondary)
                 .frame(width: 64, alignment: .trailing)
             Spacer()
             if p.isRetrograde {
-                Text("℞").foregroundStyle(.orange).help("Retrograde")
+                Text("℞").foregroundStyle(Palette.inauspicious).help("Retrograde")
             }
             Text(isLagna ? "—" : PanchangNames.nakshatra[p.nakshatra])
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(.tagSans)
+                .foregroundStyle(Palette.inkFaint)
                 .frame(width: 96, alignment: .trailing)
         }
-        .font(.subheadline)
         .padding(.vertical, 6)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(p.name), \(p.rashiName), \(Self.degreesInSign(p.longitude))\(p.isRetrograde ? ", retrograde" : "")")

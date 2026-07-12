@@ -31,13 +31,14 @@ struct CalendarView: View {
             VStack(spacing: 0) {
                 monthHeader
                 weekdayHeader
-                Divider()
+                HairlineDivider()
                 if vm.isLoading {
-                    Spacer(); ProgressView(); Spacer()
+                    Spacer(); ProgressView().tint(Palette.accent); Spacer()
                 } else {
                     grid
                 }
             }
+            .background(Palette.paper)
             .navigationTitle(monthTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbarItems }
@@ -71,7 +72,7 @@ struct CalendarView: View {
             Spacer()
 
             Button { vm.showDatePicker = true } label: {
-                Text(monthTitle).font(.title3.weight(.semibold))
+                Text(monthTitle).font(.titleSerif).foregroundStyle(Palette.inkStrong)
             }
             .accessibilityLabel("Jump to date")
 
@@ -88,7 +89,10 @@ struct CalendarView: View {
     private var weekdayHeader: some View {
         LazyVGrid(columns: columns, spacing: 0) {
             ForEach(weekdaySymbols, id: \.self) { sym in
-                Text(sym).font(.caption.weight(.medium)).foregroundStyle(.secondary)
+                Text(sym)
+                    .font(.trackedCaption)
+                    .tracking(1.5)
+                    .foregroundStyle(Palette.inkFaint)
                     .frame(maxWidth: .infinity).padding(.vertical, 6)
             }
         }
@@ -117,9 +121,7 @@ struct CalendarView: View {
         let festivalDays = vm.cells.filter(\.hasFestival)
         if !festivalDays.isEmpty {
             VStack(alignment: .leading, spacing: 0) {
-                Text("Festivals this month")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                EditorialSectionHeader("Festivals this month")
                     .padding(.vertical, 12)
 
                 ForEach(festivalDays) { cell in
@@ -129,7 +131,7 @@ struct CalendarView: View {
                     .buttonStyle(.plain)
 
                     if cell.id != festivalDays.last?.id {
-                        Divider().padding(.leading, 48)
+                        HairlineDivider().padding(.leading, 48)
                     }
                 }
             }
@@ -197,22 +199,23 @@ private struct FestivalListRow: View {
             // Day badge
             VStack(spacing: 0) {
                 Text("\(cell.day)")
-                    .font(.title3.weight(.bold))
+                    .font(.dataSans)
+                    .fontWeight(.bold)
                     .foregroundStyle(badgeColor)
                 Text(weekdayAbbrev)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+                    .font(.tagSans)
+                    .foregroundStyle(Palette.inkFaint)
             }
             .frame(width: 36)
 
             // Tithi + festival names
             VStack(alignment: .leading, spacing: 2) {
                 Text(tithiLabel)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(.tagSans)
+                    .foregroundStyle(Palette.inkFaint)
                 Text(cell.festivals.map(\.name).joined(separator: " · "))
-                    .font(.subheadline)
-                    .foregroundStyle(.primary)
+                    .font(.rowSerif)
+                    .foregroundStyle(Palette.inkStrong)
             }
 
             Spacer()
@@ -228,10 +231,10 @@ private struct FestivalListRow: View {
 
     private var badgeColor: Color {
         switch cell.topFestivalType {
-        case .festival:   return .orange
-        case .vrat:       return .indigo
-        case .observance: return .teal
-        case nil:         return .secondary
+        case .festival:   return Palette.festival
+        case .vrat:       return Palette.auspicious
+        case .observance: return Palette.inkMuted
+        case nil:         return Palette.inkMuted
         }
     }
 

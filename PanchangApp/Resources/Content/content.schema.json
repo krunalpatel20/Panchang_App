@@ -35,7 +35,7 @@
       "type": "object",
       "required": ["anchor"],
       "properties": {
-        "anchor":    { "type": "string", "enum": ["tithi", "masaTithi", "pakshaTransition"] },
+        "anchor":    { "type": "string", "enum": ["tithi", "masaTithi", "pakshaTransition", "solar", "paksha"] },
         "tithi":     { "type": ["integer", "null"], "minimum": 1, "maximum": 30 },
         "paksha":    { "type": ["string", "null"], "enum": ["shukla", "krishna", "both", null] },
         "masaIndex": { "type": ["integer", "null"], "minimum": 0, "maximum": 11 }
@@ -59,8 +59,13 @@
       "description": "food is non-nullable — the food layer is never optional.",
       "properties": {
         "advance":  { "oneOf": [{ "$ref": "#/definitions/VoiceLayer" }, { "type": "null" }] },
+        "advance2": { "oneOf": [{ "$ref": "#/definitions/VoiceLayer" }, { "type": "null" }],
+                      "description": "Second advance notification (e.g. 3 days out). Matched to the advance trigger whose daysBefore == advance2.daysBefore." },
         "eve":      { "oneOf": [{ "$ref": "#/definitions/VoiceLayer" }, { "type": "null" }] },
         "morning":  { "$ref": "#/definitions/VoiceLayer" },
+        "offsets":  { "type": ["object", "null"],
+                      "description": "Texts for dayOffset triggers, keyed by trigger label (e.g. 'visarjan').",
+                      "additionalProperties": { "$ref": "#/definitions/VoiceLayer" } },
         "deepDive": { "$ref": "#/definitions/DeepDive" },
         "food":     { "$ref": "#/definitions/FoodNote" }
       }
@@ -108,7 +113,7 @@
       "properties": {
         "type":       { "type": "string", "enum": ["advance", "eve", "morning", "midnight", "dayOffset"] },
         "daysBefore": { "type": "integer", "description": "Required for type=advance" },
-        "time":       { "$ref": "#/definitions/TimeHHMM", "description": "Required for type=eve|morning" },
+        "time":       { "$ref": "#/definitions/TimeHHMM", "description": "Required for type=eve|morning. Optional for type=dayOffset (defaults to 8:00 when absent)." },
         "offset":     { "type": "integer", "description": "Required for type=dayOffset" },
         "label":      { "type": "string",  "description": "Required for type=dayOffset" }
       }

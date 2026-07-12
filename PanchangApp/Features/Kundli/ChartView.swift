@@ -48,15 +48,15 @@ struct ChartView: View {
     private func southChart(side: CGFloat) -> some View {
         let cell = side / 4
         return ZStack(alignment: .topLeading) {
-            Rectangle().stroke(.primary, lineWidth: 1).frame(width: side, height: side)
+            Rectangle().stroke(Palette.inkStrong, lineWidth: 1).frame(width: side, height: side)
             ForEach(0..<12, id: \.self) { sign in
                 let (r, c) = Self.southCells[sign]!
                 signCell(sign: sign, isLagna: sign == lagnaRashi)
                     .frame(width: cell, height: cell)
-                    .overlay(Rectangle().stroke(.primary.opacity(0.4), lineWidth: 0.5))
+                    .overlay(Rectangle().stroke(Palette.hairline, lineWidth: 0.5))
                     .offset(x: CGFloat(c) * cell, y: CGFloat(r) * cell)
             }
-            Text("Rāśi").font(.caption2).foregroundStyle(.secondary)
+            Text("Rāśi").font(.caption2).foregroundStyle(Palette.inkFaint)
                 .frame(width: cell * 2, height: cell * 2)
                 .offset(x: cell, y: cell)
         }
@@ -65,16 +65,17 @@ struct ChartView: View {
     private func signCell(sign: Int, isLagna: Bool) -> some View {
         VStack(alignment: .leading, spacing: 1) {
             HStack(spacing: 2) {
-                Text(PanchangNames.rashi[sign]).font(.system(size: 8)).foregroundStyle(.secondary)
-                if isLagna { Text("Asc").font(.system(size: 8)).foregroundStyle(.orange) }
+                Text(PanchangNames.rashi[sign]).font(.system(size: 8)).foregroundStyle(Palette.inkMuted)
+                if isLagna { Text("Asc").font(.system(size: 8)).foregroundStyle(Palette.accent) }
             }
             Text((planetsByRashi[sign] ?? []).joined(separator: " "))
                 .font(.system(size: 11, weight: .medium))
+                .foregroundStyle(Palette.inkStrong)
             Spacer(minLength: 0)
         }
         .padding(3)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(isLagna ? Color.orange.opacity(0.08) : .clear)
+        .background(isLagna ? Palette.accent.opacity(0.08) : .clear)
     }
 
     // MARK: - North Indian (fixed houses, signs rotate from lagna)
@@ -98,16 +99,17 @@ struct ChartView: View {
                 p.addLine(to: CGPoint(x: s/2, y: s)); p.addLine(to: CGPoint(x: 0, y: s/2))
                 p.addLine(to: CGPoint(x: s/2, y: 0))
             }
-            .stroke(.primary, lineWidth: 1)
+            .stroke(Palette.inkStrong, lineWidth: 1)
 
             ForEach(0..<12, id: \.self) { house in
                 let sign = (lagnaRashi + house) % 12
                 let anchor = Self.northAnchors[house]
                 VStack(spacing: 1) {
-                    Text("\(sign + 1)").font(.system(size: 8)).foregroundStyle(.secondary)
+                    Text("\(sign + 1)").font(.system(size: 8)).foregroundStyle(Palette.inkMuted)
                     Text((planetsByRashi[sign] ?? []).joined(separator: " "))
                         .font(.system(size: 10, weight: .medium)).multilineTextAlignment(.center)
-                    if house == 0 { Text("Asc").font(.system(size: 8)).foregroundStyle(.orange) }
+                        .foregroundStyle(Palette.inkStrong)
+                    if house == 0 { Text("Asc").font(.system(size: 8)).foregroundStyle(Palette.accent) }
                 }
                 .frame(width: side * 0.22)
                 .position(x: anchor.x * side, y: anchor.y * side)

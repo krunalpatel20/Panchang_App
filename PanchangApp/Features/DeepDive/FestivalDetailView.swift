@@ -4,6 +4,7 @@ import EventKit
 /// Full deep-dive view for a resolved content entry. Pure display — data passed in.
 struct FestivalDetailView: View {
     let content: ResolvedContent
+    var mood: DayMood = .ordinary
 
     @State private var reminderAlert: ReminderAlert?
 
@@ -13,19 +14,43 @@ struct FestivalDetailView: View {
     }
 
     var body: some View {
-        List {
-            deepDiveSections
-            foodSection
-            if let action = content.action {
-                actionSection(action)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                header
+                deepDiveSections
+                FoodView(food: content.voice.food, accent: mood.accent)
+                    .padding(.bottom, 28)
+                if let action = content.action {
+                    actionLink(action)
+                }
             }
+            .padding(.horizontal, 28)
+            .padding(.top, 22)
+            .padding(.bottom, 40)
         }
-        .listStyle(.insetGrouped)
+        .background(Palette.paper.ignoresSafeArea())
         .navigationTitle(content.entry.name)
-        .navigationBarTitleDisplayMode(.large)
+        .navigationBarTitleDisplayMode(.inline)
         .alert(item: $reminderAlert) { alert in
             Alert(title: Text("Reminders"), message: Text(alert.message), dismissButton: .default(Text("OK")))
         }
+    }
+
+    // MARK: - Header
+
+    private var header: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(content.entry.name)
+                .font(.titleSerif)
+                .foregroundStyle(Palette.ink)
+            if let tagline = content.entry.tagline {
+                Text(tagline)
+                    .font(.tagSans)
+                    .foregroundStyle(Palette.inkFaint)
+            }
+        }
+        .padding(.bottom, 26)
+        .accessibilityElement(children: .combine)
     }
 
     // MARK: - Deep dive sections
@@ -34,58 +59,37 @@ struct FestivalDetailView: View {
     private var deepDiveSections: some View {
         let dive = content.voice.deepDive
 
-        Section("What It Is") {
-            Text(dive.whatItIs)
-                .font(.body)
-                .foregroundStyle(.primary)
-        }
-
-        Section("Mythology") {
-            Text(dive.mythology)
-                .font(.body)
-                .foregroundStyle(.primary)
-        }
-
-        Section("History") {
-            Text(dive.history)
-                .font(.body)
-                .foregroundStyle(.primary)
-        }
-
-        Section("Regional") {
-            Text(dive.regional)
-                .font(.body)
-                .foregroundStyle(.primary)
-        }
-
-        Section("What To Do") {
-            Text(dive.whatToDo)
-                .font(.body)
-                .foregroundStyle(.primary)
-        }
+        sectionBlock(title: "WHAT IT IS", text: dive.whatItIs)
+        sectionBlock(title: "MYTHOLOGY", text: dive.mythology)
+        sectionBlock(title: "HISTORY", text: dive.history)
+        sectionBlock(title: "REGIONAL", text: dive.regional)
+        sectionBlock(title: "WHAT TO DO", text: dive.whatToDo)
     }
 
-    // MARK: - Food section
-
-    private var foodSection: some View {
-        Section {
-            FoodView(food: content.voice.food)
-                .listRowInsets(EdgeInsets())
-                .listRowBackground(Color.clear)
+    private func sectionBlock(title: String, text: String) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            EditorialSectionHeader(title)
+                .accessibilityAddTraits(.isHeader)
+            Text(text)
+                .font(.bodyProse)
+                .foregroundStyle(Palette.inkStrong)
+                .lineSpacing(6)
         }
+        .padding(.bottom, 28)
     }
 
-    // MARK: - Action section
+    // MARK: - Action link
 
-    private func actionSection(_ action: ContentAction) -> some View {
-        Section {
-            Button {
-                Task { await handleAction(action) }
-            } label: {
-                Label(action.label, systemImage: actionSystemImage(for: action.kind))
-                    .font(.body.weight(.medium))
-            }
+    private func actionLink(_ action: ContentAction) -> some View {
+        Button {
+            Task { await handleAction(action) }
+        } label: {
+            QuietLink(label: action.label, color: mood.accent)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
+        .padding(.vertical, 14)
     }
 
     // MARK: - Action handling
@@ -109,15 +113,6 @@ struct FestivalDetailView: View {
             }
         case .addReminder:
             await addReminder(notes: action.payload)
-        }
-    }
-
-    private func actionSystemImage(for kind: ContentAction.Kind) -> String {
-        switch kind {
-        case .call: return "phone"
-        case .addReminder: return "bell.badge"
-        case .openMaps: return "map"
-        case .note: return "doc.on.clipboard"
         }
     }
 
@@ -177,8 +172,10 @@ extension ResolvedContent {
         )
         let voice = VoiceLayers(
             advance: VoiceLayer(text: "Ekadashi arrives in two days.", daysBefore: 2),
+            advance2: nil,
             eve: VoiceLayer(text: "Tomorrow is Ekadashi — prepare your fast.", daysBefore: nil),
             morning: VoiceLayer(text: "Today is Ekadashi. A good day for fasting, prayer, and stillness.", daysBefore: nil),
+            offsets: nil,
             deepDive: dive,
             food: food
         )

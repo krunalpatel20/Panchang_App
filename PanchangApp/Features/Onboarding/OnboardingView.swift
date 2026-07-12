@@ -29,24 +29,30 @@ struct OnboardingView: View {
 private struct WelcomePage: View {
     let onContinue: () -> Void
 
+    @ScaledMetric(relativeTo: .largeTitle) private var titleSize: CGFloat = 42
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
             VStack(spacing: 24) {
                 Text("Panchang")
-                    .font(.system(size: 42, weight: .semibold, design: .serif))
-                    .foregroundStyle(.primary)
+                    .font(.system(size: titleSize, weight: .semibold, design: .serif))
+                    .foregroundStyle(Palette.ink)
+                    .dynamicTypeSize(...DynamicTypeSize.accessibility2)
 
                 Text("The shape of the month, in your pocket.\nThe Hindu lunar calendar — festivals, fasting days, and the rhythm of the year — rebuilt for wherever you are now.")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
+                    .font(.bodyProse)
+                    .foregroundStyle(Palette.inkSecondary)
                     .multilineTextAlignment(.center)
+                    .lineSpacing(6)
                     .padding(.horizontal, 32)
             }
             Spacer()
             ContinueButton(label: "Continue", action: onContinue)
                 .padding(.bottom, 52)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Palette.paper.ignoresSafeArea())
     }
 }
 
@@ -61,19 +67,21 @@ private struct AbsolutionPage: View {
             VStack(spacing: 28) {
                 Text("A note before we begin")
                     .font(.system(.title2, design: .serif))
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(Palette.ink)
 
                 Text("You don't have to have done this perfectly to start now. You don't have to have grown up with it, or observed every fast, or known the Sanskrit words, or had a grandmother who explained things. The tradition survived a lot — centuries of travel, partition, diaspora, intermarriage, forgetting. It can survive you coming to it late. You're here now. That's the beginning.")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
+                    .font(.bodyProse)
+                    .foregroundStyle(Palette.inkSecondary)
                     .multilineTextAlignment(.center)
-                    .lineSpacing(4)
+                    .lineSpacing(6)
                     .padding(.horizontal, 32)
             }
             Spacer()
             ContinueButton(label: "Continue", action: onContinue)
                 .padding(.bottom, 52)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Palette.paper.ignoresSafeArea())
     }
 }
 
@@ -93,12 +101,13 @@ private struct LocationPage: View {
 
                 Text("Sunrise and sunset times")
                     .font(.system(.title2, design: .serif))
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(Palette.ink)
 
                 Text("Panchang times shift with the sun. Your location lets the app show accurate tithi changes, sunrise, and sunset for where you actually are.")
-                    .font(.body)
-                    .foregroundStyle(.secondary)
+                    .font(.bodyProse)
+                    .foregroundStyle(Palette.inkSecondary)
                     .multilineTextAlignment(.center)
+                    .lineSpacing(6)
                     .padding(.horizontal, 32)
             }
             Spacer()
@@ -113,11 +122,15 @@ private struct LocationPage: View {
             }
             .padding(.bottom, 52)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Palette.paper.ignoresSafeArea())
     }
 }
 
 // MARK: - Shared button
 
+/// The one filled button in the app — accent capsule, reserved for the
+/// onboarding threshold moment.
 private struct ContinueButton: View {
     let label: String
     let action: () -> Void
@@ -128,8 +141,8 @@ private struct ContinueButton: View {
                 .font(.headline)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
-                .background(Color.primary)
-                .foregroundStyle(Color(uiColor: .systemBackground))
+                .background(Palette.accent)
+                .foregroundStyle(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 14))
         }
         .padding(.horizontal, 32)

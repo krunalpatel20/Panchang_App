@@ -39,6 +39,7 @@ struct MuhurtaView: View {
                                            description: Text(msg))
                 }
             }
+            .background(Palette.paper.ignoresSafeArea())
             .navigationTitle("Muhurta")
             .onChange(of: savedLocations.first(where: { $0.isActive })?.name) { _, _ in
                 vm.load(location: activeLocation, config: config)
@@ -55,39 +56,64 @@ private struct MuhurtaGridView: View {
     let janmaNakshatra: Int
     let janmaRashi: Int
 
+    /// The moment "now," in the same Julian-day (UT) space as segment/window bounds,
+    /// so the current choghadiya/hora row can be highlighted.
+    private var nowJD: Double { JulianDate.julianDay(from: Date()) }
+
+    private func isCurrent(_ start: Double, _ end: Double) -> Bool {
+        nowJD >= start && nowJD < end
+    }
+
     var body: some View {
-        List {
-            choghadiyaSection("Choghadiya — Day", day.choghadiya.day)
-            choghadiyaSection("Choghadiya — Night", day.choghadiya.night)
-            windowsSection("Dur Muhurtam", day.durMuhurtam, inauspicious: true)
-            windowsSection("Varjyam", day.varjyam, inauspicious: true)
-            windowsSection("Amrit Kalam", day.amritKalam, inauspicious: false)
-            horaSection
-            if janmaNakshatra >= 0 || janmaRashi >= 0 { balaSection }
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                choghadiyaSection("Choghadiya — Day", day.choghadiya.day)
+                choghadiyaSection("Choghadiya — Night", day.choghadiya.night)
+                windowsSection("Dur Muhurtam", day.durMuhurtam, inauspicious: true)
+                windowsSection("Varjyam", day.varjyam, inauspicious: true)
+                windowsSection("Amrit Kalam", day.amritKalam, inauspicious: false)
+                horaSection
+                if janmaNakshatra >= 0 || janmaRashi >= 0 { balaSection }
+            }
+            .padding(.horizontal, 28)
+            .padding(.top, 22)
+            .padding(.bottom, 28)
         }
-        .listStyle(.insetGrouped)
+        .background(Palette.paper.ignoresSafeArea())
     }
 
     // MARK: Choghadiya
 
     private func choghadiyaSection(_ title: String, _ segments: [Choghadiya.Segment]) -> some View {
-        Section(title) {
-            ForEach(segments) { seg in
+        VStack(alignment: .leading, spacing: 0) {
+            EditorialSectionHeader(title)
+                .padding(.bottom, 14)
+            ForEach(Array(segments.enumerated()), id: \.element.id) { i, seg in
+                let current = isCurrent(seg.start, seg.end)
                 HStack(spacing: 12) {
-                    Circle().fill(color(seg.quality)).frame(width: 10, height: 10)
+                    AccentDot(color: dotColor(seg.quality))
                     Text(seg.name)
+                        .font(.bodySans())
+                        .foregroundStyle(Palette.inkStrong)
                     Spacer()
                     Text("\(time(seg.start)) – \(time(seg.end))")
-                        .foregroundStyle(.secondary).monospacedDigit()
+                        .font(.dataSans)
+                        .foregroundStyle(Palette.inkSecondary)
                 }
+                .padding(.vertical, 11)
+                .background(current ? Palette.accent.opacity(0.04) : Color.clear)
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("\(seg.name), \(qualityLabel(seg.quality)), \(time(seg.start)) to \(time(seg.end))")
+                if i < segments.count - 1 {
+                    HairlineDivider(opacity: 0.6)
+                }
             }
         }
+        .padding(.bottom, 28)
     }
 
-    private func color(_ q: Choghadiya.Quality) -> Color {
-        switch q { case .good: return .green; case .bad: return .red; case .neutral: return .yellow }
+    private func dotColor(_ q: Choghadiya.Quality) -> Color {
+        switch q { case .good: return Palette.auspicious; case .bad: return Palette.inauspicious; case .neutral: return Palette.inkFaint }
     }
     private func qualityLabel(_ q: Choghadiya.Quality) -> String {
         switch q { case .good: return "auspicious"; case .bad: return "inauspicious"; case .neutral: return "neutral" }
@@ -96,62 +122,96 @@ private struct MuhurtaGridView: View {
     // MARK: Windows
 
     private func windowsSection(_ title: String, _ windows: [MuhurtaWindow], inauspicious: Bool) -> some View {
-        Section(title) {
+        VStack(alignment: .leading, spacing: 0) {
+            EditorialSectionHeader(title)
+                .padding(.bottom, 14)
             if windows.isEmpty {
-                Text("None today").foregroundStyle(.secondary)
+                Text("None today")
+                    .font(.bodySans())
+                    .foregroundStyle(Palette.inkMuted)
+                    .padding(.vertical, 11)
             } else {
-                ForEach(Array(windows.enumerated()), id: \.offset) { _, w in
+                ForEach(Array(windows.enumerated()), id: \.offset) { i, w in
                     HStack {
-                        Image(systemName: inauspicious ? "exclamationmark.triangle" : "drop.fill")
-                            .foregroundStyle(inauspicious ? .red : .green)
+                        AccentDot(color: inauspicious ? Palette.inauspicious : Palette.auspicious)
                         Spacer()
                         if let s = w.start, let e = w.end {
-                            Text("\(time(s)) – \(time(e))").foregroundStyle(.secondary).monospacedDigit()
+                            Text("\(time(s)) – \(time(e))")
+                                .font(.dataSans)
+                                .foregroundStyle(Palette.inkSecondary)
                         } else {
-                            Text("–").foregroundStyle(.secondary)
+                            Text("–")
+                                .font(.dataSans)
+                                .foregroundStyle(Palette.inkSecondary)
                         }
+                    }
+                    .padding(.vertical, 11)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel({
+                        if let s = w.start, let e = w.end { return "\(title): \(time(s)) to \(time(e))" }
+                        return "\(title): not available"
+                    }())
+                    if i < windows.count - 1 {
+                        HairlineDivider(opacity: 0.6)
                     }
                 }
             }
         }
+        .padding(.bottom, 28)
     }
 
     // MARK: Hora
 
     private var horaSection: some View {
-        Section("Hora") {
-            ForEach(day.horas) { h in
+        VStack(alignment: .leading, spacing: 0) {
+            EditorialSectionHeader("Hora")
+                .padding(.bottom, 14)
+            ForEach(Array(day.horas.enumerated()), id: \.element.id) { i, h in
+                let current = isCurrent(h.start, h.end)
                 HStack {
                     Text(h.planet)
+                        .font(.bodySans())
+                        .foregroundStyle(Palette.inkStrong)
                     Spacer()
-                    Text("\(time(h.start)) – \(time(h.end))").foregroundStyle(.secondary).monospacedDigit()
+                    Text("\(time(h.start)) – \(time(h.end))")
+                        .font(.dataSans)
+                        .foregroundStyle(Palette.inkSecondary)
+                }
+                .padding(.vertical, 11)
+                .background(current ? Palette.accent.opacity(0.04) : Color.clear)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("\(h.planet) hora, \(time(h.start)) to \(time(h.end))")
+                if i < day.horas.count - 1 {
+                    HairlineDivider(opacity: 0.6)
                 }
             }
         }
+        .padding(.bottom, 28)
     }
 
     // MARK: Bala
 
+    @ViewBuilder
     private var balaSection: some View {
-        Section("Bala") {
+        VStack(alignment: .leading, spacing: 0) {
+            EditorialSectionHeader("Bala")
+                .padding(.bottom, 14)
             if janmaNakshatra >= 0 {
                 let t = TaraBala.compute(janmaNakshatra: janmaNakshatra, dayNakshatra: day.nakshatra.index)
-                HStack {
-                    Label("Tara Bala", systemImage: "star")
-                    Spacer()
-                    Text(t.name).foregroundStyle(t.isAuspicious ? .green : .red)
-                }
+                AlmanacRow(label: "Tara Bala", value: t.name,
+                           dotColor: t.isAuspicious ? Palette.auspicious : Palette.inauspicious)
+                    .padding(.vertical, 11)
+                if janmaRashi >= 0 { HairlineDivider(opacity: 0.6) }
             }
             if janmaRashi >= 0 {
                 let c = ChandraBala.compute(janmaRashi: janmaRashi, moonRashi: day.moonRashiIndex)
-                HStack {
-                    Label("Chandra Bala", systemImage: "moon")
-                    Spacer()
-                    Text(c.isAuspicious ? "Favourable (house \(c.house))" : "Weak (house \(c.house))")
-                        .foregroundStyle(c.isAuspicious ? .green : .red)
-                }
+                AlmanacRow(label: "Chandra Bala",
+                           value: c.isAuspicious ? "Favourable (house \(c.house))" : "Weak (house \(c.house))",
+                           dotColor: c.isAuspicious ? Palette.auspicious : Palette.inauspicious)
+                    .padding(.vertical, 11)
             }
         }
+        .padding(.bottom, 8)
     }
 
     // MARK: Time formatting

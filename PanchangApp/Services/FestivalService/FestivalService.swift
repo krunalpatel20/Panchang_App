@@ -66,6 +66,10 @@ private extension ContentMatch {
         case .pakshaTransition:
             // Notification-text variant selector only — not a standalone calendar event.
             return nil
+
+        case .paksha:
+            // Ordinary-day hero copy only (A4) — not a standalone calendar event.
+            return nil
         }
     }
 }

@@ -5,7 +5,7 @@ enum NotificationTrigger: Sendable, Codable {
     case eve(time: CodableDateComponents)
     case morning(time: CodableDateComponents)
     case midnight
-    case dayOffset(Int, label: String)
+    case dayOffset(Int, label: String, time: CodableDateComponents?)
 
     // MARK: - Codable support
 
@@ -28,7 +28,8 @@ enum NotificationTrigger: Sendable, Codable {
         case "dayOffset":
             self = .dayOffset(
                 try c.decode(Int.self, forKey: .offset),
-                label: try c.decode(String.self, forKey: .label)
+                label: try c.decode(String.self, forKey: .label),
+                time: try c.decodeIfPresent(CodableDateComponents.self, forKey: .time)
             )
         default:
             throw DecodingError.dataCorruptedError(
@@ -51,10 +52,11 @@ enum NotificationTrigger: Sendable, Codable {
             try c.encode(time, forKey: .time)
         case .midnight:
             try c.encode("midnight", forKey: .type)
-        case .dayOffset(let offset, let label):
+        case .dayOffset(let offset, let label, let time):
             try c.encode("dayOffset", forKey: .type)
             try c.encode(offset, forKey: .offset)
             try c.encode(label, forKey: .label)
+            try c.encodeIfPresent(time, forKey: .time)
         }
     }
 }

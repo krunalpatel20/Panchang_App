@@ -23,7 +23,12 @@ struct DayDetailView: View {
         Group {
             switch state {
             case .loading:
-                ProgressView("Computing…").frame(maxWidth: .infinity, maxHeight: .infinity)
+                ProgressView("Computing…")
+                    .tint(Palette.accent)
+                    .font(.bodySans())
+                    .foregroundStyle(Palette.inkSecondary)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Palette.paper)
             case .loaded(let day, let festivals, let resolved):
                 PanchangDayView(day: day, festivals: festivals,
                                 scriptMode: scriptMode, resolvedContent: resolved)

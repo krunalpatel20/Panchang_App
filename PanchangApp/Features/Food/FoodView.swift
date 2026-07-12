@@ -1,30 +1,34 @@
 import SwiftUI
 
-/// Compact food-layer card. Embeddable in FestivalDetailView or used standalone.
+/// The one visually distinct block in the deep dive — a hairline-bordered card
+/// with the food note and, if present, a quiet recipe link. Embeddable in
+/// FestivalDetailView or used standalone.
 struct FoodView: View {
     let food: FoodNote
+    var accent: Color = Palette.accent
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Label("In the Kitchen", systemImage: "fork.knife")
-                .font(.headline)
-                .foregroundStyle(.primary)
+        VStack(alignment: .leading, spacing: 10) {
+            EditorialSectionHeader("THE FOOD")
+                .accessibilityAddTraits(.isHeader)
 
             Text(food.note)
-                .font(.body)
-                .foregroundStyle(.primary)
+                .font(.bodyProse)
+                .foregroundStyle(Palette.inkStrong)
+                .lineSpacing(6)
 
             if let url = food.recipeLink {
                 Link(destination: url) {
-                    Label("See recipe", systemImage: "arrow.up.right")
-                        .font(.subheadline)
+                    QuietLink(label: "See recipe", color: accent)
                 }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(Color(.secondarySystemGroupedBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .strokeBorder(Palette.hairline, lineWidth: 1)
+        )
     }
 }
 
@@ -34,4 +38,5 @@ struct FoodView: View {
         recipeLink: URL(string: "https://example.com/sabudana-khichdi")
     ))
     .padding()
+    .background(Palette.paper)
 }

@@ -27,7 +27,7 @@ struct ContentResolver: ContentResolving {
             let date = gregorianDate(from: day)
             results.append(ResolvedContent(
                 entry: entry,
-                voice: voice,
+                voice: substituted(voice, day: day),
                 triggers: triggers,
                 action: action,
                 date: date
@@ -72,7 +72,7 @@ struct ContentResolver: ContentResolving {
                     allTriggers.append(ScheduledTrigger(
                         id: id,
                         title: rc.entry.name,
-                        body: rc.voice.morning.text,
+                        body: body(for: trigger, voice: rc.voice),
                         fireDate: fireDate,
                         timeZone: location.timeZone,
                         tier: rc.entry.tier,
@@ -89,7 +89,9 @@ struct ContentResolver: ContentResolving {
 
     // MARK: - Matching
 
-    private func matchesDay(_ match: ContentMatch, day: PanchangDay) -> Bool {
+    /// Not `private`: exercised directly by unit tests (e.g. the `.paksha` anchor, which has
+    /// no dedicated content entries yet to resolve through the public API).
+    func matchesDay(_ match: ContentMatch, day: PanchangDay) -> Bool {
         switch match.anchor {
         case .tithi:
             return tithiMatches(match: match, day: day)
@@ -118,6 +120,11 @@ struct ContentResolver: ContentResolving {
         case .solar:
             guard let rashi = match.rashiIndex else { return false }
             return day.isSolarTransition && day.sunRashiIndex == rashi
+
+        case .paksha:
+            // Fail closed like masaTithi: nil (and .both, which doesn't identify a single
+            // paksha) must not match every day.
+            return match.paksha.map { day.tithi.paksha == ($0 == .shukla ? .shukla : .krishna) } ?? false
         }
     }
 
@@ -160,12 +167,14 @@ struct ContentResolver: ContentResolving {
         let best = candidates.max(by: { specificity($0.match) < specificity($1.match) })
 
         var voice = best?.voice ?? entry.voice
-        // morningOverride swaps only the morning layer; deepDive/food inherit from base.
+        // morningOverride swaps only the morning layer; everything else inherits from base.
         if let morningOverride = best?.morningOverride {
             voice = VoiceLayers(
                 advance: voice.advance,
+                advance2: voice.advance2,
                 eve: voice.eve,
                 morning: morningOverride,
+                offsets: voice.offsets,
                 deepDive: voice.deepDive,
                 food: voice.food
             )
@@ -174,6 +183,63 @@ struct ContentResolver: ContentResolving {
         let action = best?.action ?? entry.action
 
         return (voice, triggers, action)
+    }
+
+    // MARK: - Notification body selection
+
+    /// Picks the voice text for a fired trigger. Not `private`: exercised directly by unit
+    /// tests covering the advance/advance2/eve/dayOffset selection rules (A1.1).
+    func body(for trigger: NotificationTrigger, voice: VoiceLayers) -> String {
+        switch trigger {
+        case .advance(let d):
+            if let a2 = voice.advance2, a2.daysBefore == d { return a2.text }
+            return voice.advance?.text ?? voice.morning.text
+        case .eve:
+            return voice.eve?.text ?? voice.morning.text
+        case .dayOffset(_, let label, _):
+            return voice.offsets?[label]?.text ?? voice.morning.text
+        case .morning, .midnight:
+            return voice.morning.text
+        }
+    }
+
+    // MARK: - Template token substitution
+
+    /// Substitutes `{{masa}}`/`{{vsYear}}` tokens across every text field of a resolved
+    /// `VoiceLayers`. Not `private`: exercised directly by unit tests so token substitution
+    /// can be verified without depending on content authoring landing first (A3).
+    func substituted(_ voice: VoiceLayers, day: PanchangDay) -> VoiceLayers {
+        func sub(_ s: String) -> String {
+            s.replacingOccurrences(of: "{{masa}}", with: day.displayedMasaName)
+             .replacingOccurrences(of: "{{vsYear}}", with: String(day.displayedVikramSamvat))
+        }
+        func sub(_ layer: VoiceLayer?) -> VoiceLayer? {
+            guard let layer else { return nil }
+            return VoiceLayer(text: sub(layer.text), daysBefore: layer.daysBefore)
+        }
+
+        let deepDive = voice.deepDive
+        let subbedDeepDive = DeepDive(
+            whatItIs: sub(deepDive.whatItIs),
+            mythology: sub(deepDive.mythology),
+            history: sub(deepDive.history),
+            regional: sub(deepDive.regional),
+            whatToDo: sub(deepDive.whatToDo)
+        )
+
+        let subbedOffsets = voice.offsets?.mapValues { layer in
+            VoiceLayer(text: sub(layer.text), daysBefore: layer.daysBefore)
+        }
+
+        return VoiceLayers(
+            advance: sub(voice.advance),
+            advance2: sub(voice.advance2),
+            eve: sub(voice.eve),
+            morning: VoiceLayer(text: sub(voice.morning.text), daysBefore: voice.morning.daysBefore),
+            offsets: subbedOffsets,
+            deepDive: subbedDeepDive,
+            food: FoodNote(note: sub(voice.food.note), recipeLink: voice.food.recipeLink)
+        )
     }
 
     private func specificity(_ match: ContentMatch) -> Int {
@@ -234,9 +300,9 @@ struct ContentResolver: ContentResolving {
             let fireDate = dateAtHourMinute(date: dayDate, hour: 0, minute: 0, timeZone: timeZone)
             return (fireDate, "midnight")
 
-        case .dayOffset(let offset, let label):
+        case .dayOffset(let offset, let label, let time):
             guard let offsetDate = cal.date(byAdding: .day, value: offset, to: dayDate) else { return nil }
-            let fireDate = dateAtHourMinute(date: offsetDate, hour: 8, minute: 0, timeZone: timeZone)
+            let fireDate = dateAtHourMinute(date: offsetDate, hour: time?.hour ?? 8, minute: time?.minute ?? 0, timeZone: timeZone)
             return (fireDate, "offset-\(label)")
         }
     }

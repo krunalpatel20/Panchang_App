@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import UIKit
 import PanchangKit
 
 @main
@@ -10,11 +11,54 @@ struct PanchangApp: App {
         return try! ModelContainer(for: schema, configurations: [config])
     }()
 
+    @MainActor
+    init() {
+        AppChrome.apply()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView()
+                .tint(Palette.accent)
         }
         .modelContainer(container)
+    }
+}
+
+/// One-time UIKit appearance setup so tab/nav chrome matches the paper +
+/// hairline design system instead of the system default background/blue tint.
+private enum AppChrome {
+    @MainActor
+    static func apply() {
+        let tabAppearance = UITabBarAppearance()
+        tabAppearance.configureWithOpaqueBackground()
+        tabAppearance.backgroundColor = UIColor(Palette.paper)
+        let selected = UIColor(Palette.accent)
+        let unselected = UIColor(Palette.inkFaint)
+        for itemAppearance in [tabAppearance.stackedLayoutAppearance,
+                               tabAppearance.inlineLayoutAppearance,
+                               tabAppearance.compactInlineLayoutAppearance] {
+            itemAppearance.selected.iconColor = selected
+            itemAppearance.selected.titleTextAttributes = [.foregroundColor: selected]
+            itemAppearance.normal.iconColor = unselected
+            itemAppearance.normal.titleTextAttributes = [.foregroundColor: unselected]
+        }
+        tabAppearance.shadowColor = UIColor(Palette.hairline)
+        UITabBar.appearance().standardAppearance = tabAppearance
+        UITabBar.appearance().scrollEdgeAppearance = tabAppearance
+
+        let navAppearance = UINavigationBarAppearance()
+        navAppearance.configureWithOpaqueBackground()
+        navAppearance.backgroundColor = UIColor(Palette.paper)
+        navAppearance.shadowColor = UIColor(Palette.hairline)
+        let titleFont = UIFont(descriptor: UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body)
+            .withDesign(.serif) ?? UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body), size: 0)
+        navAppearance.titleTextAttributes = [.foregroundColor: UIColor(Palette.inkStrong), .font: titleFont]
+        navAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor(Palette.inkStrong), .font: titleFont]
+        UINavigationBar.appearance().standardAppearance = navAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navAppearance
+        UINavigationBar.appearance().compactAppearance = navAppearance
+        UINavigationBar.appearance().tintColor = UIColor(Palette.accent)
     }
 }
 

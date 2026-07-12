@@ -149,7 +149,7 @@
           "daysBefore": 7
         },
         "eve": {
-          "text": "Purnima tonight — the moon at its fullest. The tradition made this a celebration: kheer made and shared, Satyanarayan katha told in households, the month's completion acknowledged. Whatever you do tonight, look up at some point.",
+          "text": "Purnima tonight — the moon at its fullest. This one is {{masa}} Purnima. The tradition made this a celebration: kheer made and shared, Satyanarayan katha told in households, the month's completion acknowledged. Whatever you do tonight, look up at some point.",
           "daysBefore": null
         },
         "morning": {
@@ -559,6 +559,15 @@
         "morning": {
           "text": "Ganpati Bappa Morya. He's here. Welcome him."
         },
+        "advance2": {
+          "daysBefore": 3,
+          "text": "Three days to Ganesh Chaturthi. What's worth knowing if you're new to it: Ganesha has an elephant head because the original was destroyed and his father Shiva replaced it with the first one he found. He rides a mouse — the ego, which he has learned to carry rather than be carried by. He broke one of his own tusks to write the Mahabharata when the ink ran out. He is the remover of obstacles and the most beloved deity in the tradition. He is almost impossible not to love."
+        },
+        "offsets": {
+          "visarjan": {
+            "text": "Today he goes back. The clay Ganesha that has lived in the home or the pandal for ten days is carried to the water — river, ocean, lake — and immersed. He dissolves. The chant: Ganpati Bappa Morya, Pudcha Varshi Laukar Ya — come back soon next year. That chant, carrying something beloved toward the water, knowing you are choosing to let it go, is one of the most moving things in the Hindu calendar."
+          }
+        },
         "deepDive": {
           "whatItIs": "Ganesh Chaturthi is a ten-day festival honoring Ganesha — the elephant-headed son of Shiva and Parvati, god of beginnings and remover of obstacles. It begins on Shukla Chaturthi, the fourth day of the bright fortnight, in the lunar month of Bhadrapada, which falls in August or September. On the tenth day, Visarjan: the clay image is carried to the water and immersed. He dissolves. The chant: Ganpati Bappa Morya, Pudcha Varshi Laukar Ya — come back soon next year.",
           "mythology": "Ganesha's elephant head comes from an act of destruction and restoration. Parvati created him from the sandalwood paste on her body while Shiva was away, and he stood guard at her bath. Shiva, not recognizing him, cut off his head. Parvati's grief was absolute. Shiva sent his attendants to bring back the head of the first living creature they found sleeping with its head pointing north. They found an elephant. Ganesha was restored. He is Vighnaharta — the remover of obstacles — and also Vighnakarta — the creator of obstacles for those on the wrong path. Both roles matter.",
@@ -589,6 +598,15 @@
             "hour": 8,
             "minute": 0
           }
+        },
+        {
+          "type": "advance",
+          "daysBefore": 3
+        },
+        {
+          "type": "dayOffset",
+          "offset": 9,
+          "label": "visarjan"
         }
       ],
       "action": null,
@@ -622,6 +640,14 @@
         "morning": {
           "text": "Navratri begins tonight. Shailaputri — the first form. Daughter of the mountains. She carries a trident and a lotus, rides a bull. She is the beginning of strength, before it has been tested. Light a diya."
         },
+        "offsets": {
+          "night5": {
+            "text": "Five nights in. You're at the midpoint of Navratri. The goddess in her fifth form tonight is Skandamata — the mother of the war god, who holds her fierce warrior-son in her lap with perfect tenderness. Power and care in the same hands. If you're dancing garba: the circles are tighter now. Everyone knows the steps."
+          },
+          "night9": {
+            "text": "The last night. Tomorrow Ravana burns. But tonight is still hers. Nine nights, nine forms, nine aspects of a power that exists in every person who has ever had to fight for something that mattered. Jai Mata Di."
+          }
+        },
         "deepDive": {
           "whatItIs": "Navratri means nine nights. It happens four times a year, but Sharad Navratri — the autumn one, in Ashwin — is the one people mean when they say Navratri. This is Durga's festival, arriving after the monsoon ends, when the air changes and the harvest begins. Nine nights of the goddess in her nine forms, ending on the tenth day — Dussehra — with the day of victory.",
           "mythology": "Mahishasura, a buffalo-demon, had acquired a boon making him invincible to any man or god. He defeated the gods one by one and took the heavens. In their defeat, the gods pooled every divine energy — each one sending their power outward — and from that pooled light, a woman emerged. Armed with each god's weapon, riding a lion. Durga. She fought Mahishasura for nine nights. On the tenth day, she killed him. The nine nights of Navratri replay that battle. The tenth day is Dussehra — the day of victory.",
@@ -652,6 +678,70 @@
             "hour": 8,
             "minute": 0
           }
+        },
+        {
+          "type": "dayOffset",
+          "offset": 4,
+          "label": "night5",
+          "time": {
+            "hour": 20,
+            "minute": 0
+          }
+        },
+        {
+          "type": "dayOffset",
+          "offset": 8,
+          "label": "night9",
+          "time": {
+            "hour": 20,
+            "minute": 0
+          }
+        }
+      ],
+      "action": null,
+      "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "diaspora_window",
+      "kind": "cycle",
+      "tier": 4,
+      "name": "The Season",
+      "tagline": "the season worth going home for",
+      "festivalType": null,
+      "match": {
+        "anchor": "masaTithi",
+        "masaIndex": 6,
+        "tithi": 1,
+        "paksha": "shukla",
+        "rashiIndex": null
+      },
+      "variants": [],
+      "voice": {
+        "advance": {
+          "daysBefore": 21,
+          "text": "Navratri begins in three weeks. Dussehra follows. Then Diwali. This is the window when India sounds and smells and feels most like itself — the air after monsoon, the smell of gunpowder and jasmine, garba until 2am and sweets at breakfast. If you've been thinking about going: the tickets are still reasonable. Some things are better experienced than remembered."
+        },
+        "morning": {
+          "text": "Navratri begins in three weeks. Dussehra follows. Then Diwali. The season when India feels most like itself is starting. If you've been thinking about going: go."
+        },
+        "deepDive": {
+          "whatItIs": "The Season is not a festival — it's the six-week run from Navratri through Dussehra to Diwali, the stretch of the Hindu calendar where one celebration hands off to the next without much of a gap. For the diaspora, it has become shorthand for something specific: the part of the year when a visit home lines up with the most going on at once — garba every night, a bonfire and effigy on the tenth day, then two weeks later the whole country lit up for the new moon. Nothing else on the calendar compresses this much into six weeks.",
+          "mythology": "Each leg of the Season carries its own story, but they chain together into one arc. Durga spends nine nights fighting Mahishasura and wins on the tenth — Dussehra. Three weeks after that, Ram comes home to Ayodhya after his own long fight, and the city lights lamps so he can find his way in the dark — Diwali. Two victories, three weeks apart, both marked by an entire population doing something at once: dancing for nine nights straight, then lighting every threshold in the country. The Season is what it looks like when a culture stages its biggest stories back to back.",
+          "history": "The diaspora didn't invent this window, but it did turn it into a travel season. Flights home fill up early, wedding season overlaps with it deliberately, and NRI associations abroad schedule garba nights and Diwali melas to approximate what's happening at full scale on the ground. What's lost in translation is density — a garba in a rented hall on a Saturday is real, but it isn't nine consecutive nights building toward something. That density is only available in one place, for six weeks, once a year.",
+          "regional": "In Gujarat the Season means garba scaled up to entire cities — grounds that hold thousands of dancers, nine nights running. In Mumbai it means Ganpati's afterglow sliding straight into Navratri pandals and then Diwali markets taking over entire streets. In Delhi it means Ramlila performances leading into a Dussehra effigy-burning that draws crowds by the tens of thousands, followed by a Diwali that turns the whole city into a wall of light and sound. Every region plays the same three-part sequence at a different volume, but nowhere plays only one part quietly.",
+          "whatToDo": "If a visit is even a maybe, look at flights now — this is the window they get expensive first. Structure the trip so it spans at least two of the three legs; arriving only for Diwali means missing the nine nights that build the mood the whole season runs on. If you can't go this year, treat the six weeks as their own occasion at home: find the local garba, save the vacation days for the next one, put the tin of chevdo out early."
+        },
+        "food": {
+          "note": "Garba until 2am and sweets at breakfast — the season's food is whatever the night hands you. If you make one thing at home, make it chevdo: the tin lasts the whole stretch from Navratri to Diwali.",
+          "recipeLink": null
+        }
+      },
+      "triggers": [
+        {
+          "type": "advance",
+          "daysBefore": 21
         }
       ],
       "action": null,
@@ -1908,6 +1998,80 @@
       ],
       "action": null,
       "regions": [],
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "waxing_days",
+      "kind": "cycle",
+      "tier": 6,
+      "name": "Waxing Moon",
+      "tagline": "the building fortnight",
+      "festivalType": null,
+      "match": {
+        "anchor": "paksha",
+        "tithi": null,
+        "paksha": "shukla",
+        "masaIndex": null,
+        "rashiIndex": null
+      },
+      "variants": [],
+      "triggers": [],
+      "action": null,
+      "regions": [],
+      "voice": {
+        "morning": {
+          "text": "The moon is waxing toward full — a building, beginning kind of day. Good energy for starting things, less for finishing them."
+        },
+        "deepDive": {
+          "whatItIs": "Shukla Paksha is the bright fortnight — the roughly fifteen days between new moon and full moon, when the moon grows a little fuller each night. The tradition doesn't treat this as a neutral backdrop to the calendar; it treats it as a direction. A waxing moon is a moon that is accumulating, and the calendar built around it tends to place beginnings — new ventures, weddings, moving into a house, starting a fast — inside this half of the month rather than the other.",
+          "mythology": "The moon itself has a story for why it grows and shrinks at all: Chandra, cursed by his father-in-law Daksha for favoring one wife over the others, was condemned to waste away completely. Shiva intervened and softened the curse rather than lifting it — the moon would still shrink to nothing, but it would also, every month, be allowed to grow whole again. Waxing and waning became a single continuous cycle instead of a one-way decline. The bright fortnight is the recovery half of that old bargain — the moon doing the growing it was promised.",
+          "history": "Muhurta texts — the classical literature on auspicious timing — consistently favor Shukla Paksha for griha pravesh (entering a new home), vivaha (weddings), and upanayana (thread ceremonies), while reserving the dark fortnight for closure-oriented rites. This isn't superstition layered onto an indifferent calendar; it's a working theory, applied for centuries, that the phase of the moon correlates with which kind of undertaking is likely to hold.",
+          "regional": "Across most of North and West India, shubh muhurats for weddings cluster heavily in Shukla Paksha, and almanac publishers print the fortnight distinction as plainly as they print the date. In South Indian practice, the same logic governs when a Vaishnava household will start a new business ledger or break ground on construction. The specifics of which festival lands where vary by region; the underlying rule — build during the waxing half — does not.",
+          "whatToDo": "If you've been sitting on a start date — a project, a conversation, a purchase, a move — a Shukla Paksha day is a reasonable one to pick. Begin something today rather than resolve to begin it later. The fortnight rewards motion, not preparation for motion."
+        },
+        "food": {
+          "note": "No fixed food of its own — Shukla Paksha food is whatever the day's specific tithi calls for, from a light Ekadashi fast to a Purnima kheer.",
+          "recipeLink": null
+        }
+      },
+      "audioScript": null,
+      "almanacBlurb": null
+    },
+    {
+      "id": "waning_days",
+      "kind": "cycle",
+      "tier": 6,
+      "name": "Waning Moon",
+      "tagline": "the clearing fortnight",
+      "festivalType": null,
+      "match": {
+        "anchor": "paksha",
+        "tithi": null,
+        "paksha": "krishna",
+        "masaIndex": null,
+        "rashiIndex": null
+      },
+      "variants": [],
+      "triggers": [],
+      "action": null,
+      "regions": [],
+      "voice": {
+        "morning": {
+          "text": "The moon is waning toward new — a clearing, finishing kind of day. Good energy for completing things, and for letting go."
+        },
+        "deepDive": {
+          "whatItIs": "Krishna Paksha is the dark fortnight — the roughly fifteen days between full moon and new moon, when the moon loses a little of itself each night until nothing is left. Where the bright fortnight is a calendar of beginnings, the dark fortnight is a calendar of endings: finishing what's unresolved, releasing what no longer needs carrying, letting a thing run down instead of propping it up.",
+          "mythology": "The same curse that gives Shukla Paksha its growth gives Krishna Paksha its shrinking: Chandra, condemned by Daksha and only partly reprieved by Shiva, wastes away every month before he's allowed to fill out again. The waning half is the curse still doing its work — a reminder built into the sky that decline is not a malfunction, it's half of the arrangement. Amavasya, the new moon at the fortnight's end, is the point where the losing is complete and the ancestors, the pitrus, are given their due.",
+          "history": "Classical muhurta texts steer weddings, housewarmings, and other beginnings away from Krishna Paksha, but they don't treat the fortnight as merely inauspicious — they assign it its own proper work. Shraddha rites for the recently deceased, debt-clearing, and the emptying-out that precedes a new start are all traditionally placed here. The dark fortnight has always had a job; it just isn't the job of starting things.",
+          "regional": "In many South Indian households, Krishna Paksha is when outstanding accounts are meant to be settled before the month turns over, echoing the same logic Gujarat applies to the days just before Diwali. In North India, the fortnight leading into a major Amavasya — Diwali's especially — is treated as a clearing period: the house is cleaned out, clutter and grime physically removed, well before the lamps are lit on the new moon itself.",
+          "whatToDo": "Use a Krishna Paksha day to close something out rather than open something new — pay off a debt, finish a task you've been dragging, clear a space, have the conversation that ends an ambiguity. The fortnight isn't a bad time to act; it's a good time to act on endings specifically."
+        },
+        "food": {
+          "note": "No fixed food of its own — Krishna Paksha food follows whatever the specific tithi calls for, from an Ekadashi fast to the quiet single meal of Amavasya.",
+          "recipeLink": null
+        }
+      },
       "audioScript": null,
       "almanacBlurb": null
     }

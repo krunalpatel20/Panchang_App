@@ -12,27 +12,20 @@ struct DashaTimelineView: View {
                 DisclosureGroup(isExpanded: .constant(md.isCurrent)) {
                     if md.isCurrent {
                         ForEach(dasha.currentAntardashas) { ad in
-                            HStack {
-                                Text(ad.planet)
-                                    .font(.caption)
-                                    .foregroundStyle(ad.isCurrent ? Color.accentColor : .secondary)
-                                    .fontWeight(ad.isCurrent ? .semibold : .regular)
-                                Spacer()
-                                Text("\(Self.f(ad.start)) – \(Self.f(ad.end))")
-                                    .font(.caption2).monospacedDigit().foregroundStyle(.secondary)
-                            }
+                            AlmanacRow(
+                                label: ad.planet,
+                                value: "\(Self.f(ad.start)) – \(Self.f(ad.end))",
+                                dotColor: ad.isCurrent ? Palette.accent : nil
+                            )
                             .padding(.leading, 12).padding(.vertical, 2)
                         }
                     }
                 } label: {
-                    HStack {
-                        Text(md.planet)
-                            .fontWeight(md.isCurrent ? .bold : .regular)
-                            .foregroundStyle(md.isCurrent ? Color.accentColor : .primary)
-                        Spacer()
-                        Text("\(Self.year(md.start)) – \(Self.year(md.end))")
-                            .font(.subheadline).monospacedDigit().foregroundStyle(.secondary)
-                    }
+                    AlmanacRow(
+                        label: md.planet,
+                        value: "\(Self.year(md.start)) – \(Self.year(md.end))",
+                        dotColor: md.isCurrent ? Palette.accent : nil
+                    )
                 }
                 .disabled(!md.isCurrent)
             }

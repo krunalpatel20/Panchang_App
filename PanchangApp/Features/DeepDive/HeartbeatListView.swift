@@ -6,7 +6,7 @@ struct HeartbeatListView: View {
 
     var body: some View {
         List(items) { item in
-            NavigationLink(destination: FestivalDetailView(content: item)) {
+            NavigationLink(destination: FestivalDetailView(content: item, mood: .ordinary)) {
                 HeartbeatRow(item: item)
             }
         }
@@ -49,8 +49,8 @@ private struct TierBadge: View {
         Text("Major")
             .font(.caption2).bold()
             .padding(.horizontal, 6).padding(.vertical, 2)
-            .background(Color.orange.opacity(0.15), in: Capsule())
-            .foregroundStyle(.orange)
+            .background(Palette.festival.opacity(0.15), in: Capsule())
+            .foregroundStyle(Palette.festival)
     }
 }
 

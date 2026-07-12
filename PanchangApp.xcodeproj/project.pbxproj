@@ -9,12 +9,18 @@
 /* Begin PBXBuildFile section */
 		0CF540C3A54C9A29D2E39EA7 /* content-regional.json in Resources */ = {isa = PBXBuildFile; fileRef = 673B4FBCAB5CDBF827CD47E8 /* content-regional.json */; };
 		239E9D82C01479C2ED7EEC06 /* content.json in Resources */ = {isa = PBXBuildFile; fileRef = 872198943BE056EA5F0FC626 /* content.json */; };
+		32ACE4568F310E6CA418BF7A /* ContentResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CF8F31286290DC4681EAF6 /* ContentResolverTests.swift */; };
 		3611B7572084BA7AD2D81FC9 /* NotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B024B2F27A91FCDD97EBFAD5 /* NotificationTrigger.swift */; };
+		45763CD50E495E878C93BF06 /* PanchangDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C96A16333FC8106C075C5BF8 /* PanchangDayView.swift */; };
 		637D9AD97D6D20DA06143E75 /* FoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D9D94092936D922A9E2320 /* FoodView.swift */; };
 		6502AE5243A2D695CB84C910 /* TriggerPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0232890D655330EAF1D283BA /* TriggerPlan.swift */; };
 		673F0A634014771E641FA6BD /* ContentResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B9DC95D1A9DEF3B1D6435 /* ContentResolver.swift */; };
 		68896CADFD7C10F4F3F58EA2 /* content.schema.json in Resources */ = {isa = PBXBuildFile; fileRef = A89112781E867F0B7B04F1B6 /* content.schema.json */; };
+		6AC33A105C1BFB88D3314DC6 /* PanchangKit in Frameworks */ = {isa = PBXBuildFile; productRef = 48A1D4052C27C8D5AD237751 /* PanchangKit */; };
+		73624E64968A76BE9096F569 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0A145DD8D40C05DB5527E8 /* Components.swift */; };
+		825B6C6B3A5D2912F1AE0E9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB8D2C0E971B03B2C35A18E /* Foundation.framework */; };
 		A40DFAF8C6A11E36D92E94D5 /* ContentModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB1BBCBB401F908769C4CD /* ContentModels.swift */; };
+		A6FBFBF97D539AA5119B0FDA /* MoonArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8319B6B05BE07BB50000BAD /* MoonArcView.swift */; };
 		A844B13B424110AC1DDCB20C /* ContentResolving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01632AD939370E86F825E552 /* ContentResolving.swift */; };
 		AA000000000000000000041 /* PanchangApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000040 /* PanchangApp.swift */; };
 		AA000000000000000000043 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000042 /* TodayView.swift */; };
@@ -40,18 +46,32 @@
 		AA00000000000000000019A /* DashaTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000199 /* DashaTimelineView.swift */; };
 		AA00000000000000000019C /* BirthProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000019B /* BirthProfileFormView.swift */; };
 		D446CBBE7BB4472E464FC490 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B311619D02035F36CE12044E /* OnboardingView.swift */; };
+		DDD687FB48BD4F6DD34D72E7 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542A7FD232A3C6B6ED3D953E /* Theme.swift */; };
 		DEAC9F5240D8769ADCB64055 /* ContentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED1C2D59CB02E8516403F8 /* ContentStore.swift */; };
 		F00938B4BB53728B648D3489 /* FestivalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7B302F21FCBF986E7CE8C0 /* FestivalDetailView.swift */; };
 		F8D07DB15A7F8E30B4FC0700 /* HeartbeatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EE2581376FA4F065CAB057 /* HeartbeatListView.swift */; };
 		F962B85F3CA5ACF74CDEB318 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17CB5582CE845C223E44B46 /* NotificationScheduler.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3B99E29E4E56B065980D33D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA000000000000000000010;
+			remoteInfo = PanchangApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		01632AD939370E86F825E552 /* ContentResolving.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentResolving.swift; path = Services/ContentService/ContentResolving.swift; sourceTree = "<group>"; };
 		0232890D655330EAF1D283BA /* TriggerPlan.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TriggerPlan.swift; path = Features/Notifications/TriggerPlan.swift; sourceTree = "<group>"; };
 		43ED1C2D59CB02E8516403F8 /* ContentStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentStore.swift; path = Services/ContentService/ContentStore.swift; sourceTree = "<group>"; };
 		53EE2581376FA4F065CAB057 /* HeartbeatListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HeartbeatListView.swift; path = Features/DeepDive/HeartbeatListView.swift; sourceTree = "<group>"; };
+		542A7FD232A3C6B6ED3D953E /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		5EB8D2C0E971B03B2C35A18E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		673B4FBCAB5CDBF827CD47E8 /* content-regional.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = "content-regional.json"; path = "Resources/Content/content-regional.json"; sourceTree = "<group>"; };
+		82CF8F31286290DC4681EAF6 /* ContentResolverTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ContentResolverTests.swift; sourceTree = "<group>"; };
 		872198943BE056EA5F0FC626 /* content.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = content.json; path = Resources/Content/content.json; sourceTree = "<group>"; };
 		9A7B302F21FCBF986E7CE8C0 /* FestivalDetailView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FestivalDetailView.swift; path = Features/DeepDive/FestivalDetailView.swift; sourceTree = "<group>"; };
 		A89112781E867F0B7B04F1B6 /* content.schema.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = content.schema.json; path = Resources/Content/content.schema.json; sourceTree = "<group>"; };
@@ -79,12 +99,16 @@
 		AA000000000000000000197 /* PlanetTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetTableView.swift; sourceTree = "<group>"; };
 		AA000000000000000000199 /* DashaTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashaTimelineView.swift; sourceTree = "<group>"; };
 		AA00000000000000000019B /* BirthProfileFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthProfileFormView.swift; sourceTree = "<group>"; };
+		AD0A145DD8D40C05DB5527E8 /* Components.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		B024B2F27A91FCDD97EBFAD5 /* NotificationTrigger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NotificationTrigger.swift; path = Services/ContentService/NotificationTrigger.swift; sourceTree = "<group>"; };
 		B17CB5582CE845C223E44B46 /* NotificationScheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NotificationScheduler.swift; path = Features/Notifications/NotificationScheduler.swift; sourceTree = "<group>"; };
 		B311619D02035F36CE12044E /* OnboardingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OnboardingView.swift; path = Features/Onboarding/OnboardingView.swift; sourceTree = "<group>"; };
+		C96A16333FC8106C075C5BF8 /* PanchangDayView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PanchangDayView.swift; sourceTree = "<group>"; };
 		E56B9DC95D1A9DEF3B1D6435 /* ContentResolver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentResolver.swift; path = Services/ContentService/ContentResolver.swift; sourceTree = "<group>"; };
+		E8319B6B05BE07BB50000BAD /* MoonArcView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MoonArcView.swift; sourceTree = "<group>"; };
 		EBBB1BBCBB401F908769C4CD /* ContentModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContentModels.swift; path = Services/ContentService/ContentModels.swift; sourceTree = "<group>"; };
 		F9D9D94092936D922A9E2320 /* FoodView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoodView.swift; path = Features/Food/FoodView.swift; sourceTree = "<group>"; };
+		FC3863941A3335CBBE52FC40 /* PanchangAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PanchangAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +117,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA000000000000000000082 /* PanchangKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC9BF38B764E12C3D6BAF216 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				825B6C6B3A5D2912F1AE0E9C /* Foundation.framework in Frameworks */,
+				6AC33A105C1BFB88D3314DC6 /* PanchangKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +142,17 @@
 				B024B2F27A91FCDD97EBFAD5 /* NotificationTrigger.swift */,
 			);
 			name = ContentService;
+			sourceTree = "<group>";
+		};
+		247BA4071AE0368C10F30A3F /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				542A7FD232A3C6B6ED3D953E /* Theme.swift */,
+				AD0A145DD8D40C05DB5527E8 /* Components.swift */,
+				E8319B6B05BE07BB50000BAD /* MoonArcView.swift */,
+			);
+			name = DesignSystem;
+			path = DesignSystem;
 			sourceTree = "<group>";
 		};
 		25D0EF67B45B1D21BFEF11B9 /* Food */ = {
@@ -145,6 +189,15 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		8B44F00C76502C645A176E8E /* PanchangAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				82CF8F31286290DC4681EAF6 /* ContentResolverTests.swift */,
+			);
+			name = PanchangAppTests;
+			path = PanchangAppTests;
+			sourceTree = "<group>";
+		};
 		8FC7FA98861C654207241E34 /* Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +215,8 @@
 				AA000000000000000000050 /* PanchangApp */,
 				AA000000000000000000090 /* Signing.xcconfig */,
 				AA000000000000000000003 /* Products */,
+				C44D3FF0B802B784EA056E24 /* Frameworks */,
+				8B44F00C76502C645A176E8E /* PanchangAppTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				AA000000000000000000060 /* PanchangApp.app */,
+				FC3863941A3335CBBE52FC40 /* PanchangAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -184,6 +240,7 @@
 				8FC7FA98861C654207241E34 /* Features */,
 				EA85D301D6C6A978A0822556 /* Services */,
 				55451E64B18762A6B6A5E608 /* Resources */,
+				247BA4071AE0368C10F30A3F /* DesignSystem */,
 			);
 			path = PanchangApp;
 			sourceTree = "<group>";
@@ -214,6 +271,7 @@
 			children = (
 				AA000000000000000000042 /* TodayView.swift */,
 				AA0000000000000000000C1 /* TodayViewModel.swift */,
+				C96A16333FC8106C075C5BF8 /* PanchangDayView.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -319,6 +377,22 @@
 			name = Content;
 			sourceTree = "<group>";
 		};
+		C44D3FF0B802B784EA056E24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4D90BA7B5086A7C04826C17 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D4D90BA7B5086A7C04826C17 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				5EB8D2C0E971B03B2C35A18E /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		D79FECC339397D9E9BF0E002 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +412,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2223D62D1BBE540074D4C390 /* PanchangAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A106E92CBD9D1D534F0DF098 /* Build configuration list for PBXNativeTarget "PanchangAppTests" */;
+			buildPhases = (
+				FF7E2CB1D3288E787D6B5778 /* Sources */,
+				DC9BF38B764E12C3D6BAF216 /* Frameworks */,
+				7EA6A69C63583913BCAF4A0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F3C51AC24017AF1C003499D5 /* PBXTargetDependency */,
+			);
+			name = PanchangAppTests;
+			packageProductDependencies = (
+				48A1D4052C27C8D5AD237751 /* PanchangKit */,
+			);
+			productName = PanchangAppTests;
+			productReference = FC3863941A3335CBBE52FC40 /* PanchangAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		AA000000000000000000010 /* PanchangApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA000000000000000000011 /* Build configuration list for PBXNativeTarget "PanchangApp" */;
@@ -390,11 +485,19 @@
 			projectRoot = "";
 			targets = (
 				AA000000000000000000010 /* PanchangApp */,
+				2223D62D1BBE540074D4C390 /* PanchangAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7EA6A69C63583913BCAF4A0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA000000000000000000031 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -445,12 +548,84 @@
 				A844B13B424110AC1DDCB20C /* ContentResolving.swift in Sources */,
 				DEAC9F5240D8769ADCB64055 /* ContentStore.swift in Sources */,
 				3611B7572084BA7AD2D81FC9 /* NotificationTrigger.swift in Sources */,
+				45763CD50E495E878C93BF06 /* PanchangDayView.swift in Sources */,
+				DDD687FB48BD4F6DD34D72E7 /* Theme.swift in Sources */,
+				73624E64968A76BE9096F569 /* Components.swift in Sources */,
+				A6FBFBF97D539AA5119B0FDA /* MoonArcView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF7E2CB1D3288E787D6B5778 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32ACE4568F310E6CA418BF7A /* ContentResolverTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F3C51AC24017AF1C003499D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PanchangApp;
+			target = AA000000000000000000010 /* PanchangApp */;
+			targetProxy = 3B99E29E4E56B065980D33D6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		4A80E4338D99D718EBFA6E55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA000000000000000000090 /* Signing.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X9XT6KW58W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.modak.panchang.PanchangAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanchangApp.app/PanchangApp";
+			};
+			name = Debug;
+		};
+		5E36339FB28DC438242A14CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA000000000000000000090 /* Signing.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X9XT6KW58W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.modak.panchang.PanchangAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanchangApp.app/PanchangApp";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		AA000000000000000000012 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AA000000000000000000090 /* Signing.xcconfig */;
@@ -625,6 +800,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A106E92CBD9D1D534F0DF098 /* Build configuration list for PBXNativeTarget "PanchangAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E36339FB28DC438242A14CE /* Release */,
+				4A80E4338D99D718EBFA6E55 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AA000000000000000000011 /* Build configuration list for PBXNativeTarget "PanchangApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -653,6 +837,11 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		48A1D4052C27C8D5AD237751 /* PanchangKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA000000000000000000080 /* XCLocalSwiftPackageReference "PanchangKit" */;
+			productName = PanchangKit;
+		};
 		AA000000000000000000081 /* PanchangKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AA000000000000000000080 /* XCLocalSwiftPackageReference "PanchangKit" */;

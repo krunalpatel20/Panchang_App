@@ -35,7 +35,7 @@ struct ContentEntry: Sendable, Identifiable, Codable {
 
 struct ContentMatch: Sendable, Codable {
     enum Anchor: String, Sendable, Codable {
-        case tithi, masaTithi, pakshaTransition, solar
+        case tithi, masaTithi, pakshaTransition, solar, paksha
     }
     let anchor: Anchor
     let tithi: Int?
@@ -62,8 +62,13 @@ struct ContentVariant: Sendable, Codable {
 
 struct VoiceLayers: Sendable, Codable {
     let advance: VoiceLayer?
+    /// Second advance notification (e.g. Ganesh Chaturthi 3 days out).
+    /// Matched to the advance trigger whose daysBefore == advance2.daysBefore.
+    let advance2: VoiceLayer?
     let eve: VoiceLayer?
     let morning: VoiceLayer
+    /// Texts for dayOffset triggers, keyed by trigger label (e.g. "visarjan").
+    let offsets: [String: VoiceLayer]?
     let deepDive: DeepDive
     let food: FoodNote // non-optional — structurally enforced
 }

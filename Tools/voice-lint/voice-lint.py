@@ -71,33 +71,78 @@ def validate_schema(data: Any) -> list[str]:
 # Text field extraction
 # ---------------------------------------------------------------------------
 
-def get_voice_text_fields(entry: dict) -> list[tuple[str, str]]:
+def _voice_layer_fields(voice: dict, prefix: str) -> list[tuple[str, str]]:
     """
-    Return (field_path, text) pairs for all voice text fields in an entry.
-    Covers: advance.text, eve.text, morning.text, deepDive.*, food.note
+    Return (field_path, text) pairs for the text fields of a single VoiceLayers-shaped
+    object (either the entry's base `voice` or a variant's full `voice` override).
+    Covers: advance.text, advance2.text, eve.text, morning.text, offsets.*.text,
+    deepDive.*, food.note.
     """
-    results = []
-    voice = entry.get("voice", {})
+    found = []
 
-    for layer in ("advance", "eve", "morning"):
+    for layer in ("advance", "advance2", "eve", "morning"):
         layer_obj = voice.get(layer)
         if isinstance(layer_obj, dict):
             text = layer_obj.get("text", "")
             if text:
-                results.append((f"voice.{layer}.text", text))
+                found.append((f"{prefix}.{layer}.text", text))
+
+    offsets = voice.get("offsets")
+    if isinstance(offsets, dict):
+        for label, layer_obj in offsets.items():
+            if isinstance(layer_obj, dict):
+                text = layer_obj.get("text", "")
+                if text:
+                    found.append((f"{prefix}.offsets.{label}.text", text))
 
     deep_dive = voice.get("deepDive", {})
     if isinstance(deep_dive, dict):
         for field in DEEP_DIVE_FIELDS:
             text = deep_dive.get(field, "")
             if text:
-                results.append((f"voice.deepDive.{field}", text))
+                found.append((f"{prefix}.deepDive.{field}", text))
 
     food = voice.get("food", {})
     if isinstance(food, dict):
         note = food.get("note", "")
         if note:
-            results.append(("voice.food.note", note))
+            found.append((f"{prefix}.food.note", note))
+
+    return found
+
+
+def get_voice_text_fields(entry: dict) -> list[tuple[str, str]]:
+    """
+    Return (field_path, text) pairs for every voice-adjacent text field in an entry,
+    including the blind spots A5 found: variants[].voice.* (full variant voice
+    overrides), variants[].morningOverride.text, and the entry's tagline.
+    Taglines are included here (N-rule checks only) but are noun phrases, not prose —
+    check_a2/check_a3 do not consult this function for tagline text.
+    """
+    results = []
+
+    voice = entry.get("voice", {})
+    if isinstance(voice, dict):
+        results.extend(_voice_layer_fields(voice, "voice"))
+
+    tagline = entry.get("tagline")
+    if isinstance(tagline, str) and tagline:
+        results.append(("tagline", tagline))
+
+    for variant in entry.get("variants", []) or []:
+        if not isinstance(variant, dict):
+            continue
+        vid = variant.get("id", "<unknown>")
+
+        variant_voice = variant.get("voice")
+        if isinstance(variant_voice, dict):
+            results.extend(_voice_layer_fields(variant_voice, f"variants.{vid}.voice"))
+
+        morning_override = variant.get("morningOverride")
+        if isinstance(morning_override, dict):
+            text = morning_override.get("text", "")
+            if text:
+                results.append((f"variants.{vid}.morningOverride.text", text))
 
     return results
 
@@ -123,11 +168,23 @@ NEVER_RULES = [
 ]
 
 
+# Gita-verbatim texts that intentionally trip a Never rule by the source material's own
+# phrasing. Mirrors A3_ALLOWED's principle (spec: "the Gita text is the spec") but keyed
+# by (entryId, field, ruleId) since Never rules, unlike A3, have no severity to downgrade.
+NEVER_RULE_ALLOWED = {
+    # "...is one of the most moving things in the Hindu calendar" — verbatim visarjan text.
+    ("ganesh_chaturthi", "voice.offsets.visarjan.text", "N7"),
+}
+
+
 def check_never_rules(entry: dict) -> list[dict]:
     findings = []
     entry_id = entry.get("id", "<unknown>")
     for field_path, text in get_voice_text_fields(entry):
         for rule_id, pattern in NEVER_RULES:
+            if (entry_id, field_path, rule_id) in NEVER_RULE_ALLOWED:
+                print(f"{rule_id}: skipping allowed exception for {entry_id}.{field_path} (Gita-verbatim text)")
+                continue
             for match in pattern.finditer(text):
                 findings.append({
                     "severity": "error",
@@ -193,41 +250,91 @@ def check_a2(entry: dict) -> list[dict]:
     return findings
 
 
+# A5: Gita-verbatim texts that intentionally end in a question. check_a3 skips these
+# (entryId, field) pairs rather than flagging them — do not "fix" the text to dodge lint.
+A3_ALLOWED = {
+    # Gita Part Three ends this text with a question by design.
+    ("paksha_transition", "variants.krishna_to_shukla.morningOverride.text"),
+}
+
+
+def _morning_text_fields(entry: dict) -> list[tuple[str, str]]:
+    """
+    Return (field_path, text) pairs for every "morning" surface A3 governs: the base
+    voice.morning.text, each variant's morningOverride.text, and each variant's own
+    voice.morning.text (when a variant supplies a full voice override). Before A5 this
+    only looked at voice.morning.text, which is why the paksha_transition.krishna_to_shukla
+    morningOverride question ending went uncaught.
+    """
+    fields = []
+
+    morning = entry.get("voice", {}).get("morning")
+    if isinstance(morning, dict):
+        text = morning.get("text", "").strip()
+        if text:
+            fields.append(("voice.morning.text", text))
+
+    for variant in entry.get("variants", []) or []:
+        if not isinstance(variant, dict):
+            continue
+        vid = variant.get("id", "<unknown>")
+
+        morning_override = variant.get("morningOverride")
+        if isinstance(morning_override, dict):
+            text = morning_override.get("text", "").strip()
+            if text:
+                fields.append((f"variants.{vid}.morningOverride.text", text))
+
+        variant_voice = variant.get("voice")
+        if isinstance(variant_voice, dict):
+            variant_morning = variant_voice.get("morning")
+            if isinstance(variant_morning, dict):
+                text = variant_morning.get("text", "").strip()
+                if text:
+                    fields.append((f"variants.{vid}.voice.morning.text", text))
+
+    return fields
+
+
 def check_a3(entry: dict, strict: bool) -> list[dict]:
     """
-    voice.morning.text — last sentence must not end with '?' and must not be
-    a bullet/list item (starts with '-', '*', or a digit+dot).
-    Warning normally, error in --strict.
+    Every "morning" surface (base voice.morning.text, each variant's morningOverride.text,
+    and any variant's own voice.morning.text) — last sentence must not end with '?' and
+    must not be a bullet/list item (starts with '-', '*', or a digit+dot).
+    Warning normally, error in --strict. Pairs in A3_ALLOWED are skipped with a printed
+    notice instead of being flagged.
     """
     entry_id = entry.get("id", "<unknown>")
-    morning = entry.get("voice", {}).get("morning", {})
-    if not isinstance(morning, dict):
-        return []
-    text = morning.get("text", "").strip()
-    if not text:
-        return []
+    findings = []
 
-    # Split into sentences (naive: split on '.', '!', '?')
-    sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', text) if s.strip()]
-    if not sentences:
-        return []
-    last = sentences[-1]
+    for field_path, text in _morning_text_fields(entry):
+        if (entry_id, field_path) in A3_ALLOWED:
+            print(f"A3: skipping allowed exception for {entry_id}.{field_path} (Gita-verbatim question ending)")
+            continue
+        if not text:
+            continue
 
-    problems = []
-    if last.endswith("?"):
-        problems.append("last sentence ends with '?'")
-    if re.match(r'^[-*]|\d+\.', last):
-        problems.append("last sentence looks like a list item")
+        # Split into sentences (naive: split on '.', '!', '?')
+        sentences = [s.strip() for s in re.split(r'(?<=[.!?])\s+', text) if s.strip()]
+        if not sentences:
+            continue
+        last = sentences[-1]
 
-    if problems:
-        return [{
-            "severity": "error" if strict else "warning",
-            "rule": "A3",
-            "entryId": entry_id,
-            "field": "voice.morning.text",
-            "match": "; ".join(problems),
-        }]
-    return []
+        problems = []
+        if last.endswith("?"):
+            problems.append("last sentence ends with '?'")
+        if re.match(r'^[-*]|\d+\.', last):
+            problems.append("last sentence looks like a list item")
+
+        if problems:
+            findings.append({
+                "severity": "error" if strict else "warning",
+                "rule": "A3",
+                "entryId": entry_id,
+                "field": field_path,
+                "match": "; ".join(problems),
+            })
+    return findings
 
 
 def check_a4(entry: dict, strict: bool) -> list[dict]:
@@ -303,6 +410,32 @@ def _edit_distance_one(a: str, b: str) -> bool:
     return diffs <= 1
 
 
+KNOWN_TOKENS = {"masa", "vsYear"}
+TOKEN_PATTERN = re.compile(r"\{\{([a-zA-Z]+)\}\}")
+
+
+def check_a7(entry: dict) -> list[dict]:
+    """
+    A3 (template tokens): any `{{token}}` placeholder in any text field must be one of
+    KNOWN_TOKENS ({"masa", "vsYear"}) — error otherwise (catches typos like {{masaa}}).
+    None of the N-rule regexes match token braces, so this doesn't overlap with N-checks.
+    """
+    entry_id = entry.get("id", "<unknown>")
+    findings = []
+    for field_path, text in get_voice_text_fields(entry):
+        for match in TOKEN_PATTERN.finditer(text):
+            token = match.group(1)
+            if token not in KNOWN_TOKENS:
+                findings.append({
+                    "severity": "error",
+                    "rule": "A7",
+                    "entryId": entry_id,
+                    "field": field_path,
+                    "match": match.group(0),
+                })
+    return findings
+
+
 def check_a6(entries: list[dict]) -> list[dict]:
     """No duplicate id values across all entries."""
     seen: dict[str, int] = {}
@@ -343,6 +476,7 @@ def lint(data: dict, strict: bool) -> list[dict]:
         findings.extend(check_a3(entry, strict))
         findings.extend(check_a4(entry, strict))
         findings.extend(check_a5(entry, all_ids))
+        findings.extend(check_a7(entry))
 
     return findings
 
@@ -456,6 +590,129 @@ TEST_FIXTURE = {
 }
 
 
+def run_field_coverage_tests() -> None:
+    """
+    A5: get_voice_text_fields must scan variants[].voice.*, variants[].morningOverride.text,
+    advance2.text, offsets.*.text, and tagline — the fields it used to miss entirely.
+    """
+    entry = {
+        "id": "field_coverage_probe",
+        "tagline": "a testing tagline",
+        "voice": {
+            "advance2": {"text": "Advance2 probe text that is long enough to matter.", "daysBefore": 3},
+            "offsets": {
+                "someLabel": {"text": "Offset probe text long enough to matter."},
+            },
+            "morning": {"text": "Base morning probe text."},
+            "deepDive": {},
+            "food": {"note": ""},
+        },
+        "variants": [
+            {
+                "id": "variant_probe",
+                "voice": {
+                    "morning": {"text": "Variant voice morning probe text."},
+                },
+                "morningOverride": {"text": "Variant morning override probe text."},
+            },
+        ],
+    }
+    field_paths = {path for path, _ in get_voice_text_fields(entry)}
+    expected = {
+        "voice.advance2.text",
+        "voice.offsets.someLabel.text",
+        "voice.morning.text",
+        "tagline",
+        "variants.variant_probe.voice.morning.text",
+        "variants.variant_probe.morningOverride.text",
+    }
+    missing = expected - field_paths
+    assert not missing, f"get_voice_text_fields is missing expected field paths: {missing}"
+    print("PASS: get_voice_text_fields covers variants/offsets/advance2/tagline (A5)")
+
+
+def run_a3_allowed_tests() -> None:
+    """
+    A5: check_a3 must scan variants[].morningOverride.text (previously invisible), skip the
+    documented A3_ALLOWED exception, and still catch question-ending morning text elsewhere.
+    """
+    allowed_entry = {
+        "id": "paksha_transition",
+        "voice": {"morning": {"text": "A normal statement."}},
+        "variants": [
+            {
+                "id": "krishna_to_shukla",
+                "morningOverride": {"text": "Is this allowed to end in a question?"},
+            },
+        ],
+    }
+    findings = check_a3(allowed_entry, strict=False)
+    assert not findings, f"A3_ALLOWED exception should suppress this finding, got: {findings}"
+    print("PASS: A3_ALLOWED exception suppresses the documented Gita-verbatim question ending")
+
+    unallowed_entry = {
+        "id": "some_other_entry",
+        "voice": {"morning": {"text": "A normal statement."}},
+        "variants": [
+            {
+                "id": "some_variant",
+                "morningOverride": {"text": "Is this a problem?"},
+            },
+        ],
+    }
+    findings = check_a3(unallowed_entry, strict=False)
+    assert findings, "A3 should flag a question-ending variant morningOverride.text outside A3_ALLOWED"
+    assert findings[0]["field"] == "variants.some_variant.morningOverride.text"
+    print("PASS: A3 catches question-ending variant morningOverride.text outside A3_ALLOWED")
+
+
+def run_never_rule_allowed_tests() -> None:
+    """NEVER_RULE_ALLOWED must suppress the one documented Gita-verbatim N7 hit and
+    still catch the same phrase anywhere else."""
+    allowed_entry = {
+        "id": "ganesh_chaturthi",
+        "voice": {"offsets": {"visarjan": {"text": "...is one of the most moving things in the Hindu calendar."}}},
+    }
+    findings = check_never_rules(allowed_entry)
+    assert not findings, f"NEVER_RULE_ALLOWED exception should suppress this finding, got: {findings}"
+    print("PASS: NEVER_RULE_ALLOWED suppresses the documented Gita-verbatim N7 hit")
+
+    unallowed_entry = {
+        "id": "some_other_entry",
+        "voice": {"morning": {"text": "This is one of the most sacred days."}},
+    }
+    findings = check_never_rules(unallowed_entry)
+    assert any(f["rule"] == "N7" for f in findings), "N7 should still fire outside the documented exception"
+    print("PASS: N7 still fires outside the documented exception")
+
+
+def run_a7_tests() -> None:
+    """A3 engine: check_a7 must flag unknown {{token}} placeholders and allow known ones."""
+    bad_entry = {
+        "id": "token_probe_bad",
+        "voice": {
+            "morning": {"text": "This has an {{unknownToken}} in it."},
+            "deepDive": {},
+            "food": {"note": ""},
+        },
+    }
+    findings = check_a7(bad_entry)
+    assert any(f["rule"] == "A7" for f in findings), "check_a7 should flag an unknown token"
+    print("PASS: check_a7 flags unknown {{token}} placeholders")
+
+    good_entry = {
+        "id": "token_probe_good",
+        "voice": {
+            "morning": {"text": "This one is {{masa}} Purnima. Vikram Samvat {{vsYear}} begins now."},
+            "deepDive": {},
+            "food": {"note": ""},
+        },
+    }
+    findings = check_a7(good_entry)
+    assert not findings, f"check_a7 should not flag known tokens, got: {findings}"
+    print("PASS: check_a7 allows known {{masa}}/{{vsYear}} tokens")
+
+
 def run_tests() -> None:
     """Run against the inline fixture and print results."""
     print("Running against inline test fixture...\n")
@@ -469,6 +726,13 @@ def run_tests() -> None:
         print(f"\n{len(findings)} finding(s) found.")
     else:
         print("No findings.")
+
+    print("\nRunning A5/A7 targeted test cases...\n")
+    run_field_coverage_tests()
+    run_a3_allowed_tests()
+    run_never_rule_allowed_tests()
+    run_a7_tests()
+    print("\nAll targeted test cases passed.")
 
 
 if __name__ == "__main__":
