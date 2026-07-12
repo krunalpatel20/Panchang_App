@@ -359,6 +359,12 @@ def check_a4(entry: dict, strict: bool) -> list[dict]:
 
 KNOWN_CYCLE_IDS = {"ekadashi", "purnima", "amavasya", "paksha_transition"}
 
+# Id pairs that are near-duplicates by design (opposite-paksha counterparts), not typos.
+# check_a5 skips these unordered pairs instead of flagging them every run.
+A5_ID_ALLOWED = {
+    frozenset({"waxing_days", "waning_days"}),
+}
+
 
 def check_a5(entry: dict, all_ids: set[str]) -> list[dict]:
     """
@@ -367,7 +373,8 @@ def check_a5(entry: dict, all_ids: set[str]) -> list[dict]:
     duplicate with minor typo differences (fuzzy check is hard in stdlib;
     we do a simple check for ids that differ by one character from another id).
     The prompt says: duplicate check only; A6 covers exact dups.
-    We flag near-duplicates (edit distance == 1) as potential typos.
+    We flag near-duplicates (edit distance == 1) as potential typos, except
+    pairs in A5_ID_ALLOWED (intentional counterparts, e.g. waxing/waning).
     """
     entry_id = entry.get("id", "<unknown>")
     findings = []
@@ -375,6 +382,8 @@ def check_a5(entry: dict, all_ids: set[str]) -> list[dict]:
     # Check near-duplicates against other ids (simple transposition/substitution check)
     for other_id in all_ids:
         if other_id == entry_id:
+            continue
+        if frozenset({entry_id, other_id}) in A5_ID_ALLOWED:
             continue
         if _edit_distance_one(entry_id, other_id):
             findings.append({
@@ -666,6 +675,20 @@ def run_a3_allowed_tests() -> None:
     print("PASS: A3 catches question-ending variant morningOverride.text outside A3_ALLOWED")
 
 
+def run_a5_id_allowed_tests() -> None:
+    """A5_ID_ALLOWED must suppress the documented waxing/waning pair and still
+    flag genuine one-edit-away id typos."""
+    all_ids = {"waxing_days", "waning_days"}
+    findings = check_a5({"id": "waxing_days"}, all_ids)
+    assert not findings, f"A5_ID_ALLOWED should suppress waxing_days/waning_days, got: {findings}"
+    print("PASS: A5_ID_ALLOWED suppresses the documented waxing/waning near-duplicate pair")
+
+    typo_ids = {"navratri_start", "navratri_strt"}
+    findings = check_a5({"id": "navratri_start"}, typo_ids)
+    assert findings, "A5 should still flag a genuine one-edit-away id typo outside A5_ID_ALLOWED"
+    print("PASS: A5 still catches a genuine near-duplicate id outside A5_ID_ALLOWED")
+
+
 def run_never_rule_allowed_tests() -> None:
     """NEVER_RULE_ALLOWED must suppress the one documented Gita-verbatim N7 hit and
     still catch the same phrase anywhere else."""
@@ -730,6 +753,7 @@ def run_tests() -> None:
     print("\nRunning A5/A7 targeted test cases...\n")
     run_field_coverage_tests()
     run_a3_allowed_tests()
+    run_a5_id_allowed_tests()
     run_never_rule_allowed_tests()
     run_a7_tests()
     print("\nAll targeted test cases passed.")
