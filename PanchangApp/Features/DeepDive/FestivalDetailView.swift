@@ -187,6 +187,7 @@ extension ResolvedContent {
             kind: .tithi,
             tier: 2,
             name: "Ekadashi",
+            tagline: "the monthly fast",
             festivalType: "vrat",
             match: ContentMatch(anchor: .tithi, tithi: 11, paksha: nil, masaIndex: nil, rashiIndex: nil),
             variants: [],

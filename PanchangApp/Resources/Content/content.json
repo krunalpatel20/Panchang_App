@@ -6,6 +6,7 @@
       "kind": "cycle",
       "tier": 1,
       "name": "Ekadashi",
+      "tagline": "the monthly fast",
       "festivalType": "vrat",
       "match": {
         "anchor": "tithi",
@@ -69,6 +70,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Nirjala Ekadashi",
+      "tagline": "the waterless fast",
       "festivalType": "vrat",
       "match": {
         "anchor": "masaTithi",
@@ -132,6 +134,7 @@
       "kind": "cycle",
       "tier": 2,
       "name": "Purnima",
+      "tagline": "the full moon",
       "festivalType": "observance",
       "match": {
         "anchor": "tithi",
@@ -195,6 +198,7 @@
       "kind": "cycle",
       "tier": 2,
       "name": "Amavasya",
+      "tagline": "the new moon",
       "festivalType": "observance",
       "match": {
         "anchor": "tithi",
@@ -339,6 +343,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Diwali",
+      "tagline": "the festival of lights",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -402,6 +407,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Janmashtami",
+      "tagline": "Krishna's midnight birth",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -468,6 +474,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Mahashivratri",
+      "tagline": "Shiva's great night",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -531,6 +538,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Ganesh Chaturthi",
+      "tagline": "Ganesha arrives",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -593,6 +601,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Navratri (Start)",
+      "tagline": "nine nights of the goddess",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -655,6 +664,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Dussehra (Vijaya Dashami)",
+      "tagline": "the day of victory",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -717,6 +727,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Holi (Holika Dahan)",
+      "tagline": "the fire before the colors",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -779,6 +790,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Vasant Panchami",
+      "tagline": "the first day of spring",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -841,6 +853,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Guru Purnima",
+      "tagline": "the teacher's full moon",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -903,6 +916,7 @@
       "kind": "festival",
       "tier": 2,
       "name": "Sharad Purnima",
+      "tagline": "the autumn full moon",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -965,6 +979,7 @@
       "kind": "festival",
       "tier": 2,
       "name": "Kartik Purnima",
+      "tagline": "Diwali of the gods",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -1027,6 +1042,7 @@
       "kind": "festival",
       "tier": 2,
       "name": "Mahalaya Amavasya",
+      "tagline": "for the ancestors",
       "festivalType": "observance",
       "match": {
         "anchor": "masaTithi",
@@ -1089,6 +1105,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Devutthana Ekadashi",
+      "tagline": "Vishnu wakes",
       "festivalType": "vrat",
       "match": {
         "anchor": "masaTithi",
@@ -1151,6 +1168,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Vaikunta Ekadashi",
+      "tagline": "the open door",
       "festivalType": "vrat",
       "match": {
         "anchor": "masaTithi",
@@ -1216,6 +1234,7 @@
       "kind": "festival",
       "tier": 2,
       "name": "Amalaki Ekadashi",
+      "tagline": "the amla tree day",
       "festivalType": "vrat",
       "match": {
         "anchor": "masaTithi",
@@ -1278,6 +1297,7 @@
       "kind": "tithi",
       "tier": 3,
       "name": "Pradosh",
+      "tagline": "the twilight worship",
       "festivalType": "vrat",
       "match": {
         "anchor": "tithi",
@@ -1322,6 +1342,7 @@
       "kind": "tithi",
       "tier": 3,
       "name": "Sankashti / Vinayaka Chaturthi",
+      "tagline": "Ganesha's day",
       "festivalType": "vrat",
       "match": {
         "anchor": "tithi",
@@ -1366,6 +1387,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Makar Sankranti",
+      "tagline": "the sun turns north",
       "festivalType": "festival",
       "match": {
         "anchor": "solar",
@@ -1429,6 +1451,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Raksha Bandhan",
+      "tagline": "the thread of protection",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -1496,6 +1519,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Dhanteras",
+      "tagline": "the day of wealth",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -1547,6 +1571,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Kali Chaudas",
+      "tagline": "the night before Diwali",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -1595,6 +1620,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Bhai Dooj",
+      "tagline": "the sibling day",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -1643,6 +1669,7 @@
       "kind": "tithi",
       "tier": 3,
       "name": "Ashtami",
+      "tagline": "the eighth day",
       "festivalType": "observance",
       "match": {
         "anchor": "tithi",
@@ -1689,6 +1716,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Ram Navami",
+      "tagline": "Rama's birthday",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -1740,6 +1768,7 @@
       "kind": "festival",
       "tier": 2,
       "name": "Hanuman Jayanti",
+      "tagline": "Hanuman's birthday",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -1787,6 +1816,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Akshaya Tritiya",
+      "tagline": "the unfading day",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -1838,6 +1868,7 @@
       "kind": "festival",
       "tier": 2,
       "name": "Govardhan Puja",
+      "tagline": "the lifted mountain",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",

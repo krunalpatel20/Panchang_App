@@ -6,6 +6,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Uttarayan",
+      "tagline": "the kite-flying day",
       "festivalType": "festival",
       "match": {
         "anchor": "solar",
@@ -70,6 +71,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Bestu Varas (Gujarati New Year)",
+      "tagline": "the Gujarati new year",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -133,6 +135,7 @@
       "kind": "festival",
       "tier": 3,
       "name": "Labh Pancham",
+      "tagline": "the auspicious fifth",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -180,6 +183,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Paryushana",
+      "tagline": "the days of forgiveness",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -243,6 +247,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Mahavir Jayanti",
+      "tagline": "Mahavir's birthday",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -306,6 +311,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Guru Nanak Gurpurab",
+      "tagline": "Guru Nanak's birthday",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",
@@ -369,6 +375,7 @@
       "kind": "festival",
       "tier": 1,
       "name": "Guru Gobind Singh Gurpurab",
+      "tagline": "Guru Gobind Singh's birthday",
       "festivalType": "festival",
       "match": {
         "anchor": "masaTithi",

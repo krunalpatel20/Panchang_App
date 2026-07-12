@@ -9,6 +9,9 @@ struct ContentEntry: Sendable, Identifiable, Codable {
     /// Curated display name, e.g. "Diwali", "Ekadashi" — used as notification title and
     /// calendar label instead of deriving one mechanically from `id`.
     let name: String
+    /// Short lowercase noun phrase shown under the name in "Coming up" lists,
+    /// e.g. "the monthly fast", "the teacher's full moon".
+    let tagline: String?
     /// festival/vrat/observance — drives FestivalService's derived FestivalRule.FestivalType
     /// and calendar color-coding. nil = this entry produces no standalone calendar occurrence
     /// (e.g. paksha_transition, which only supplies notification-text variants for adjacent
