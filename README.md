@@ -55,7 +55,7 @@ PanchangApp/          SwiftUI app (iOS 17+, SwiftData) — the voice.
                       ScriptRenderer
   Resources/Content/  content.json + content-regional.json — all editorial text
 
-Tools/voice-lint/     Style linter enforcing the Content Gita's writing rules (CI)
+Tools/voice-lint/     Style linter enforcing the app's writing/voice rules (CI)
 ```
 
 Two ideas hold the codebase together:
@@ -91,8 +91,8 @@ xcodebuild test -project PanchangApp.xcodeproj -scheme PanchangApp \
 ## Authoring content
 
 All user-facing editorial text lives in `PanchangApp/Resources/Content/` — never in
-Swift. The voice is governed by [content-gita.md](content-gita.md) (the writing
-rules, festival scripts, and tone guardrails) and enforced by the linter:
+Swift. The voice is governed by a set of writing rules and tone guardrails enforced
+by the linter:
 
 ```sh
 python3 Tools/voice-lint/voice-lint.py PanchangApp/Resources/Content/content.json
@@ -103,13 +103,3 @@ python3 Tools/voice-lint/voice-lint.py            # linter self-tests
 Entries support template tokens (`{{masa}}`, `{{vsYear}}`) substituted at resolve
 time, per-variant overrides, and notification triggers (`advance`, `eve`, `morning`,
 `midnight`, `dayOffset`). Schema: `content.schema.json`.
-
-## Documents
-
-| File | What it is |
-|---|---|
-| [SPEC.md](SPEC.md) | V1 build spec — architecture and product decisions (settled) |
-| [SPEC2.md](SPEC2.md) | V2 feature clusters |
-| [SPEC-conformity-theme.md](SPEC-conformity-theme.md) | Gita conformance + app-wide design system spec |
-| [content-gita.md](content-gita.md) | The editorial constitution: voice, philosophy, festival scripts |
-| [CONTENT_LAYER_PLAN.md](CONTENT_LAYER_PLAN.md) | How the voice layer was built |
