@@ -90,8 +90,8 @@ struct DayCell: View {
     /// SF Symbol for full/new moon days, nil otherwise.
     private var moonGlyph: String? {
         switch cell.tithiName {
-        case "Purnima": return "moonphase.full.circle"
-        case "Amavasya": return "moonphase.new.circle"
+        case "Purnima": return "moonphase.full.moon"
+        case "Amavasya": return "moonphase.new.moon"
         default: return nil
         }
     }
