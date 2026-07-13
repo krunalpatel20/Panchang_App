@@ -92,7 +92,7 @@ struct TodayHomeView: View {
             VStack(alignment: .leading, spacing: 0) {
                 headerLine
                 MoonArcView(phase: moonPhase, accent: mood.accent)
-                    .frame(height: 92)
+                    .frame(height: 116)
                     .padding(.top, 18)
                     .accessibilityHidden(true)
                 Text(moonCaption)
