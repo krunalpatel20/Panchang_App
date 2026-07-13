@@ -147,12 +147,12 @@ struct TodayHomeView: View {
                 HStack(spacing: 5) {
                     Image(systemName: "sun.horizon.fill")
                         .font(.system(size: 12))
-                    Text("\(formatTime12(day.timings.sunrise)) · \(formatTime12(day.timings.sunset))")
+                    Text("\(formatTime24(day.timings.sunrise)) · \(formatTime24(day.timings.sunset))")
                         .font(.bodySans(14).weight(.semibold))
                 }
                 .foregroundStyle(mood.accent)
                 .accessibilityElement(children: .ignore)
-                .accessibilityLabel("Sunrise \(formatTime12(day.timings.sunrise)), sunset \(formatTime12(day.timings.sunset))")
+                .accessibilityLabel("Sunrise \(formatTime24(day.timings.sunrise)), sunset \(formatTime24(day.timings.sunset))")
             }
             if isEditingLocation { locationSuggestions }
         }
@@ -472,11 +472,9 @@ struct TodayHomeView: View {
         return formatter.string(from: date)
     }
 
-    private func formatTime12(_ jd: Double?) -> String {
+    private func formatTime24(_ jd: Double?) -> String {
         guard let jd else { return "–" }
         let c = JulianDate.components(julianDay: jd, timeZone: day.location.timeZone)
-        var h = (c.hour ?? 0) % 12
-        if h == 0 { h = 12 }
-        return String(format: "%d:%02d", h, c.minute ?? 0)
+        return String(format: "%02d:%02d", c.hour ?? 0, c.minute ?? 0)
     }
 }
