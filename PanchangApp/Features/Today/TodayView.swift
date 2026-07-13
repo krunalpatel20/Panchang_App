@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import MapKit
 import PanchangKit
 
 struct TodayView: View {
@@ -14,10 +15,6 @@ struct TodayView: View {
         }
         return GeoLocation(latitude: 37.3382, longitude: -121.8863,
                            timeZoneIdentifier: "America/Los_Angeles")
-    }
-
-    private var locationName: String {
-        savedLocations.first(where: { $0.isActive })?.name ?? "San Jose"
     }
 
     private var config: CalendarConfig {
@@ -40,7 +37,7 @@ struct TodayView: View {
                     let resolved = ContentResolver().resolve(for: day, region: region)
                     TodayHomeView(day: day, festivals: festivals,
                                   resolvedContent: resolved, upcoming: vm.upcoming,
-                                  scriptMode: scriptMode, locationName: locationName)
+                                  scriptMode: scriptMode)
                         .refreshable { vm.refresh(location: activeLocation, config: config, region: region, includeUpcoming: true) }
                 case .failed(let msg):
                     ContentUnavailableView("Unable to compute",
@@ -73,9 +70,20 @@ struct TodayHomeView: View {
     var resolvedContent: [ResolvedContent] = []
     var upcoming: [UpcomingObservance] = []
     var scriptMode: String = "transliteration"
-    var locationName: String = "San Jose"
+
+    @Environment(\.modelContext) private var modelContext
+    @Query private var savedLocations: [SavedLocation]
+    @State private var isEditingLocation = false
+    @State private var locationQuery = ""
+    @State private var isGeocoding = false
+    @StateObject private var completer = SearchCompleter()
+    @FocusState private var locationFieldFocused: Bool
 
     private var renderer: ScriptRenderer { ScriptRenderer(mode: scriptMode) }
+
+    private var locationName: String {
+        savedLocations.first(where: { $0.isActive })?.name ?? "San Jose"
+    }
 
     /// Highest-priority content matched today, if any — drives the hero and the mood.
     private var heroContent: ResolvedContent? { resolvedContent.first }
@@ -128,21 +136,173 @@ struct TodayHomeView: View {
     // MARK: Sections
 
     private var headerLine: some View {
-        HStack(alignment: .firstTextBaseline) {
-            Text("\(locationName) · today")
-                .font(.bodySans(14))
-                .foregroundStyle(Palette.inkMuted)
-            Spacer()
-            HStack(spacing: 5) {
-                Image(systemName: "sun.horizon.fill")
-                    .font(.system(size: 12))
-                Text("\(formatTime12(day.timings.sunrise)) · \(formatTime12(day.timings.sunset))")
-                    .font(.bodySans(14).weight(.semibold))
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .firstTextBaseline) {
+                if isEditingLocation {
+                    locationField
+                } else {
+                    locationLabel
+                }
+                Spacer()
+                HStack(spacing: 5) {
+                    Image(systemName: "sun.horizon.fill")
+                        .font(.system(size: 12))
+                    Text("\(formatTime12(day.timings.sunrise)) · \(formatTime12(day.timings.sunset))")
+                        .font(.bodySans(14).weight(.semibold))
+                }
+                .foregroundStyle(mood.accent)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("Sunrise \(formatTime12(day.timings.sunrise)), sunset \(formatTime12(day.timings.sunset))")
             }
-            .foregroundStyle(mood.accent)
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Sunrise \(formatTime12(day.timings.sunrise)), sunset \(formatTime12(day.timings.sunset))")
+            if isEditingLocation { locationSuggestions }
         }
+    }
+
+    /// Tapping the location turns it into a search field, right where it's read — no sheet
+    /// to lose track of. Suggestions (saved locations first, then live geocoded results)
+    /// appear inline below as you type.
+    private var locationLabel: some View {
+        Button {
+            locationQuery = ""
+            isEditingLocation = true
+            locationFieldFocused = true
+        } label: {
+            HStack(spacing: 4) {
+                Text("\(locationName) · today")
+                    .font(.bodySans(14))
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 8, weight: .semibold))
+                    .layoutPriority(1)
+            }
+            .foregroundStyle(Palette.inkMuted)
+        }
+        .accessibilityHint("Double tap to change location")
+    }
+
+    private var locationField: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "location")
+                .font(.system(size: 12))
+                .foregroundStyle(Palette.inkFaint)
+            TextField("Search city or address", text: $locationQuery)
+                .font(.bodySans(14))
+                .foregroundStyle(Palette.inkStrong)
+                .focused($locationFieldFocused)
+                .submitLabel(.search)
+                .onChange(of: locationQuery) { _, new in completer.query = new }
+            Button {
+                closeLocationEditor()
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 14))
+                    .foregroundStyle(Palette.inkFaint)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var locationSuggestions: some View {
+        let filteredSaved = savedLocations.filter {
+            locationQuery.isEmpty || $0.name.localizedCaseInsensitiveContains(locationQuery)
+        }
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(filteredSaved) { loc in
+                Button {
+                    setActive(loc)
+                    closeLocationEditor()
+                } label: {
+                    HStack {
+                        Text(loc.name)
+                            .font(.bodySans(14))
+                            .foregroundStyle(Palette.inkStrong)
+                        Spacer()
+                        if loc.isActive {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundStyle(mood.accent)
+                        }
+                    }
+                    .padding(.vertical, 9)
+                }
+                HairlineDivider(opacity: 0.5)
+            }
+            if !locationQuery.isEmpty {
+                ForEach(completer.results, id: \.self) { completion in
+                    Button {
+                        selectCompletion(completion)
+                    } label: {
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(completion.title)
+                                .font(.bodySans(14))
+                                .foregroundStyle(Palette.inkStrong)
+                            if !completion.subtitle.isEmpty {
+                                Text(completion.subtitle)
+                                    .font(.tagSans)
+                                    .foregroundStyle(Palette.inkFaint)
+                            }
+                        }
+                        .padding(.vertical, 9)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    HairlineDivider(opacity: 0.5)
+                }
+            }
+            if isGeocoding {
+                HStack(spacing: 8) {
+                    ProgressView().controlSize(.small)
+                    Text("Finding location…")
+                        .font(.tagSans)
+                        .foregroundStyle(Palette.inkFaint)
+                }
+                .padding(.vertical, 9)
+            }
+        }
+    }
+
+    private func setActive(_ location: SavedLocation) {
+        for loc in savedLocations { loc.isActive = false }
+        location.isActive = true
+    }
+
+    private func selectCompletion(_ completion: MKLocalSearchCompletion) {
+        isGeocoding = true
+        let request = MKLocalSearch.Request(completion: completion)
+        MKLocalSearch(request: request).start { response, error in
+            Task { @MainActor in
+                self.isGeocoding = false
+                guard let item = response?.mapItems.first, error == nil else { return }
+                let coord = item.placemark.coordinate
+                let tz = item.timeZone ?? .current
+                let name = [item.name, item.placemark.locality, item.placemark.administrativeArea]
+                    .compactMap { $0 }.first ?? completion.title
+                self.saveNewLocation(name: name, latitude: coord.latitude, longitude: coord.longitude,
+                                     timeZoneIdentifier: tz.identifier)
+                self.closeLocationEditor()
+            }
+        }
+    }
+
+    private func saveNewLocation(name: String, latitude: Double, longitude: Double, timeZoneIdentifier: String) {
+        for loc in savedLocations { loc.isActive = false }
+        let existing = savedLocations.first {
+            abs($0.latitude - latitude) < 0.01 && abs($0.longitude - longitude) < 0.01
+        }
+        if let existing {
+            existing.isActive = true
+        } else {
+            let new = SavedLocation(name: name, latitude: latitude, longitude: longitude,
+                                    timeZoneIdentifier: timeZoneIdentifier, isActive: true)
+            modelContext.insert(new)
+        }
+    }
+
+    private func closeLocationEditor() {
+        isEditingLocation = false
+        locationQuery = ""
+        completer.query = ""
+        locationFieldFocused = false
     }
 
     private var dateDuality: some View {
